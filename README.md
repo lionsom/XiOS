@@ -154,7 +154,7 @@
 	* [6.、是否使用过CoreText或者CoreImage等？如果使用过，请谈谈你使用CoreText或者CoreImage的体验。]()
 	* [6.、UIView如何需要重新绘制整个界面,需要调用什么方法?]()
 	* [6.、UlView的setNeedsDisplay和setNeedsLayout方法]()
-	* [6.、layoutSubViews & drawRects]()
+	* [6.、layoutSubViews & drawRects](https://www.jianshu.com/p/17eb5e095dd7)
 	* [6.、如何绘制UIView?]()
 	* [6.、使用drawRect有什么影响？]()
 	* [6.、Core开头的系列的内容。是否使用过CoreAnimation和CoreGraphics。UI框架和CA，CG框架的联系是什么？分别用CA和CG做过些什么动画或者图像上的内容。（有需要的话还可以涉及Quartz的一些内容）]()
@@ -1324,10 +1324,428 @@ Preference：设置目录，iCloud会备份设置信息。
 
 
 
+## <h2 id="1.4">1.4、简单说一下APP的启动过程,从main文件开始说起。</h2>
+
+有storyboard的情况下：
+
+main函数
+UIApplicationMain
+
+创建UIApplication对象
+创建UIApplication的delegate对象
+
+
+根据Info.plist获得最主要storyboard的文件名，加载最主要的storyboard（有storyboard）
+
+创建UIWindow
+创建和设置UIWindow的rootViewController
+显示窗口
+
+
+
+无storyboard情况下：
+
+main函数
+UIApplicationMain
+
+创建UIApplication对象
+创建UIApplication的delegate对象
+
+
+delegate对象开始处理（监听）系统事件（没有storyboard）
+
+程序启动完毕的时候，就会调用代理的application：didFinishLaunchingWithOptions：方法
+在application：didFinishLaunchingWithOptions：中创建UIWindow
+创建和设置UIWindow的rootViewController
+显示窗口
+
+## <h2 id="1.4">1.4、谈谈消息转发机制实现</h2>
+
+[iOS Runtime详解](https://www.jianshu.com/p/6ebda3cd8052)
+
+当对象收到无法解读的消息时，就会启动“消息转发”机制。
+
+动态方法解析 resolveInstanceMethod
+
+备用接收者 forwardingTargetForSelector
+
+完整消息转发 methodSignatureForSelector  forwardInvocation
+
+![](media/008.png)
+
+
+
+
+## <h2 id="1.4">1.4、objc在向⼀个对象发送消息时，发⽣了什么？</h2>
+
+
+objc在向一个对象发送消息时，runtime库会根据对象的isa指针找到该对象实际所属的类，然后在该类中的方法列表以及其父类方法列表中寻找方法运行，然后在发送消息的时候，objc_msgSend方法不会返回值，所谓的返回内容都是具体调用时执行的。
+
+根据对象的isa指针找到该对象所属的类，去obj的对应的类中找方法
+
+1.首先，在相应操作的对象中的缓存方法列表中找调用的方法，如果找到，转向相应实现并执行。
+
+2.如果没找到，在相应操作的对象中的方法列表中找调用的方法，如果找到，转向相应实现执行
+
+3.如果没找到，去父类指针所指向的对象中执行1，2.
+
+4.以此类推，如果一直到根类还没找到，转向拦截调用，走消息转发机制。
+
+5.如果没有重写拦截调用的方法，程序报错。
+
+
+
+## <h2 id="1.4">1.4、Objc中向一个nil对象发送消息会怎样</h2>
+
+如果向一个nil对象发送消息，首先在寻找对象的isa指针时就是0地址返回了，所以不会出现任何错误。也不会崩溃。
+
+
+## <h2 id="1.4">1.4、为什么其他语言里叫函数调用， objective c里则是给对象发消息（或者谈下对runtime的理解）</h2>
+
+
+C语言：调用函数的语言在声明完函数后,如果没有实现函数,程序是无法编译通过的。
+
+OC：程序是可以编译通过的,但是会有一个黄色的警告。只有当程序运行之后才会出现崩溃。
+
+消息传递和调用函数对于程序员来说最大的区别就在于源代码编译的过程中是否能够编译通过.
+解释消息传递机制的原理就要用到OC语言中的运行时系统(Runtime)了.
+
+
+## <h2 id="1.4">1.4、为什么要用重用机制?UITableView的重用机制</h2>
+	* [1.、UITableView的重用机制，]()
+
+
+**为什么要用重用机制?**
+众所周知，UITableView是可以滚动的一个控件，当UITableView回滚时，如果不用重用机制会重复初始化原来已初始化的cell，所以用重用机制会节省性能，避免出现一些因为网络因素而造成的卡顿现象。
+
+**UITableView重用机制的原理**
+
+重用机制主要用到了一个可变数组visiableCells和一个可变的字典类型reusableTableCells,其中visiableCells用来存储当前UITableView显示的cell，reusableTableCells用来存储已经用'identify'缓存的cell。当UITableView滚动的时候，会先在reusableTableCells中根据identify找是否有有已经缓存的cell，如果有直接用，没有再去初始化。
+
+
+## <h2 id="1.4">1.4、iOS逆向传值的几种方法整理</h2>
+
+
+第一种：代理传值
+
+第二种：通知传值
+
+第三种：单例传值
+
+第四种：block传值
+
+第五种：extern传值
+
+第六种：KVO传值
+
+第七种：NSUserDefaults
+
+
+
+## <h2 id="1.4">1.4、你是否接触过OC中的反射机制？简单聊一下概念和使用</h2>
+
+> JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。
+
+```
+1). class反射
+    通过类名的字符串形式实例化对象。
+        Class class = NSClassFromString(@"student"); 
+        Student *stu = [[class alloc] init];
+    将类名变为字符串。
+        Class class =[Student class];
+        NSString *className = NSStringFromClass(class);
+        
+2). SEL的反射
+    通过方法的字符串形式实例化方法。
+        SEL selector = NSSelectorFromString(@"setName");  
+        [stu performSelector:selector withObject:@"Mike"];
+    将方法变成字符串。
+        NSStringFromSelector(@selector*(setName:));
+```
+
+
+<h1 id="二">二、Runtime </h1>
+
+
+[iOS Runtime详解](https://www.jianshu.com/p/6ebda3cd8052)
+
+## <h2 id="1.4">1.4、Runtime如何通过selector找到对应的IMP地址</h2>
+
+
+
+## <h2 id="1.4">1.4、你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？</h2>
+
+
+1、方法交换：替换NSArray类避免崩溃；替换NSURL解决中文字符问题；利用 runtime 一键改变字体;UIButton同时点击&&重复点击规避;
+
+2、使用Runtime获取变量以及属性：归档解档
+
+```
+// runtime中获取某类的所有变量(属性变量以及实例变量)API：
+Ivar *class_copyIvarList(Class cls, unsigned int *outCount)
+
+// 获取某类的所有属性变量API：
+objc_property_t *class_copyPropertyList(Class cls, unsigned int *outCount)
+```
+
+
+3、用runtime解耦取消依赖：
+
+```
++ (UIViewController *)BookDetailComponent_viewController:(NSString *)bookId {
+   Class cls = NSClassFromString(@"BookDetailComponent");
+   return [cls performSelector:NSSelectorFromString(@"detailViewController:") withObject:@{@"bookId":bookId}];
+}
+```
+
+4、KVO实现
+
+Apple 使用了 isa-swizzling 来实现 KVO 。当观察对象A时，KVO机制动态创建一个新的名为：NSKVONotifying_A的新类，该类继承自对象A的本类，且 KVO 为 NSKVONotifying_A 重写观察属性的 setter 方法，setter 方法会负责在调用原 setter 方法之前和之后，通知所有观察对象属性值的更改情况。
+
+在这个过程，被观察对象的 isa 指针从指向原来的 A 类，被KVO 机制修改为指向系统新创建的子类NSKVONotifying_A 类，来实现当前类属性值改变的监听；
+所以当我们从应用层面上看来，完全没有意识到有新的类出现，这是系统“隐瞒”了对 KVO 的底层实现过程，让我们误以为还是原来的类。但是此时如果我们创建一个新的名为“NSKVONotifying_A”的类，就会发现系统运行到注册 KVO 的那段代码时程序就崩溃，因为系统在注册监听的时候动态创建了名为 NSKVONotifying_A 的中间类，并指向这个中间类了。
+
+
+
+## <h2 id="1.4">1.4、对于语句NSString *obj =[[NSData alloc] init]; obj在编译时和运行时分别是什么类型的对象?</h2>
+
+编译时是NSString的类型;运行时是NSData类型的对象。
+
+原因如下：
+首先，声明 NSString *obj 是告诉编译器，obj是一个指向某个Objective-C对象的指针。因为不管指向的是什么类型的对象，一个指针所占的内存空间都是固定的，所以这里声明成任何类型的对象，最终生成的可执行代码都是没有区别的。这里限定了NSString只不过是告诉编译器，请把obj当做一个NSString来检查，如果后面调用了非NSString的方法，会产生警告。
+
+接着，你创建了一个NSData对象，然后把这个对象所在的内存地址保存在obj里。那么运行时，obj指向的内存空间就是一个NSData对象。你可以把obj当做一个NSData对象来用。
+
+
+* [二、Runtime](#二)
+	* [2.1、什么是 Runtime？Runtime实现的机制是什么？](#2.1)
+	* [2.2、message send如果寻找不到相应的对象，会如何进行后续处理 ？](#2.2)
+	* [2.、Runtime如何通过selector找到对应的IMP地址]()
+	* [2.、一个objc对象的isa的指针指向什么？有什么作用？]()
+	* [2.、isa、Class介绍]()
+	* [2.、消息发送与转发]()
+	* [2.、runtime如何使用]()
+	* [2.、_objc_msgForward 函数是做什么的，直接调用它将会发生什么？]()
+	* [2.、你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？]()
+	* [2.、对于语句NSString *obj =[[NSData alloc] init]; obj在编译时和运行时分别是什么类型的对象?]()
 
 
 
 
 
-		
+
+<h1 id="三">三、Runloop</h1>
+
+[iOS 多线程：『RunLoop』详尽总结](https://www.jianshu.com/p/d260d18dd551)
+
+## <h2 id="3.1">3.1、什么是 RunLoop？Runloop内部实现逻辑？</h2>
+
+**什么是 RunLoop？**
+
+Run loops是线程相关的的基础框架的一部分。一个run loop就是一个事件处理的循环，用来不停的调度工作以及处理输入事件。其实内部就是do－while循环，这个循环内部不断地处理各种任务（比 如Source，Timer，Observer）。使用run loop的目的是让你的线程在有工作的时候忙于工作，而没工作的时候处于休眠状态。
+
+
+## <h2 id="3.1">3.1、RunLoop 有几个model，分别是什么？mode作用？</h2>
+
+系统默认注册了5个Mode:
+
+（1）kCFRunLoopDefaultMode: App的默认 Mode，通常主线程是在这个 Mode 下运行的。
+
+（2）UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响。
+
+（3）UIInitializationRunLoopMode: 在刚启动 App 时第进入的第一个 Mode，启动完成后就不再使用。
+
+（4）GSEventReceiveRunLoopMode: 接受系统事件的内部 Mode，通常用不到。
+
+（5）kCFRunLoopCommonModes: 这是一个占位的 Mode，没有实际作用。
+
+
+## <h2 id="3.1">3.1、Runloop和线程有什么关系？主线程默认开启了Runloop么？⼦线程呢？</h2>
+
+**Runloop和线程有什么关系？**
+
+RunLoop 和线程是息息相关的，我们知道线程的作用是用来执行特定的一个或多个任务，在默认情况下，线程执行完之后就会退出，就不能再执行任务了。这时我们就需要采用一种方式来让线程能够不断地处理任务，并不退出。所以，我们就有了 RunLoop。
+
+1、一条线程对应一个RunLoop对象，每条线程都有唯一一个与之对应的 RunLoop 对象。
+
+2、RunLoop 并不保证线程安全。我们只能在当前线程内部操作当前线程的 
+
+3、RunLoop 对象，而不能在当前线程内部去操作其他线程的 RunLoop 对象方法。
+
+4、RunLoop 对象在第一次获取 RunLoop 时创建，销毁则是在线程结束的时候。
+
+5、主线程的 RunLoop 对象系统自动帮助我们创建好了（原理如 1.3 所示），而子线程的 RunLoop对象需要我们主动创建和维护。
+
+
+**⼦线程呢？**
+
+子线程的 RunLoop 需要手动启动;
+每次RunLoop启动时,只能指定其中一个 Mode,这个Mode被称作 CurrentMode,
+
+如果需要切换 Mode,只能退出 Loop,再重新指定一个 Mode 进入,这样做主要是为了隔离不同 Mode 中的 Source、Timer、Observer,让其互不影响 
+
+
+
+## <h2 id="3.1">3.1、当NSTimer `+scheduledTimerWithTimeInterval...` 的⽅式触发的timer，在滑动⻚⾯上的列表时，timer会暂定回调，为什么？如何解决？</h2>
+
+```
+	// 定义一个定时器，约定两秒之后调用self的run方法
+    NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
+
+    // 将定时器添加到当前RunLoop的NSDefaultRunLoopMode下
+    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+```
+
+
+**在滑动⻚⾯上的列表时，timer会暂定回调，为什么？**
+
+当我们不做任何操作的时候，RunLoop处于NSDefaultRunLoopMode下。
+
+而当我们拖动Text View的时候，RunLoop就结束NSDefaultRunLoopMode，切换到了UITrackingRunLoopMode模式下，这个模式下没有添加NSTimer，所以我们的NSTimer就不工作了。
+
+但当我们松开鼠标的时候，RunLoop就结束UITrackingRunLoopMode模式，又切换回NSDefaultRunLoopMode模式，所以NSTimer就又开始正常工作了。
+
+当我们尝试 `[[NSRunLoop currentRunLoop] addTimer:timer forMode:UITrackingRunLoopMode];`，也就是将定时器添加到当前RunLoop的UITrackingRunLoopMode下，你就会发现定时器只会在拖动Text View的模式下工作，而不做操作的时候定时器就不工作。
+
+**如何解决？**
+
+这就用到了我们之前说过的伪模式（kCFRunLoopCommonModes），这其实不是一种真实的模式，而是一种标记模式，意思就是可以在打上Common Modes标记的模式下运行。
+
+那么哪些模式被标记上了Common Modes呢？
+NSDefaultRunLoopMode 和 UITrackingRunLoopMode。
+
+所以我们只要我们将NSTimer添加到当前RunLoop的kCFRunLoopCommonModes（Foundation框架下为NSRunLoopCommonModes）下，我们就可以让NSTimer在不做操作和拖动Text View两种情况下愉快的正常工作了。
+
+具体做法就是讲添加语句改为`[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];`
+
+
+**NSTimer方法 `scheduledTimerWithTimeInterval 与 timerWithTimeInterval` 拓展**
+
+既然讲到了NSTimer，这里顺便讲下NSTimer中的scheduledTimerWithTimeInterval方法和RunLoop的关系。添加下面的代码：
+
+```
+[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
+```
+
+这句代码调用了scheduledTimer返回的定时器，NSTimer会自动被加入到了RunLoop的NSDefaultRunLoopMode模式下。这句代码相当于下面两句代码：
+
+```
+NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
+[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
+```
+
+
+
+
+## <h2 id="3.1">3.1、RunLoop 在项目中的应用？</h2>
+
+1、NSTimer的使用 （参考上面）
+
+2、ImageView推迟显示
+
+当界面中含有UITableView，而且每个UITableViewCell里边都有图片。这时候当我们滚动UITableView的时候，如果有一堆的图片需要显示，那么可能会出现卡顿的现象。
+
+
+解决方案1. 监听UIScrollView的滚动
+
+因为UITableView继承自UIScrollView，所以我们可以通过监听UIScrollView的滚动，实现UIScrollView相关delegate即可。
+
+解决方案2. 利用PerformSelector设置当前线程的RunLoop的运行模式
+利用performSelector方法为UIImageView调用setImage:方法，并利用inModes将其设置为RunLoop下NSDefaultRunLoopMode运行模式。代码如下：
+
+```
+[self.imageView performSelector:@selector(setImage:) withObject:[UIImage imageNamed:@"tupian"] afterDelay:4.0 inModes:NSDefaultRunLoopMode];
+```
+
+3、后台常驻线程（很常用）
+
+我们在开发应用程序的过程中，如果后台操作特别频繁，经常会在子线程做一些耗时操作（下载文件、后台播放音乐等），我们最好能让这条线程永远常驻内存。
+
+
+
+
+
+* [三、Runloop](#三)
+	* [3.、什么是 RunLoop？Runloop内部实现逻辑？](#3.)
+	* [3.、Runloop是来做什么的？Runloop和线程有什么关系？主线程默认开启了Runloop么？⼦线程呢？](#3.)
+	* [3.、RunLoop 有几个model，分别是什么？mode作用？](#3.)
+	* [3.、以 `+ scheduledTimerWithTimeInterval...` 的⽅式触发的timer，在滑动⻚⾯上的
+列表时，timer会暂定回调，为什么？如何解决？](#3.)
+	* [3.、](#3.)
+
+	
+	
+	
+<h1 id="四">四、KVC & KVO</h1>
+
+
+## <h2 id="4.1">4.1、KVC的底层实现？应用在哪些场景？</h2>
+
+
+**KVC的底层实现？**
+
+```
+当一个对象调用setValue:forKey: 方法时,方法内部会做以下操作:
+ 1.判断有没有指定key的set方法,如果有set方法,就会调用set方法,给该属性赋值
+ 2.如果没有set方法,判断有没有跟key值相同且带有下划线的成员属性(_key).如果有,直接给该成员属性进行赋值
+ 3.如果没有成员属性_key,判断有没有跟key相同名称的属性.如果有,直接给该属性进行赋值
+ 4.如果都没有,就会调用 valueforUndefinedKey 和setValue:forUndefinedKey:方法
+```
+
+**应用在哪些场景？**
+
+赋值
+
+取值
+
+字典转模型
+
+
+## <h2 id="4.1">4.1、KVO的底层实现？应用在哪些场景？</h2>
+
+**KVO的底层实现？**
+
+```
+(1)KVO 是基于 runtime 机制实现的
+(2)当一个对象(假设是person对象,对应的类为 JLperson)的属性值age发生改变时,系统会自动生成一个继承自JLperson的类NSKVONotifying_JLPerson,在这个类的 setAge 方法里面调用
+    [super setAge:age];
+    [self willChangeValueForKey:@"age"];
+    [self didChangeValueForKey:@"age"];
+ 三个方法,而后面两个方法内部会主动调用
+ -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context方法,在该方法中可以拿到属性改变前后的值.
+```
+
+**应用在哪些场景？**
+
+作用:能够监听某个对象属性值的改变
+
+
+## <h2 id="4.1">4.1、直接修改成员变量会触发KVO么？</h2>
+
+不会触发KVO
+
+
+## <h2 id="4.1">4.1、通过KVC修改属性会触发KVO么？</h2>
+
+会触发KVO
+
+## <h2 id="4.1">4.1、如何手动触发KVO？</h2>
+
+手动调用willChangeValueForKey:和didChangeValueForKey:
+
+
+
+
+	
+* [四、KVC & KVO](#四)
+	* [4.、KVC的底层实现？应用在哪些场景？](#4.)
+	* [4.、KVO的底层实现？应用在哪些场景？](#4.)
+	* [4.、iOS用什么方式实现对一个对象的KVO？(KVO的本质是什么？)](#4.)
+	* [4.、如何⼿动触发⼀个value的KVO](#4.)
+	* [4.、如何手动触发KVO？](#4.)
+	* [4.、直接修改成员变量会触发KVO么？](#4.)
+	* [4.、通过KVC修改属性会触发KVO么？](#4.)
+	* [4.、KVC的赋值和取值过程是怎样的？原理是什么？](#4.)
+	* [4.、如何访问并修改一个类的私有属性？](#4.)
+	* [4.、NSNotification和KVO的区别和用法是什么？什么时候应该使用NSNotification，什么时候应该使用KVO？它们的实现上有什么区别吗？如果用protocol和delegate（或者delegate的Array）来实现类似的功能可能吗？如果可能，会有什么潜在的问题？如果不能，为什么？](#4.)
 
