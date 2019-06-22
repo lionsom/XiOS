@@ -1,33 +1,39 @@
+iOS面试整理
 
 ## 目录
 * [一、iOS基础部分](#一)
-	* [1.1、iOS内存机制](#一) 
+	* [1.1、iOS内存机制](#1.1)
 		* [1.1.1、简述OC内存管理机制](#1.1.1)
-		* [1.1.4、对MRC和ARC的理解，什么是ARC？ARC基本原理？ARC是为了解决什么问题诞生的？](#1.3)
-		* [1.1.2、与retain配对使用的方法是dealloc还是release，为什么？需要与alloc配对使用的方法是dealloc还是release，为什么？](#1.1.2)
+    	* [1.1.2、对MRC和ARC的理解，什么是ARC？ARC基本原理？ARC是为了解决什么问题诞生的？ARC不足的地方？](#1.1.2)
+    	* [1.1.3、与retain配对使用的方法是dealloc还是release，为什么？需要与alloc配对使用的方法是dealloc还是release，为什么？](#1.1.3)
+    	* [1.1.4、为什么说Objective-C是一门动态的语言？iOS的动态性？](#1.1.4)
+    	
 		* [1.1.5、ARC情况下，编译的时候，系统是怎么添加相关内存管理的代码](#1.4)
-		* [1.1.6、写一个 setter 方法用于完成 @property (nonatomic, retain) NSString *name，写一个 setter 方法用于完成 @property (nonatomic, copy) NSString *name](#1.) 
-		* [1.1.3、为什么说Objective-C是一门动态的语言？iOS的动态性？](#1.2)
-
-	* [1.2、@property属性]()
-		* [1.2.1、@property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的？](#1.5)
-		* [1.2.2、如何自己重写 setter / getter?](#1.6)
-		* [1.2.2、@property中有哪些属性关键字？默认的关键字是什么？](#1.6)
-		* [1.2.3、属性关键字 readwrite，readonly，assign，retain，copy，nonatomic 、atomic、strong、weak、unsafe_unretained 各是什么作用，在那种情况下用？](#1.7)
-		* [1.2.4、什么情况使用 weak 关键字，相比 assign 有什么不同？](#1.8)
-		* [1.2.5、怎么用 copy 关键字？block用copy修饰吗？可以用其他修饰符吗？](#1.9)
-		* [1.2.6、用@property声明的 NSString / NSArray / NSDictionary 经常使用 copy 关键字，为什么？如果改用strong关键字，可能造成什么问题？](#1.10)
-		* [1.2.7、对于深拷贝和浅拷贝的理解，系统对象 NSString/NSMutableString/NSArray/NSMutableArray 的 copy 与 mutableCopy 方法](#1.) 
-		* [1.2.8、这个写法会出什么问题：`@property (nonatomic, copy) NSMutableArray *arr;`](#1.11)
-		* [1.2.9、为什么我们常见的delegate属性都用是weak而不是retain/strong？](#1.13)
-		* [1.2.10 为什么很多内置类如UITableViewControl的delegate属性都是assign而不是retain？请举例]()
-		* [1.2.11、如何让自己的类用 copy 修饰符？如何重写带 copy 关键字的 setter？](#1.12)
-		
-		* [1.2.12、@synthesize 和 @dynamic 分别有什么作用？](#1.14)
-		* [1.16、类变量的 @public，@protected，@private，@package 声明各有什么含义？
-](#1.16)
-
-	* [1.3、autoreleasePool]()
+		* [1.、对于Objective-C，你认为它最大的优点和最大的不足是什么？对于不足之处，现在有没有可用的方法绕过这些不足来实现需求。如果可以的话，你有没有考虑或者实践过重新实现OC的一些功能，如果有，具体会如何做？]()
+	
+	* [1.2、@property属性](#1.2)
+		* [1.2.1、@property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的？](#1.2.1)
+		* [1.2.2、@synthesize 和 @dynamic 分别有什么作用？](#1.2.2)
+    	* [1.2.3、如何自己重写 setter / getter?](#1.2.3)
+		* [1.2.4、@property中有哪些属性关键字？默认的关键字是什么？](#1.2.4)
+		* [1.2.4.1、属性关键字 readwrite，readonly，assign，retain，copy，nonatomic 、atomic、strong、weak、unsafe_unretained 各是什么作用，在哪种情况下用？](#1.2.4.1)
+   		* [1.2.5、写一个 setter 方法用于完成 `@property (nonatomic, retain) NSString *name;`，写一个 setter 方法用于完成 `@property (nonatomic, copy) NSString *name;`](#1.2.5)
+		* [1.2.6、什么情况使用 weak 关键字？相比 assign 有什么不同？](#1.2.6)
+		* [1.2.7、为什么assign不推荐用于修饰对象？](#1.2.7)
+		* [1.2.7.1、什么是空指针、野指针？如何产生野指针？](#1.2.7.1)
+		* [1.2.7.2、野指针的定位](#1.2.7.2)
+		* [1.2.8、为什么我们常见的delegate属性都用是assign而不是retain/strong？](#1.2.8)
+		* [1.2.8.1、为什么很多内置类如UITableViewControl的delegate属性都是assign而不是retain？请举例](#1.2.8.1)
+		* [1.2.8.2、delegate的内存管理属性是weak还是assign？](#1.2.8.2)
+		* [1.2.9、怎么用 copy 关键字？block用copy修饰吗？可以用其他修饰符吗？](#1.2.9)
+		* [1.2.10、用@property声明的 NSString / NSArray / NSDictionary 经常使用 copy 关键字，为什么？如果改用strong关键字，可能造成什么问题？](#1.2.10)
+   		* [1.2.11、这个写法会出什么问题：`@property (copy) NSMutableArray *arr;`](#1.2.11)
+   		* [1.2.12、如何让自己的类用 copy 修饰符？](#1.2.12)
+   		* [1.2.13、对于深拷贝和浅拷贝的理解，系统对象 NSString/NSMutableString/NSArray/NSMutableArray 的 copy 与 mutableCopy 方法](#1.2.13) 
+   		* [1.2.14、类变量的 @public，@protected，@private，@package 声明各有什么含义？](#1.2.14)
+   		
+    
+	* [1.3、autoreleasePool](#1.3)
 		* [1.3.1、谈谈你对autoreleasePool自动释放池的理解，自动释放池的原理](#1.17)
 		* [1.3.2、autoreleasePool自动释放池在 MRC和ARC 下的区别](#1.17)
 		* [1.、不⼿动指定autoreleasepool的前提下，⼀个autorealese对象在什么时刻释放？]()
@@ -36,60 +42,65 @@
 		* [1.3.5、autorelease对象在什么时机会被调用release]()
 		* [1.3.6、方法里有局部对象， 出了方法后会立即释放吗]()
 
-	* [1.1、如何令⾃⼰所写的对象具有拷⻉功能?]()
-	* [1.、+(void)load; +(void)initialize；区别？有什么用处？initialize方法如何调用,以及调用时机]()
-	* [1.、数据持久化存储方案有哪些？]()
-	* [1.、沙盒的目录结构是怎样的？各自一般用于什么场合？]()
-	* [1.、#define和const定义的变量，有什么区别？]()
-	* [1.、static有什么作⽤?]()	
-	* [1.、介绍下内存的几大区域？内存中的栈和堆的区别是什么？那些数据在栈上，哪些在堆上？]()
-	* [1.、#import跟 #include 有什么区别，@class呢，#import<> 跟 #import””有什么区别？]()
+	* [1.4、iOS中的方法](#1.4)   
+		* [1.4.1、+(void)load; +(void)initialize；区别？有什么用处？initialize方法如何调用,以及调用时机](#1.4.1)
+		* [1.、谈谈instancetype和id的异同？id 声明的对象有什么特性？id和NSObject＊的区别？]()
+		* [1.、UIView和CALayer是啥关系？]()
+		* [1.、isKindOfClass和isMemberOfClass的区别？]()
+		* [1.、frame 和 bounds 有什么不同？frame 和 bounds 分别是用来做什么的？frame和bound 一定都相等么？如果有不等的情况，请举例说明]()
+		* [1.、loadView是干嘛用的？viewWillLayoutSubView你总是知道的]()
+		* [1.、imageName和mageWithContextOfFile的区别?哪个性能高]()
+		* [1.、drawRect与layout]()
 
-	
-	
-	* [1.、简单介绍下APNS]()
-	* [1.、UIView和CALayer是啥关系？]()
-	* [1.、isKindOfClass和isMemberOfClass的区别？]()
-	* [1.、loadView是干嘛用的？viewWillLayoutSubView你总是知道的]()
-	* [1.、谈谈instancetype和id的异同？id 声明的对象有什么特性？id和NSObject＊的区别？]()
-	* [1.、frame 和 bounds 有什么不同？frame 和 bounds 分别是用来做什么的？frame和bound 一定都相等么？如果有不等的情况，请举例说明]()
-	* [1.、谈谈事件响应链，如何响应view之外的事件]()
-	* [1.、事件传递链，页面上一个按钮，按钮和它的superView有一样的action,为什么只执行button的action?]()
-	* [1.、iOS里面的手势是如何实现的?]()
-	* [1.、简单说一下APP的启动过程,从main文件开始说起。]()
-	* [1.、UIViewController的生命周期， 应用的生命周期]()
-	* [1.、main()之前的过程有哪些？]()
-	* [1.、什么是谓词？谓词过滤]()
-	* [1.、谈谈消息转发机制实现]()
-	* [1.、objc在向⼀个对象发送消息时，发⽣了什么？]()
-	* [1.、Objc中向一个nil对象发送消息会怎样]()
-	* [1.、为什么其他语言里叫函数调用， objective c里则是给对象发消息（或者谈下对runtime的理解）]()
-	* [1.、空指针，野指针，僵尸对象]()
-	* [1.、c++引用和指针区别]()
-	* [1.、静态库的原理是什么？你有没有⾃⼰写过静态编译库，遇到了哪些问题？]()
-	* [1.、imageName和mageWithContextOfFile的区别?哪个性能高]()
-	* [1.、isKindOfClass和isMemberOfClass的区别]()
-	* [1.、怎样实现一个singleton的类?]()
-	* [1.、NSString存储类型]()
-	* [1.、NSCache与可变集合有几点不同]()
-	* [1.、UITableView的重用机制，]()
-	* [1.、iOS逆向传值的几种方法整理]()
-	* [1.、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？]()
-	* [1.、描述一个你遇到过的retain cycle例子。如何避免retain cycle]()
-	* [1.、计时器有哪些？NSTimer创建后，会在哪个线程运行？如何让计时器调用一个类方法？]()
-	* [1.、你是否接触过OC中的反射机制？简单聊一下概念和使用]()
-	* [1.、什么是谓词？谓词过滤]()
-	* [1.、如何重写类方法]()
-	* [1.、浅谈iOS开发中方法延迟执行的几种方式]()
-	* [1.、对于Objective-C，你认为它最大的优点和最大的不足是什么？对于不足之处，现在有没有可用的方法绕过这些不足来实现需求。如果可以的话，你有没有考虑或者实践过重新实现OC的一些功能，如果有，具体会如何做？]()
-	* [1.、请用简单的代码展示@protocol的定义及实现.]()
-	* [1.、协议是什么?有什么作用?]()
-	* [1.、使用CADisplayLink、NSTimer有什么注意点？]()
-	* [1.、]()
-	* [1.、]()
-	* [1.、]()
+* [1.5、iOS编程中一些基础]()    
+    * [1.、数据持久化存储方案有哪些？]()
+    * [1.、沙盒的目录结构是怎样的？各自一般用于什么场合？]()
+    * [1.、介绍下内存的几大区域？内存中的栈和堆的区别是什么？那些数据在栈上，哪些在堆上？]()
+    * [1.、#import跟 #include 有什么区别，@class呢，#import<> 跟 #import””有什么区别？]()
+    * [1.、#define和const定义的变量，有什么区别？]()
+    * [1.、static有什么作⽤?]()   
+    * [1.、iOS逆向传值的几种方法整理]()
+    * [1.、浅谈iOS开发中方法延迟执行的几种方式]()
+    * [1.、怎样实现一个singleton的类？单例的好处与坏处？如何释放一个单例类？]()
+    * [1.1、如何令⾃⼰所写的对象具有拷⻉功能?]()
+    * [1.、如何重写类方法]()
+    * [1.、什么是谓词？谓词过滤]()
+    * [1.、NSString存储类型]()
+    * [1.、NSCache与可变集合有几点不同]()
+    * [1.、UITableView的重用机制]()
+    * [1.、请用简单的代码展示@protocol的定义及实现.]()
+    * [1.、协议是什么?有什么作用?]()
+    * [1.、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？]()
+    
+* [1.6、iOS中一些机制和原理]()   
+    * [1.、简单介绍下APNS]()
+    * [1.、谈谈事件响应链，如何响应view之外的事件]()
+    * [1.、事件传递链，页面上一个按钮，按钮和它的superView有一样的action,为什么只执行button的action?]()
+    * [1.、iOS里面的手势是如何实现的?]()
+    * [1.、main()之前的过程有哪些？]()
+    * [1.、简单说一下APP的启动过程,从main文件开始说起。]()
+    * [1.、UIViewController的生命周期， 应用的生命周期]()
+    
+* [1.7、其他]()    
+	* [1.3、iOS中nil 、Nil、 NULL 、NSNull，你真的了解吗？]() 
+    * [1.、c++引用和指针区别]()
+    * [1.、静态库的原理是什么？你有没有⾃⼰写过静态编译库，遇到了哪些问题？]()
+    * [1.、描述一个你遇到过的retain cycle例子。如何避免retain cycle]()
+    * [1.、计时器有哪些？NSTimer创建后，会在哪个线程运行？如何让计时器调用一个类方法？]()
+    * [1.、你是否接触过OC中的反射机制？简单聊一下概念和使用，反射函数？]()
+    * [1.、使用CADisplayLink、NSTimer有什么注意点？]()
+```
 
-* [二、Runtime](#二)
+* [二、Runtime](#%E4%BA%8C)
+
+  * [1.6、消息发送]()
+
+    * [1.、谈谈消息转发机制实现]()
+    * [1.、空指针，野指针，僵尸对象]()
+    * [1.、objc在向⼀个对象发送消息时，发⽣了什么？]()
+    * [1.、Objc中向一个nil对象发送消息会怎样]()
+    * [1.、objc在向⼀个野指针发送消息时，发⽣了什么？]
+    * [1.、为什么其他语言里叫函数调用， objective c里则是给对象发消息（或者谈下对runtime的理解）]()
 	* [2.1、什么是 Runtime？Runtime实现的机制是什么？](#2.1)
 	* [2.2、message send如果寻找不到相应的对象，会如何进行后续处理 ？](#2.2)
 	* [2.、Runtime如何通过selector找到对应的IMP地址]()
@@ -281,6 +292,7 @@
 	* [12.、讲讲你用Instrument优化动画性能的经历吧]()
 	* [12.、优化你是从哪几方面着手？从UI优化说起，然后到内存优化、APP启动优化、包体量优化、网络请求优化等等]()
 	* [12.、retain cycle有哪些？如何避免retain cycle？]()
+	* [12、什么是内存泄漏？]()
 	* [12.、开发项目时你是怎么检查内存泄露？]()
 	* [12.、如何高性能的给 UIImageView 加个圆角?]()
 	* [12.、列表卡顿的原因可能有哪些？如何去优化UITableVIew？]()
@@ -436,9 +448,9 @@ NSLog(@"aaa");
     
 2019年，经历几次失败、成功的面试经历，回头把iOS面试相关的知识进行一个回顾和总结吧。
 
-<h1 id="一">一、iOS基础部分</h2>
+<h1 id="一">一、iOS基础部分</h1>
 
-<h2 id="1.1">1.1、iOS内存机制</h3>
+<h2 id="1.1">1.1、iOS内存机制</h2>
 
 <h3 id="1.1.1">1.1.1、简述OC内存管理机制</h3>
 
@@ -574,7 +586,7 @@ ARC不足一：ARC 不适用于 Core Foundation 框架中, 仍然需要手动管
 ARC不足二：不能释放循环引用的对象（这里也不算是 ARC 不足，这个是引用计数机制本身的缺点）
 
 
-<h3 id="1.1.2">1.1.2、与retain配对使用的方法是dealloc还是release，为什么？需要与alloc配对使用的方法是dealloc还是release，为什么？</h3>
+<h3 id="1.1.3">1.1.3、与retain配对使用的方法是dealloc还是release，为什么？需要与alloc配对使用的方法是dealloc还是release，为什么？</h3>
 
 
 |Objective-C对象的动作 | Objective-C对象的方法|
@@ -584,7 +596,8 @@ ARC不足二：不能释放循环引用的对象（这里也不算是 ARC 不足
 |3. 放弃对象的所有权|release (RC - 1)|
 |4. 释放对象|dealloc (RC = 0 ，此时会调用该方法)|
 
-<h3 id="1.1.2">1.1.6、为什么说Objective-C是一门动态的语言？iOS的动态性？</h3>
+
+<h3 id="1.1.4">1.1.4、为什么说Objective-C是一门动态的语言？iOS的动态性？</h3>
 
 **为什么说Objective-C是一门动态的语言？**
 
@@ -608,10 +621,10 @@ Objective-C 可以通过Runtime 这个运行时机制，在运行时动态的添
 
 
 
-<h2 id="1.2">1.2、@property属性</h3>
+<h2 id="1.2">1.2、@property属性</h2>
 
 
-<h3 id="1.1.2">1.2.1、@property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的？</h3>
+<h3 id="1.2.1">1.2.1、@property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的？</h3>
 
 **@property 的本质是什么？**
 
@@ -711,7 +724,7 @@ iOS5之后，现在，苹果将默认编译器从 GCC转换为LLVM(low level vir
 
 
 
-<h3 id="1.2.9">1.2.9、@synthesize 和 @dynamic 分别有什么作用？</h3>
+<h3 id="1.2.2">1.2.2、@synthesize 和 @dynamic 分别有什么作用？</h3>
 
 1、@property有两个对应的词，一个是 @synthesize，一个是 @dynamic。如果 @synthesize和 @dynamic都没写，那么默认的就是@syntheszie var = _var;
 
@@ -720,7 +733,7 @@ iOS5之后，现在，苹果将默认编译器从 GCC转换为LLVM(low level vir
 3、@dynamic 告诉编译器：属性的 setter 与 getter 方法由用户自己实现，不自动生成。（当然对于 readonly 的属性只需提供 getter 即可）。假如一个属性被声明为 @dynamic var，然后你没有提供 @setter方法和 @getter 方法，编译的时候没问题，但是当程序运行到 instance.var = someVar，由于缺 setter 方法会导致程序崩溃；或者当运行到 someVar = var 时，由于缺 getter 方法同样会导致崩溃。编译时没问题，运行时才执行相应的方法，这就是所谓的动态绑定。
 
 
-<h3 id="1.2.2">1.2.2、如何自己重写 setter / getter？</h3>
+<h3 id="1.2.3">1.2.3、如何自己重写 setter / getter？</h3>
 
 我们会发现，当我们同时重写setter/getter时会报错，为什么呢？这是因为当我们同时重写setter/getter时，编译器自动添加的代码@synthesize myTitle = _myTitle;失效，就不会自动为我们生成实例变量_myTitle了，setter/getter操作的对象就不存在了。所以我们要加上@synthesize myTitle = _myTitle;,手动指定setter/getter要操作的实例对象是_myTitle。
 
@@ -751,7 +764,7 @@ iOS5之后，现在，苹果将默认编译器从 GCC转换为LLVM(low level vir
 }
 ```
 
-<h3 id="1.2.2">1.2.3、@property中有哪些属性关键字？默认的关键字是什么？</h3>
+<h3 id="1.2.4">1.2.4、@property中有哪些属性关键字？默认的关键字是什么？</h3>
 
 **@property中有哪些属性关键字？**
 
@@ -775,7 +788,14 @@ iOS5之后，现在，苹果将默认编译器从 GCC转换为LLVM(low level vir
 ```atomic,readwrite,strong```
 
 
-<h3 id="1.1.2">1.1.6、写一个 setter 方法用于完成 @property (nonatomic, retain) NSString *name，写一个 setter 方法用于完成 @property (nonatomic, copy) NSString *name，也就是如何重写带 copy 关键字的 setter？</h3>
+<h3 id="1.2.4.1">1.2.4.1、属性关键字 readwrite，readonly，assign，retain，copy，nonatomic 、atomic、strong、weak、unsafe_unretained 各是什么作用，在哪种情况下用？</h3>
+
+同上一题目，语言要重新组织
+
+
+
+
+<h3 id="1.2.5">1.2.5、写一个 setter 方法用于完成 `@property (nonatomic, retain) NSString *name;`，写一个 setter 方法用于完成 `@property (nonatomic, copy) NSString *name;`</h3>
 
 ```
 @property (nonatomic, retain) NSString *name;
@@ -796,7 +816,7 @@ iOS5之后，现在，苹果将默认编译器从 GCC转换为LLVM(low level vir
 ```
 
 
-<h3 id="1.1.2">1.2.4、什么情况使用 weak 关键字？相比 assign 有什么不同？</h3>
+<h3 id="1.2.6">1.2.6、什么情况使用 weak 关键字？相比 assign 有什么不同？</h3>
 
 **什么情况使用 weak 关键字？**
 
@@ -810,7 +830,7 @@ iOS5之后，现在，苹果将默认编译器从 GCC转换为LLVM(low level vir
 * assign的“设置方法”只会执行针对“纯量类型” (scalar type，例如 CGFloat 或 NSlnteger 等)的简单赋值操作。
 * assign可以修饰对象(但不推荐)和基本数据类型都可以,但是只是简单地进行赋值操作而已，而 weak 必须用于OC对象。
 
-<h3 id="1.2.9">1.2.9、为什么assign不推荐用于修饰对象？</h3>
+<h3 id="1.2.7">1.2.7、为什么assign不推荐用于修饰对象？</h3>
 
 **assign可以用来修饰OC对象，但是不推荐！！！**
 
@@ -820,219 +840,7 @@ iOS5之后，现在，苹果将默认编译器从 GCC转换为LLVM(low level vir
 
 而assign修饰基本数据类型或oc数据类型，因为基本数据类型是分配在栈上的，由系统分配和释放，所以不会造成野指针。
 
-
-<h3 id="1.2.9">1.2.9、为什么我们常见的delegate属性都用是assign而不是retain/strong？</h3>
-
-在 Delegate 关系中防止强引用循环。在 ARC 特性下，通常我们应该设置 Delegate 属性为 weak 的。
-```@property (nonatomic, weak) id<UITableViewDelegate> delegate;```
-
-但是这里有一个疑问，我们常用到的 UITableView 的 delegate 属性是这样定义的： `@property (nonatomic, assign) id<UITableViewDelegate> delegate;`，为什么用的修饰符是 assign 而不是 weak？其实这个 assign 在 ARC 中意义等同于所有权修饰符 `__unsafe_unretained`，它是为了在 ARC 特性下兼容 iOS4 及更低版本来实现弱引用机制。一般情况下，你应该尽量使用 weak。
-
-
-<h3 id="1.2.9">1.2.9、怎么用 copy 关键字？block用copy修饰吗？可以用其他修饰符吗？</h3>
-
-* NSString、NSArray、NSDictionary等等经常使用copy关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary，为确保对象中的属性值不会无意间变动，应该在设置新属性值时拷贝一份，保护其封装性
-* block也经常使用copy关键字
-	* block 使用 copy 是从 MRC 遗留下来的“传统”,在 MRC 中,方法内部的 block 是在栈区的,使用 copy 可以把它放到堆区.
-	* 在ARC中写不写都行：对于 block 使用 copy 还是 strong 效果是一样的，但是建议写上copy，因为这样显示告知调用者“编译器会自动对 block 进行了 copy 操作”
-
-
-<h3 id="1.2.9">1.2.9、用@property声明的 NSString / NSArray / NSDictionary 经常使用 copy 关键字，为什么？如果改用strong关键字，可能造成什么问题？</h3>
-
-**用@property声明的 NSString / NSArray / NSDictionary 经常使用 copy 关键字，为什么？**
-
-copy 的语义是将对象拷贝一份给新的引用，通过新的引用对它的修改不影响原来那个被拷贝的对象。
-
-NSString、NSArray、NSDictionary 等等经常使用 copy 关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary。
-
-使用 copy 无论给我传入是一个可变对象还是不可对象，我本身持有的就是一个不可变的副本。
-
-```
--(void)string_Copy {
-    NSMutableString *mutableStr = [NSMutableString stringWithFormat:@"123"];
-    self.str2 = mutableStr;
-    [mutableStr appendString:@"456"];
-    
-    NSLog(@"**推荐** NSString copy修饰词 : 此时string和copystring的内存地址都是不同的，修改一个，互不影响");
-    NSLog(@"%@ == %p", self.str2, self.str2);
-    NSLog(@"%@ == %p", mutableStr, mutableStr);
-}
-
--(void)array_Copy {
-    NSMutableArray *mutableArray = [NSMutableArray array];
-    [mutableArray addObject:@"1"];
-    
-    self.arr2 = mutableArray;
-   	 
-    NSLog(@"**** NSArray Copy修饰词 : 此时内存地址都是不同的，修改一个，互不影响");
-    NSLog(@"修改前 == %@ == %p", self.arr2, self.arr2);
-    NSLog(@"修改前 == %@ == %p", mutableArray, mutableArray);
-    
-    [mutableArray addObject:@"2"];
-    
-    NSLog(@"修改后 == %@ == %p", self.arr2, self.arr2);
-    NSLog(@"修改后 == %@ == %p", mutableArray, mutableArray);
-}
-```
-
-**如果改用strong关键字，可能造成什么问题？**
-
-如果我们使用是 strong ,那么这个属性就有可能指向一个可变对象,如果这个可变对象在外部被修改了,那么会影响该属性。
-
-```
--(void)string_Strong {
-    NSMutableString *mutableStr = [NSMutableString stringWithFormat:@"123"];
-    self.str1 = mutableStr;
-    [mutableStr appendString:@"456"];
-    
-    NSLog(@"NSString Strong修饰词 : 此时string和copystring的内存地址都是一样的，修改一个，两个就同时被修改");
-    NSLog(@"%@ == %p", self.str1, self.str1);
-    NSLog(@"%@ == %p", mutableStr, mutableStr);
-}
-
--(void)array_Strong {
-    NSMutableArray *mutableArray = [NSMutableArray array];
-    
-    [mutableArray addObject:@"1"];
-    
-    self.arr1 = [NSArray array];
-    self.arr1 = mutableArray;
-    
-    NSLog(@"**** NSArray Strong修饰词 : 此时内存地址都是一样的，修改一个，两个就同时被修改");
-    NSLog(@"修改前 == %@ == %p", self.arr1, self.arr1);
-    NSLog(@"修改前 == %@ == %p", mutableArray, mutableArray);
-    
-    [mutableArray addObject:@"2"];
-
-    NSLog(@"修改后 == %@ == %p", self.arr1, self.arr1);
-    NSLog(@"修改后 == %@ == %p", mutableArray, mutableArray);
-}
-```
-
-
-<h3 id="1.2.9">1.2.9、这个写法会出什么问题：`@property (copy) NSMutableArray *arr;`</h3>
-
-1.atomic 属性会影响性能；
-
-2.由于copy复制了一个不可变的NSArray对象，如果对arr进行添加、删除、修改数组内部元素的时候，程序找不到对应的方法而崩溃；
-
-
-<h3 id="1.2.9">1.2.9、如何让自己的类用 copy 修饰符？</h3>
-
-1、需要声明该类遵从NSCopying 或 NSMutableCopying协议；
-
-2、实现NSCopying协议，该协议只有一个方法：`-(id)copyWithZone:(NSZone *)zone;`
-
-**拓展**
-
-copy：不可变拷贝,遵循NSCopying协议，需要对应实现copyWithZone方法；
-
-mutableCopy：可变拷贝，遵循NSMutableCopying协议，需要对应实现mutableCopyWithZone:方法；
-
-
-<h3 id="1.2.9">1.2.9、对于深拷贝和浅拷贝的理解，系统对象 NSString/NSMutableString/NSArray/NSMutableArray 的 copy 与 mutableCopy 方法</h3>
-
-浅复制：指针拷贝，源对象和副本指向的是同一个对象
-对象的引用计数器+1，其实相当于做了一次retain操作
-
-深复制：内容拷贝，源对象和副本指向的是不同的两个对象
-源对象引用计数器不变，副本计数器设置为1
-
-
-> **非集合类 NSString/NSMutableString**
-> 
-> * [immutableObject copy]   // 浅复制
-> * [immutableObject mutableCopy]   // 深复制
-> * [mutableObject copy]        // 深复制
-> * [mutableObject mutableCopy]  // 深复制
-
-![](media/003.png)
-
-> **集合类 NSArray/NSMutableArray**
-> 
-> * [immutableObject copy]  // 浅复制
-> * [immutableObject mutableCopy]  // 单层深复制
-> * [mutableObject copy]  // 单层深复制
-> * [mutableObject mutableCopy]  // 单层深复制
-
-![](media/004.png)
-
-![](media/002.png)
-
-
-
-<h3 id="1.2.9">1.2.9、类变量的 @public，@protected，@private，@package 声明各有什么含义？</h3>
-
-上面的几个声明表明类成员的作用域:
-
-@private 作用范围只能在自身类（外界既不可访问，又不能继承）；
-
-@protected(默认) 作用范围在自身类和子类（外界不可访问，但是可以继承）；
-
-@public 作用范围最大，可以在任何地方被访问（外界即可访问，又可以继承）；
-
-@package 作用范围只能在框架内，框架之外不能访问，也就是说本包内可以使用，跨包就不行。
-
-
-
-## <h2 id="1.3">1.3、iOS中nil 、Nil、 NULL 、NSNull，你真的了解吗？</h3>
-
-* **nil**
-
-nil是指向OC中对象的空指针。
-
-```
-示例代码：
- NSString *someString = nil;
- NSURL *someURL = nil;
- id someObject = nil;
- if (anotherObject == nil)     // do something
-```
-
-* **Nil**
-
-定义一个空的类
-
-```
-示例代码：　　
- Class someClass = Nil;　
- Class anotherClass = [NSString class];
-```
-
-* **NULL**
-
-NULL可以用在C语言的各种指针上。
-
-```
-示例代码：
- int *pointerToInt = NULL;　　　　
- char *pointerToChar = NULL;　　
- struct TreeNode *rootNode = NULL;
-```
-
-* **NSNull**
-
-NSNull是一个类，它定义了一个单例对象用于表示集合对象的空值
-
-NSNull是用于表示空值对象的类。
-
-NSNull经常用于NSArray、NSDictionary等，因为它们不能存储nil值，所以使用NSNull来代替nil。
-
-```
-//错误写法：nil为数组结束标志，所以此时该数组的count=2，所以数组不能存储nil值。
-NSArray *array = [[NSArray array]initWithObjects:@"1",@"2",nil,@"4", nil];
-//正确写法：[NSNull null]通常可以作为数组的占位符。
-NSArray *array = [[NSArray array]initWithObjects:@"1",@"2",[NSNull null],@"4", nil];
-
-NSMutableDictionary *dict = [NSMutableDictionary dictionary];
-//错误写法，会出现编译错误。
-[dict setObject:nil forKey:@"key"]; 
-//正确写法
-[dict setObject:[NSNull null] forKey:@"key"];
-```
-
-
-## <h2 id="1.3">1.3、什么是空指针、野指针？如何产生野指针？什么是内存泄露？</h3>
+<h3 id="1.2.7.1">1.2.7.1、什么是空指针、野指针？如何产生野指针？</h3>
 
 [【Objective-C】09-空指针和野指针](https://www.cnblogs.com/mjios/archive/2013/04/22/3034788.html)
 
@@ -1122,23 +930,184 @@ Student对象被销毁了，地址为0xff43的内存就变成了"垃圾内存"�
  
 因为stu是个空指针，没有指向任何对象，因此第9行的setAge:消息是发不出去的，不会造成任何影响。当然，肯定也不会报错。
 
+<h3 id="1.2.7.2">1.2.7.2、野指针的定位</h3>
 
-**问：什么是内存泄漏？**
+[iOS野指针定位总结](https://www.jianshu.com/p/8aba0ee41cd7)
 
-[内存泄漏（Memory Leak）](https://baike.baidu.com/item/内存泄漏/6181425?fr=aladdin)是指程序中己动态分配的堆内存由于某种原因程序 **未释放或无法释放，造成系统内存的浪费**，导致程序运行速度减慢甚至系统崩溃等严重后果。
+[iOS 通向野指针的必经之路](https://www.jianshu.com/p/a9014c4f379d)
+
+
+<h3 id="1.2.8">1.2.8、为什么我们常见的delegate属性都用是assign而不是retain/strong？</h3>
+
+在 Delegate 关系中防止强引用循环。在 ARC 特性下，通常我们应该设置 Delegate 属性为 weak 的。
+```@property (nonatomic, weak) id<UITableViewDelegate> delegate;```
+
+但是这里有一个疑问，我们常用到的 UITableView 的 delegate 属性是这样定义的： `@property (nonatomic, assign) id<UITableViewDelegate> delegate;`，为什么用的修饰符是 assign 而不是 weak？其实这个 assign 在 ARC 中意义等同于所有权修饰符 `__unsafe_unretained`，它是为了在 ARC 特性下兼容 iOS4 及更低版本来实现弱引用机制。一般情况下，你应该尽量使用 weak。
+
+
+<h3 id="1.2.8.1">1.2.8.1、为什么很多内置类如UITableViewControl的delegate属性都是assign而不是retain？请举例</h3>
+
+我们常见的delegate往往是assign方式的属性而不是retain方式的属性，赋值不会增加引用计数，就是为了防止delegation两端产生不必要的循环引用。如果一个UITableViewController对象a通过retain获取了UITableView对象b的所有权，这个UITableView对象b的delegate又是a，如果这个delegate是retain方式的，那基本上就没有机会释放这两个对象了。如果是retain会引起循环引用。
+
+
+<h3 id="1.2.8.2">1.2.8.2、delegate的内存管理属性是weak还是assign？</h3>
+
+[delegate的内存管理属性是weak还是assign？](https://www.jianshu.com/p/ccc31e92c664)
+
+
+<h3 id="1.2.9">1.2.9、怎么用 copy 关键字？block用copy修饰吗？可以用其他修饰符吗？</h3>
+
+* NSString、NSArray、NSDictionary等等经常使用copy关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary，为确保对象中的属性值不会无意间变动，应该在设置新属性值时拷贝一份，保护其封装性
+* block也经常使用copy关键字
+	* block 使用 copy 是从 MRC 遗留下来的“传统”,在 MRC 中,方法内部的 block 是在栈区的,使用 copy 可以把它放到堆区.
+	* 在ARC中写不写都行：对于 block 使用 copy 还是 strong 效果是一样的，但是建议写上copy，因为这样显示告知调用者“编译器会自动对 block 进行了 copy 操作”
+
+
+<h3 id="1.2.10">1.2.10、用@property声明的 NSString / NSArray / NSDictionary 经常使用 copy 关键字，为什么？如果改用strong关键字，可能造成什么问题？</h3>
+
+**用@property声明的 NSString / NSArray / NSDictionary 经常使用 copy 关键字，为什么？**
+
+copy 的语义是将对象拷贝一份给新的引用，通过新的引用对它的修改不影响原来那个被拷贝的对象。
+
+NSString、NSArray、NSDictionary 等等经常使用 copy 关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary。
+
+使用 copy 无论给我传入是一个可变对象还是不可对象，我本身持有的就是一个不可变的副本。
+
+```
+-(void)string_Copy {
+    NSMutableString *mutableStr = [NSMutableString stringWithFormat:@"123"];
+    self.str2 = mutableStr;
+    [mutableStr appendString:@"456"];
+    
+    NSLog(@"**推荐** NSString copy修饰词 : 此时string和copystring的内存地址都是不同的，修改一个，互不影响");
+    NSLog(@"%@ == %p", self.str2, self.str2);
+    NSLog(@"%@ == %p", mutableStr, mutableStr);
+}
+
+-(void)array_Copy {
+    NSMutableArray *mutableArray = [NSMutableArray array];
+    [mutableArray addObject:@"1"];
+    
+    self.arr2 = mutableArray;
+   	 
+    NSLog(@"**** NSArray Copy修饰词 : 此时内存地址都是不同的，修改一个，互不影响");
+    NSLog(@"修改前 == %@ == %p", self.arr2, self.arr2);
+    NSLog(@"修改前 == %@ == %p", mutableArray, mutableArray);
+    
+    [mutableArray addObject:@"2"];
+    
+    NSLog(@"修改后 == %@ == %p", self.arr2, self.arr2);
+    NSLog(@"修改后 == %@ == %p", mutableArray, mutableArray);
+}
+```
+
+**如果改用strong关键字，可能造成什么问题？**
+
+如果我们使用是 strong ,那么这个属性就有可能指向一个可变对象,如果这个可变对象在外部被修改了,那么会影响该属性。
+
+```
+-(void)string_Strong {
+    NSMutableString *mutableStr = [NSMutableString stringWithFormat:@"123"];
+    self.str1 = mutableStr;
+    [mutableStr appendString:@"456"];
+    
+    NSLog(@"NSString Strong修饰词 : 此时string和copystring的内存地址都是一样的，修改一个，两个就同时被修改");
+    NSLog(@"%@ == %p", self.str1, self.str1);
+    NSLog(@"%@ == %p", mutableStr, mutableStr);
+}
+
+-(void)array_Strong {
+    NSMutableArray *mutableArray = [NSMutableArray array];
+    
+    [mutableArray addObject:@"1"];
+    
+    self.arr1 = [NSArray array];
+    self.arr1 = mutableArray;
+    
+    NSLog(@"**** NSArray Strong修饰词 : 此时内存地址都是一样的，修改一个，两个就同时被修改");
+    NSLog(@"修改前 == %@ == %p", self.arr1, self.arr1);
+    NSLog(@"修改前 == %@ == %p", mutableArray, mutableArray);
+    
+    [mutableArray addObject:@"2"];
+
+    NSLog(@"修改后 == %@ == %p", self.arr1, self.arr1);
+    NSLog(@"修改后 == %@ == %p", mutableArray, mutableArray);
+}
+```
+
+
+<h3 id="1.2.11">1.2.11、这个写法会出什么问题：`@property (copy) NSMutableArray *arr;`</h3>
+
+1.atomic 属性会影响性能；
+
+2.由于copy复制了一个不可变的NSArray对象，如果对arr进行添加、删除、修改数组内部元素的时候，程序找不到对应的方法而崩溃；
+
+
+<h3 id="1.2.12">1.2.12、如何让自己的类用 copy 修饰符？</h3>
+
+1、需要声明该类遵从NSCopying 或 NSMutableCopying协议；
+
+2、实现NSCopying协议，该协议只有一个方法：`-(id)copyWithZone:(NSZone *)zone;`
+
+**拓展**
+
+copy：不可变拷贝,遵循NSCopying协议，需要对应实现copyWithZone方法；
+
+mutableCopy：可变拷贝，遵循NSMutableCopying协议，需要对应实现mutableCopyWithZone:方法；
+
+
+<h3 id="1.2.13">1.2.13、对于深拷贝和浅拷贝的理解，系统对象 NSString/NSMutableString/NSArray/NSMutableArray 的 copy 与 mutableCopy 方法</h3>
+
+浅复制：指针拷贝，源对象和副本指向的是同一个对象
+对象的引用计数器+1，其实相当于做了一次retain操作
+
+深复制：内容拷贝，源对象和副本指向的是不同的两个对象
+源对象引用计数器不变，副本计数器设置为1
+
+
+> **非集合类 NSString/NSMutableString**
+> 
+> * [immutableObject copy]   // 浅复制
+> * [immutableObject mutableCopy]   // 深复制
+> * [mutableObject copy]        // 深复制
+> * [mutableObject mutableCopy]  // 深复制
+
+![](media/003.png)
+
+> **集合类 NSArray/NSMutableArray**
+> 
+> * [immutableObject copy]  // 浅复制
+> * [immutableObject mutableCopy]  // 单层深复制
+> * [mutableObject copy]  // 单层深复制
+> * [mutableObject mutableCopy]  // 单层深复制
+
+![](media/004.png)
+
+![](media/002.png)
 
 
 
-<h2 id="1.3">1.3、autoreleasePool </h3>
+<h3 id="1.2.14">1.2.14、类变量的 @public，@protected，@private，@package 声明各有什么含义？</h3>
+
+上面的几个声明表明类成员的作用域:
+
+@private 作用范围只能在自身类（外界既不可访问，又不能继承）；
+
+@protected(默认) 作用范围在自身类和子类（外界不可访问，但是可以继承）；
+
+@public 作用范围最大，可以在任何地方被访问（外界即可访问，又可以继承）；
+
+@package 作用范围只能在框架内，框架之外不能访问，也就是说本包内可以使用，跨包就不行。
+
+
+
+
+<h2 id="1.3">1.3、autoreleasePool</h2>
 
 <h3 id="1.3.1">1.3.1、关键字autorelease与所有权修饰符__autorelease与autoreleasepool的关系？</h3>
 
 
-
-
-
-* [1.3、autoreleasePool]()
-	* []	 
+* [1.3、autoreleasePool]() 
 		* [1.3.1、谈谈你对autoreleasePool自动释放池的理解，自动释放池的原理](#1.17)
 		* [1.3.2、autoreleasePool自动释放池在 MRC和ARC 下的区别](#1.17)
 		* [1.、不⼿动指定autoreleasepool的前提下，⼀个autorealese对象在什么时刻释放？]()
@@ -1150,9 +1119,10 @@ Student对象被销毁了，地址为0xff43的内存就变成了"垃圾内存"�
 
 
 
+<h2 id="1.4">1.4、iOS中的方法</h2>
 
 
-## <h2 id="1.4">1.4、+(void)load; +(void)initialize；区别？有什么用处？initialize方法如何调用,以及调用时机 </h3>
+<h3 id="1.4.1">1.4.1、+(void)load; +(void)initialize；区别？有什么用处？initialize方法如何调用,以及调用时机 </h3>
 
 [Apple官网 -- load](https://developer.apple.com/documentation/objectivec/nsobject/1418815-load?language=objc)
 
@@ -1464,6 +1434,78 @@ OC：程序是可以编译通过的,但是会有一个黄色的警告。只有�
 ```
 
 
+
+
+
+
+
+
+
+
+
+
+## <h2 id="1.3">1.3、iOS中nil 、Nil、 NULL 、NSNull，你真的了解吗？</h3>
+
+* **nil**
+
+nil是指向OC中对象的空指针。
+
+```
+示例代码：
+ NSString *someString = nil;
+ NSURL *someURL = nil;
+ id someObject = nil;
+ if (anotherObject == nil)     // do something
+```
+
+* **Nil**
+
+定义一个空的类
+
+```
+示例代码：　　
+ Class someClass = Nil;　
+ Class anotherClass = [NSString class];
+```
+
+* **NULL**
+
+NULL可以用在C语言的各种指针上。
+
+```
+示例代码：
+ int *pointerToInt = NULL;　　　　
+ char *pointerToChar = NULL;　　
+ struct TreeNode *rootNode = NULL;
+```
+
+* **NSNull**
+
+NSNull是一个类，它定义了一个单例对象用于表示集合对象的空值
+
+NSNull是用于表示空值对象的类。
+
+NSNull经常用于NSArray、NSDictionary等，因为它们不能存储nil值，所以使用NSNull来代替nil。
+
+```
+//错误写法：nil为数组结束标志，所以此时该数组的count=2，所以数组不能存储nil值。
+NSArray *array = [[NSArray array]initWithObjects:@"1",@"2",nil,@"4", nil];
+//正确写法：[NSNull null]通常可以作为数组的占位符。
+NSArray *array = [[NSArray array]initWithObjects:@"1",@"2",[NSNull null],@"4", nil];
+
+NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+//错误写法，会出现编译错误。
+[dict setObject:nil forKey:@"key"]; 
+//正确写法
+[dict setObject:[NSNull null] forKey:@"key"];
+```
+
+
+
+
+
+
+
 <h1 id="二">二、Runtime </h1>
 
 
@@ -1748,4 +1790,19 @@ NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@select
 	* [4.、KVC的赋值和取值过程是怎样的？原理是什么？](#4.)
 	* [4.、如何访问并修改一个类的私有属性？](#4.)
 	* [4.、NSNotification和KVO的区别和用法是什么？什么时候应该使用NSNotification，什么时候应该使用KVO？它们的实现上有什么区别吗？如果用protocol和delegate（或者delegate的Array）来实现类似的功能可能吗？如果可能，会有什么潜在的问题？如果不能，为什么？](#4.)
+
+
+
+
+
+
+**问：什么是内存泄漏？**
+
+[内存泄漏（Memory Leak）](https://baike.baidu.com/item/内存泄漏/6181425?fr=aladdin)是指程序中己动态分配的堆内存由于某种原因程序 **未释放或无法释放，造成系统内存的浪费**，导致程序运行速度减慢甚至系统崩溃等严重后果。
+
+
+
+
+
+
 
