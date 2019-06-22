@@ -99,7 +99,7 @@ iOS面试整理
     * [1.、空指针，野指针，僵尸对象]()
     * [1.、objc在向⼀个对象发送消息时，发⽣了什么？]()
     * [1.、Objc中向一个nil对象发送消息会怎样]()
-    * [1.、objc在向⼀个野指针发送消息时，发⽣了什么？]
+    * [1.、objc在向⼀个野指针发送消息时，发⽣了什么？]()
     * [1.、为什么其他语言里叫函数调用， objective c里则是给对象发消息（或者谈下对runtime的理解）]()
 	* [2.1、什么是 Runtime？Runtime实现的机制是什么？](#2.1)
 	* [2.2、message send如果寻找不到相应的对象，会如何进行后续处理 ？](#2.2)
@@ -110,7 +110,7 @@ iOS面试整理
 	* [2.、runtime如何使用]()
 	* [2.、_objc_msgForward 函数是做什么的，直接调用它将会发生什么？]()
 	* [2.、你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？]()
-	* [2.、对于语句NSString *obj =[[NSData alloc] init]; obj在编译时和运行时分别是什么类型的对象?]()
+	* [2.、对于语句 `NSString *obj =[[NSData alloc] init]; `obj在编译时和运行时分别是什么类型的对象?]()
 	
 * [三、Runloop](#三)
 	* [3.、什么是 RunLoop？Runloop内部实现逻辑？](#3.)
