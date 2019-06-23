@@ -44,13 +44,14 @@ iOS面试整理
 
 	* [1.4、iOS中的方法](#1.4)   
 		* [1.4.1、+(void)load; +(void)initialize；区别？有什么用处？initialize方法如何调用,以及调用时机](#1.4.1)
-		* [1.、谈谈instancetype和id的异同？id 声明的对象有什么特性？id和NSObject＊的区别？]()
-		* [1.、UIView和CALayer是啥关系？]()
-		* [1.、isKindOfClass和isMemberOfClass的区别？]()
-		* [1.、frame 和 bounds 有什么不同？frame 和 bounds 分别是用来做什么的？frame和bound 一定都相等么？如果有不等的情况，请举例说明]()
+		* [1.4.2、谈谈instancetype和id的异同？id和NSObject＊的区别？id 声明的对象有什么特性？](#1.4.2)
+		* [1.4.3、UIView和CALayer是啥关系？](#1.4.3)
+		* [1.4.4、isKindOfClass和isMemberOfClass的区别？](#1.4.4)
+		* [1.4.5、frame 和 bounds 有什么不同？frame 和 bounds 分别是用来做什么的？frame 和 bound 一定都相等么？如果有不等的情况，请举例说明](#1.4.5)
 		* [1.、loadView是干嘛用的？viewWillLayoutSubView你总是知道的]()
 		* [1.、imageName和mageWithContextOfFile的区别?哪个性能高]()
 		* [1.、drawRect与layout]()
+		* [1.、setNeedsDisplay]()
 
 * [1.5、iOS编程中一些基础]()    
     * [1.、数据持久化存储方案有哪些？]()
@@ -91,24 +92,27 @@ iOS面试整理
     * [1.、使用CADisplayLink、NSTimer有什么注意点？]()
 
 * [二、Runtime](#二)
-
-  * [1.6、消息发送]()
-    * [1.、谈谈消息转发机制实现]()
-    * [1.、空指针，野指针，僵尸对象]()
-    * [1.、objc在向⼀个对象发送消息时，发⽣了什么？]()
-    * [1.、Objc中向一个nil对象发送消息会怎样]()
-    * [1.、objc在向⼀个野指针发送消息时，发⽣了什么？]()
-    * [1.、为什么其他语言里叫函数调用， objective c里则是给对象发消息（或者谈下对runtime的理解）]()
 	* [2.1、什么是 Runtime？Runtime实现的机制是什么？](#2.1)
-	* [2.2、message send如果寻找不到相应的对象，会如何进行后续处理 ？](#2.2)
 	* [2.、Runtime如何通过selector找到对应的IMP地址]()
 	* [2.、一个objc对象的isa的指针指向什么？有什么作用？]()
+	* [2.、isa与IMP区别]()
 	* [2.、isa、Class介绍]()
 	* [2.、消息发送与转发]()
 	* [2.、runtime如何使用]()
 	* [2.、_objc_msgForward 函数是做什么的，直接调用它将会发生什么？]()
 	* [2.、你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？]()
 	* [2.、对于语句 `NSString *obj =[[NSData alloc] init]; `obj在编译时和运行时分别是什么类型的对象?]()
+	* [2.、runtime使用场景？]()
+   * [1.6、消息发送]()
+		* [1.、谈谈消息转发机制实现]()
+		* [1.、空指针，野指针，僵尸对象]()
+		* [2.2、message send如果寻找不到相应的对象，会如何进行后续处理 ？](#2.2)
+    	* [1.、objc在向⼀个对象发送消息时，发⽣了什么？]()
+   	 	* [1.、Objc中向一个nil对象发送消息会怎样]()
+    	* [1.、objc在向⼀个野指针发送消息时，发⽣了什么？]()
+    	* [1.、为什么其他语言里叫函数调用， objective c里则是给对象发消息（或者谈下对runtime的理解）]()
+	
+	
 	
 * [三、Runloop](#三)
 	* [3.、什么是 RunLoop？Runloop内部实现逻辑？](#3.)
@@ -1122,21 +1126,116 @@ mutableCopy：可变拷贝，遵循NSMutableCopying协议，需要对应实现mu
 
 <h3 id="1.4.1">1.4.1、+(void)load; +(void)initialize；区别？有什么用处？initialize方法如何调用,以及调用时机 </h3>
 
-[Apple官网 -- load](https://developer.apple.com/documentation/objectivec/nsobject/1418815-load?language=objc)
+* [load](https://developer.apple.com/documentation/objectivec/nsobject/1418815-load?language=objc)
 
-[Apple官网 -- initialize](https://developer.apple.com/documentation/objectivec/nsobject/1418639-initialize?language=objc)
+	Invoked whenever a class or category is added to the Objective-C runtime; implement this method to perform class-specific behavior upon loading.
 
-https://www.jianshu.com/p/9368ce9bb8f9
-https://blog.csdn.net/ZCLengendary/article/details/83548463
+* [initialize](https://developer.apple.com/documentation/objectivec/nsobject/1418639-initialize?language=objc)
 
-load方法常用来method swizzle，initialize常常用于初始化全局变量和静态变量.
+	Initializes the class before it receives its first message.
+
+
+[iOS类方法load和initialize详解](https://www.jianshu.com/p/c52d0b6ee5e9)
 
 ||+(void)load|+(void)initialize|
 |----|----|----|
-|执行时机	| 在程序运行后立即执行	| 在类的方法第一次被调时执行|
+| 调用时机 | 只要文件被引用就会被调用，所以如果类没有被引进项目,就不会调用 +load	| 是在类或者它的子类收到第一条消息（实例方法、类方法）之前被调用的。|
+| 调用顺序 | 1、+load 会在 main() 函数之前被调用；<br> 2、父类 > 子类 > 分类 | 父类 > 子类（或分类） |
+| 子类、类别调用 | 子类：如果子类没有实现 load 方法, 该子类是不会调用该方法的, 就算父类实现了也不会调用父类的load方法；<br><br> 类别：当有多个类别(Category)都实现了load方法,这几个load方法都会执行,但执行顺序不确定，执行顺序与其在Compile Sources中出现的顺序一致; ![](media/009.png)| 如果子类实现 initialize方法时,会覆盖父类initialize方法；<br><br> 如果子类不实现 initialize 方法，会把父类的实现继承过来调用一遍；<br><br>当有多个Category都实现了initialize方法,会覆盖类中的方法,只执行一个(会执行Compile Sources 列表中最后一个Category 的initialize方法) |
+| 调用次数 | 1次 | 1、如果只有父类，则调用1次或0次；<br>2；有子类则调用多次；（子类也会调用父类的initialize方法） |
+| 线程安全 | load 方法是线程安全的，内部使用了锁，应避免线程阻塞在 load 中。 | 在initialize方法收到调用时，运行环境基本健全。initialize的运行过程中是能保证线程安全的； |
+| 常见场景 | 1、由于调用load方法时的环境很不安全，我们应该尽量减少load方法的逻辑；<br> 2、load 中实现 Method Swizzle | 1、常用于初始化全局变量和静态变量；<br> 2、者单例模式的实现方案； |
 
 
 
+<h3 id="1.4.2">1.4.2、谈谈instancetype和id的异同？id和NSObject＊的区别？id 声明的对象有什么特性？</h3>
+
+**问：谈谈instancetype和id的异同？**
+
+[iOS instancetype 和 id 区别详解](https://juejin.im/entry/588022572f301e00697c8756)
+
+（1）id在编译的时候不能判断对象的真实类型；
+instancetype在编译的时候可以判断对象的真实类型；
+
+（2）如果init方法的返回值是instancetype,那么将返回值赋值给一个其它的对象会报一个警告，如果是在以前，init的返回值是id,那么将init返回的对象地址赋值给其它对象是不会报错的；
+
+ (3）id可以用来定义变量, 可以作为返回值, 可以作为形参；
+instancetype只能用于作为返回值；
+
+
+
+**问：id和NSObject＊的区别？**
+
+* id 被成为万能指针,也就是可以指向任何对象.
+* NSObject * 本身就是定义指向NSObject类型的指针.
+
+```
+ 1. id foo1;
+ 2. NSObject *foo2;
+ 3. id<NSObject> foo3;
+```
+
+第一种是最常用的，它简单地申明了指向对象的指针，没有给编译器任何类型信息，因此，编译器不会做类型检查。但也因为是这样，你可以发送任何信息给id类型的对象。这就是为什么+alloc返回id类型，但调用[[Foo alloc] init]不会产生编译错误。
+
+因此，**id类型是运行时的动态类型，编译器无法知道它的真实类型，即使你发送一个id类型没有的方法，也不会产生编译警告。**
+
+我们知道，id类型是一个Objective-C对象，但并不是都指向继承自NSOjbect的对象，即使这个类型和NSObject对象有很多共同的方法，像retain和release。要让编译器知道这个类继承自NSObject，一种解决办法就是像第2种那样，使用NSObject静态类型，当你发送NSObject没有的方法，像length或者count时，编译器就会给出警告。这也意味着，你可以安全地使用像retain，release，description这些方法。
+
+因此，申明一个通用的NSObject对象指针和你在其它语言里做的类似，像Java，但其它语言有一定的限制，没有像Objective-C这样灵活。并不是所有的Foundation/Cocoa对象都继承息NSObject，比如NSProxy就不从NSObject继承，所以你无法使用NSObject＊指向这个对象，即使NSProxy对象有release和retain这样的通用方法。为了解决这个问题，这时候，你就需要一个指向拥有NSObject方法对象的指针，这就是第3种申明的使用情景。
+
+id告诉编译器，你不关心对象是什么类型，但它必须遵守NSObject协议(protocol)，编译器就能保证所有赋值给id类型的对象都遵守NSObject协议(protocol)。这样的指针可以指向任何NSObject对象，因为NSObject对象遵守NSObject协议(protocol)，而且，它也可以用来保存NSProxy对象，因为它也遵守NSObject协议(protocol)。这是非常强大，方便且灵活，你不用关心对象是什么类型，而只关心它实现了哪些方法。
+
+
+**问：id 声明的对象有什么特性？**
+
+1. 没有*号;
+2. id类型的对象可以是任意类型的OC对象，而不关心其具体类型，与C中的void*万能指针相似;
+3. 具有运行时的特点，在程序运行时才确定对象的类型;
+4. 可以对其发送任何（存在的）消息；
+
+
+
+<h3 id="1.4.3">1.4.3、UIView和CALayer是啥关系？</h3>
+
+1. 首先UIView可以响应事件，Layer不可以；
+2. UIView主要处理事件，CALayer负责绘制就更好；
+3. View 持有 Layer 用于显示，View 中大部分显示属性实际是从 Layer 映射而来；
+4. Layer 的 delegate 在这里是 View，当其属性改变、动画产生时，View 能够得到通知；
+5. UIView 和 CALayer 不是线程安全的，并且只能在主线程创建、访问和销毁。
+6. 每个 UIView 内部都有一个 CALayer 在背后提供内容的绘制和显示，并且 UIView 的尺寸样式都由内部的 Layer 所提供。两者都有树状层级结构，layer 内部有 SubLayers，View 内部有 SubViews.但是 Layer 比 View 多了个AnchorPoint
+
+<h3 id="1.4.4">1.4.4、isKindOfClass和isMemberOfClass的区别？</h3>
+
+* isKindOfClass 判断是否是这个类或者这个类的子类的实例；
+* isMemberOfClass 判断是否是这个类的实例；
+
+
+<h3 id="1.4.5">1.4.5、frame 和 bounds 有什么不同？frame 和 bounds 分别是用来做什么的？frame 和 bound 一定都相等么？如果有不等的情况，请举例说明</h3>
+
+**问：frame 和 bounds 有什么不同？**
+
+[frame和bounds的区别](https://www.jianshu.com/p/964313cfbdaa)
+
+* frame: 该view在父view坐标系统中的位置和大小。（参照点是，父亲的坐标系统）
+* bounds：该view在本地坐标系统中的位置和大小。（参照点是，本地坐标系统，就相当于ViewB自己的坐标系统，以0,0点为起点）
+
+![frame & bounds](media/010.png)
+
+**问：frame 和 bounds 分别是用来做什么的？**
+
+* frame是参考父view的坐标系来设置自己左上角的位置。
+* 设置bounds可以修改自己坐标系的原点位置，进而影响到其“子view”的显示位置。
+
+* bounds使用场景：
+	
+	其实bounds我们一直在使用，就是我们使用scrollview的时候。
+
+	为什么我们滚动scrollview可以看到超出显示屏的内容。就是因为scrollview在不断改变自己的bounds，从而改变scrollview上的子view的frame，让他们的frame始终在最顶级view（window）的frame内部，这样我们就可以始终看到内容了。
+
+
+**问：frame 和 bound 一定都相等么？如果有不等的情况，请举例说明**
+
+[未答]
 
 
 ## <h2 id="1.4">1.4、#define和 const定义的常量，有什么区别？</h3>
@@ -1148,9 +1247,6 @@ load方法常用来method swizzle，initialize常常用于初始化全局变量�
 | 编译检查 | 宏不做检查，不会报编译错误，只是替换 | const会编译检查，会报编译错误 |
 | 内存分配 | 系统不为宏分配内存 | 系统为const的常量分配内存 |
 | 优劣势 | 1、宏能定义一些函数 `#define MAX(a,b) ((a)>(b)?(a):(b))` <br> 2、使用大量宏，容易造成编译时间久，每次都需要重新替换。 | const不能定义函数 |
-
-
-
 | 作用 |  | 1.const仅仅用来修饰右边的变量（基本数据变量p，指针变量*p）<br> 2.被const修饰的变量是只读的。|
 | 使用场景 || 1、定义只读全局变量（NSString * const str  = @"123";）；<br> 2、|
 
@@ -1504,16 +1600,40 @@ NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
 
 
-<h1 id="二">二、Runtime </h1>
+<h2 id="二">二、Runtime </h2>
 
 
 [iOS Runtime详解](https://www.jianshu.com/p/6ebda3cd8052)
 
-## <h2 id="1.4">1.4、Runtime如何通过selector找到对应的IMP地址</h2>
+<h2 id="2.1">2.1、什么是 Runtime？Runtime实现的机制是什么？</h2>
+
+**问：什么是 Runtime？**
+
+1. runtime是一套比较底层的纯C语言API, 属于1个C语言库, 包含了很多底层的C语言API;
+
+2. 平时编写的OC代码, 在程序运行过程中, 其实最终都是转成了runtime的C语言代码, runtime算是OC的幕后工作者;
+
+3. Objective-C 扩展了 C 语言，并加入了面向对象特性和 Smalltalk 式的消息传递机制。而这个扩展的核心是一个用 C 和 编译语言 写的 Runtime 库。它是 Objective-C 面向对象和动态机制的基石。
+
+
+
+<h2 id="1.4">1.4、Runtime如何通过selector找到对应的IMP地址</h2>
 
 
 
 ## <h2 id="1.4">1.4、你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？</h2>
+
+
+* 关联对象(Objective-C Associated Objects)给分类增加属性
+* 方法魔法(Method Swizzling)方法添加和替换和KVO实现
+* 消息转发(热更新)解决Bug(JSPatch)
+* 实现NSCoding的自动归档和自动解档
+* 实现字典和模型的自动转换(MJExtension)
+
+作者：jackyshan
+鏈接：https://www.jianshu.com/p/6ebda3cd8052
+來源：簡書
+簡書著作權歸作者所有，任何形式的轉載都請聯繫作者獲得授權並註明出處。
 
 
 1、方法交换：替换NSArray类避免崩溃；替换NSURL解决中文字符问题；利用 runtime 一键改变字体;UIButton同时点击&&重复点击规避;
@@ -1544,6 +1664,7 @@ Apple 使用了 isa-swizzling 来实现 KVO 。当观察对象A时，KVO机制�
 
 在这个过程，被观察对象的 isa 指针从指向原来的 A 类，被KVO 机制修改为指向系统新创建的子类NSKVONotifying_A 类，来实现当前类属性值改变的监听；
 所以当我们从应用层面上看来，完全没有意识到有新的类出现，这是系统“隐瞒”了对 KVO 的底层实现过程，让我们误以为还是原来的类。但是此时如果我们创建一个新的名为“NSKVONotifying_A”的类，就会发现系统运行到注册 KVO 的那段代码时程序就崩溃，因为系统在注册监听的时候动态创建了名为 NSKVONotifying_A 的中间类，并指向这个中间类了。
+
 
 
 
@@ -1637,7 +1758,7 @@ RunLoop 和线程是息息相关的，我们知道线程的作用是用来执行
 ```
 
 
-**在滑动⻚⾯上的列表时，timer会暂定回调，为什么？**
+**问：在滑动⻚⾯上的列表时，timer会暂定回调，为什么？**
 
 当我们不做任何操作的时候，RunLoop处于NSDefaultRunLoopMode下。
 
@@ -1718,6 +1839,8 @@ NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@select
 	
 <h1 id="四">四、KVC & KVO</h1>
 
+[iOS窥探KVO底层实现原理篇](https://www.jianshu.com/p/0aa83ac521ba)
+
 
 ## <h2 id="4.1">4.1、KVC的底层实现？应用在哪些场景？</h2>
 
@@ -1755,25 +1878,36 @@ NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@select
  -(void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary<NSString *,id> *)change context:(void *)context方法,在该方法中可以拿到属性改变前后的值.
 ```
 
+继续探究 NSKVONotifying_Person 子类 重写 setName 都做了什么?
+其实 setName 方法内部 是调用了 Foundation 的_NSSetObjectValueAndNotify 函数 ,在_NSSetObjectValueAndNotify 内部
+
+1. 首先会调用 willChangeValueForKey
+2. 然后给 name 属性赋值
+3. 最后调用 didChangeValueForKey
+4. 最后调用 observer 的 observeValueForKeyPath 去告诉监听器属性值发生了改变 .
+
+
 **应用在哪些场景？**
 
 作用:能够监听某个对象属性值的改变
 
 
-## <h2 id="4.1">4.1、直接修改成员变量会触发KVO么？</h2>
+## <h2 id="4.1">4.1、直接修改成员变量会触发KVO么？通过KVC修改属性会触发KVO么？如何手动触发KVO？</h2>
+
+KVC 对属性赋值时候 是会在这个类里边 去查找 _age  isAge setAge setIsAge 等方法的 ,最终会调用属性的 setter 方法 ,那么如果添加了 KVO 还是会被触发的 .
+相反 设置成员变量  _age 由于不会触发 setter 方法 ,因此不会去触发 KVO 相关的代码 .
+
+**问：直接修改成员变量会触发KVO么？**
 
 不会触发KVO
 
-
-## <h2 id="4.1">4.1、通过KVC修改属性会触发KVO么？</h2>
+**问：通过KVC修改属性会触发KVO么？** 
 
 会触发KVO
 
-## <h2 id="4.1">4.1、如何手动触发KVO？</h2>
+**问：如何手动触发KVO？**
 
 手动调用willChangeValueForKey:和didChangeValueForKey:
-
-
 
 
 	
