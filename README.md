@@ -488,6 +488,7 @@ OC使用了一种叫做引用计数的机制来管理内存中的对象。OC中�
 	* 1、原子操作相关： atomic(默认，线程操作安全)、nonatomic
 	* 2、内存管理相关：assign、weak、copy、strong(默认)、unsafe_unretained
 	* 3、读写操作：readwrite(默认，表示既有getter方法，也有setter方法)、readonly(表示只有getter方法)
+	* 4、setter/getter方法
 
 
 * 内存管理相关：assign、weak、copy、strong(默认)、unsafe_unretained
