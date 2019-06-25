@@ -1,5 +1,8 @@
 iOS面试整理
 
+[AAA](https://github.com/lionsom/iOS-/blob/master/Runtime.md)
+
+
 ## 目录
 * [一、iOS基础部分](#一)
 	* [1.1、iOS内存机制](#1.1)
