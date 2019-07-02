@@ -80,6 +80,14 @@
     * [1.、简单说一下APP的启动过程,从main文件开始说起。]()
     * [1.、UIViewController的生命周期， 应用的生命周期]()
     
+    
+* [layout]()
+	* [下面列出View的layout的方法:layoutSubviews/layoutIfNeeded/setNeedsLayout/setNeedsDisplay/drawRect/sizeThatFits/sizeToFit区别使用？](https://www.jianshu.com/p/2ef48c2f0c97) 
+	* [uitableviewcell行高计算？]()
+	* [masonry自适应行高]()
+	
+	
+    
 * [1.7、其他]()    
 	* [1.3、iOS中nil 、Nil、 NULL 、NSNull，你真的了解吗？]() 
 	* [1.、c++引用和指针区别]()
