@@ -643,7 +643,7 @@ Student对象被销毁了，地址为0xff43的内存就变成了"垃圾内存"�
 [iOS 通向野指针的必经之路](https://www.jianshu.com/p/a9014c4f379d)
 
 
-<h3 id="1.2.8">1.2.8、为什么我们常见的delegate属性都用是assign而不是retain/strong？</h3>
+<h2 id="1.2.8">1.2.8、为什么我们常见的delegate属性都用是assign而不是retain/strong？</h2>
 
 在 Delegate 关系中防止强引用循环。在 ARC 特性下，通常我们应该设置 Delegate 属性为 weak 的。
 ```@property (nonatomic, weak) id<UITableViewDelegate> delegate;```
@@ -661,7 +661,7 @@ Student对象被销毁了，地址为0xff43的内存就变成了"垃圾内存"�
 [delegate的内存管理属性是weak还是assign？](https://www.jianshu.com/p/ccc31e92c664)
 
 
-<h3 id="1.2.9">1.2.9、怎么用 copy 关键字？block用copy修饰吗？可以用其他修饰符吗？</h3>
+<h2 id="1.2.9">1.2.9、怎么用 copy 关键字？block用copy修饰吗？可以用其他修饰符吗？</h2>
 
 * NSString、NSArray、NSDictionary等等经常使用copy关键字，是因为他们有对应的可变类型：NSMutableString、NSMutableArray、NSMutableDictionary，为确保对象中的属性值不会无意间变动，应该在设置新属性值时拷贝一份，保护其封装性
 * block也经常使用copy关键字
@@ -669,7 +669,7 @@ Student对象被销毁了，地址为0xff43的内存就变成了"垃圾内存"�
 	* 在ARC中写不写都行：对于 block 使用 copy 还是 strong 效果是一样的，但是建议写上copy，因为这样显示告知调用者“编译器会自动对 block 进行了 copy 操作”
 
 
-<h3 id="1.2.10">1.2.10、用@property声明的 NSString / NSArray / NSDictionary 经常使用 copy 关键字，为什么？如果改用strong关键字，可能造成什么问题？</h3>
+<h2 id="1.2.10">1.2.10、用@property声明的 NSString / NSArray / NSDictionary 经常使用 copy 关键字，为什么？如果改用strong关键字，可能造成什么问题？</h2>
 
 **用@property声明的 NSString / NSArray / NSDictionary 经常使用 copy 关键字，为什么？**
 
@@ -740,6 +740,97 @@ NSString、NSArray、NSDictionary 等等经常使用 copy 关键字，是因为�
     NSLog(@"修改后 == %@ == %p", mutableArray, mutableArray);
 }
 ```
+
+
+<h2 id="1.2.11">1.2.11、这个写法会出什么问题：`@property (copy) NSMutableArray *arr;`</h2>
+
+1. atomic 属性会影响性能；
+
+2. 由于copy复制了一个不可变的NSArray对象，如果对arr进行添加、删除、修改数组内部元素的时候，程序找不到对应的方法而崩溃；
+
+
+<h2 id="1.2.12">1.2.12、如何让自己的类用 copy 修饰符？</h2>
+
+1. 需要声明该类遵从NSCopying 或 NSMutableCopying协议；
+
+2. 实现NSCopying协议，该协议只有一个方法：`-(id)copyWithZone:(NSZone *)zone;`
+
+* **拓展**
+
+	copy：不可变拷贝,遵循NSCopying协议，需要对应实现copyWithZone方法；
+
+	mutableCopy：可变拷贝，遵循NSMutableCopying协议，需要对应实现mutableCopyWithZone:方法；
+
+
+<h2 id="1.2.13">1.2.13、对于深拷贝和浅拷贝的理解，系统对象 NSString/NSMutableString/NSArray/NSMutableArray 的 copy 与 mutableCopy 方法</h2>
+
+浅复制：指针拷贝，源对象和副本指向的是同一个对象
+对象的引用计数器+1，其实相当于做了一次retain操作
+
+深复制：内容拷贝，源对象和副本指向的是不同的两个对象
+源对象引用计数器不变，副本计数器设置为1
+
+
+> **非集合类 NSString/NSMutableString**
+> 
+> * [immutableObject copy]   // 浅复制
+> * [immutableObject mutableCopy]   // 深复制
+> * [mutableObject copy]        // 深复制
+> * [mutableObject mutableCopy]  // 深复制
+
+![](media/003.png)
+
+> **集合类 NSArray/NSMutableArray**
+> 
+> * [immutableObject copy]  // 浅复制
+> * [immutableObject mutableCopy]  // 单层深复制
+> * [mutableObject copy]  // 单层深复制
+> * [mutableObject mutableCopy]  // 单层深复制
+
+![](media/004.png)
+
+![](media/002.png)
+
+
+<h2 id="1.2.14">1.2.14、类变量的 @public，@protected，@private，@package 声明各有什么含义？</h2>
+
+
+上面的几个声明表明类成员的作用域:
+
+@private 私有的，作用范围只能在自身类（外界既不可访问，又不能继承）；
+
+@protected(默认) 受保护的，作用范围在自身类和子类（外界不可访问，但是可以继承）；
+
+@public 共有的，作用范围最大，可以在任何地方被访问（外界即可访问，又可以继承）；
+
+@package 作用范围只能在框架内，框架之外不能访问，也就是说本包内可以使用，跨包就不行。
+
+
+
+<h1 id="1.3">1.3、autoreleasePool</h1>
+
+<h2 id="1.3.1">1.3.1、谈谈你对autoreleasePool自动释放池的理解，自动释放池的原理</h2>
+
+OC对象的生命周期取决于引用计数，我们有两种方式可以释放对象：一种是直接调用release释放；另一种是调用autorelease将对象加入自动释放池中。自动释放池用于存放那些需要在稍后某个时刻释放的对象。
+
+
+* [1.3、autoreleasePool](#1.3)
+	* [1.3.1、谈谈你对autoreleasePool自动释放池的理解，自动释放池的原理](#1.17)
+	* [1.3.2、autoreleasePool自动释放池在 MRC和ARC 下的区别](#1.17)
+	* [1.、不⼿动指定autoreleasepool的前提下，⼀个autorealese对象在什么时刻释放？]()
+	* [1.3.3、多层自动释放池嵌套的对象在哪一层释放]()
+	* [1.3.4、autoreleasePool自动释放池的应用场景]()
+	* [1.3.5、autorelease对象在什么时机会被调用release]()
+	* [1.3.6、方法里有局部对象， 出了方法后会立即释放吗]()
+
+
+
+
+
+
+
+
+
 
 
 
