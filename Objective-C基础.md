@@ -85,6 +85,7 @@
 	* [下面列出View的layout的方法:layoutSubviews/layoutIfNeeded/setNeedsLayout/setNeedsDisplay/drawRect/sizeThatFits/sizeToFit区别使用？](https://www.jianshu.com/p/2ef48c2f0c97) 
 	* [uitableviewcell行高计算？]()
 	* [masonry自适应行高]()
+	* [手写一个自动布局]()
 	
 	
     
@@ -92,7 +93,6 @@
 	* [1.3、iOS中nil 、Nil、 NULL 、NSNull，你真的了解吗？]() 
 	* [1.、c++引用和指针区别]()
     * [1.、静态库的原理是什么？你有没有⾃⼰写过静态编译库，遇到了哪些问题？]()
-    * [1.、描述一个你遇到过的retain cycle例子。如何避免retain cycle]()
     * [1.、计时器有哪些？NSTimer创建后，会在哪个线程运行？如何让计时器调用一个类方法？]()
     * [1.、你是否接触过OC中的反射机制？简单聊一下概念和使用，反射函数？]()
     * [1.、使用CADisplayLink、NSTimer有什么注意点？]()
@@ -812,6 +812,21 @@ NSString、NSArray、NSDictionary 等等经常使用 copy 关键字，是因为�
 <h2 id="1.3.1">1.3.1、谈谈你对autoreleasePool自动释放池的理解，自动释放池的原理</h2>
 
 OC对象的生命周期取决于引用计数，我们有两种方式可以释放对象：一种是直接调用release释放；另一种是调用autorelease将对象加入自动释放池中。自动释放池用于存放那些需要在稍后某个时刻释放的对象。
+
+
+**使用autorelease的好处**
+
+(1). 不需要再关心对象释放的时间
+
+(2). 不需要再关心什么时候调用release
+
+**autorelease何时释放?**
+
+对于autoreleasepool本身,会在如下两个条件发生时候被释放 
+
+1)手动释放Autorelease pool
+
+2)Runloop结束后自动释放
 
 
 * [1.3、autoreleasePool](#1.3)
