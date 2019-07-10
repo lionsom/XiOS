@@ -70,7 +70,6 @@
 	* [1.、什么是谓词？谓词过滤]()
 	* [1.、NSString存储类型]()
 	* [1.、NSCache与可变集合有几点不同]()
-	* [1.、UITableView的重用机制]()
 	* [1.、请用简单的代码展示@protocol的定义及实现.]()
 	* [1.、协议是什么?有什么作用?]()
 	* [1.、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？]()
@@ -83,7 +82,8 @@
     * [1.、main()之前的过程有哪些？]()
     * [1.、简单说一下APP的启动过程,从main文件开始说起。]()
     * [1.、UIViewController的生命周期， 应用的生命周期]()
-    
+    	* [1.、UITableView的重用机制]()
+
     	
     
 * [1.7、其他]()    
@@ -1312,8 +1312,159 @@ int main(int argc, const char * argv[]) {
 // 输出 1 2 3
 ```
 
+<h2 id="1.5.7">1.5.7、NSString存储类型</h2>
+
+[NSString的内存管理](https://www.skyfly.xyz/2015/11/08/iOS/NSString的内存管理/)
+
+[NSTaggedPointerString,__NSCFConstantString,__NSCFString和NSString的关系?NSString为什么用copy?](https://blog.csdn.net/qq_31186665/article/details/84069883)
+
+[NSString内存小结，以及isEqual与isEqualToString的研究](https://www.jianshu.com/p/68ae38ec85d9)
+
+[深入理解 Tagged Pointer -- 唐巧](https://www.infoq.cn/article/deep-understanding-of-tagged-pointer/)
+[【译】采用Tagged Pointer的字符串](http://www.cocoachina.com/articles/13449)
+
+**查看NSString isa类型**
+
+```
+#import <objc/runtime.h>
+
+NSLog(@"%@",object_getClass(string));
+```
+**三种类型**
+
+* __NSCFString
+* __NSCFConstantString
+* NSTaggedPointerString
 
 
+
+
+
+<h2 id="1.5.7">1.5.7.1、判断两个NSString的字面量是否相同，为什么要用isEqualToString来判断，而不能用==或isEqual来判断呢？</h2>
+
+[小谈NSString的内存分配](https://www.jianshu.com/p/c89c6a955772)
+
+
+<h2 id="1.5.8">1.5.8、NSCache与可变集合有几点不同</h2>
+
+NSCache类结合了各种自动删除策略，以确保不会占用过多的系统内存。
+
+NSCache是线程安全的，我们可以在不同的线程中添加、删除和查询缓存中的对象，而不需要锁定缓存区域。
+
+NSCache提供缓存限制，如属性countLimit限定了缓存最多维护的对象的个数，属性totalCostLimit来限定缓存能维持的最大内存。
+
+<h2 id="1.5.4">1.5.4、什么是谓词？谓词的简单使用？</h2>
+
+**问：什么是谓词？**
+
+谓词NSPredicate是通过给定的逻辑条件作为约束条件，完成对数据的筛选。
+
+**问：谓词的简单使用？**
+
+[iOS中的谓词（NSPredicate）使用](http://bbs.itheima.com/thread-312123-1-1.html)
+
+
+<h2 id="1.5.4">1.5.4、iOS逆向传值的几种方法整理</h2>
+
+第一种：代理传值
+
+第二种：通知传值
+
+第三种：单例传值
+
+第四种：block传值
+
+第五种：extern传值
+
+第六种：KVO传值
+
+第七种：NSUserDefaults
+
+
+<h2 id="1.5.4">1.5.4、浅谈iOS开发中方法延迟执行的几种方式</h2>
+
+[浅谈iOS开发中方法延迟执行的几种方式](https://www.jianshu.com/p/6ed28a29b391)
+
+1. performSelector方法
+2. Timer 定时器
+3. Thread 线程的sleep
+4. GCD
+
+* performSelector方法
+
+```
+[self performSelector:@selector(delayMethod) withObject:nil afterDelay:2.0];
+```
+注：此方法是一种非阻塞的执行方式，未找到取消执行的方法。
+
+* NSTimer定时器
+
+```
+NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(delayMethod) userInfo:nil repeats:NO];
+```
+注：此方法是一种非阻塞的执行方式，取消执行方法：- (void)invalidate;即可。
+
+* NSThread线程的sleep
+
+```
+[NSThread sleepForTimeInterval:2.0];
+```
+注：此方法是一种阻塞执行方式，建议放在子线程中执行，否则会卡住界面。但有时还是需要阻塞执行，如进入欢迎界面需要沉睡3秒才进入主界面时。
+没有找到取消执行方式。
+
+* GCD
+
+```
+__block ViewController/*主控制器*/ *weakSelf = self;
+
+dispatch_time_t delayTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(2.0/*延迟执行时间*/ * NSEC_PER_SEC));
+
+dispatch_after(delayTime, dispatch_get_main_queue(), ^{
+    [weakSelf delayMethod];
+});
+```
+注：此方法可以在参数中选择执行的线程，是一种非阻塞执行方式。没有找到取消执行方式。
+
+
+<h2 id="1.5.4">1.5.4、怎样实现一个singleton的类？单例的好处与坏处？如何释放一个单例类？</h2>
+
+[iOS 创建单例的两种方法](https://www.cnblogs.com/ygm900/p/3607143.html)
+
+**问：怎样实现一个singleton的类？**
+
+这里直接写出目前比较新的写法 单例+dispatch_once
+
+1. 线程安全。
+2. 满足静态分析器的要求。
+3. 兼容了ARC
+
+```
++ (id)sharedInstance {  
+    static testClass *sharedInstance = nil;  
+    static dispatch_once_t once;  
+    dispatch_once(&once, ^{  
+        sharedInstance = [[self alloc] init];  
+    });   
+    return sharedInstance;  
+}  
+```
+
+<h2 id="1.5.4">1.5.4、如何令⾃⼰所写的对象具有拷⻉功能?</h2>
+
+
+<h2 id="1.5.4">1.5.4、如何重写类方法？</h2>
+
+
+<h2 id="1.5.4">1.5.4、协议是什么？有什么作用？</h2>
+
+
+<h2 id="1.5.4">1.5.4、请用简单的代码展示@protocol的定义及实现</h2>
+
+
+<h2 id="1.5.4">1.5.4、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？</h2>
+
+
+	
 
 
 * [1.5、iOS编程中一些基础]()    
@@ -1331,7 +1482,6 @@ int main(int argc, const char * argv[]) {
 	* [1.、什么是谓词？谓词过滤]()
 	* [1.、NSString存储类型]()
 	* [1.、NSCache与可变集合有几点不同]()
-	* [1.、UITableView的重用机制]()
 	* [1.、请用简单的代码展示@protocol的定义及实现.]()
 	* [1.、协议是什么?有什么作用?]()
 	* [1.、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？]()

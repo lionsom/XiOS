@@ -550,23 +550,6 @@ OC：程序是可以编译通过的,但是会有一个黄色的警告。只有�
 重用机制主要用到了一个可变数组visiableCells和一个可变的字典类型reusableTableCells,其中visiableCells用来存储当前UITableView显示的cell，reusableTableCells用来存储已经用'identify'缓存的cell。当UITableView滚动的时候，会先在reusableTableCells中根据identify找是否有有已经缓存的cell，如果有直接用，没有再去初始化。
 
 
-## <h2 id="1.4">1.4、iOS逆向传值的几种方法整理</h2>
-
-
-第一种：代理传值
-
-第二种：通知传值
-
-第三种：单例传值
-
-第四种：block传值
-
-第五种：extern传值
-
-第六种：KVO传值
-
-第七种：NSUserDefaults
-
 
 
 ## <h2 id="1.4">1.4、你是否接触过OC中的反射机制？简单聊一下概念和使用</h2>
