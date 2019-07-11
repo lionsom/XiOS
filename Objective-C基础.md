@@ -62,17 +62,18 @@
 	* [1.5.4、#import跟 #include 有什么区别，@class呢，#import<> 跟 #import””有什么区别？](#1.5.4)
 	* [1.5.5、#define和const定义的变量，有什么区别？](#1.5.5)
 	* [1.5.6、static、extern有什么作⽤?](#1.5.6)   
-	* [1.、iOS逆向传值的几种方法整理]()
-	* [1.、浅谈iOS开发中方法延迟执行的几种方式]()
-	* [1.、怎样实现一个singleton的类？单例的好处与坏处？如何释放一个单例类？]()
-	* [1.1、如何令⾃⼰所写的对象具有拷⻉功能?]()
-	* [1.、如何重写类方法]()
-	* [1.、什么是谓词？谓词过滤]()
-	* [1.、NSString存储类型]()
-	* [1.、NSCache与可变集合有几点不同]()
-	* [1.、请用简单的代码展示@protocol的定义及实现.]()
-	* [1.、协议是什么?有什么作用?]()
-	* [1.、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？]()
+	* [1.5.7、NSString存储类型](#1.5.7)
+	* [1.5.7.1、判断两个NSString的字面量是否相同，为什么要用isEqualToString来判断，而不能用==或isEqual来判断呢？](#1.5.7.1)
+	* [1.5.8、NSCache与可变集合有几点不同](#1.5.8)
+	* [1.5.9、什么是谓词？谓词的简单使用？](#1.5.9)
+	* [1.5.10、iOS逆向传值的几种方法整理](#1.5.10)
+	* [1.5.11、浅谈iOS开发中方法延迟执行的几种方式](#1.5.11)
+	* [1.5.12、怎样实现一个singleton的类？如何释放一个单例类？单例的好处与坏处？](#1.5.12)
+	* [1.5.13、如何令⾃⼰所写的对象具有拷⻉功能？](#1.5.13)
+	* [1.5.14、如何重写类的方法？](#1.5.14)
+	* [1.5.15、协议是什么？有什么作用？](#1.5.15)
+	* [1.5.16、请用简单的代码展示@protocol的定义及实现](#1.5.16)
+	* [1.5.17、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？](#1.5.17)
     
 * [1.6、iOS中一些机制和原理]()   
     * [1.、简单介绍下APNS]()
@@ -1338,9 +1339,7 @@ NSLog(@"%@",object_getClass(string));
 
 
 
-
-
-<h2 id="1.5.7">1.5.7.1、判断两个NSString的字面量是否相同，为什么要用isEqualToString来判断，而不能用==或isEqual来判断呢？</h2>
+<h2 id="1.5.7.1">1.5.7.1、判断两个NSString的字面量是否相同，为什么要用isEqualToString来判断，而不能用==或isEqual来判断呢？</h2>
 
 [小谈NSString的内存分配](https://www.jianshu.com/p/c89c6a955772)
 
@@ -1353,7 +1352,8 @@ NSCache是线程安全的，我们可以在不同的线程中添加、删除和�
 
 NSCache提供缓存限制，如属性countLimit限定了缓存最多维护的对象的个数，属性totalCostLimit来限定缓存能维持的最大内存。
 
-<h2 id="1.5.4">1.5.4、什么是谓词？谓词的简单使用？</h2>
+
+<h2 id="1.5.9">1.5.9、什么是谓词？谓词的简单使用？</h2>
 
 **问：什么是谓词？**
 
@@ -1364,7 +1364,7 @@ NSCache提供缓存限制，如属性countLimit限定了缓存最多维护的对
 [iOS中的谓词（NSPredicate）使用](http://bbs.itheima.com/thread-312123-1-1.html)
 
 
-<h2 id="1.5.4">1.5.4、iOS逆向传值的几种方法整理</h2>
+<h2 id="1.5.10">1.5.10、iOS逆向传值的几种方法整理</h2>
 
 第一种：代理传值
 
@@ -1381,7 +1381,7 @@ NSCache提供缓存限制，如属性countLimit限定了缓存最多维护的对
 第七种：NSUserDefaults
 
 
-<h2 id="1.5.4">1.5.4、浅谈iOS开发中方法延迟执行的几种方式</h2>
+<h2 id="1.5.11">1.5.11、浅谈iOS开发中方法延迟执行的几种方式</h2>
 
 [浅谈iOS开发中方法延迟执行的几种方式](https://www.jianshu.com/p/6ed28a29b391)
 
@@ -1426,11 +1426,11 @@ dispatch_after(delayTime, dispatch_get_main_queue(), ^{
 注：此方法可以在参数中选择执行的线程，是一种非阻塞执行方式。没有找到取消执行方式。
 
 
-<h2 id="1.5.4">1.5.4、怎样实现一个singleton的类？单例的好处与坏处？如何释放一个单例类？</h2>
+<h2 id="1.5.12">1.5.12、怎样实现一个singleton的类？如何释放一个单例类？单例的好处与坏处？</h2>
 
 [iOS 创建单例的两种方法](https://www.cnblogs.com/ygm900/p/3607143.html)
 
-**问：怎样实现一个singleton的类？**
+**问：怎样实现一个singleton的类？如何释放一个单例类？****
 
 这里直接写出目前比较新的写法 单例+dispatch_once
 
@@ -1439,59 +1439,177 @@ dispatch_after(delayTime, dispatch_get_main_queue(), ^{
 3. 兼容了ARC
 
 ```
+static testClass *_sharedInstance = nil;  
+
 + (id)sharedInstance {  
-    static testClass *sharedInstance = nil;  
     static dispatch_once_t once;  
     dispatch_once(&once, ^{  
-        sharedInstance = [[self alloc] init];  
+        _sharedInstance = [[self alloc] init];  
     });   
-    return sharedInstance;  
+    return _sharedInstance;  
 }  
+
+
+// 释放单例
++ (void)destroyInstance {
+    _sharedInstance =nil;
+}
 ```
 
-<h2 id="1.5.4">1.5.4、如何令⾃⼰所写的对象具有拷⻉功能?</h2>
+**问：单例的好处与坏处？**
+
+* 优点：
+
+1. 所有对象都访问唯一实例
+1. 由于在系统内存中只存在一个对象，因此可以节约系统资源，对于一些需要频繁创建和销毁的对象单例模式无疑可以提高系统的性能。
+
+* 缺点：
+
+1. 由于单利模式中没有抽象层，因此单例类的扩展有很大的困难；
+2. 单例类的职责过重，在一定程度上违背了“单一职责原则”；
+3. 单例是一直存在在内存中的，所以过多的单例会造成内存浪费；
 
 
-<h2 id="1.5.4">1.5.4、如何重写类方法？</h2>
+<h2 id="1.5.13">1.5.13、如何令⾃⼰所写的对象具有拷⻉功能？</h2>
+
+> 类似于：[1.2.12、如何让自己的类用 copy 修饰符？](#1.2.12)
+
+<h2 id="1.5.14">1.5.14、如何重写类的方法？</h2>
+
+[【iOS】category 重写方法的调用](https://www.jianshu.com/p/87cfbdda0a68)
+
+使用Category来重写类的方法；
+
+我们经常会遇到分类中重写了原类方法导致原类中的方法被覆盖了，category的底层实现是在加载的时候，把category中的方法添加到原类的方法列表中，当调用方法时会遍历方法列表找到对应的响应子就返回，不再向下遍历。因为category的优先级高于类的优先级，使得原类中的选择子遍历不到。
 
 
-<h2 id="1.5.4">1.5.4、协议是什么？有什么作用？</h2>
+<h2 id="1.5.15">1.5.15、协议是什么？有什么作用？</h2>
 
-
-<h2 id="1.5.4">1.5.4、请用简单的代码展示@protocol的定义及实现</h2>
-
-
-<h2 id="1.5.4">1.5.4、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？</h2>
-
-
-	
-
-
-* [1.5、iOS编程中一些基础]()    
-	* [1.、数据持久化存储方案有哪些？]()
-	* [1.、沙盒的目录结构是怎样的？各自一般用于什么场合？]()
-	* [1.、介绍下内存的几大区域？内存中的栈和堆的区别是什么？那些数据在栈上，哪些在堆上？]()
-	* [1.、#import跟 #include 有什么区别，@class呢，#import<> 跟 #import””有什么区别？]()
-	* [1.、#define和const定义的变量，有什么区别？]()
-	* [1.、static有什么作⽤?]()   
-	* [1.、iOS逆向传值的几种方法整理]()
-	* [1.、浅谈iOS开发中方法延迟执行的几种方式]()
-	* [1.、怎样实现一个singleton的类？单例的好处与坏处？如何释放一个单例类？]()
-	* [1.1、如何令⾃⼰所写的对象具有拷⻉功能?]()
-	* [1.、如何重写类方法]()
-	* [1.、什么是谓词？谓词过滤]()
-	* [1.、NSString存储类型]()
-	* [1.、NSCache与可变集合有几点不同]()
-	* [1.、请用简单的代码展示@protocol的定义及实现.]()
-	* [1.、协议是什么?有什么作用?]()
-	* [1.、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？]()
-   
-
-
-
-
-	* [1.、请用简单的代码展示@protocol的定义及实现.]()
 [李峰峰博客 -- iOS Protocol详解](https://imlifengfeng.github.io/article/469/)
+
+**问：协议是什么？**
+
+只做方法声明。本质是一组方法列表，用来规范接口。
+
+**问：有什么作用？**
+
+举例一：UItableview的数据源就是一个协议，因为有些东西，自己内部不要去写死，比如说展示什么数据最好由外界觉得，这时候搞一个协议，大家相互遵守，并且在不同的类中，根据自己的需要实现这个协议方法，就可以找到拿数据。
+
+举例二：传值使用过协议。
+
+
+<h2 id="1.5.16">1.5.16、请用简单的代码展示@protocol的定义及实现</h2>
+
+* **`MyProtocol`协议定义**
+
+
+```
+#import <Foundation/Foundation.h>
+
+/**
+ Protocol的基本用途：
+ （1）可以用来声明一大堆方法（不能声明成员变量）
+ （2）只要某个类遵守了这个协议，就相当于拥有这个协议中的所有方法声明
+ （3）只要父类遵守了某个协议，就相当于子类也遵守了
+ （4）Protocol来代替实现多继承
+ 
+ 注意：在其中声明需要的方法，但要注意的是这里只做声明，不做实现。并且不能声明变量。
+ */
+@protocol MyProtocol <NSObject>
+
+// (默认) 要求实现，如果没有实现，会发出警告，但不报错
+@required
+- (void)requiredMethod;
+
+
+// 不要求实现，不实现也不会有警告
+@optional
+-(void)optionalMethod;
+
+@end
+```
+
+* **遵循`MyProtocol`协议**
+
+
+
+```
+Person.h文件
+
+#import <Foundation/Foundation.h>
+
+// 第一步：导入protocol
+#import "MyProtocol.h"
+
+NS_ASSUME_NONNULL_BEGIN
+
+// 第二步：遵守protocol
+@interface Person : NSObject <MyProtocol>
+
+@end
+```
+
+```
+Person.m文件
+
+#import "Person.h"
+
+@implementation Person
+
+// 第三步：实现方法
+- (void)requiredMethod{
+    NSLog(@"requiredMethod——必须实现的方法");
+}
+
+- (void)optionalMethod{
+    NSLog(@"optionalMethod——选择实现的方法");
+}
+
+@end
+```
+
+* **调用遵循了协议的对象**
+
+```
+// 第四步：创建Person的对象去调用这些遵循的方法
+    Person * person = [Person new];
+    [person requiredMethod];
+    [person optionalMethod];
+```
+
+
+<h2 id="1.5.17">1.5.17、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？</h2>
+
+
+1. KVO（Key-Value-Observing）:一对多，观察者模式，键值观察机制，它提供了观察某一属性变化的方法，极大简化了代码。
+	
+2. KVC（Key-Value-Coding）:是键值编码，一个对象在调用setValue的时候，   
+	* 检查是否存在相应key的set方法，存在就调用set方法。    
+ 	* set方法不存在，就查找_key的成员变量是否存在，存在就直接赋值。    
+ 	* 如果_key没找到，就查找相同名称的key，存在就赋值。    
+ 	* 如果没有就调用valueForUnderfinedkey和setValue：forUndefinedKey。
+
+3. Delegate：通常发送者和接收者的关系是直接的一对一的关系。    
+
+	* 代理的目的是改变和传递控制链。允许一个类在某些特定时刻通知到其他类，而不需要获取到那些类的指针。    
+	* 可以减少框架复杂度。消息的发送者（sender）告知接收者（receiver）某个事件将要发生，delegate同意然后发送响应者事件，delegate机制使得接收者可以改变发送者的行为。
+
+4. Notification：观察者模式，通常发送者和接收者的关系是间接的多对多关系。消息的发送者告知接收者事件已经发生或者将要发送，仅此而已，接收者并不能反过来影响发送者的行为。
+
+
+**区别：**
+
+* 效率肯定是delegate比NSNotification高
+  
+* delegate方法比notification更加直接，需要关注返回值，所以delegate方法往往包含should这个很传神的词。相反的，notification最大的特色就是不关心结果。所以notification往往did这个词汇。    
+
+* 两个模块之间联系不是很紧密，就是notification传值，例如多线程之间传值用notification.
+
+* delegate只是一个较为简单的回调，且主要用在一个模块中，例如底层功能完成了，需要把一些值传到上层去，就事先把上层的函数通过delegate传到底层，然后在底层call这个delegate，它们都在一个模块中，完成了一个功能，例如说NavgationController从B界面到A点返回按钮（调用popViewController方法）可以调用delegate比较好。
+
+
+
+
 
 
 [1.7、其他]

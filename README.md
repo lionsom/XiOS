@@ -371,50 +371,6 @@ super是一个Magic Keyword，它本质是一个编译器标示符，和self是�
 ```
 
 
-1.请用简单的代码展示@protocol的定义及实现.
-
-```
-#warning代理第一步:声明协议
-
-@protocol MarryMe
-
--(void)makeMoney;
-
-@end
-
-#warning代理第二步:声明代理
-
-@property(nonatomic,assign)id myDeleget;
-
-.m文件中
-
-#warning代理第三步:代理人执行协议方法
-
-[self.myDeleget makeMoney];
-
-代理人.m文件中
-
-#warning代理第四步:签订协议
-
-@interface Boy : NSObject
-
-Girl *girl = [[Girl alloc] init];
-
-#warning代理第五步:成为代理人
-
-girl.myDeleget = self;
-
-[girl getMessage:message];
-
-#warning协议代理第六步:实现协议方法
-
--(void)makeMoney{
-
-NSLog(@"aaa");
-
-}
-```
-
 
 
 ===========
