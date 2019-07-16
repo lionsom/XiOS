@@ -68,33 +68,34 @@
 	* [1.5.9、什么是谓词？谓词的简单使用？](#1.5.9)
 	* [1.5.10、iOS逆向传值的几种方法整理](#1.5.10)
 	* [1.5.11、浅谈iOS开发中方法延迟执行的几种方式](#1.5.11)
+	* [1.5.11.1、计时器有哪些？NSTimer创建后，会在哪个线程运行？如何让计时器调用一个类方法？](#1.5.11.1)
+	* [1.5.11.2、使用CADisplayLink、NSTimer有什么注意点？](#1.5.11.2)
 	* [1.5.12、怎样实现一个singleton的类？如何释放一个单例类？单例的好处与坏处？](#1.5.12)
 	* [1.5.13、如何令⾃⼰所写的对象具有拷⻉功能？](#1.5.13)
 	* [1.5.14、如何重写类的方法？](#1.5.14)
 	* [1.5.15、协议是什么？有什么作用？](#1.5.15)
 	* [1.5.16、请用简单的代码展示@protocol的定义及实现](#1.5.16)
 	* [1.5.17、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？](#1.5.17)
+	* [1.5.18、dealloc什么时候调用？[super dealloc]何时调用？ARC下dealloc过程？](#1.5.18)
+	* [1.5.19、iOS中nil 、Nil、 NULL 、NSNull介绍](#1.5.19)
     
-* [1.6、iOS中一些机制和原理]()   
-    * [1.、简单介绍下APNS]()
-    * [1.、谈谈事件响应链，如何响应view之外的事件]()
-    * [1.、事件传递链，页面上一个按钮，按钮和它的superView有一样的action,为什么只执行button的action?]()
-    * [1.、iOS里面的手势是如何实现的?]()
-    * [1.、main()之前的过程有哪些？]()
-    * [1.、简单说一下APP的启动过程,从main文件开始说起。]()
-    * [1.、UIViewController的生命周期， 应用的生命周期]()
-    	* [1.、UITableView的重用机制]()
+* [1.6、iOS中一些机制和原理](#1.6)   
+	* [1.6.1、简单说一下APP的生命周期](#1.6.1)
+	* [1.6.2、简单说一下APP的启动过程,从main文件开始说起](#1.6.2)
+	* [1.6.3、简单说一下UIViewController的生命周期](#1.6.3)
+	* [1.6.4、简单说一下UIView的生命周期](#1.6.4)
+	* [1.6.5、谈谈事件响应链，如何响应view之外的事件](#1.6.5)
+	* [1.6.6、事件传递链，页面上一个按钮，按钮和它的superView有一样的action,为什么只执行button的action？](#1.6.6)
+	* [1.6.7、iOS里面的手势是如何实现的?](#1.6.7)
+	* [1.6.8、简单介绍下APNS](#1.6.8)
+	* [1.6.9、UITableView的重用机制](#1.6.9)
+ 	* [1.6.10、静态库和动态库介绍？](#1.6.10)
+ 	* [1.6.11、静态库的原理是什么？你有没有⾃⼰写过静态编译库，遇到了哪些问题？](#1.6.11)
+ 	* [1.6.12、你是否接触过OC中的反射机制？简单聊一下概念和使用？](#1.6.12)
 
-    	
-    
 * [1.7、其他]()    
 	* [1.3、iOS中nil 、Nil、 NULL 、NSNull，你真的了解吗？]() 
 	* [1.、c++引用和指针区别]()
-    * [1.、静态库的原理是什么？你有没有⾃⼰写过静态编译库，遇到了哪些问题？]()
-    * [1.、计时器有哪些？NSTimer创建后，会在哪个线程运行？如何让计时器调用一个类方法？]()
-    * [1.、你是否接触过OC中的反射机制？简单聊一下概念和使用，反射函数？]()
-    * [1.、使用CADisplayLink、NSTimer有什么注意点？]()
-
 	* [1.、对于Objective-C，你认为它最大的优点和最大的不足是什么？对于不足之处，现在有没有可用的方法绕过这些不足来实现需求。如果可以的话，你有没有考虑或者实践过重新实现OC的一些功能，如果有，具体会如何做？]()
 
 
@@ -1385,6 +1386,8 @@ NSCache提供缓存限制，如属性countLimit限定了缓存最多维护的对
 
 [浅谈iOS开发中方法延迟执行的几种方式](https://www.jianshu.com/p/6ed28a29b391)
 
+[选择 GCD 还是 NSTimer ？](https://www.jianshu.com/p/0c050af6c5ee)
+
 1. performSelector方法
 2. Timer 定时器
 3. Thread 线程的sleep
@@ -1424,6 +1427,114 @@ dispatch_after(delayTime, dispatch_get_main_queue(), ^{
 });
 ```
 注：此方法可以在参数中选择执行的线程，是一种非阻塞执行方式。没有找到取消执行方式。
+
+
+<h2 id="1.5.11.1">1.5.11.1、计时器有哪些？NSTimer创建后，会在哪个线程运行？如何让计时器调用一个类方法？</h2>
+
+**问：计时器有哪些？**
+1. NSTimer
+2. CADisplayLink
+3. GCD
+
+**问：NSTimer创建后，会在哪个线程运行？**
+
+[【iOS沉思录】如何创建NSTimer并使其在当前线程中正常运行？](https://blog.csdn.net/cordova/article/details/79225004)
+
+* 1. 创建NSTimer有两种方法：
+
+```
++ (NSTimer *)timerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;
++ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;
+```
+
+这两种方法的主要区别为，使用`timerWithTimeInterval`创建的`timer`不会自动添加到当前`RunLoop`中，需要手动添加并制定`RunLoop`的模式：`[[NSRunLoop currentRunLoop] addTimer:mainThreadTimer forMode:NSDefaultRunLoopMode]; `，而使用`scheduledTimerWithTimeInterval`创建的`RunLoop`会默认自动添加到当前`RunLoop`中。
+
+结论： (1）用scheduledTimerWithTimeInterval创建的，在哪个线程创建就会被加入哪个线程的RunLoop中，就运行在哪个线程 ;（2）自己创建的Timer，加入到哪个线程的RunLoop中就运行在哪个线程。
+
+* 2. NSTimer可能在主线程中创建，也可能在子线程中创建：
+
+主线程中的RunLoop默认是启动的，所以timer只要添加到主线程RunLoop中就会被执行；而子线程中的RunLoop默认是不启动的，所以timer添加到子线程RunLoop中后，还要手动启动RunLoop才能使timer被执行。
+
+NSTimer只有添加到启动起来的RunLoop中才会正常运行。NSTimer通常不建议添加到主线程中执行，因为界面的更新在主线程中，界面导致的卡顿会影响NSTimer的准确性。
+
+以下为四种情形下正确的使用方法：
+
+```
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    /* 主线程中创建timer */
+    NSTimer *mainThreadTimer = [NSTimer timerWithTimeInterval:10.0 target:self selector:@selector(mainThreadTimer_SEL) userInfo:nil repeats:YES];
+    NSTimer *mainThreadSchduledTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(mainThreadSchduledTimer_SEL) userInfo:nil repeats:YES];
+    /* 将mainThreadTimer1添加到主线程runloop */
+    [[NSRunLoop currentRunLoop] addTimer:mainThreadTimer forMode:NSDefaultRunLoopMode];
+
+    /* 子线程中创建timer */
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSTimer *subThreadTimer = [NSTimer timerWithTimeInterval:10.0 target:self selector:@selector(subThreadTimer_SEL) userInfo:nil repeats:YES];
+        NSTimer *subThreadSchduledTimer = [NSTimer scheduledTimerWithTimeInterval:10.0 target:self selector:@selector(subThreadSchduledTimer_SEL) userInfo:nil repeats:YES];
+        /* 将subThreadTimer1添加到子线程runloop */
+        [[NSRunLoop currentRunLoop] addTimer:subThreadTimer forMode:NSDefaultRunLoopMode];
+        /* 启动子线程runloop */
+        [[NSRunLoop currentRunLoop] runMode:NSDefaultRunLoopMode beforeDate:[NSDate distantFuture]];
+    });
+}
+
+- (void) mainThreadTimer_SEL{
+    NSLog(@"mainThreadTimer is working!");
+}
+- (void) mainThreadSchduledTimer_SEL{
+    NSLog(@"mainThreadSchduledTimer is working!");
+}
+
+- (void) subThreadTimer_SEL{
+    NSLog(@"subThreadTimer is working!");
+}
+- (void) subThreadSchduledTimer_SEL{
+    NSLog(@"subThreadSchduledTimer is working!");
+}
+```
+
+**问：如何让计时器调用一个类方法？**
+
+计时器只能调用实例方法，但是可以在这个实例方法里面调用静态方法。
+
+```
+[NSTimer scheduledTimerWithTimeInterval:1 target:self selector:@selector(timerMethod) userInfo:nil repeats:YES];
+ 
+- (void)timerMethod {
+    //调用类方法
+    [[self class] staticMethod];
+}
+ 
+- (void)invalid {
+    [timer invalid];
+    timer = nil;
+}
+```
+
+
+<h2 id="1.5.11.2">1.5.11.2、CADisplayLink、NSTimer区别？使用CADisplayLink、NSTimer有什么注意点？</h2>
+
+**问：CADisplayLink、NSTimer区别？**
+
+CADisplayLink是一个能让我们以和屏幕刷新率同步的频率将特定的内容画到屏幕上的定时器类。 CADisplayLink以特定模式注册到runloop后， 每当屏幕显示内容刷新结束的时候，runloop就会向 CADisplayLink指定的target发送一次指定的selector消息， CADisplayLink类对应的selector就会被调用一次。
+
+NSTimer以指定的模式注册到runloop后，每当设定的周期时间到达后，runloop会向指定的target发送一次指定的selector消息。
+
+**问：使用CADisplayLink、NSTimer有什么注意点？**
+
+1. 防止循环引用
+
+```
++ (NSTimer *)scheduledTimerWithTimeInterval:(NSTimeInterval)ti   target:(id)aTarget selector:(SEL)aSelector userInfo:(nullable id)userInfo repeats:(BOOL)yesOrNo;
++ (CADisplayLink *)displayLinkWithTarget:(id)target selector:  (SEL)sel;
+```
+
+2. 定时不精确
+
+iOS设备的屏幕刷新频率是固定的，CADisplayLink在正常情况下会在每次刷新结束都被调用，精确度相当高。
+
+NSTimer的精确度就显得低了点，比如NSTimer的触发时间到的时候，runloop如果在阻塞状态，触发时间就会推迟到下一个runloop周期。并且 NSTimer新增了tolerance属性，让用户可以设置可以容忍的触发的时间的延迟范围。
 
 
 <h2 id="1.5.12">1.5.12、怎样实现一个singleton的类？如何释放一个单例类？单例的好处与坏处？</h2>
@@ -1608,20 +1719,361 @@ Person.m文件
 * delegate只是一个较为简单的回调，且主要用在一个模块中，例如底层功能完成了，需要把一些值传到上层去，就事先把上层的函数通过delegate传到底层，然后在底层call这个delegate，它们都在一个模块中，完成了一个功能，例如说NavgationController从B界面到A点返回按钮（调用popViewController方法）可以调用delegate比较好。
 
 
+<h2 id="1.5.18">1.5.18、dealloc什么时候调用？[super dealloc]何时调用？ARC下dealloc过程？</h2>
+
+**问：dealloc什么时候调用？**
+1、这个类被release的时候会被调用；
+2、这个对象的retain count为0的时候会被调用；或者说一个对象或者类被置为nil的时候；
+
+**问：[super dealloc]何时调用？**
+
+ARC：不调用[super dealloc]，父类的dealloc方法会在子类dealloc方法返回后自动执行；
+
+MRC：你的 dealloc 实现必须把调用父类的实现作为最后一条指令。如下：
+
+```
+- (void)dealloc {
+    [XXX release];
+    [super dealloc];
+}
+```
+
+**问：ARC下dealloc过程？**
+
+[ARC下dealloc过程及.cxx_destruct的探究](http://blog.sunnyxx.com/2014/04/02/objc_dig_arc_dealloc/)
+
+
+<h2 id="1.5.19">1.5.19、iOS中nil 、Nil、 NULL 、NSNull介绍</h2>
+
+[iOS-----类和对象,nil/Nil/NULL的区别](https://www.cnblogs.com/congli0220/p/4949137.html)
+
+* **nil**：是指向OC中对象的空指针。
+
+```
+示例代码：
+ NSString *someString = nil;
+ NSURL *someURL = nil;
+ id someObject = nil;
+ if (anotherObject == nil)     // do something
+```
+
+* **Nil**：指向OC中类的空指针
+
+```
+示例代码：　　
+ Class someClass = Nil;　
+ Class anotherClass = [NSString class];
+```
+
+* **NULL**：可以用在C语言的各种指针上。
+
+```
+示例代码：
+ int *pointerToInt = NULL;　　　　
+ char *pointerToChar = NULL;　　
+ struct TreeNode *rootNode = NULL;
+```
+
+* **NSNull**
+
+NSNull是一个类，它定义了一个单例对象用于表示集合对象的空值
+
+NSNull是用于表示空值对象的类。
+
+NSNull经常用于NSArray、NSDictionary等，因为它们不能存储nil值，所以使用NSNull来代替nil。
+
+```
+// 错误写法：nil为数组结束标志，所以此时该数组的count=2，所以数组不能存储nil值。
+NSArray *array = [[NSArray array]initWithObjects:@"1",@"2",nil,@"4", nil];
+// 正确写法：[NSNull null]通常可以作为数组的占位符。
+NSArray *array = [[NSArray array]initWithObjects:@"1",@"2",[NSNull null],@"4", nil];
+	
+NSMutableDictionary *dict = [NSMutableDictionary dictionary];
+// 错误写法，会出现编译错误。
+[dict setObject:nil forKey:@"key"]; 
+// 正确写法
+[dict setObject:[NSNull null] forKey:@"key"];
+```
+
+**拓展**
+
+若obj为nil：
+［obj message］将返回NO,而不是NSException
+
+若obj为NSNull：
+［obj message］将抛出异常NSException
+
+
+
+<h1 id="1.6">1.6、iOS中一些机制和原理</h1>
+
+<h2 id="1.6.1">1.6.1、简单说一下APP的生命周期</h2>
+
+
+iOS APP启动
+
+```
+int main(int argc, char * argv[]) {
+    @autoreleasepool {
+      return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+```
+
+[UIApplicationMain官方文档](https://developer.apple.com/documentation/uikit/1622933-uiapplicationmain?language=occ)
+
+![](media/026.png)
+
+
+1. argc和argv参数是为了与C语言保持一致，在这没用到，不详述。
+
+2. principalClassName(主要类名)：如果principalClassName是nil，那么它的值将从Info.plist中获取，如果Info.plist中没有，则默认为UIApplication。principalClass这个类除了管理整个程序的生命周期之外什么都不做，它只负责监听事件然后交给delegateClass去做。
+
+3. delegateClassName(委托类名)：delegateClass将在工程新建时实例化一个对象。NSStringFromClass([AppDelegate class]) //相当于@"AppDelegate"
+
+
+**AppDelegate具体代理**
+
+![](media/025.png)
+
+* 启动程序
+
+	```
+	-[AppDelegate application:didFinishLaunchingWithOptions:] 
+	-[AppDelegate applicationDidBecomeActive:]
+	```
+
+* 点击home键 进入后台
+
+	```
+	-[AppDelegate applicationWillResignActive:]
+	-[AppDelegate applicationDidEnterBackground:]
+	```
+
+* 重新点击 进入程序
+
+	```
+	-[AppDelegate applicationWillEnterForeground:]
+	-[AppDelegate applicationDidBecomeActive:]
+	```
+
+* 内存警告
+
+	```
+	-[AppDelegate applicationDidReceiveMemoryWarning:]
+	```
+
+
+<h2 id="1.6.2">1.6.2、简单说一下APP的启动过程,从main文件开始说起</h2>
+
+```
+int main(int argc, char * argv[]) {
+    @autoreleasepool {
+      return UIApplicationMain(argc, argv, nil, NSStringFromClass([AppDelegate class]));
+    }
+}
+```
+
+具体介绍看 [1.6.1、简单说一下APP的生命周期](#1.6.1)
+
+从main文件开始说起程序启动分为两类:1.有storyboard 2.没有storyboard
+
+```
+（一）有storyboard情况下:
+
+1.main函数
+
+2.UIApplicationMain
+
+    - 创建UIApplication对象
+    - 创建UIApplication的delegate对象
+
+3.根据Info.plist获得最主要storyboard的文件名,加载最主要的storyboard(有storyboard)
+
+    - 创建UIWindow
+    - 创建和设置UIWindow的rootViewController
+    - 显示窗口
+
+    
+（二）没有storyboard情况下:
+
+1.main函数
+
+2.UIApplicationMain
+
+    - 创建UIApplication对象
+    - 创建UIApplication的delegate对象
+
+3.delegate对象开始处理(监听)系统事件(没有storyboard)
+
+    - 程序启动完毕的时候, 就会调用代理的application:didFinishLaunchingWithOptions:方法
+    - 在application:didFinishLaunchingWithOptions:中创建UIWindow
+    - 创建和设置UIWindow的rootViewController
+    - 显示窗口
+```
+
+
+
+**拓展：这块可以结合冷启动优化一起看**
+
+[03·iOS 面试题·main()之前的过程有哪些?](https://www.jianshu.com/p/3a1a337f40bf)
+
+[戴铭 - iOS高手课 02 | App 启动速度怎么做优化与监控？](https://time.geekbang.org/column/article/85331)
+
+
+<h2 id="1.6.3">1.6.3、简单说一下UIViewController的生命周期</h2>
+
+```
+-init
+-loadView
+-viewDidLoad
+-viewWillAppear
+-viewDidAppear
+-viewWillDisappear
+-viewDidDisappear
+-viewWillUnload (iOS6后废弃)
+-viewDidUnload  (iOS6后废弃)
+-dealloc
+```
+
+
+<h2 id="1.6.4">1.6.4、简单说一下UIView的生命周期</h2>
 
 
 
 
-[1.7、其他]
 
-    * [1.、使用CADisplayLink、NSTimer有什么注意点？](https://www.jianshu.com/p/0d6acce6ff8a)
+<h2 id="1.6.5">1.6.5、谈谈事件响应链，如何响应view之外的事件</h2>
+
+**问：谈谈事件响应链**
+
+[UIResponder-(学习整理)](https://www.jianshu.com/p/4285c26f1d2c)
+
+**问：如何响应view之外的事件**
+
+
+
+<h2 id="1.6.6">1.6.6、事件传递链，页面上一个按钮，按钮和它的superView有一样的action,为什么只执行button的action？</h2>
+
+[iOS面试题：事件传递链，页面上一个按钮，按钮和它的superView有一样的action,为什么只执行button的action?](https://www.jianshu.com/p/45fc4798d36f)
+
+<h2 id="1.6.7">1.6.7、iOS里面的手势是如何实现的?</h2>
+
+[iOS 手势识别的工作原理及简单应用](http://www.cocoachina.com/articles/21315)
+
+<h2 id="1.6.8">1.6.8、简单介绍下APNS</h2>
+
+[iOS的推送服务APNs详解](https://www.jianshu.com/p/a1c68ca79dbf)
+
+
+<h2 id="1.6.9">1.6.9、UITableView的重用机制？为什么要用重用机制？</h2>
+
+**问：UITableView重用机制**
+
+重用机制主要用到了一个可变数组`visiableCells`和一个可变的字典类型`reusableTableCells`,其中`visiableCells`用来存储当前`UITableView`显示的`cell`，`reusableTableCells`用来存储已经用`identify`缓存的`cell`。当`UITableView`滚动的时候，会先在`reusableTableCells`中根据`identify`找是否有有已经缓存的`cell`，如果有直接用，没有再去初始化。
+
+**问：为什么要用重用机制?**
+
+众所周知，UITableView是可以滚动的一个控件，当UITableView回滚时，如果不用重用机制会重复初始化原来已初始化的cell，所以用重用机制会节省性能，避免出现一些因为网络因素而造成的卡顿现象。
+
+
+<h2 id="1.6.10">1.6.10、静态库和动态库介绍？</h2>
 
 
 
 
 
+<h2 id="1.6.11">1.6.11、静态库的原理是什么？你有没有⾃⼰写过静态编译库，遇到了哪些问题？</h2>
 
 
+
+
+<h2 id="1.6.12">1.6.12、你是否接触过OC中的反射机制？简单聊一下概念和使用？</h2>
+
+> JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。
+
+```
+1). class反射
+    通过类名的字符串形式实例化对象。
+        Class class = NSClassFromString(@"student"); 
+        Student *stu = [[class alloc] init];
+    将类名变为字符串。
+        Class class =[Student class];
+        NSString *className = NSStringFromClass(class);
+2). SEL的反射
+    通过方法的字符串形式实例化方法。
+        SEL selector = NSSelectorFromString(@"setName");  
+        [stu performSelector:selector withObject:@"Mike"];
+    将方法变成字符串。
+        NSStringFromSelector(@selector*(setName:));
+```
+
+<h1 id="1.7">1.7、其他</h1>
+
+<h2 id="1.7.1">1.7.1、C++引用和指针区别</h2>
+
+指针是指向一块内存地址的变量，这个变量可以指向其他地址；
+
+引用就是对变量起一个别名，而变量还是原来的变量，并没有重新定义一个变量。
+
+1. 一个变量可以有多个别名
+2. 引用必须初始化
+3. 引用只可以在变量初始化的时候引用一次，只能是一个变量的别名。
+
+```
+#include<iostream>
+using namespace std;
+ 
+int main() {
+      int a = 10;
+      int& n = a;
+      
+      cout<<a<<endl;
+      cout<<n<<endl;
+      cout<<&a<<endl;
+      cout<<&n<<endl;
+ 
+      return 0;
+}
+
+// 输出
+10
+10
+0057F9A0
+0057F9A0
+```
+
+
+<h2 id="1.7.2">1.7.2、对于Objective-C，你认为它最大的优点和最大的不足是什么？对于不足之处，现在有没有可用的方法绕过这些不足来实现需求。如果可以的话，你有没有考虑或者实践过重新实现OC的一些功能，如果有，具体会如何做？</h2>
+
+**问：对于Objective-C，你认为它最大的优点和最大的不足是什么？**
+
+[详解Objective-C的优点和不足](https://blog.csdn.net/chenyufeng1991/article/details/49097459)
+
+优势：
+
+1. 面向对象的特性：封装、继承、多态;
+2. OC的动态性，之所以叫做动态，是因为必须到运行时（run time）才会做一些事情。
+（动态特性的三个方面：动态类型、动态绑定、动态加载）
+
+	* （1）动态类型
+> 动态类型，（id类型）在编译器编译的时候不能被识别出，在运行时（run time），程序运行的时候才会根据语境来识别。
+静态类型，与动态类型相对。在编译的时候就能识别出来，明确的基本类型都属于静态类型。（int、NSString等）
+
+	* （2）动态绑定
+> （关键词@selector）跳过编译，在运行时动态添加函数调用，运行时才决定调用什么方法，传递什么参数。
+
+
+	* （3）动态加载
+> 根据需求动态地加载资源。
+
+
+
+缺点
+
+（1）不支持命名空间
+
+（2）不支持多继承
 
 
 

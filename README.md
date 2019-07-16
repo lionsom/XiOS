@@ -407,40 +407,6 @@ super是一个Magic Keyword，它本质是一个编译器标示符，和self是�
 ---------------
 
 
-## <h2 id="1.4">1.4、简单说一下APP的启动过程,从main文件开始说起。</h2>
-
-有storyboard的情况下：
-
-main函数
-UIApplicationMain
-
-创建UIApplication对象
-创建UIApplication的delegate对象
-
-
-根据Info.plist获得最主要storyboard的文件名，加载最主要的storyboard（有storyboard）
-
-创建UIWindow
-创建和设置UIWindow的rootViewController
-显示窗口
-
-
-
-无storyboard情况下：
-
-main函数
-UIApplicationMain
-
-创建UIApplication对象
-创建UIApplication的delegate对象
-
-
-delegate对象开始处理（监听）系统事件（没有storyboard）
-
-程序启动完毕的时候，就会调用代理的application：didFinishLaunchingWithOptions：方法
-在application：didFinishLaunchingWithOptions：中创建UIWindow
-创建和设置UIWindow的rootViewController
-显示窗口
 
 ## <h2 id="1.4">1.4、谈谈消息转发机制实现</h2>
 
@@ -492,51 +458,6 @@ OC：程序是可以编译通过的,但是会有一个黄色的警告。只有�
 
 消息传递和调用函数对于程序员来说最大的区别就在于源代码编译的过程中是否能够编译通过.
 解释消息传递机制的原理就要用到OC语言中的运行时系统(Runtime)了.
-
-
-## <h2 id="1.4">1.4、为什么要用重用机制?UITableView的重用机制</h2>
-	* [1.、UITableView的重用机制，]()
-
-
-**为什么要用重用机制?**
-众所周知，UITableView是可以滚动的一个控件，当UITableView回滚时，如果不用重用机制会重复初始化原来已初始化的cell，所以用重用机制会节省性能，避免出现一些因为网络因素而造成的卡顿现象。
-
-**UITableView重用机制的原理**
-
-重用机制主要用到了一个可变数组visiableCells和一个可变的字典类型reusableTableCells,其中visiableCells用来存储当前UITableView显示的cell，reusableTableCells用来存储已经用'identify'缓存的cell。当UITableView滚动的时候，会先在reusableTableCells中根据identify找是否有有已经缓存的cell，如果有直接用，没有再去初始化。
-
-
-
-
-## <h2 id="1.4">1.4、你是否接触过OC中的反射机制？简单聊一下概念和使用</h2>
-
-> JAVA反射机制是在运行状态中，对于任意一个类，都能够知道这个类的所有属性和方法；对于任意一个对象，都能够调用它的任意方法和属性；这种动态获取信息以及动态调用对象方法的功能称为java语言的反射机制。
-
-```
-1). class反射
-    通过类名的字符串形式实例化对象。
-        Class class = NSClassFromString(@"student"); 
-        Student *stu = [[class alloc] init];
-    将类名变为字符串。
-        Class class =[Student class];
-        NSString *className = NSStringFromClass(class);
-        
-2). SEL的反射
-    通过方法的字符串形式实例化方法。
-        SEL selector = NSSelectorFromString(@"setName");  
-        [stu performSelector:selector withObject:@"Mike"];
-    将方法变成字符串。
-        NSStringFromSelector(@selector*(setName:));
-```
-
-
-
-
-
-
-
-
-
 
 
 
