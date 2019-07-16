@@ -1,8 +1,3 @@
-iOS面试整理
-
-[AAA](https://github.com/lionsom/iOS-/blob/master/Runtime.md)
-
-
 ## 目录
 
 # 一、[Objective-C基础](https://github.com/lionsom/iOS-/blob/master/Objective-C基础.md)
