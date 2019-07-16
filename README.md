@@ -5,8 +5,7 @@ iOS面试整理
 
 ## 目录
 
-
-# 一、iOS基础部分
+# 一、[Objective-C基础](https://github.com/lionsom/iOS-/blob/master/Objective-C基础.md)
 
 * [1.1、iOS内存机制](#1.1)
 	* [1.1.1、简述OC内存管理机制](#1.1.1)
