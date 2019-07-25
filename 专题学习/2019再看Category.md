@@ -67,7 +67,7 @@ Category是Objective-C 2.0之后添加的语言特性，category的主要作用�
 
 
 
-## 二、Category在Runtime层的实现原理
+## 二、Category在Runtime层的实现原理（编译器的工作）
 
 ### 2.1、举个栗子
 
@@ -197,8 +197,6 @@ struct _category_t {
 };
 ```
 
-
-
 > - 1)、类的名字（name）
 > - 2)、类（cls）
 > - 3)、category中所有给类添加的实例方法的列表（instanceMethods）
@@ -206,7 +204,7 @@ struct _category_t {
 > - 5)、category实现的所有协议的列表（protocols）
 > - 6)、category中添加的所有属性（instanceProperties）
 
-* ##### `_OBJC_$_CATEGORY_Person_$_DD` ：该结构体是 Person+DD分类的初始化
+* ##### `_OBJC_$_CATEGORY_Person_$_DD` ：该结构体是 Person+DD分类本身的初始化
 
 ```
 static struct _category_t _OBJC_$_CATEGORY_Person_$_DD __attribute__ ((used, section ("__DATA,__objc_const"))) = 
@@ -220,58 +218,78 @@ static struct _category_t _OBJC_$_CATEGORY_Person_$_DD __attribute__ ((used, sec
 };
 ```
 
+几个结构体的命名都遵循 **公共前缀+类名+category名字** 的命名方式，需要注意到的事实就是category的名字用来给各种列表以及后面的category结构体本身命名，而且有static来修饰，所以在同一个编译单元里我们的category名不能重复，否则会出现编译错误。（***面试题：同一编译单元Category能否重名？***）
+
 * ##### `_OBJC_$_CATEGORY_INSTANCE_METHODS_Person_$_DD` ：实例方法列表 结构体
-
-
-
-* ##### `_OBJC_$_CATEGORY_CLASS_METHODS_Person_$_DD` :  类方法列表 结构体
-
-
-
-* ##### `_OBJC_CATEGORY_PROTOCOLS_$_Person_$_DD` : 协议列表 结构体
-
-
-
-* ##### `_OBJC_$_PROP_LIST_Person_$_DD ` ：属性列表 结构体
-
-
-
-
-
-
-
-下面我们针对里面的结构体具体看看：
-
-先看 **对象方法列表结构体** `_OBJC_$_CATEGORY_INSTANCE_METHODS_Person_$_C`
 
 ```
 static struct /*_method_list_t*/ {
 	unsigned int entsize;  // sizeof(struct _objc_method)
 	unsigned int method_count;
-	struct _objc_method method_list[5];
-} _OBJC_$_CATEGORY_INSTANCE_METHODS_Person_$_C __attribute__ ((used, section ("__DATA,__objc_const"))) = {
+	struct _objc_method method_list[7];
+} _OBJC_$_CATEGORY_INSTANCE_METHODS_Person_$_DD __attribute__ ((used, section ("__DATA,__objc_const"))) = {
 	sizeof(_objc_method),
-	5,
-	{{(struct objc_selector *)"setHeight:", "v24@0:8@16", (void *)_I_Person_C_setHeight_},
-	{(struct objc_selector *)"height", "@16@0:8", (void *)_I_Person_C_height},
-	{(struct objc_selector *)"setWeight:", "v24@0:8@16", (void *)_I_Person_C_setWeight_},
-	{(struct objc_selector *)"weight", "@16@0:8", (void *)_I_Person_C_weight},
-	{(struct objc_selector *)"play_C", "v16@0:8", (void *)_I_Person_C_play_C}}
+	7,
+	{{(struct objc_selector *)"setHeight:", "v24@0:8@16", (void *)_I_Person_DD_setHeight_},
+	{(struct objc_selector *)"height", "@16@0:8", (void *)_I_Person_DD_height},
+	{(struct objc_selector *)"setWeight:", "v24@0:8@16", (void *)_I_Person_DD_setWeight_},
+	{(struct objc_selector *)"weight", "@16@0:8", (void *)_I_Person_DD_weight},
+	{(struct objc_selector *)"run_Category", "v16@0:8", (void *)_I_Person_DD_run_Category},
+	{(struct objc_selector *)"requiredMethod", "v16@0:8", (void *)_I_Person_DD_requiredMethod},
+	{(struct objc_selector *)"optionalMethod", "v16@0:8", (void *)_I_Person_DD_optionalMethod}}
 };
 ```
 
-可以看到这个结构体中包含多个对象方法setHeight、height、setWeight、weight、play_C，这正是Person+C这个分类中的对象方法。
+此处，很容易发现几个熟悉的方法名，都是分类中的 **实例方法+setter/getter+protocol方法**
 
+> 1. 实例方法：`run_Category`
+>
+> 2. setter/getter：`setHeight:`、`height`、`setWeight:`、`weight`
+>
+> 3. protocol方法：`requiredMethod`、`optionalMethod`
 
+* ##### `_OBJC_$_CATEGORY_CLASS_METHODS_Person_$_DD` :  类方法列表 结构体
 
-早看下 **属性列表的结构体** `_OBJC_$_PROP_LIST_Person_$_C`
+```
+static struct /*_method_list_t*/ {
+	unsigned int entsize;  // sizeof(struct _objc_method)
+	unsigned int method_count;
+	struct _objc_method method_list[1];
+} _OBJC_$_CATEGORY_CLASS_METHODS_Person_$_DD __attribute__ ((used, section ("__DATA,__objc_const"))) = {
+	sizeof(_objc_method),
+	1,
+	{{(struct objc_selector *)"eat_Category", "v16@0:8", (void *)_C_Person_DD_eat_Category}}
+};
+```
+
+此处是分类中 **类方法**
+
+> 1. 类方法：`eat_Category`
+
+* ##### `_OBJC_CATEGORY_PROTOCOLS_$_Person_$_DD` : 协议列表 结构体
+
+```
+static struct /*_protocol_list_t*/ {
+	long protocol_count;  // Note, this is 32/64 bit
+	struct _protocol_t *super_protocols[1];
+} _OBJC_CATEGORY_PROTOCOLS_$_Person_$_DD __attribute__ ((used, section ("__DATA,__objc_const"))) = {
+	1,
+	&_OBJC_PROTOCOL_MyProtocol
+};
+```
+
+此处为 **协议列表结构体**，可以看出当前Category只遵循了 `_OBJC_PROTOCOL_MyProtocol` 协议。
+
+对于`协议列表结构体` 的深入了解。可自行搜索。
+
+* ##### `_OBJC_$_PROP_LIST_Person_$_DD ` ：属性列表 结构体
 
 ```
 static struct /*_prop_list_t*/ {
 	unsigned int entsize;  // sizeof(struct _prop_t)
 	unsigned int count_of_properties;
 	struct _prop_t prop_list[2];
-} _OBJC_$_PROP_LIST_Person_$_C __attribute__ ((used, section ("__DATA,__objc_const"))) = {
+} _OBJC_$_PROP_LIST_Person_$_DD __attribute__ ((used, section ("__DATA,__objc_const"))) = {
 	sizeof(_prop_t),
 	2,
 	{{"height","T@\"NSString\",C,N"},
@@ -279,15 +297,39 @@ static struct /*_prop_list_t*/ {
 };
 ```
 
-可以看到我们Person+C分类为Person新增的两个属性 `height` 、`weight` 。
+此处是分类中新增的 **属性列表结构体** ，可以看到分类为Person新增的两个属性 `height` 、`weight` 。
 
 
 
+## Category如何加载（运行时加载）
+
+也就是如何将Category中新增的属性与方法在运行时加载到本类中。
 
 
 
+我们知道，所有的OC类和对象，在runtime层都是用struct表示的，category也不例外，在runtime层，category用结构体category_t（在objc-runtime-new.h中可以找到此定义），它包含了：
 
-## Category如何加载
+```
+struct category_t {
+    const char *name;
+    classref_t cls;
+    struct method_list_t *instanceMethods;
+    struct method_list_t *classMethods;
+    struct protocol_list_t *protocols;
+    struct property_list_t *instanceProperties;
+    // Fields below this point are not always present on disk. -- 此点下方的字段并不总是出现在磁盘上
+    struct property_list_t *_classProperties;
+
+    method_list_t *methodsForMeta(bool isMeta) {
+        if (isMeta) return classMethods;
+        else return instanceMethods;
+    }
+
+    property_list_t *propertiesForMeta(bool isMeta, struct header_info *hi);
+};
+```
+
+
 
 
 
@@ -301,6 +343,8 @@ static struct /*_prop_list_t*/ {
 ## Category和关联对象
 
 
+
+### category关联对象何时释放
 
 
 
