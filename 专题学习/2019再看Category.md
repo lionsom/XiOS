@@ -56,8 +56,8 @@ Category是Objective-C 2.0之后添加的语言特性，category的主要作用�
 
 > - 可以把类的实现分开在几个不同的文件里面。这样做有几个显而易见的好处：
 >   	* a). 可以减少单个文件的体积 
->   	* b). 可以把不同的功能组织到不同的category里 
->   	* c). 可以由多个开发者共同完成一个类 d)可以按需加载想要的category 等等。
+>   	  	* b). 可以把不同的功能组织到不同的category里 
+>   	   * c). 可以由多个开发者共同完成一个类 d)可以按需加载想要的category 等等。
 > - 声明私有方法
 
 不过除了apple推荐的使用场景，广大开发者脑洞大开，还衍生出了category的其他几个使用场景：
@@ -179,6 +179,31 @@ Person.m
 
 
 ### 2.2、将Objective-c的代码转化为c++的源码
+
+我们知道，所有的OC类和对象，在runtime层都是用struct表示的，category也不例外，在runtime层，category用结构体category_t（在objc-runtime-new.h中可以找到此定义），它包含了：
+
+```
+struct category_t {
+    const char *name;
+    classref_t cls;
+    struct method_list_t *instanceMethods;
+    struct method_list_t *classMethods;
+    struct protocol_list_t *protocols;
+    struct property_list_t *instanceProperties;
+    // Fields below this point are not always present on disk. 
+    // 译：此点下方的字段并不总是出现在磁盘上
+    struct property_list_t *_classProperties;
+
+    method_list_t *methodsForMeta(bool isMeta) {
+        if (isMeta) return classMethods;
+        else return instanceMethods;
+    }
+
+    property_list_t *propertiesForMeta(bool isMeta, struct header_info *hi);
+};
+```
+
+
 
 我们在分类中新增 `1.对象方法；2.类方法；3.协议；4.属性`
 
@@ -306,28 +331,6 @@ static struct /*_prop_list_t*/ {
 也就是如何将Category中新增的属性与方法在运行时加载到本类中。
 
 
-
-我们知道，所有的OC类和对象，在runtime层都是用struct表示的，category也不例外，在runtime层，category用结构体category_t（在objc-runtime-new.h中可以找到此定义），它包含了：
-
-```
-struct category_t {
-    const char *name;
-    classref_t cls;
-    struct method_list_t *instanceMethods;
-    struct method_list_t *classMethods;
-    struct protocol_list_t *protocols;
-    struct property_list_t *instanceProperties;
-    // Fields below this point are not always present on disk. -- 此点下方的字段并不总是出现在磁盘上
-    struct property_list_t *_classProperties;
-
-    method_list_t *methodsForMeta(bool isMeta) {
-        if (isMeta) return classMethods;
-        else return instanceMethods;
-    }
-
-    property_list_t *propertiesForMeta(bool isMeta, struct header_info *hi);
-};
-```
 
 
 
