@@ -1,11 +1,5 @@
 
 
-1. category添加属性（用到runtime绑定对象方法）、方法；
-2. 调用顺序
-3. 多个Category之间，属性，方法如何调用，调用顺序
-4. Category不允许为已有的类添加新的成员变量，实际上允许添加属性的；
-5. category在runtime层的实现原理
-
 - [8.、Category的实现原理]()
 
 - [8.、分别描述类别（categories）和延展（extensions）是什么？以及两者的区别？]()
@@ -25,8 +19,6 @@
 - [8.、Category中有load方法吗？load方法是什么时候调用的？load 方法能继承吗？]()
 
   
-
-##### 如何给NSArray添加一个属性（不能使用继承）？不能用继承，难道用分类？但是分类只能添加方法不能添加属性啊（Category不允许为已有的类添加新的成员变量，实际上允许添加属性的，同样可以使用@property，但是不会生成_变量（带下划线的成员变量），也不会生成添加属性的getter和setter方法，所以，尽管添加了属性，也无法使用点语法调用getter和setter方法。但实际上可以使用runtime去实现Category为已有的类添加新的属性并生成getter和setter方法)
 
 
 
@@ -326,40 +318,294 @@ static struct /*_prop_list_t*/ {
 
 
 
-## Category如何加载（运行时加载）
+## 三、Category如何加载（运行时加载）
+
+我们知道，Objective-C的运行是依赖OC的runtime的，而OC的runtime和其他系统库一样，是OS X和iOS通过dyld动态加载的。
 
 也就是如何将Category中新增的属性与方法在运行时加载到本类中。
 
+想了解更多dyld地同学可以移步这里（[3](https://www.mikeash.com/pyblog/friday-qa-2012-11-09-dyld-dynamic-linking-on-os-x.html)）。
+
+
+
+
+
+## 四、Category中+load方法、+initialize方法
+
+我们先从几个面试题开始：
+
+> 1)、在类的+load方法调用的时候，我们可以调用category中声明的方法么？
+>
+> ​		答： 1)、可以调用，因为附加category到类的工作会先于+load方法的执行
+>
+> 2)、Category中有load方法吗？load方法是什么时候调用？
+>
+> ​		答：2)、有，+load的执行顺序是先类，后category，而category的+load执行顺序是根据编译顺序决定的。 
+>
+> 3)、load，initialize的区别是什么？它们在Category中的调用顺序以及出现继承时它们之间的调用过程是怎么样的？
+
+
+
+### 4.1、+load方法在Category中的调用顺序
+
+> +load的执行顺序是先类，后category，而category的+load执行顺序是根据编译顺序决定的。 
+
+
+
+![](media_Category/001.png)
+
+```
+2019-07-29 14:48:38.461856+0800 Category深入[4543:177912] MyClass load
+2019-07-29 14:48:38.462248+0800 Category深入[4543:177912] MyClass+Category_1 load
+2019-07-29 14:48:38.462303+0800 Category深入[4543:177912] MyClass+Category_2 load
+```
+
+
+
+![](media_Category/002.png)
+
+```
+2019-07-29 14:47:46.286189+0800 Category深入[4526:177145] MyClass load
+2019-07-29 14:47:46.286580+0800 Category深入[4526:177145] MyClass+Category_2 load
+2019-07-29 14:47:46.286647+0800 Category深入[4526:177145] MyClass+Category_1 load
+```
+
+
+
+### 4.2、有继承关系的类中，+load调用顺序
+
+![](media_Category/004.png)
+
+> 父类：Father
+>
+> 父类分类：Father+Category_1 和 Father+Category_2
+>
+> 子类：Son
+>
+> 子类分类：Son+Category_1 和 Son+Category_2
+
+
+
+```
+// 输出
+2019-07-29 16:20:57.900182+0800 Category深入[5664:229891] Father load
+2019-07-29 16:20:57.900585+0800 Category深入[5664:229891] Son load
+2019-07-29 16:20:57.900681+0800 Category深入[5664:229891] Father Cagetory_2 load
+2019-07-29 16:20:57.900734+0800 Category深入[5664:229891] Son Category_1 load
+2019-07-29 16:20:57.900782+0800 Category深入[5664:229891] Father Category_1 load
+2019-07-29 16:20:57.900845+0800 Category深入[5664:229891] Son Category_2 load
+```
+
+
+
+> 1、父类+load 在 子类之前调用；子类+load在分类之前调用；(修改编译顺序也一样)
+>
+> 2、当有多个类别(Category)都实现了load方法,这几个load方法都会执行，但执行顺序不确定，执行顺序与其在Compile Sources中出现的顺序一致; 
+
+
+
+为什么会这样呢？
+
+细节查看： [Category的本质<二>load，initialize方法 - 有继承关系时load方法的调用顺序](https://www.jianshu.com/p/b5492c40fe8f)
+
+
+
+### 4.3、+initialize方法调用顺序
+
+ [Category的本质<二>load，initialize方法](https://www.jianshu.com/p/b5492c40fe8f)
+
+
+
+
+
+### 4.4、+load与+initialize比较
+
+
+
+拓展：
+
+自写的类方法与+load方法比较
+
+同样是类方法，同样是分类中实现了类的方法，为什么load方法不像test方法一样，调用分类的实现，而是类和每个分类中的load方法都被调用了呢？load方法到底有什么不同呢？
+
+
+
+[Category的本质<二>load，initialize方法](https://www.jianshu.com/p/b5492c40fe8f)
+
+
+
++load方法为什么和其他的类方法调用方式不同？
+
+其他分类类方法是通过消息转发机制调用的，isa和superclass来寻找的；而+load是通过函数指针指向函数，拿到函数地址，分开来直接调用的，直接通过内存地址查找调用的。
 
 
 
 
 
 
-## Category和方法覆盖
 
-1. 覆盖源文件
-2. 覆盖分类方法
+## 五、Category和方法覆盖
 
+### 5.1、覆盖本类方法（类方法和实例方法）
 
+```
+// 本类 方法
++(void)getName;
+-(void)getAge;
 
-## Category和关联对象
+// Stu_Category_1 分类覆盖实现
+// Stu_Category_2 分类覆盖实现
 
-
-
-### category关联对象何时释放
-
-
-
-
-
-## Category和+load方法
-
+// 输出
+2019-07-29 15:29:09.597718+0800 Category深入[5074:203420] Stu_Category_2 getName
+2019-07-29 15:29:09.597790+0800 Category深入[5074:203420] Stu_Category_2 getAge
+```
 
 
 
+**交换下编译顺序**
 
-##  Category与继承一起用？
+![](media_Category/003.png)
+
+```
+// 输出
+2019-07-29 15:36:48.679354+0800 Category深入[5140:208264] Stu_Category_1 getName
+2019-07-29 15:36:48.679421+0800 Category深入[5140:208264] Stu_Category_1 getAge
+```
+
+
+
+> 结论：
+>
+> 1)、category的方法没有“完全替换掉”原来类已经有的方法，也就是说如果category和原来类都有methodA，那么category附加完成之后，类的方法列表里会有两个methodA；
+>
+> 2)、category的方法被放到了新方法列表的前面，而原来类的方法被放到了新方法列表的后面，这也就是我们平常所说的category的方法会“覆盖”掉原来类的同名方法，这是因为运行时在查找方法的时候是顺着方法列表的顺序查找的，它只要一找到对应名字的方法，就会罢休^_^，殊不知后面可能还有一样名字的方法。
+
+
+
+### 5.2、怎么调用到原来类中被category覆盖掉的方法？
+
+​		对于这个问题，我们已经知道category其实并不是完全替换掉原来类的同名方法，只是category在方法列表的前面而已，所以我们只要顺着方法列表找到最后一个对应名字的方法，就可以调用原来类的方法：
+
+[美团技术 - 深入理解Objective-C：Category  第6节：触类旁通-category和方法覆盖](http://tech.meituan.com/DiveIntoCategory.html)
+
+
+
+### 5.3、分类覆盖分类方法
+
+```
+// 在分类Stu_Category_1 和 分类Stu_Category_2 分别新增方法，
+-(void)getSchool;
+
+// 输出
+2019-07-29 15:47:28.076732+0800 Category深入[5297:215194] Stu_Category_2 getSchool
+
+// 交换编译顺序
+2019-07-29 15:51:50.765307+0800 Category深入[5336:217361] Stu_Category_1 getSchool
+```
+
+> 结论：
+>
+> ​		与5.1中覆盖本类方法是一样的，category附加完成之后，类的方法列表里会有两个methodA，最后调用哪个是根据编译顺序决定的。
+
+
+
+
+
+## 六、Category和关联对象
+
+### 6.1、Category能否添加成员变量？如果可以，如何给Category添加成员变量？
+
+首先我们从Category底层结构体category_t（在objc-runtime-new.h中可以找到此定义）来看下：
+
+```
+struct category_t {
+    const char *name;
+    classref_t cls;
+    struct method_list_t *instanceMethods;
+    struct method_list_t *classMethods;
+    struct protocol_list_t *protocols;
+    struct property_list_t *instanceProperties;
+    // Fields below this point are not always present on disk. 
+    // 译：此点下方的字段并不总是出现在磁盘上
+    struct property_list_t *_classProperties;
+
+    method_list_t *methodsForMeta(bool isMeta) {
+        if (isMeta) return classMethods;
+        else return instanceMethods;
+    }
+
+    property_list_t *propertiesForMeta(bool isMeta, struct header_info *hi);
+};
+```
+
+通过分类的底层结构我们可以看到，分类中可以存放实例方法，类方法，协议，属性，但是没有存放成员变量的地方。所以不能添加成员变量。
+
+
+
+**如何如何给Category添加成员变量？**
+
+如何给NSArray添加一个属性（不能使用继承）？不能用继承，难道用分类？但是分类只能添加方法不能添加属性啊（Category不允许为已有的类添加新的成员变量，实际上允许添加属性的，同样可以使用@property，但是不会生成_变量（带下划线的成员变量），也不会生成添加属性的getter和setter方法，所以，尽管添加了属性，也无法使用点语法调用getter和setter方法。但实际上可以使用runtime去实现Category为已有的类添加新的属性并生成getter和setter方法)：
+
+```
+// .h 文件
+@interface Person (DD) 
+@property (nonatomic, copy) NSString *height;
+@end
+
+// .m 文件
+@implementation Person (DD)
+#pragma mark - setter/getter
+-(void)setHeight:(NSString *)height {
+    objc_setAssociatedObject(self, @selector(height), height, OBJC_ASSOCIATION_COPY_NONATOMIC);
+}
+-(NSString *)height {
+    return objc_getAssociatedObject(self, _cmd);
+}
+@end
+```
+
+
+
+|             关联策略              |          对应修饰符          |
+| :-------------------------------: | :--------------------------: |
+|      OBJC_ASSOCIATION_ASSIGN      |      @property(assign)       |
+| OBJC_ASSOCIATION_RETAIN_NONATOMIC | @property(strong, nonatomic) |
+|  OBJC_ASSOCIATION_COPY_NONATOMIC  |  @property(copy, nonatomic)  |
+|      OBJC_ASSOCIATION_RETAIN      |  @property(strong, atomic)   |
+|       OBJC_ASSOCIATION_COPY       |   @property(copy, atomic)    |
+
+
+
+### 6.2、关联对象又是存在什么地方呢？ 如何存储？ 对象销毁时候如何处理关联对象呢？
+
+
+
+[美团技术 - 深入理解Objective-C：Category - 第七节：更上一层-category和关联对象](http://tech.meituan.com/DiveIntoCategory.html)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
