@@ -1,27 +1,5 @@
 
 
-- [8.、Category的实现原理]()
-
-- [8.、分别描述类别（categories）和延展（extensions）是什么？以及两者的区别？]()
-
-- [8.、谈谈category和extension区别，系统如何底层实现category]()
-
-- [8.、category中能不能使用声明属性？为什么？如果能，怎么实现？]()
-
-- [8.、Category能否添加成员变量？如果可以，如何给Category添加成员变量？]()
-
-- [8.、为什么Category只能为对象添加方法，却不能添加成员变量？]()
-
-- [8.、Category（类别）、Extension（扩展）和继承的区别]()
-
-- [8.、Category的使用场合是什么？]()
-
-- [8.、Category中有load方法吗？load方法是什么时候调用的？load 方法能继承吗？]()
-
-  
-
-
-
 [官网文档 - Category](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Category.html)
 
 [Runtime开源代码](https://github.com/RetVal/objc-runtime)
@@ -38,6 +16,8 @@
 
 ## 一、Category简介
 
+### 1.1、什么是Category？
+
 Category是Objective-C 2.0之后添加的语言特性，category的主要作用是为已经存在的类添加方法。除此之外，[apple](https://developer.apple.com/library/archive/documentation/General/Conceptual/DevPedia-CocoaCore/Category.html) 还推荐了category的另外两个使用场景:
 
 > * Distribute the implementation of your own classes into separate source files—for example, you could group the methods of a large class into several categories and put each category in a different file.
@@ -46,16 +26,44 @@ Category是Objective-C 2.0之后添加的语言特性，category的主要作用�
 
 大致意思：
 
-> - 可以把类的实现分开在几个不同的文件里面。这样做有几个显而易见的好处：
->   	* a). 可以减少单个文件的体积 
->   	  	* b). 可以把不同的功能组织到不同的category里 
->   	   * c). 可以由多个开发者共同完成一个类 d)可以按需加载想要的category 等等。
+> - 可以把类的实现分开在几个不同的文件里面
 > - 声明私有方法
 
 不过除了apple推荐的使用场景，广大开发者脑洞大开，还衍生出了category的其他几个使用场景：
 
 >* 模拟多继承
 >* 把framework的私有方法公开
+
+### 1.2、Category好处
+
+可以把类的实现分开在几个不同的文件里面。这样做有几个显而易见的好处。
+
+- 可以减少单个文件的体积
+- 可以把不同的功能组织到不同的category里
+- 可以由多个开发者共同完成一个类
+- 可以按需加载想要的category
+- 声明私有方法
+
+### 1.3、category特点
+
+- category只能给某个已有的类扩充方法，**不能扩充成员变量。**
+- **category中也可以添加属性**，只不过@property只会生成setter和getter的声明，不会生成setter和getter的实现以及成员变量。
+- 如果category中的方法和类中原有方法同名，运行时会优先调用category中的方法。也就是，category中的方法会覆盖掉类中原有的方法。所以开发中尽量保证不要让分类中的方法和原有类中的方法名相同。避免出现这种情况的解决方案是给分类的方法名统一添加前缀。比如category_。
+- 如果多个category中存在同名的方法，运行时到底调用哪个方法由编译器决定，最后一个参与编译的方法会被调用。
+
+### 1.4、Category应用场景
+
+- 将类的实现分开在几个不同的文件中
+- 声明私有方法
+- 模拟多继承（另外可以模拟多继承的还有protocol）
+- 把framework的私有方法公开
+
+### 1.5、调用优先级
+
+* 在本类和分类有相同的方法时，优先调用分类的方法再调用本类的方法（分类 > 本类 > 父类）。
+* 如果有两个分类，他们都实现了相同的方法（+load方法也算，具体看4.1），如何判断谁先执行？分类执行顺序可以通过`targets -> Build Phases -> Complie Source`进行调节，注意执行顺序是从上到下的。（只有两个相同方法名的分类）
+
+注意：category是在运行时加载的，不是在编译时。
 
 
 
@@ -400,7 +408,7 @@ static struct /*_prop_list_t*/ {
 
 > 1、父类+load 在 子类之前调用；子类+load在分类之前调用；(修改编译顺序也一样)
 >
-> 2、当有多个类别(Category)都实现了load方法,这几个load方法都会执行，但执行顺序不确定，执行顺序与其在Compile Sources中出现的顺序一致; 
+> 2、当有多个类别(Category)都实现了load方法，这几个load方法都会执行，但执行顺序不确定，执行顺序与其在Compile Sources中出现的顺序一致; 
 
 
 
@@ -416,9 +424,44 @@ static struct /*_prop_list_t*/ {
 
 
 
+**情况一：只有父类和子类**
+
+查看本类的initialize方法有没有实现过，如果已经实现过就返回，不再实现。
+
+如果本类没有实现过initialize方法，那么就去递归查看该类的父类有没有实现过initialize方法，如果没有实现就去实现，最后实现本类的initialize方法。并且initialize方法是通过objc_msgSend()实现的。
+
+
+
+- 如果子类没有实现+initialize方法，会调用父类的+initialize（所以父类的+initialize方法可能会被调用多次）
+- 如果分类实现了+initialize，会覆盖类本身的+initialize调用。
+
+
+
+情况二：父类子类
+
+
+
+
+
+
+
+
+
+
+
 
 
 ### 4.4、+load与+initialize比较
+
+- [load](https://developer.apple.com/documentation/objectivec/nsobject/1418815-load?language=objc)
+
+  Invoked whenever a class or category is added to the Objective-C runtime; implement this method to perform class-specific behavior upon loading.
+
+- [initialize](https://developer.apple.com/documentation/objectivec/nsobject/1418639-initialize?language=objc)
+
+  Initializes the class before it receives its first message.
+
+
 
 
 
@@ -491,30 +534,42 @@ static struct /*_prop_list_t*/ {
 
 
 
-### 5.3、分类覆盖分类方法
-
-```
-// 在分类Stu_Category_1 和 分类Stu_Category_2 分别新增方法，
--(void)getSchool;
-
-// 输出
-2019-07-29 15:47:28.076732+0800 Category深入[5297:215194] Stu_Category_2 getSchool
-
-// 交换编译顺序
-2019-07-29 15:51:50.765307+0800 Category深入[5336:217361] Stu_Category_1 getSchool
-```
-
-> 结论：
->
-> ​		与5.1中覆盖本类方法是一样的，category附加完成之后，类的方法列表里会有两个methodA，最后调用哪个是根据编译顺序决定的。
-
-
-
-
-
 ## 六、Category和关联对象
 
-### 6.1、Category能否添加成员变量？如果可以，如何给Category添加成员变量？
+### 6.1、为什么category不能添加成员变量？
+
+##### 解释一：从Objective-C类是由Class类型来分析
+
+Objective-C类是由Class类型来表示的，它实际上是一个指向objc_class结构体的指针。它的定义如下：
+
+```
+typedef struct objc_class *Class;
+```
+
+objc_class结构体的定义如下：
+
+```
+struct objc_class {
+    Class isa  OBJC_ISA_AVAILABILITY;
+#if !__OBJC2__
+    Class super_class                       OBJC2_UNAVAILABLE;  // 父类
+    const char *name                        OBJC2_UNAVAILABLE;  // 类名
+    long version                            OBJC2_UNAVAILABLE;  // 类的版本信息，默认为0
+    long info                               OBJC2_UNAVAILABLE;  // 类信息，供运行期使用的一些位标识
+    long instance_size                      OBJC2_UNAVAILABLE;  // 该类的实例变量大小
+    struct objc_ivar_list *ivars            OBJC2_UNAVAILABLE;  // 该类的成员变量链表
+    struct objc_method_list **methodLists   OBJC2_UNAVAILABLE;  // 方法定义的链表
+    struct objc_cache *cache                OBJC2_UNAVAILABLE;  // 方法缓存
+    struct objc_protocol_list *protocols    OBJC2_UNAVAILABLE;  // 协议链表
+#endif
+} OBJC2_UNAVAILABLE;
+```
+
+在上面的objc_class结构体中，ivars是objc_ivar_list（成员变量列表）指针；methodLists是指向objc_method_list指针的指针。在Runtime中，objc_class结构体大小是固定的，不可能往这个结构体中添加数据，只能修改。所以ivars指向的是一个固定区域，只能修改成员变量值，不能增加成员变量个数。methodList是一个二维数组，所以可以修改methodLists的值来增加成员方法，虽没办法扩展methodLists指向的内存区域，却可以改变这个内存区域的值（存储的是指针）。因此，可以动态添加方法，不能添加成员变量。
+
+
+
+##### 解释二：从Category底层结构体category_t看
 
 首先我们从Category底层结构体category_t（在objc-runtime-new.h中可以找到此定义）来看下：
 
@@ -543,7 +598,7 @@ struct category_t {
 
 
 
-**如何如何给Category添加成员变量？**
+### 6.2、如何给Category添加成员变量？
 
 如何给NSArray添加一个属性（不能使用继承）？不能用继承，难道用分类？但是分类只能添加方法不能添加属性啊（Category不允许为已有的类添加新的成员变量，实际上允许添加属性的，同样可以使用@property，但是不会生成_变量（带下划线的成员变量），也不会生成添加属性的getter和setter方法，所以，尽管添加了属性，也无法使用点语法调用getter和setter方法。但实际上可以使用runtime去实现Category为已有的类添加新的属性并生成getter和setter方法)：
 
@@ -577,29 +632,19 @@ struct category_t {
 
 
 
-### 6.2、关联对象又是存在什么地方呢？ 如何存储？ 对象销毁时候如何处理关联对象呢？
-
-
+### 6.3、关联对象又是存在什么地方呢？ 如何存储？ 对象销毁时候如何处理关联对象呢？
 
 [美团技术 - 深入理解Objective-C：Category - 第七节：更上一层-category和关联对象](http://tech.meituan.com/DiveIntoCategory.html)
 
 
 
+## 七、Category与Extension
 
 
 
+**extension看起来很像一个匿名的category，但是extension和有名字的category几乎完全是两个东西。 extension在编译期决议，它就是类的一部分，在编译期和头文件里的@interface以及实现文件里的@implement一起形成一个完整的类，它伴随类的产生而产生，亦随之一起消亡。extension一般用来隐藏类的私有信息，你必须有一个类的源码才能为一个类添加extension，所以你无法为系统的类比如NSString添加extension。**
 
-
-
-
-
-
-
-
-
-
-
-
+**但是category则完全不一样，它是在运行期决议的。 就category和extension的区别来看，我们可以推导出一个明显的事实，extension可以添加实例变量，而category是无法添加实例变量的（因为在运行期，对象的内存布局已经确定，如果添加实例变量就会破坏类的内部布局，这对编译型语言来说是灾难性的）。**
 
 
 
