@@ -328,13 +328,15 @@ static struct /*_prop_list_t*/ {
 
 ## 三、Category如何加载（运行时加载）
 
+[深入理解Objective-C：Category - 4、追本溯源-category如何加载](https://tech.meituan.com/2015/03/03/diveintocategory.html)
+
+
+
 我们知道，Objective-C的运行是依赖OC的runtime的，而OC的runtime和其他系统库一样，是OS X和iOS通过dyld动态加载的。
 
 也就是如何将Category中新增的属性与方法在运行时加载到本类中。
 
 想了解更多dyld地同学可以移步这里（[3](https://www.mikeash.com/pyblog/friday-qa-2012-11-09-dyld-dynamic-linking-on-os-x.html)）。
-
-
 
 
 
@@ -422,32 +424,97 @@ static struct /*_prop_list_t*/ {
 
  [Category的本质<二>load，initialize方法](https://www.jianshu.com/p/b5492c40fe8f)
 
-
-
 **情况一：只有父类和子类**
 
-查看本类的initialize方法有没有实现过，如果已经实现过就返回，不再实现。
+```
+// NewFather
++(void)initialize {
+    NSLog(@"NewFather initialize");
+}
 
-如果本类没有实现过initialize方法，那么就去递归查看该类的父类有没有实现过initialize方法，如果没有实现就去实现，最后实现本类的initialize方法。并且initialize方法是通过objc_msgSend()实现的。
+// NewSon
++(void)initialize {
+    NSLog(@"NewSon initialize");
+}
+
+
+// 测试一：调用父类
+[NewFather alloc];
+// 输出
+2019-08-01 09:03:11.547651+0800 Category深入[1088:16966] NewFather initialize
+
+
+// 测试二：调用子类
+[NewSon alloc];
+// 输出
+2019-08-01 09:02:30.083591+0800 Category深入[1072:16383] NewFather initialize
+2019-08-01 09:02:30.083668+0800 Category深入[1072:16383] NewSon initialize
+
+
+// 测试三：若子类未实现 +(void)initialize 方法，调用子类
+[NewSon alloc];
+// 输出
+2019-08-01 09:09:22.596737+0800 Category深入[1168:20045] NewFather initialize
+2019-08-01 09:09:22.596811+0800 Category深入[1168:20045] NewFather initialize
+
+```
 
 
 
+- initialize在类第一次接收到消息时调用，也就是objc_msgSend()。
+- 先调用父类的+initialize，再调用子类的initialize。
 - 如果子类没有实现+initialize方法，会调用父类的+initialize（所以父类的+initialize方法可能会被调用多次）
-- 如果分类实现了+initialize，会覆盖类本身的+initialize调用。
 
 
 
-情况二：父类子类
+**情况二：父类、子类和分类**
+
+```
+// NewFather
++(void)initialize {
+    NSLog(@"NewFather initialize");
+}
+// NewFather+Category_1
++(void)initialize {
+    NSLog(@"NewFather Category_1 initialize");
+}
+// NewFather+Category_2
++(void)initialize {
+    NSLog(@"NewFather Category_2 initialize");
+}
+
+// NewSon
++(void)initialize {
+    NSLog(@"NewSon initialize");
+}
+// NewSon+Category_1
++(void)initialize {
+    NSLog(@"NewSon Category_1 initialize");
+}
+// NewSon+Category_2
++(void)initialize {
+    NSLog(@"NewSon Category_2 initialize");
+}
+
+
+// 调用父类
+[NewFather alloc];
+// 输出
+2019-08-01 09:22:06.398530+0800 Category深入[1349:26686] NewFather Category_2 initialize
+
+// 调用子类
+[NewSon alloc];
+// 输出
+2019-08-01 09:25:37.274370+0800 Category深入[1454:29643] NewFather Category_2 initialize
+2019-08-01 09:25:37.274441+0800 Category深入[1454:29643] NewSon Category_2 initialize
+```
 
 
 
+* 如果分类实现了+initialize，会覆盖类本身的+initialize调用；
 
-
-
-
-
-
-
+* 多个分类时，分类执行顺序可以通过`targets -> Build Phases -> Complie Source`进行调节，注意执行顺序是从上到下的；
+* 如果子类和子类的分类都不实现+initialize，则显示父类的分类的+initialize方法；
 
 
 
@@ -461,29 +528,17 @@ static struct /*_prop_list_t*/ {
 
   Initializes the class before it receives its first message.
 
+[iOS类方法load和initialize详解](https://www.jianshu.com/p/c52d0b6ee5e9)
 
-
-
-
-拓展：
-
-自写的类方法与+load方法比较
-
-同样是类方法，同样是分类中实现了类的方法，为什么load方法不像test方法一样，调用分类的实现，而是类和每个分类中的load方法都被调用了呢？load方法到底有什么不同呢？
-
-
-
-[Category的本质<二>load，initialize方法](https://www.jianshu.com/p/b5492c40fe8f)
-
-
-
-+load方法为什么和其他的类方法调用方式不同？
-
-其他分类类方法是通过消息转发机制调用的，isa和superclass来寻找的；而+load是通过函数指针指向函数，拿到函数地址，分开来直接调用的，直接通过内存地址查找调用的。
-
-
-
-
+|                | +(void)load                                                  | +(void)initialize                                            |
+| -------------- | ------------------------------------------------------------ | ------------------------------------------------------------ |
+| 调用方式       | +load是通过函数指针指向函数，拿到函数地址，直接通过内存地址查找调用的。 | +initialize是通过objc_msgSend()进行调用，isa和superclass来寻找的 |
+| 调用时机       | 只要文件被引用就会被调用，所以如果类没有被引进项目,就不会调用 +load | 是在类或者它的子类收到第一条消息（实例方法、类方法）之前被调用的。 |
+| 调用顺序       | 1、+load 会在 main() 函数之前被调用；<br>2、父类 > 子类 > 分类 | 父类 > 子类（或分类，分类覆盖本类方法）                      |
+| 调用次数       | 1次                                                          | 1、如果只有父类，则调用1次或0次；<br>2；有子类则调用多次；（子类也会调用父类的initialize方法） |
+| 子类、类别调用 | 子类：如果子类没有实现 load 方法, 该子类是不会调用该方法的, 就算父类实现了也不会调用父类的load方法；<br><br> 类别：当有多个类别(Category)都实现了load方法,这几个load方法都会执行,但执行顺序不确定，执行顺序与其在Compile Sources中出现的顺序一致; ![](media_Category/009.png) | 如果子类实现 initialize方法时,会覆盖父类initialize方法；<br><br> 如果子类不实现 initialize 方法，会把父类的实现继承过来调用一遍；<br><br>当有多个Category都实现了initialize方法,会覆盖类中的方法,只执行一个(会执行Compile Sources 列表中最后一个Category 的initialize方法) |
+| 线程安全       | load 方法是线程安全的，内部使用了锁，应避免线程阻塞在 load 中。 | 在initialize方法收到调用时，运行环境基本健全。initialize的运行过程中是能保证线程安全的； |
+| 常见场景       | 1、由于调用load方法时的环境很不安全，我们应该尽量减少load方法的逻辑；<br>2、load 中实现 Method Swizzle | 1、常用于初始化全局变量和静态变量；<br>2、者单例模式的实现方案； |
 
 
 
