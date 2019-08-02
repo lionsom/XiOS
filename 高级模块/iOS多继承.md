@@ -28,88 +28,60 @@ Objective-C不支持多继承，由于消息机制名字查找发生在运行时
 
 ## 第二部分：Objective-C实现多继承
 
-
-
 ### 2.1、Category分类
 
-
-
 ```
-/*分类头文件*/
-#import "Programmer.h"
-
-@interface Programmer (Program)
-// 声明属性
-@property (nonatomic, assign) NSString *motto;
-// 声明公有方法
-- (void)draw;
-- (void)sing;
+// 分类.h
+@interface Programmer (Coding)
+@property (nonatomic, copy) NSString *height;
+-(void)show;
 @end
 
-
-/*分类实现文件*/
+// 分类.m
 #import <objc/runtime.h>
-
-@implementation Programmer (Program)
-// 为Catagory添加属性
-static const char kMottoKey;
-- (void)setMotto:(NSString *)motto {
-    objc_setAssociatedObject(self, &kMottoKey, motto, OBJC_ASSOCIATION_COPY_NONATOMIC);
+@implementation Programmer (Coding)
+-(void)setHeight:(NSString *)height {
+    objc_setAssociatedObject(self, @selector(height), height, OBJC_ASSOCIATION_COPY_NONATOMIC);
 }
-- (NSString *)motto {
-    return objc_getAssociatedObject(self, &kMottoKey);
+-(NSString *)height {
+    return objc_getAssociatedObject(self, _cmd);
 }
-// 私有方法
-- (void)program {
-    NSLog(@"I'm writing bugs!");
-}
-// 实现公有方法
-- (void)draw {
-    NSLog(@"I can draw");
-}
-- (void)sing {
-    NSLog(@"Lalalalallalala");
+-(void)show {
+    NSLog(@"分类新增方法");
 }
 @end
+
+
+/**
+ 多继承实现一：分类，给类添加属性和方法
+ */
+ 		// 调用
+    Programmer *programmer = [[Programmer alloc] init];
+    programmer.height = @"123";
+    [programmer show];
+
 ```
-
-
-
-
-
-
 
 
 
 ### 2.2、协议
 
+协议主要是用来提出类应遵守的标准，但其特性也可用来实现多继承。一个类可以遵守多个协议，也即实现多个协议的方法，以此来达到多继承的效果。
+
+概念上的单继承和多继承应该是继承父类的属性和方法，并且不经重写即可使用，但通过协议实现多继承有如下不同:
+
+> a.需要实现协议方法
+> b.由于协议无法定义属性，所以只能实现方法的多继承
+
+
+
+### 2.3、消息转发机制
 
 
 
 
 
-
-
-
-**方法1. 组合方式，用ClassC  添加ClassA ,ClassB成员变量 来调用methodA，methodB**
-
-
-
-**方法2.协议protocol  设置ClassA delegate和 ClasssB delegate 以及实现方法ClassA里的methodA，和ClasssB里的methodB。ClassC遵守这两个协议就可以。**
-
-
-
-**方法3.类别（分类）**
-
-
-
-**方法4.消息转发机制**
-
-
-
-
-
-NSproxy
+### 2.4、NSProxy
 
 
 
