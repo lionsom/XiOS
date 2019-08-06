@@ -1,5 +1,6 @@
 ### 参考文档
 [Beyond Compare for Mac 无限试用方法](https://www.seidea.com/2017/03/23/beyond-compare-for-mac-无限试用方法/)
+
 [Beyond Compare Download](https://www.scootersoftware.com/download.php)
 
 
