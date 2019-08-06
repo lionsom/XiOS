@@ -10,6 +10,8 @@
 > `BCompare` 是应用程序启动的程序，只要在在启动的时候**删除 registry.dat**(`Library/Application Support/Beyond Compare/registry.dat`)注册信息就好了。
 
 
+
+
 * #### registry.dat所在目录：`Library/Application Support/Beyond Compare`
 ![](media_Beyond_Compare/001.jpeg)
 
