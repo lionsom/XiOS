@@ -1,16 +1,6 @@
 
-# 高级开发-卡顿检测
 
-### 参考文档
-
-1. [iOS版微信界面卡顿监测方案](http://www.52im.net/thread-136-1-1.html)
-2. [移动端监控体系之技术原理剖析](https://www.jianshu.com/p/8123fc17fe0e)
-3. [iOS无埋点数据SDK实践之路](https://www.jianshu.com/p/69ce01e15042)
-4. [腾讯Bugly的专栏](https://blog.csdn.net/tencent_bugly)
-5. [iOS开发高手课 - 13 | 如何利用 RunLoop 原理去监控卡顿？
-](https://time.geekbang.org/column/article/89494)
-
-### 学习RunLoop
+**学习RunLoop**
 
 1. [孙源的一个线下分享《RunLoop》](https://v.youku.com/v_show/id_XODgxODkzODI0.html)：对 RunLoop 的整体有个了解
 
@@ -18,19 +8,9 @@
 
 3. ibireme 的一篇文章 [《深入理解 RunLoop》](https://blog.ibireme.com/2015/05/18/runloop/) 结合着底层 CFRunLoop 的源码，对 RunLoop 机制进行了深入分析。
 
+   
 
-
-
-
-
-
-
-
-
-
-
-
-
+**[应用拓展 --- 卡顿检测](https://github.com/lionsom/iOS-/blob/master/高级模块/卡顿检测.md)**
 
 
 
