@@ -84,20 +84,22 @@ Shell 就是一种脚本语言，我们编写完源码后不用编译，直接�
 
 [Shell脚本是什么 - Shell的分类](http://c.biancheng.net/view/932.html)
 
-目前 Shell 的版本有很多种，如 Bourne Shell、C Shell、Bash、ksh、tcsh 等，它们各有特点，下面简要介绍一下。
 
-最重要的 Shell 是 Bourne Shell，这个命名是为了纪念此 Shell 的发明者 Steven Bourne。从 1979 年起，UNIX 就开始使用 Boume Shell。Bourne Shell 的主文件名为 sh，开发人员便以 sh 作为 Bourne Shell 的主要识别名称。
+|Shell种类全称|缩写|概要|
+|:--:|:--:|:--|
+|Bourne Shell|sh|**sh 是 UNIX 上的标准 shell**，很多 UNIX 版本都配有 sh。sh 是第一个流行的 Shell。由 AT&T 公司的 Steve Bourne开发，为了纪念他，就用他的名字命名了。|
+|Boume Again|Bash|Bash 由 GNU 组织开发，保持了对 sh shell 的兼容性，是各种 Linux 发行版 **默认配置的 shell**。 |
+|C Shell|csh|C Shell 是广为流行的 Shell 变种。**C Shell 主要在 BSD 版的 UNIX 系统中使用**，发明者是柏克莱大学的 Bill Joy。C Shell 因为其语法和 C 语言类似而得名，这也使得 UNIX 的系统工程师在学习 C Shell 时感到相当方便。|
+|TC Shell|tcsh|**tcsh 是 csh 的增强版**，加入了命令补全功能，提供了更加强大的语法支持。|
+|Z Shell|zsh|Zsh属于Shell中的一种，但比Bash好用，而且完全兼容Bash，拥有及其丰富的插件。|
 
 
-
-**Bash Shell** 是 GNU 计划的重要工具之一，也是 GNU 系统中标准的 Shell。Bash 与 sh 兼容，所以许多早期开发出来的 Bourne Shell 程序都可以继续在 Bash 中运行。现在使用的 Linux 就使用 Bash 作为用户的基本 Shell。
 
 ```
 ➜  ~ bash -version
 GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin18)
 Copyright (C) 2007 Free Software Foundation, Inc.
 ```
-
 
 
 ##  四、查看系统中的shell
