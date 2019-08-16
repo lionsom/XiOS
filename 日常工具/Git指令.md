@@ -82,6 +82,22 @@ $ git push --set-upstream origin feature/justtest
 
 
 
+## 三、合并Merge
+
+保证合并的两个分支最新；
+
+将 `feature/acrossContainer` 分支合并到 `feature/ViewAugIteration` 分支，
+
+跳转到`feature/ViewAugIteration` 分支下，
+
+```
+➜  IOS git:(feature/ViewAugIteration) git merge feature/acrossContainer 
+```
+
+然后 `git status` 查看具体合并细节，解决冲突。 
+
+
+
 ## 三、查看历史
 
 [菜鸟教程 - Git 查看提交历史](https://www.runoob.com/git/git-commit-history.html)
