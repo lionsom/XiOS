@@ -12,7 +12,6 @@
 	* [1.1.4、为什么说Objective-C是一门动态的语言？iOS的动态性？](#1.1.4)
 	* [1.1.5、[未完成]ARC情况下，编译的时候，系统是怎么添加相关内存管理的代码](#1.1.5)
 	
-	
 * [1.2、@property属性](#1.2)
 	* [1.2.1、@property 的本质是什么？ivar、getter、setter 是如何生成并添加到这个类中的？](#1.2.1)
 	* [1.2.2、@synthesize 和 @dynamic 分别有什么作用？](#1.2.2)
@@ -34,8 +33,7 @@
 	* [1.2.12、如何让自己的类用 copy 修饰符？](#1.2.12)
 	* [1.2.13、对于深拷贝和浅拷贝的理解，系统对象 NSString/NSMutableString/NSArray/NSMutableArray 的 copy 与 mutableCopy 方法](#1.2.13) 
 	* [1.2.14、类变量的 @public，@protected，@private，@package 声明各有什么含义？](#1.2.14)
-   		
-   		
+  
 * [1.3、autorelease/autoreleasePool](#1.3) -- 未完结
 	* [1.3.1、一个 autorealese 对象在什么时刻释放](#1.3.1)
 	* [1.3.2、方法里有局部对象， 出了方法后会立即释放吗？](#1.3.2)
@@ -82,7 +80,7 @@
 	* [1.5.17、简述NotificationCenter、KVC、KVO、Delegate？并说明它们之间的区别？](#1.5.17)
 	* [1.5.18、dealloc什么时候调用？[super dealloc]何时调用？ARC下dealloc过程？](#1.5.18)
 	* [1.5.19、iOS中nil 、Nil、 NULL 、NSNull介绍](#1.5.19)
-    
+  
 * [1.6、iOS中一些机制和原理](#1.6)   
 	* [1.6.1、简单说一下APP的生命周期](#1.6.1)
 	* [1.6.2、简单说一下APP的启动过程,从main文件开始说起](#1.6.2)
@@ -101,7 +99,6 @@
 	* [1.7.1、C++引用和指针区别](#1.7.1)
 	* [1.7.2、对于Objective-C，你认为它最大的优点和最大的不足是什么？对于不足之处，现在有没有可用的方法绕过这些不足来实现需求。如果可以的话，你有没有考虑或者实践过重新实现OC的一些功能，如果有，具体会如何做？](#1.7.2)
 	
-
 * [二、Runtime](#二)
 	* [2.1、什么是 Runtime？Runtime实现的机制是什么？](#2.1)
 	* [2.、Runtime如何通过selector找到对应的IMP地址]()
@@ -136,6 +133,7 @@
 	* [3.、](#3.)
 
 * [四、KVC & KVO](#四)
+	
 	* [4.、KVC的底层实现？应用在哪些场景？](#4.)
 	* [4.、KVO的底层实现？应用在哪些场景？](#4.)
 	* [4.、iOS用什么方式实现对一个对象的KVO？(KVO的本质是什么？)](#4.)
@@ -147,8 +145,8 @@
 	* [4.、如何访问并修改一个类的私有属性？](#4.)
 	* [4.、NSNotification和KVO的区别和用法是什么？什么时候应该使用NSNotification，什么时候应该使用KVO？它们的实现上有什么区别吗？如果用protocol和delegate（或者delegate的Array）来实现类似的功能可能吗？如果可能，会有什么潜在的问题？如果不能，为什么？](#4.)
 	* [4.、](#4.)
-	* [4.、](#4.)
-
+* [4.、](#4.)
+	
 * [五、多线程](#五)
 	* [5.、iOS多线程有哪几种实现方法？](#5.)
 	* [5.、GCD执行原理？](#5.)
@@ -171,7 +169,6 @@
 	* [5.、](#5.)
 	* [5.、](#5.)
 	
-	
 * [六、核心动画块 & 绘图](#六)
 	* [6.、YYAsyncLayer如何异步绘制？]()
 	* [6.、什么是 OpenGL、Quartz 2D？]()
@@ -184,7 +181,6 @@
 	* [6.、Core开头的系列的内容。是否使用过CoreAnimation和CoreGraphics。UI框架和CA，CG框架的联系是什么？分别用CA和CG做过些什么动画或者图像上的内容。（有需要的话还可以涉及Quartz的一些内容）]()
 	* [6.、]()
 	* [6.、]()
-	
 	
 * [七、Block]()
 	* [7.、什么是block？block的原理是怎样的？本质是什么？]()
@@ -266,7 +262,6 @@
 	* [11.、]()
 	* [11.、]()
 
-	
 * [三、调试](#三)
 
 1. BAD_ACCESS在什么情况下出现？
@@ -533,11 +528,9 @@ NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
 <h2 id="二">二、Runtime </h2>
 
-
 [iOS Runtime详解](https://www.jianshu.com/p/6ebda3cd8052)
 
 <h2 id="2.1">2.1、什么是 Runtime？Runtime实现的机制是什么？</h2>
-
 **问：什么是 Runtime？**
 
 1. runtime是一套比较底层的纯C语言API, 属于1个C语言库, 包含了很多底层的C语言API;
@@ -549,7 +542,6 @@ NSMutableDictionary *dict = [NSMutableDictionary dictionary];
 
 
 <h2 id="1.4">1.4、Runtime如何通过selector找到对应的IMP地址</h2>
-
 
 
 ## <h2 id="1.4">1.4、你使用过Objective-C的运行时编程（Runtime Programming）么？如果使用过，你用它做了什么？</h2>
@@ -623,153 +615,7 @@ Apple 使用了 isa-swizzling 来实现 KVO 。当观察对象A时，KVO机制�
 
 
 
-
-
-
-<h1 id="三">三、Runloop</h1>
-
-[iOS 多线程：『RunLoop』详尽总结](https://www.jianshu.com/p/d260d18dd551)
-
-## <h2 id="3.1">3.1、什么是 RunLoop？Runloop内部实现逻辑？</h2>
-
-**什么是 RunLoop？**
-
-Run loops是线程相关的的基础框架的一部分。一个run loop就是一个事件处理的循环，用来不停的调度工作以及处理输入事件。其实内部就是do－while循环，这个循环内部不断地处理各种任务（比 如Source，Timer，Observer）。使用run loop的目的是让你的线程在有工作的时候忙于工作，而没工作的时候处于休眠状态。
-
-
-## <h2 id="3.1">3.1、RunLoop 有几个model，分别是什么？mode作用？</h2>
-
-系统默认注册了5个Mode:
-
-（1）kCFRunLoopDefaultMode: App的默认 Mode，通常主线程是在这个 Mode 下运行的。
-
-（2）UITrackingRunLoopMode: 界面跟踪 Mode，用于 ScrollView 追踪触摸滑动，保证界面滑动时不受其他 Mode 影响。
-
-（3）UIInitializationRunLoopMode: 在刚启动 App 时第进入的第一个 Mode，启动完成后就不再使用。
-
-（4）GSEventReceiveRunLoopMode: 接受系统事件的内部 Mode，通常用不到。
-
-（5）kCFRunLoopCommonModes: 这是一个占位的 Mode，没有实际作用。
-
-
-## <h2 id="3.1">3.1、Runloop和线程有什么关系？主线程默认开启了Runloop么？⼦线程呢？</h2>
-
-**Runloop和线程有什么关系？**
-
-RunLoop 和线程是息息相关的，我们知道线程的作用是用来执行特定的一个或多个任务，在默认情况下，线程执行完之后就会退出，就不能再执行任务了。这时我们就需要采用一种方式来让线程能够不断地处理任务，并不退出。所以，我们就有了 RunLoop。
-
-1、一条线程对应一个RunLoop对象，每条线程都有唯一一个与之对应的 RunLoop 对象。
-
-2、RunLoop 并不保证线程安全。我们只能在当前线程内部操作当前线程的 
-
-3、RunLoop 对象，而不能在当前线程内部去操作其他线程的 RunLoop 对象方法。
-
-4、RunLoop 对象在第一次获取 RunLoop 时创建，销毁则是在线程结束的时候。
-
-5、主线程的 RunLoop 对象系统自动帮助我们创建好了（原理如 1.3 所示），而子线程的 RunLoop对象需要我们主动创建和维护。
-
-
-**⼦线程呢？**
-
-子线程的 RunLoop 需要手动启动;
-每次RunLoop启动时,只能指定其中一个 Mode,这个Mode被称作 CurrentMode,
-
-如果需要切换 Mode,只能退出 Loop,再重新指定一个 Mode 进入,这样做主要是为了隔离不同 Mode 中的 Source、Timer、Observer,让其互不影响 
-
-
-
-## <h2 id="3.1">3.1、当NSTimer `+scheduledTimerWithTimeInterval...` 的⽅式触发的timer，在滑动⻚⾯上的列表时，timer会暂定回调，为什么？如何解决？</h2>
-
-```
-	// 定义一个定时器，约定两秒之后调用self的run方法
-    NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
-
-    // 将定时器添加到当前RunLoop的NSDefaultRunLoopMode下
-    [[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-```
-
-
-**问：在滑动⻚⾯上的列表时，timer会暂定回调，为什么？**
-
-当我们不做任何操作的时候，RunLoop处于NSDefaultRunLoopMode下。
-
-而当我们拖动Text View的时候，RunLoop就结束NSDefaultRunLoopMode，切换到了UITrackingRunLoopMode模式下，这个模式下没有添加NSTimer，所以我们的NSTimer就不工作了。
-
-但当我们松开鼠标的时候，RunLoop就结束UITrackingRunLoopMode模式，又切换回NSDefaultRunLoopMode模式，所以NSTimer就又开始正常工作了。
-
-当我们尝试 `[[NSRunLoop currentRunLoop] addTimer:timer forMode:UITrackingRunLoopMode];`，也就是将定时器添加到当前RunLoop的UITrackingRunLoopMode下，你就会发现定时器只会在拖动Text View的模式下工作，而不做操作的时候定时器就不工作。
-
-**如何解决？**
-
-这就用到了我们之前说过的伪模式（kCFRunLoopCommonModes），这其实不是一种真实的模式，而是一种标记模式，意思就是可以在打上Common Modes标记的模式下运行。
-
-那么哪些模式被标记上了Common Modes呢？
-NSDefaultRunLoopMode 和 UITrackingRunLoopMode。
-
-所以我们只要我们将NSTimer添加到当前RunLoop的kCFRunLoopCommonModes（Foundation框架下为NSRunLoopCommonModes）下，我们就可以让NSTimer在不做操作和拖动Text View两种情况下愉快的正常工作了。
-
-具体做法就是讲添加语句改为`[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSRunLoopCommonModes];`
-
-
-**NSTimer方法 `scheduledTimerWithTimeInterval 与 timerWithTimeInterval` 拓展**
-
-既然讲到了NSTimer，这里顺便讲下NSTimer中的scheduledTimerWithTimeInterval方法和RunLoop的关系。添加下面的代码：
-
-```
-[NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
-```
-
-这句代码调用了scheduledTimer返回的定时器，NSTimer会自动被加入到了RunLoop的NSDefaultRunLoopMode模式下。这句代码相当于下面两句代码：
-
-```
-NSTimer *timer = [NSTimer timerWithTimeInterval:2.0 target:self selector:@selector(run) userInfo:nil repeats:YES];
-[[NSRunLoop currentRunLoop] addTimer:timer forMode:NSDefaultRunLoopMode];
-```
-
-
-
-
-## <h2 id="3.1">3.1、RunLoop 在项目中的应用？</h2>
-
-1、NSTimer的使用 （参考上面）
-
-2、ImageView推迟显示
-
-当界面中含有UITableView，而且每个UITableViewCell里边都有图片。这时候当我们滚动UITableView的时候，如果有一堆的图片需要显示，那么可能会出现卡顿的现象。
-
-
-解决方案1. 监听UIScrollView的滚动
-
-因为UITableView继承自UIScrollView，所以我们可以通过监听UIScrollView的滚动，实现UIScrollView相关delegate即可。
-
-解决方案2. 利用PerformSelector设置当前线程的RunLoop的运行模式
-利用performSelector方法为UIImageView调用setImage:方法，并利用inModes将其设置为RunLoop下NSDefaultRunLoopMode运行模式。代码如下：
-
-```
-[self.imageView performSelector:@selector(setImage:) withObject:[UIImage imageNamed:@"tupian"] afterDelay:4.0 inModes:NSDefaultRunLoopMode];
-```
-
-3、后台常驻线程（很常用）
-
-我们在开发应用程序的过程中，如果后台操作特别频繁，经常会在子线程做一些耗时操作（下载文件、后台播放音乐等），我们最好能让这条线程永远常驻内存。
-
-
-
-
-
-* [三、Runloop](#三)
-	* [3.、什么是 RunLoop？Runloop内部实现逻辑？](#3.)
-	* [3.、Runloop是来做什么的？Runloop和线程有什么关系？主线程默认开启了Runloop么？⼦线程呢？](#3.)
-	* [3.、RunLoop 有几个model，分别是什么？mode作用？](#3.)
-	* [3.、以 `+ scheduledTimerWithTimeInterval...` 的⽅式触发的timer，在滑动⻚⾯上的
-列表时，timer会暂定回调，为什么？如何解决？](#3.)
-	* [3.、](#3.)
-
-	
-	
-	
 <h1 id="四">四、KVC & KVO</h1>
-
 [iOS窥探KVO底层实现原理篇](https://www.jianshu.com/p/0aa83ac521ba)
 
 
@@ -841,7 +687,7 @@ KVC 对属性赋值时候 是会在这个类里边 去查找 _age  isAge setAge 
 手动调用willChangeValueForKey:和didChangeValueForKey:
 
 
-	
+​	
 * [四、KVC & KVO](#四)
 	* [4.、KVC的底层实现？应用在哪些场景？](#4.)
 	* [4.、KVO的底层实现？应用在哪些场景？](#4.)
