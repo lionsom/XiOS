@@ -10,6 +10,8 @@
 
 
 
+
+
 # 一、Cocopods各种问题汇总
 
 > 推荐文档
@@ -30,25 +32,41 @@
 [重要参考](https://www.jianshu.com/p/dd6fa8531d0c)
 [辅助参考- stackoverflow](https://stackoverflow.com/questions/18376416/the-target-overrides-the-other-ldflags-build-setting-defined-in-pods-pods#)
 
+**图1.1**
 
+![图1.1](media_CocoaPods/1.1.png)
 
-![图1.1]()
+**图1.2**
 
-![图1.2]()
+![图1.2](media_CocoaPods/1.2.png)
 
-![图1.3]()
+**图1.3**
 
-![图1.4]()
+![图1.3](media_CocoaPods/1.3.png)
 
-![图1.5]()
+**图1.4**
+
+![图1.4](media_CocoaPods/1.4.png)
+
+**图1.5**
+
+![图1.5](media_CocoaPods/1.5.png)
+
 
 
 ### 二、- Use the `$(inherited)` flag, or - Remove the build settings from the target.
 
-#### [stackoverflow同文](https://stackoverflow.com/questions/18376416/the-target-overrides-the-other-ldflags-build-setting-defined-in-pods-pods)
-![问题截图]()
+**[stackoverflow同文](https://stackoverflow.com/questions/18376416/the-target-overrides-the-other-ldflags-build-setting-defined-in-pods-pods)**
 
-![解决方案]()
+**问题截图**
+
+![问题截图](media_CocoaPods/2.1.png)
+
+
+
+**解决方案**
+
+![解决方案](media_CocoaPods/2.2.png)
 
 
 ### 三、不要使用TextEdit编辑PodFile文件
@@ -66,24 +84,25 @@
 
 ### 四、overrides the `ENABLE_BITCODE` ......
 
-![]()
+![](media_CocoaPods/4.1.png)
 
 > ##### 解决方案：`pod update` 将库更新一下，然后再`pod install` 就没有警告了。
 
 
 ### 五、[!] ERROR: Parsing unable to continue due to merge conflicts present in:
 
-![]()
+![](media_CocoaPods/5.1.png)
 
 > ##### 解决方案：在`Podfile.lock` 和 `Manifest.lock` 中有冲突，解决下冲突即可。
 
-![冲突]()
+![冲突](media_CocoaPods/5.2.png)
 
 
 ### 六、Cocoapod版本过低警告
 
 
-![]()
+![](media_CocoaPods/6.1.png)
 
 
 > ##### 解决方案：`pod repo update` 命令更新资源库即可。
+
