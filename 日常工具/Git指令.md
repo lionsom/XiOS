@@ -98,7 +98,61 @@ $ git push --set-upstream origin feature/justtest
 
 
 
-## 三、查看历史
+## 四、撤销
+
+### 4.1、若仅仅是本地修改，未commit
+
+```
+➜  IOS git:(feature/ViewAugIteration) git reset --hard
+```
+
+### 4.2、若本地commit了
+
+解决方法：
+
+1、 查看提交记录，确认想回退的 commit_id
+git log
+
+2、 回退到commit_id指向的版本
+git reset --hard <commit_id>
+
+3、 强制提交：
+git push origin HEAD --force
+
+再查看，commit_id之后指向的提交记录全不见了 ， 仓库中也不见了，成功！
+
+
+
+## 五、删除远程/本地分支
+
+### 5.1、先删除远程分支
+
+```
+git push origin --delete hotfix/ViewFilterBug 
+```
+
+[git已经删除了远程分支，本地仍然能看到](https://blog.csdn.net/weixin_37999256/article/details/82117048)
+
+**解决方案**
+
+1. 使用 `git branch -a` 命令可以查看所有本地分支和远程分支，发现很多在远程仓库已经删除的分支在本地依然可以看到。
+
+2. 使用命令 `git remote show origin` 可以查看remote地址，远程分支，还有本地分支与之相对应关系等信息。
+
+3. 此时我们可以看到哪些远程仓库已经不存在的分支，根据提示，使用 `git remote prune origin` 命令：这样就能成功在本地删除远程不存在的分支。
+
+### 5.2、再删除本地分支
+
+```
+删除分支：git branch -d <name>
+强行删除：git branch -D <name>
+
+git branch -d hotfix/ViewFilterBug
+```
+
+
+
+## 其他、查看历史
 
 [菜鸟教程 - Git 查看提交历史](https://www.runoob.com/git/git-commit-history.html)
 
