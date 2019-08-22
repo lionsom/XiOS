@@ -152,27 +152,49 @@ git branch -d hotfix/ViewFilterBug
 
 
 
+
+
+## 拓展一：GitHub提交无法添加统计到Contribution图
+
+**问题**
+
+当我用公司电脑提交github后，无法添加统计到Contribution图
+
+![](media_git/Contribution图.png)
+
+**后来发现了原因：**
+
+本地Git的设置中 邮件是GitHub账户中绑定的邮箱地址是必要的。
+
+本地Git的用户名需指定为GitHub上Profile上的用户名
+
+**解决**
+
+先查看本地git配置信息
+
+```
+$ git config --list
+```
+
+设置git本地用户名和邮箱
+
+```
+设置或者修改用户名及邮箱
+$ git config --global user.name "***"
+$ git config –-global user.email "***"
+```
+
+
+
+
+
+
+
+
+
 ## 其他、查看历史
 
 [菜鸟教程 - Git 查看提交历史](https://www.runoob.com/git/git-commit-history.html)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
