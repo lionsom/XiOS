@@ -225,7 +225,7 @@ $ pod --version
 $ pod search AFNetworking
 ```
 
-### 2.3、在使用Pod进行操作之前最好手动更新repos文件
+### 2.3、在使用Pod进行操作之前最好手动更新repos文件（解决详情见4.1）
 
 > 为什么最好手动导入呢？
 >
@@ -233,7 +233,7 @@ $ pod search AFNetworking
 
 ![setting up cocoapods master repo](media_CocoaPods/myblog_SetupPods_001.png)
 
-#### 2.3.1、如何前往`.COCOAPODS`文件
+### 2.4、如何前往`.COCOAPODS`文件
 
 - 显示隐藏文件`Command + shift + .`
 - 也可在`Finder -> 前往 -> 前往文件夹 -> ~/.cocoapods`
@@ -243,6 +243,8 @@ $ pod search AFNetworking
 - 具体路径如下
 
 ![路径图](media_CocoaPods/myblog_SetupPods_003.png)
+
+
 
 ## 三、CocoaPods使用原理
 
@@ -262,15 +264,21 @@ $ pod search AFNetworking
 
 ### 4.1、问题一：”setting up cocoapods master repo”卡着不动
 
-> 分析：
-> 那个淘宝镜像（https://ruby.taobao.org）不可用了，所以需要使用最新的ruby镜像（https://gems.ruby-china.org/）
+> 概述
+>
+> CocoaPods首次安装使用时均需要强制拉取repos，因为repos是在GitHub托管的，导致容易出现拉取缓慢超时和异常中断等问题，以往大家为解决这一问题一般会采用替换国内镜像的方式来解决，可惜国内镜像更新不及时的问题也是没有办法解决。实际上我们都知道CocoaPods拉取repos就是将托管服务器中的Specs项目克隆至本地的过程，所以解决办法就出现啦，见『解决二』。
 
-**具体操作 可查看1.6章节**
 
-```
-$ gem source -r https://ruby.taobao.org
-$ gem source -a https://gems.ruby-china.org/
-```
+
+* 解决一：替换国内镜像
+
+  > 那个淘宝镜像（https://ruby.ta obao.org）不可用了，所以需要使用最新的ruby镜像（https://gems.ruby-china.com）
+  >
+  > **具体操作 可查看1.7章节**
+
+* 解决二：前往GitHub上手动下载[CocoaPods/Specs](https://github.com/CocoaPods/Specs)项目
+
+  参考：[解决首次CocoaPods拉取repos过慢问题](https://www.jianshu.com/p/c8116c167ce5)
 
 ### 4.2、问题二：`pod search`异常
 
