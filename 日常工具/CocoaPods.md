@@ -249,9 +249,8 @@ $ pod search AFNetworking
 ## 三、CocoaPods使用原理
 
 - pod setup
-  - 将**远程索引库**下载到本地
-  - **本地索引库**路径（查看2.3.1）
-  - 同时生成**检索文件（Key-Value格式，便于检索）**
+  - 将**远程索引库**下载到本地，**本地索引库**路径：`~/.cocoapods/repos`
+  - 同时生成**检索文件（Key-Value格式，便于检索）**，检索文件路径：`~/Library/Caches/CocoaPods/search_index.json`
 - pod search AFN
   - 前往**检索文件**检索 
   - 然后根据检索到的Value找到**本地索引库**中`.spec`查看框架的具体信息
@@ -278,7 +277,31 @@ $ pod search AFNetworking
 
 * 解决二：前往GitHub上手动下载[CocoaPods/Specs](https://github.com/CocoaPods/Specs)项目
 
-  参考：[解决首次CocoaPods拉取repos过慢问题](https://www.jianshu.com/p/c8116c167ce5)
+  下载到本地的文件，需要与远程仓库进行关联，所以此处也有两种方案：
+  
+  * 方案一：[解决首次CocoaPods拉取repos过慢问题](https://www.jianshu.com/p/c8116c167ce5)
+  
+    * 验证是否关联成功：
+  
+    * ```
+      ➜  ~ pod repo
+      
+      master
+      - Type: git (unknown)
+      - URL:  https://github.com/CocoaPods/Specs.git
+      - Path: /Users/qiyeyun/.cocoapods/repos/master
+      ```
+  
+  * 方案二：[首次 pod setup 慢的取巧方法](https://www.jianshu.com/p/40fd4384447e)
+    * 1、到 https://github.com/CocoaPods/Specs.git网址 把文件clone下来，默认文件夹名字为Specs-master
+    * 2、前往文件夹 ~/.cocoapods/repos
+    * 3、终端cd到你的工程目录中执行 pod setup，等待一会，等到开始下载的时候，会发现在~/.cocoapods/repos 下面多一个master文件，这时，需要复制master下面的.git 文件夹到Specs-master下面，同时停止pod setup
+    * 4、Specs-master文件夹名字修改为master，并替换~/.cocoapods/repos 下的master文件夹
+    * 5、直接可以正常执行pod install 等命令
+  
+* **解决三（推荐）**：从同事电脑上拷贝一份`~/.cocoaPods/repos/master`文件，直接放到我们的目录下即可！
+
+  
 
 ### 4.2、问题二：`pod search`异常
 
@@ -286,6 +309,7 @@ $ pod search AFNetworking
 
 - 终端输入：`pod search AFNetworking`
 - 输出：`Unable to find a pod with name, author, summary, or descriptionmatching 'AFNetworking'` 这时就需要继续下面的步骤了。
+- 原因：**检索文件（Key-Value格式，便于检索）**太老，需要重新生成。
 
 **4.2.2、删除~/Library/Caches/CocoaPods目录下的search_index.json文件**
 
