@@ -292,7 +292,21 @@ $ pod search AFNetworking
       - Path: /Users/qiyeyun/.cocoapods/repos/master
       ```
   
+    * 最后再对repo进行更新
+  
+      ```
+      ➜  pod repo update
+      Updating spec repo `master`
+        $ /usr/bin/git -C /Users/qiyeyun/.cocoapods/repos/master fetch origin
+        --progress
+        remote: Enumerating objects: 396, done.        
+        remote: Counting objects: 100% (396/396), done.        
+        remote: Compressing objects: 100% (372/372), done.        
+        Receiving objects:   0% (7714/3265890), 1.54 MiB | 12.00 KiB/s    
+      ```
+  
   * 方案二：[首次 pod setup 慢的取巧方法](https://www.jianshu.com/p/40fd4384447e)
+  
     * 1、到 https://github.com/CocoaPods/Specs.git网址 把文件clone下来，默认文件夹名字为Specs-master
     * 2、前往文件夹 ~/.cocoapods/repos
     * 3、终端cd到你的工程目录中执行 pod setup，等待一会，等到开始下载的时候，会发现在~/.cocoapods/repos 下面多一个master文件，这时，需要复制master下面的.git 文件夹到Specs-master下面，同时停止pod setup
