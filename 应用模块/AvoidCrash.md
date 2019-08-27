@@ -20,13 +20,17 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
 
 
 
+[iOS 降低 NSArray Crash 风险](https://www.jianshu.com/p/794d42de0aaf)
 
+
+
+[**微信团队分享：iOS版微信是如何防止特殊字符导致的炸群、APP崩溃的？**](http://www.52im.net/thread-1449-1-1.html)
 
 
 
 ## NSArray
 
-### 1.1、创建/初始化NSArray
+### 1.1、找到NSArray崩溃方法有哪些？？
 
 ```
 //===========
@@ -46,7 +50,7 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
     
     NSString *strings[3];
     strings[0] = @"First";
-    strings[1] = @"Second";
+    strings[1] = nil;
     strings[2] = @"Third";
     NSArray *arr5 = [NSArray arrayWithObjects:strings count:3];
 ```
@@ -67,9 +71,65 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
     
     NSString *strings[3];
     strings[0] = @"First";
-    strings[1] = @"Second";
+    strings[1] = nil;
     strings[2] = @"Third";
     NSArray *arr10 = [[NSArray alloc] initWithObjects:strings count:3];
+```
+
+
+
+```
+//===========
+// Querying an Array
+//===========
+    NSArray *arr11 = @[@"1", @"2"];
+    
+    [arr11 containsObject:nil];
+    
+    arr11.count;
+    
+    // - getObjects: range:   不常用
+    NSArray *mArray = @[@"1",@"2",@"3",@"4",@"5",@"6"];
+    id *objects;
+    NSRange range = NSMakeRange(2, 4);
+    objects = malloc(sizeof(id) * range.length);
+    [mArray getObjects:objects range:range];
+    for (i = 0; i < range.length; i++) {
+        NSLog(@"objects: %@", objects[i]);
+    }
+    free(objects);
+    
+    NSArray *arr12 = nil;
+    id a = arr12.firstObject;
+    id b = arr12.lastObject;
+    
+    // 崩溃 -[__NSArrayI objectAtIndex:]: index 3 beyond bounds [0 .. 1]
+    [arr11 objectAtIndex:3];
+
+    // 崩溃 -[__NSArrayI objectAtIndexedSubscript:]: index 3 beyond bounds [0 .. 1]
+    [arr11 objectAtIndexedSubscript:3];
+     
+    // 崩溃 -[NSArray objectsAtIndexes:]: index 9 in index set beyond bounds [0 .. 3]
+    NSIndexSet *se = [NSIndexSet indexSetWithIndex:9];
+//或   NSIndexSet *se = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 9)];
+    NSArray *test = [arr11 objectsAtIndexes:se];
+    
+    // - objectEnumerator
+    // - reverseObjectEnumerator
+    // 返回一个枚举器对象，该对象允许您以 正序/逆序 访问数组中的每个对象。
+    NSEnumerator *enumerator = [arr11 objectEnumerator];
+    id anObject;
+    while (anObject = [enumerator nextObject]) {
+        // code to act on each element as it is returned
+        NSLog(@"%@", anObject);
+    }
+    
+    NSEnumerator *reverseEnumerator = [arr11 reverseObjectEnumerator];
+    id anreverseObject;
+    while (anreverseObject = [reverseEnumerator nextObject]) {
+        // code to act on each element as it is returned
+        NSLog(@"%@", anreverseObject);
+    }
 ```
 
 
@@ -77,39 +137,103 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
 **通过以上测试，发现有可能造成崩溃的函数有：**
 
 ```
-NSArray *arr1 = @[@"1",@"2",string];
+@[];
 + arrayWithObject:
 + arrayWithObjects: count:
 - initWithObjects: count:
+arr[10];
+- objectAtIndex:
+- objectAtIndexedSubscript:
+- objectsAtIndexes:
 ```
 
 
 
+### 1.2、`@[];` 底层如何创建
+
+> clang -rewrite-objc main.m
+>
+> **结论：经过`clang`，可以发现`@[]`这种方式创建的数组是通过发送消息给`NSArray`执行`arrayWithObjects:count:`这个方法来创建的数组。**
+
+```
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        NSString *str11 = nil;
+        NSArray *arr11 = @[@"1",@"2",str11];
+    }
+    return 0;
+}
+```
+
+如下图：
+
+![](media_AvoidCrash/@[]底层.png)
 
 
 
+### 1.3、`array[10];`底层调用
 
-**id** AA = obj[@"value"];
+> **结论：经过`clang`，可以发现`array[10]`这种方式创建的数组是通过发送消息给`NSArray`执行`objectAtIndexedSubscript:`这个方法来创建的数组。**
 
-​                NSString *A = AA[@"max"];
+```
+int main(int argc, const char * argv[]) {
+    @autoreleasepool {
+        NSArray *arr1 = @[@1, @2, @3];
+        NSLog(@"%@", arr1[7]);
+    }
+    return 0;
+}
+```
 
-​                NSString *B =AA[@"min"];
+如下图：
 
-
-
-
-
-
-
-
-
-
-
-
-
+![](media_AvoidCrash/array[10]底层.png)
 
 
 
+### 1.4、方法交换，避免崩溃
+
+[从NSArray看类簇](http://www.cocoachina.com/articles/10696)
+
+[类簇，从NSArray说起](https://www.aopod.com/2017/02/24/class-clusters/)
+
+http://www.manongjc.com/article/56380.html
+
+https://blog.csdn.net/likui1989/article/details/79867449
+
+```
+// 类继承关系
+// __NSArrayI                 继承于 NSArray
+// __NSSingleObjectArrayI     继承于 NSArray
+// __NSArray0                 继承于 NSArray
+// __NSFrozenArrayM           继承于 NSArray
+// __NSArrayM                 继承于 NSMutableArray
+// __NSCFArray                继承于 NSMutableArray
+// NSMutableArray             继承于 NSArray
+// NSArray                    继承于 NSObject
+
+
+Class __NSPlaceholderArray = NSClassFromString(@"__NSPlaceholderArray");
+Class __NSArray0 = NSClassFromString(@"__NSArray0");
+Class __NSSingleObjectArrayI = NSClassFromString(@"__NSSingleObjectArrayI");
+Class __NSArrayI = NSClassFromString(@"__NSArrayI");
+Class __NSFrozenArrayM = NSClassFromString(@"__NSFrozenArrayM");  // 不知道如何触发
+  
+/** 解释
+	__NSPlaceholderArray   // [NSArray alloc]; alloc后所得到的类
+	__NSArray0             // 当init为一个空数组后，变成了__NSArray0
+	__NSSingleObjectArrayI // 如果有且仅有一个元素，那么为__NSSingleObjectArrayI
+	__NSArrayI             // 如果数组大于一个元素，那么为__NSArrayI
+ */
+  
+// 验证
+NSArray *placeholder = [NSArray alloc];                     // __NSPlaceholderArray
+NSArray *arr1 = [placeholder init];                         // __NSArray0
+NSArray *arr2 = [placeholder initWithObjects:@0, nil];      // __NSSingleObjectArrayI
+NSArray *arr3 = [placeholder initWithObjects:@0, @1, nil];  // __NSArrayI
+
+__NSFrozenArrayM    NSMutableArray用copy修饰之后，在使用addObjectsFromArray方法时崩溃
+```
 
 
 
