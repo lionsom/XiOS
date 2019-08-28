@@ -239,9 +239,21 @@ Thumbs.db
 	trustExitCode = true
 ```
 
+**3、移除冲突文件**
 
+* 移除本地 .DS_Store
 
+  ```
+  $ rm .DS_Store
+  ```
 
+* 移除暂存区.DS_Store
+
+  ```
+  $ git rm .DS_Store
+  ```
+
+  
 
 
 
