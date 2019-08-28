@@ -186,6 +186,65 @@ $ git config –-global user.email "***"
 
 
 
+## 拓展二：`.DS_Store`文件冲突
+
+> **解决方法：.配置全局的.gitignore**
+
+**1、用`touch .gitignore_global`创建~/.gitignore_global文件，把需要全局忽略的文件类型塞到这个文件里。**
+
+```
+# .gitignore_global
+
+####################################
+######## OS generated files ########
+####################################
+.DS_Store
+.DS_Store?
+*.swp
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+####################################
+############# packages #############
+####################################
+*.7z  
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+```
+
+**2、在~/.gitconfig中引入.gitignore_global**
+
+这是我的.gitconfig文件:
+
+```csharp
+[user]
+	email = lionsom_lin@qq.com
+	name = lionsom
+[core]
+	excludesfile = /Users/lionsom/.gitignore_global
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+```
+
+
+
+
+
+
+
 
 
 
