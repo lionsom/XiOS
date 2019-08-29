@@ -28,7 +28,7 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
 
 
 
-## NSArray
+## 一、[NSArray](https://developer.apple.com/documentation/foundation/nsarray?language=objc)
 
 ### 1.1、找到NSArray崩溃方法有哪些？？
 
@@ -234,6 +234,14 @@ NSArray *arr3 = [placeholder initWithObjects:@0, @1, nil];  // __NSArrayI
 
 __NSFrozenArrayM    NSMutableArray用copy修饰之后，在使用addObjectsFromArray方法时崩溃
 ```
+
+
+
+## 二、[NSMutableArray](https://developer.apple.com/documentation/foundation/nsmutablearray?language=objc)
+
+
+
+
 
 
 
