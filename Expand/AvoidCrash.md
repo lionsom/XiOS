@@ -28,9 +28,15 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
 
 
 
+[iOS中类簇的使用](https://juejin.im/entry/5bd955fe6fb9a022433c38aa/)
+
+
+
 ## 一、[NSArray](https://developer.apple.com/documentation/foundation/nsarray?language=objc)
 
 ### 1.1、找到NSArray崩溃方法有哪些？？
+
+#### 1.1.1、测试NSArray方法
 
 ```
 //===========
@@ -134,7 +140,7 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
 
 
 
-**通过以上测试，发现有可能造成崩溃的函数有：**
+#### 1.1.2、NSArray崩溃方法总结
 
 ```
 @[];
@@ -145,6 +151,7 @@ arr[10];
 - objectAtIndex:
 - objectAtIndexedSubscript:
 - objectsAtIndexes:
+- getObjects: range:
 ```
 
 
@@ -191,7 +198,7 @@ int main(int argc, const char * argv[]) {
 
 
 
-### 1.4、方法交换，避免崩溃
+### 1.4、NSArray类簇
 
 [从NSArray看类簇](http://www.cocoachina.com/articles/10696)
 
@@ -239,9 +246,242 @@ __NSFrozenArrayM    NSMutableArray用copy修饰之后，在使用addObjectsFromA
 
 ## 二、[NSMutableArray](https://developer.apple.com/documentation/foundation/nsmutablearray?language=objc)
 
+### 2.1、找到NSMutableArray崩溃方法有哪些？？
+
+#### 2.1.1、测试NSMutableArray方法
+
+```
+//===========
+// 0.NSMutableArray 继承 NSArray 方法
+//===========
+		// 崩溃 -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[0]
+    NSMutableArray *mArr30 = [NSMutableArray arrayWithObject:nil];
+    
+    // 崩溃 -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[1]
+    NSString *strings[3];
+    strings[0] = @"First";
+    strings[1] = nil;
+    strings[2] = @"Third";
+    NSMutableArray *mArr31 = [NSMutableArray arrayWithObjects:strings count:3];
+    
+    // 崩溃 -[__NSPlaceholderArray initWithObjects:count:]: attempt to insert nil object from objects[1]
+    NSString *strings1[3];
+    strings1[0] = @"First";
+    strings1[1] = nil;
+    strings1[2] = @"Third";
+    NSMutableArray *mArr32 = [[NSMutableArray alloc] initWithObjects:strings1 count:3];
+    
+    
+    NSMutableArray *mArr0 = [NSMutableArray arrayWithArray:@[@"1",@"2"]];
+    // 崩溃 -[__NSArrayM objectAtIndexedSubscript:]: index 3 beyond bounds [0 .. 1]
+    mArr0[3];
+    
+    // 崩溃 -[__NSArrayM objectAtIndex:]: index 3 beyond bounds [0 .. 1]
+    [mArr0 objectAtIndex:3];
+    
+    // 崩溃 -[__NSArrayM objectAtIndexedSubscript:]: index 3 beyond bounds [0 .. 1]
+    [mArr0 objectAtIndexedSubscript:3];
+    
+    // 崩溃 -[NSArray objectsAtIndexes:]: index 10 in index set beyond bounds [0 .. 1]
+    NSIndexSet *se = [NSIndexSet indexSetWithIndexesInRange:NSMakeRange(2, 9)];
+    NSArray *test = [mArr0 objectsAtIndexes:se];
+    
+    // 崩溃 -[__NSArrayM getObjects:range:]: range {0, 11} extends beyond bounds [0 .. 1]
+    NSRange range0 = NSMakeRange(0, 11);
+    __unsafe_unretained id cArray[range0.length];
+    [mArr0 getObjects:cArray range:range0];
+    
+```
 
 
 
+```
+//===========
+// 1.Creating and Initializing a Mutable Array
+//===========
+    NSMutableArray *mArr1 = [NSMutableArray arrayWithCapacity:0];  // NSUInteger   -1 崩溃
+    
+    NSMutableArray *mArr2 = [NSMutableArray arrayWithContentsOfFile:nil];
+    
+    NSMutableArray *mArr3 = [NSMutableArray arrayWithContentsOfURL:[NSURL URLWithString:nil]];
+    
+    NSMutableArray *mArr4 = [[NSMutableArray alloc] init];
+    
+    NSMutableArray *mArr5 = [[NSMutableArray alloc] initWithCapacity:0];
+
+    NSMutableArray *mArr6 = [[NSMutableArray alloc] initWithContentsOfFile:nil];
+
+    NSMutableArray *mArr7 = [[NSMutableArray alloc] initWithContentsOfURL:nil];
+```
+
+
+
+```
+//===========
+// 2.Adding Objects
+//===========
+    NSMutableArray *mArr8 = [[NSMutableArray alloc] init];
+    // 崩溃 -[__NSArrayM insertObject:atIndex:]: object cannot be nil
+    [mArr8 addObject:nil];
+    
+    NSArray *arr1 = nil;
+    [mArr8 addObjectsFromArray:arr1];
+
+    // 崩溃 -[__NSArrayM insertObject:atIndex:]: object cannot be nil
+    [mArr8 insertObject:nil atIndex:7];
+    // 崩溃 -[__NSArrayM insertObject:atIndex:]: index 7 beyond bounds for empty array
+    [mArr8 insertObject:@"1" atIndex:7];
+    
+    // 崩溃 -[NSMutableArray insertObjects:atIndexes:]: index 3 in index set beyond bounds [0 .. 2]'
+    // 1. 序号要小于等于mArr8最大值
+    NSArray *array = [NSArray arrayWithObjects:@"q",@"d",@"e", nil];  // 2.插入的数组可以为nil
+    NSRange range = NSMakeRange(1, [array count]);
+    NSIndexSet *indexSet = [NSIndexSet indexSetWithIndexesInRange:range];
+    [mArr8 insertObjects:array atIndexes:indexSet];
+```
+
+
+
+```
+//===========
+// 3.Removing Objects
+//===========
+    NSMutableArray *mArr10 = [[NSMutableArray alloc] init];
+
+    [mArr10 removeAllObjects];
+
+    [mArr10 removeLastObject];
+
+    [mArr10 removeObject:@"1"];
+    [mArr10 removeObject:nil];
+
+    // 崩溃 -[__NSArrayM removeObjectsInRange:]: range {1, 2} extends beyond bounds for empty array
+    [mArr10 removeObjectsInRange:NSMakeRange(1, 2)];
+
+    // 崩溃 -[__NSArrayM removeObjectsInRange:]: range {2, 1} extends beyond bounds for empty array
+    [mArr10 removeObjectAtIndex:2];
+    
+    // 崩溃 -[NSMutableArray removeObjectsAtIndexes:]: index 4 in index set beyond bounds for empty array
+    NSRange range1 = NSMakeRange(1, 4);
+    NSIndexSet *indexSet1 = [NSIndexSet indexSetWithIndexesInRange:range1];
+    [mArr10 removeObjectsAtIndexes:indexSet1];
+    
+    
+    [mArr10 removeObjectIdenticalTo:@"1"];
+
+    // 崩溃  -[NSMutableArray removeObjectIdenticalTo:inRange:]: range {2, 4} extends beyond bounds for empty array
+    [mArr10 removeObjectIdenticalTo:@"1" inRange:NSMakeRange(2, 4)];
+
+    [mArr10 removeObjectsInArray:@[@"1",@"2"]];
+    [mArr10 removeObjectsInArray:nil];
+
+    // 崩溃 -[__NSArrayM removeObjectsInRange:]: range {1, 3} extends beyond bounds for empty array
+    [mArr10 removeObjectsInRange:NSMakeRange(1, 3)];
+```
+
+
+
+```
+//===========
+// 4.Replacing Objects
+//===========
+    NSMutableArray *mArr11 = [[NSMutableArray alloc] init];
+
+    // 崩溃 -[__NSArrayM replaceObjectAtIndex:withObject:]: object cannot be nil
+    [mArr11 replaceObjectAtIndex:2 withObject:nil];
+    // 崩溃 -[__NSArrayM replaceObjectAtIndex:withObject:]: index 2 beyond bounds for empty array
+    [mArr11 replaceObjectAtIndex:2 withObject:@"2"];
+
+    // 崩溃 -[__NSArrayM setObject:atIndexedSubscript:]: object cannot be nil
+    [mArr11 setObject:nil atIndexedSubscript:2];
+     // 崩溃 -[__NSArrayM setObject:atIndexedSubscript:]: index 2 beyond bounds for empty array
+    [mArr11 setObject:@"1" atIndexedSubscript:2];
+
+    NSRange range2 = NSMakeRange(1, 4);
+    NSIndexSet *indexSet2 = [NSIndexSet indexSetWithIndexesInRange:range2];
+    // 崩溃 -[NSMutableArray replaceObjectsAtIndexes:withObjects:]: index 4 in index set beyond bounds for empty array
+    [mArr11 replaceObjectsAtIndexes:indexSet2 withObjects:nil];
+    // 崩溃 -[NSMutableArray replaceObjectsAtIndexes:withObjects:]: index set cannot be nil
+    [mArr11 replaceObjectsAtIndexes:nil withObjects:@[@"1"]];
+    
+    // 崩溃 -[NSMutableArray replaceObjectsInRange:withObjectsFromArray:]: range {1, 3} extends beyond bounds for empty array
+    [mArr11 replaceObjectsInRange:NSMakeRange(1, 3) withObjectsFromArray:nil];
+    NSMutableArray *mArr12 = [NSMutableArray arrayWithArray:@[@"a",@"b",@"c"]];
+    [mArr12 replaceObjectsInRange:NSMakeRange(0, 2) withObjectsFromArray:nil];
+    NSMutableArray *mArr13 = [NSMutableArray arrayWithArray:@[@"a",@"b",@"c"]];
+    [mArr13 replaceObjectsInRange:NSMakeRange(0, 2) withObjectsFromArray:@[@"1",@"2",@"3",@"3",@"3"]];
+
+    // 要判断两个range是否越界
+    // 崩溃 -[NSMutableArray replaceObjectsInRange:withObjectsFromArray:range:]: range {0, 3} extends beyond bounds for empty array
+    NSMutableArray *mArr14 = [NSMutableArray arrayWithArray:@[@"a",@"b",@"c"]];
+    [mArr14 replaceObjectsInRange:NSMakeRange(0, 3) withObjectsFromArray:@[@"1"] range:NSMakeRange(0, 1)]; 
+    
+    NSMutableArray *mArr15 = [[NSMutableArray alloc] init];
+    [mArr15 setArray:nil];
+    [mArr15 setArray:@[@"1"]];
+```
+
+
+
+#### 2.1.2、NSMutableArray崩溃方法总结
+
+```
+//===========
+// NSMutableArray 继承 NSArray，所以也继承了一些崩溃方法
+//===========
+    @[];
+    + arrayWithObject:
+    + arrayWithObjects: count:
+    - initWithObjects: count:
+    arr[10];
+    - objectAtIndex:
+    - objectAtIndexedSubscript:
+    - objectsAtIndexes:
+    - getObjects: range:
+    
+//===========
+// 2.Adding Objects
+//===========
+    - addObject:
+    - insertObject: atIndex:
+    - insertObjects: atIndexes:
+    
+//===========
+// 3.Removing Objects
+//===========
+    - removeObject: InRange:
+    - removeObjectAtIndex:
+    - removeObjectsAtIndexes:
+    - removeObjectIdenticalTo: inRange:
+    - removeObjectsInRange: 
+    
+//===========
+// 4.Replacing Objects
+//===========
+    - replaceObjectAtIndex: withObject:
+    - setObject: atIndexedSubscript:
+    - replaceObjectsAtIndexes: withObjects:
+    - replaceObjectsInRange: withObjectsFromArray: 
+		- replaceObjectsInRange: withObjectsFromArray: range:
+```
+
+
+
+## 三、[NSDictionary](https://developer.apple.com/library/prerelease/ios/documentation/Cocoa/Reference/Foundation/Classes/NSDictionary_Class/index.html)
+
+### 3.1、NSDictionary类簇
+
+```
+// 类继承关系
+// __NSDictionaryI              继承于 NSDictionary
+// __NSSingleEntryDictionaryI   继承于 NSDictionary
+// __NSDictionary0              继承于 NSDictionary
+// __NSFrozenDictionaryM        继承于 NSDictionary
+// __NSDictionaryM              继承于 NSMutableDictionary
+// __NSCFDictionary             继承于 NSMutableDictionary
+// NSMutableDictionary          继承于 NSDictionary
+// NSDictionary                 继承于 NSObject
+```
 
 
 
