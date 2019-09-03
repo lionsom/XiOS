@@ -1,0 +1,19 @@
+# Uncomment this line to define a global platform for your project
+# platform :ios, 8.0’
+# Uncomment this line if you're using Swift
+# use_frameworks!
+
+# 下面两行是指明依赖库的来源地址
+source 'https://github.com/CocoaPods/Specs.git'
+
+# 说明平台是ios，版本是9.0
+platform :ios, '9.0'
+
+# 忽略引入库的所有警告（强迫症者的福音啊）
+inhibit_all_warnings!
+
+target 'LXSS' do
+
+    pod 'AFNetworking', '~> 3.1.0’
+
+end
