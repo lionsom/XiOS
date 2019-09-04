@@ -32,6 +32,36 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
 
 
 
+[Baymax：网易iOS App运行时Crash自动防护实践](https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247488311&idx=1&sn=0db090c8d4a5efafa47f00af4b3f174f&source=41#wechat_redirect)
+
+
+
+
+
+
+
+集合类崩溃
+
+KVC崩溃 
+
+-- [iOS 开发：『Crash 防护系统』（三）KVC 防护](https://bujige.net/blog/iOS-YSCDefender-03.html?utm_source=tuicool&utm_medium=referral)
+
+KVO崩溃
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 ## 一、[NSArray](https://developer.apple.com/documentation/foundation/nsarray?language=objc)
 
 ### 1.1、找到NSArray崩溃方法有哪些？？
