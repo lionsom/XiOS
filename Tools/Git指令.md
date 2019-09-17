@@ -128,7 +128,7 @@ git push origin HEAD --force
 ### 5.1、先删除远程分支
 
 ```
-git push origin --delete hotfix/ViewFilterBug 
+$ git push origin --delete hotfix/ViewFilterBug 
 ```
 
 [git已经删除了远程分支，本地仍然能看到](https://blog.csdn.net/weixin_37999256/article/details/82117048)
@@ -147,7 +147,7 @@ git push origin --delete hotfix/ViewFilterBug
 删除分支：git branch -d <name>
 强行删除：git branch -D <name>
 
-git branch -d hotfix/ViewFilterBug
+$ git branch -d hotfix/ViewFilterBug
 ```
 
 

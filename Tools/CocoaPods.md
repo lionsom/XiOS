@@ -124,8 +124,6 @@ $ rvm install 2.4
   $ rvm remove 1.9.2
   ```
 
-
-
 ### 1.5、设置 Ruby 版本
 
 RVM 装好以后，需要执行下面的命令将指定版本的 Ruby 设置为系统默认版本
@@ -364,6 +362,36 @@ pod update --verbose --no-repo-update
 ```
 
 
+
+## 六、Podfile使用
+
+[官网 - The Podfile](https://guides.cocoapods.org/using/the-podfile.html)
+
+[你真的会写Podfile吗?](https://www.jianshu.com/p/8a0fd6150159)
+
+
+
+```
+# 下面两行是指明依赖库的来源地址
+source 'https://github.com/CocoaPods/Specs.git'
+source 'https://github.com/Artsy/Specs.git'
+
+# 说明平台是ios，版本是9.0
+platform :ios, '9.0'
+
+# 忽略引入库的所有警告（强迫症者的福音啊）
+inhibit_all_warnings!
+
+# 针对MyApp target引入AFNetworking
+# 针对MyAppTests target引入OCMock，
+target 'MyApp' do 
+    pod 'AFNetworking', '~> 3.0' 
+    target 'MyAppTests' do
+       inherit! :search_paths 
+       pod 'OCMock', '~> 2.0.1' 
+    end
+end
+```
 
 
 
