@@ -20,6 +20,14 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
 
 
 
+[KSCrash Star 2700+](https://github.com/kstenerud/KSCrash)
+
+
+
+[PLCrashReporter](https://plcrashreporter.org/)
+
+
+
 [iOS 降低 NSArray Crash 风险](https://www.jianshu.com/p/794d42de0aaf)
 
 
@@ -33,6 +41,12 @@ Demo - [LSSafeProtector Star 500+](https://github.com/lsmakethebest/LSSafeProtec
 
 
 [Baymax：网易iOS App运行时Crash自动防护实践](https://mp.weixin.qq.com/s?__biz=MzUxMzcxMzE5Ng==&mid=2247488311&idx=1&sn=0db090c8d4a5efafa47f00af4b3f174f&source=41#wechat_redirect)
+
+
+
+[漫谈iOS Crash收集框架](http://www.cocoachina.com/articles/12301)
+
+[iOS异常捕获](http://www.iosxxx.com/blog/2015-08-29-iosyi-chang-bu-huo.html)
 
 
 
