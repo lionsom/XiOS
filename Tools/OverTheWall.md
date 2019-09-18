@@ -1,3 +1,9 @@
+### 前期可先使用蓝灯翻墙
+
+[lantern](https://github.com/getlantern/lantern)
+
+
+
 ### 真正官网
 
 [shadowsocks真正官网](https://shadowsocks.org/en/index.html)
