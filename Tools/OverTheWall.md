@@ -44,11 +44,7 @@ https://leaderliang.coding.me/1829.html
 
 
 
-前期订阅地址：
-
-https://npsboost.com/link/BQ9LW92gDBTJVThs?mu=1&filter_offline=1
-
-
+订阅地址：
 
 ![](media_OverTheWall/喵_订阅.png)
 
