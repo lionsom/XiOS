@@ -189,6 +189,8 @@ $ git config –-global user.email "***"
 ## 拓展二：`.DS_Store`文件冲突
 
 > **解决方法：.配置全局的.gitignore**
+>
+> Github有一个项目 [**gitignore**](https://github.com/github/gitignore) 可进行参考！！
 
 **1、用`touch .gitignore_global`创建~/.gitignore_global文件，把需要全局忽略的文件类型塞到这个文件里。**
 
@@ -253,7 +255,17 @@ Thumbs.db
   $ git rm .DS_Store
   ```
 
-  
+
+**4、坑**
+
+*这个坑一定要记住，一定要在一开始就配置忽略文件（在第一次次push之前），如果忘记配置那么到后期远程仓库就会跟踪你的*.DS_Store*，那么你就总会出现这种情况了；*
+`error: Your local changes to the following files would be overwritten by merge: .DS_Store`
+*或：*
+`both modified: .DS_Store`
+*反正就是各种不能如愿的和小伙伴pull、push*
+*如果一开始的时候忘记配置了忽略文件的话，也不要怕，通过以下方法来做更改：*
+`git rm -r --cached .DS_Store`
+*这句代码的意思就是解除跟踪，清一清缓存；然后在配好忽略文件就好OK了！*
 
 
 
