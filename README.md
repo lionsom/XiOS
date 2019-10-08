@@ -21,25 +21,20 @@
 
 
 
-##  个人笔记
+## 个人开发笔记
 
-| 工具篇                              |      |
-| ----------------------------------- | ---- |
-| Zsh替换mac自带Bash                  |      |
-| 翻墙简单攻略                        |      |
-| Git指令                             |      |
-| CocoaPods按照使用                   |      |
-| Vim快捷键                           |      |
-| Terminal_Skills终端使用             |      |
-|                                     |      |
-| **破解工具**                        |      |
-| Beyond Compare 4 破解：文件比较工具 |      |
-| Navicat Premium 12 破解：数据库工具 |      |
-|                                     |      |
-|                                     |      |
-|                                     |      |
-|                                     |      |
-|                                     |      |
+| 工具篇                              |                                                              |
+| ----------------------------------- | ------------------------------------------------------------ |
+| Zsh替换mac自带Bash                  | https://github.com/lionsom/iOS-/blob/master/Tools/Zsh.md     |
+| 翻墙简单攻略                        | https://github.com/lionsom/iOS-/blob/master/Tools/OverTheWall.md |
+| Git日常记录                         | https://github.com/lionsom/iOS-/blob/master/Tools/Git指令.md |
+| CocoaPods按照使用                   | https://github.com/lionsom/iOS-/blob/master/Tools/CocoaPods.md |
+| Vim快捷键                           | https://github.com/lionsom/iOS-/blob/master/Tools/Vim快捷键.md |
+| Terminal_Skills终端使用             | https://github.com/lionsom/iOS-/blob/master/Tools/Terminal_Skills.md |
+|                                     |                                                              |
+| **破解工具**                        |                                                              |
+| Beyond Compare 4 破解：文件比较工具 | https://github.com/lionsom/iOS-/blob/master/Tools/Beyond Compare 4 破解.md |
+| Navicat Premium 12 破解：数据库工具 | https://github.com/lionsom/iOS-/blob/master/Tools/Navicat Premium 12 破解.md |
 
 
 
