@@ -33,8 +33,8 @@
 | Terminal_Skills终端使用             | https://github.com/lionsom/iOS-/blob/master/Tools/Terminal_Skills.md |
 |                                     |                                                              |
 | **破解工具**                        |                                                              |
-| Beyond Compare 4 破解：文件比较工具 | https://github.com/lionsom/iOS-/blob/master/Tools/Beyond Compare 4 破解.md |
-| Navicat Premium 12 破解：数据库工具 | https://github.com/lionsom/iOS-/blob/master/Tools/Navicat Premium 12 破解.md |
+| Beyond Compare 4 破解：文件比较工具 | https://github.com/lionsom/iOS-/blob/master/Tools/Beyond_Compare_4_破解.md |
+| Navicat Premium 12 破解：数据库工具 | https://github.com/lionsom/iOS-/blob/master/Tools/Navicat_Premium_12_破解.md |
 
 
 
