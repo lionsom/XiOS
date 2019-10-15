@@ -108,18 +108,36 @@ $ git push --set-upstream origin feature/justtest
 
 ### 4.2、若本地commit了
 
-解决方法：
+* 解决方法一：
 
-1、 查看提交记录，确认想回退的 commit_id
-git log
+1、`$ git reset HEAD~` 此时，移除了commit，但是修改已经存在，
 
-2、 回退到commit_id指向的版本
-git reset --hard <commit_id>
+2、可执行`$ git reset --hard` 撤销修改
 
-3、 强制提交：
-git push origin HEAD --force
+
+
+* 解决方法二：
+
+1、 `git log`查看提交记录，确认想回退的 commit_id
+
+2、 回退到commit_id指向的版本`$ git reset --hard <commit_id>`
+
+3、 强制提交：`$ git push origin HEAD --force`
 
 再查看，commit_id之后指向的提交记录全不见了 ， 仓库中也不见了，成功！
+
+### 4.3、撤销merge
+
+回退到指定commit_id，但merge后修改的代码依旧存在，此时需要 `$ git reset --hard` 撤销修改。
+
+```
+// 具体步骤如下
+$ git log
+
+$ git reset 06a82b26cd0a3c3131d1e40dba2420dbeb859e6c
+
+$ git reset --hard
+```
 
 
 
