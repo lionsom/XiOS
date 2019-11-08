@@ -170,9 +170,9 @@ $ git branch -d hotfix/ViewFilterBug
 
 
 
+## 六、拓展
 
-
-## 拓展一：GitHub提交无法添加统计到Contribution图
+### 拓展一：GitHub提交无法添加统计到Contribution图
 
 **问题**
 
@@ -204,7 +204,7 @@ $ git config –-global user.email "***"
 
 
 
-## 拓展二：`.DS_Store`文件冲突
+### 拓展二：`.DS_Store`文件冲突
 
 > **解决方法：.配置全局的.gitignore**
 >
@@ -286,6 +286,33 @@ Thumbs.db
 *这句代码的意思就是解除跟踪，清一清缓存；然后在配好忽略文件就好OK了！*
 
 
+
+### 拓展三、git clone 失败
+
+```
+error: RPC failed; curl 18 transfer closed with outstanding read data remaining
+fatal: the remote end hung up unexpectedly
+fatal: early EOF
+fatal: index-pack failed
+```
+
+#### 方法一：将http:// 改为 git://
+
+#### 方法二：修改curl的postBuffer的默认值
+
+查看配置 终端输入：
+
+```
+$ git config --list
+```
+
+这里我们把postBuffer的值配置成500M。可以根据自己需要下载的文件大小，将postBuffer值配置成合适的大小：
+
+```
+// 524288000 的单位代表 B，524288000B 也就是 500MB。
+// 这个值的大小，可自行酌情设置。
+$ git config --global http.postBuffer 524288000
+```
 
 
 
