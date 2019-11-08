@@ -1,3 +1,12 @@
+## 目录介绍
+
+* InterView2019：面试题整理；
+* Reading：阅读笔记；
+* Study：iOS/编程相关学习；
+* Tool：日常工具记录，包括：git、pod、工具破解等；
+
+
+
 ## 推荐网址
 
 | 地址                                                         | 摘要                                                         |
@@ -18,25 +27,6 @@
 | -------------------- | ------------------------------------------------------------ |
 | 《编码》             | 近期阅读中...可查看部分阅读笔记：[《编码》阅读](https://github.com/lionsom/iOS-/blob/master/Reading/《编码》阅读.md) |
 | 《网络是怎样连接的》 | 我的阅读笔记：https://www.jianshu.com/p/6c92358dffc4         |
-
-
-
-## 个人开发笔记
-
-| 工具篇                              |                                                              |
-| ----------------------------------- | ------------------------------------------------------------ |
-| Zsh替换mac自带Bash                  | https://github.com/lionsom/iOS-/blob/master/Tools/Zsh.md     |
-| 翻墙简单攻略                        | https://github.com/lionsom/iOS-/blob/master/Tools/OverTheWall.md |
-| Git日常记录                         | https://github.com/lionsom/iOS-/blob/master/Tools/Git指令.md |
-| CocoaPods按照使用                   | https://github.com/lionsom/iOS-/blob/master/Tools/CocoaPods.md |
-| Vim快捷键                           | https://github.com/lionsom/iOS-/blob/master/Tools/Vim快捷键.md |
-| Terminal_Skills终端使用             | https://github.com/lionsom/iOS-/blob/master/Tools/Terminal_Skills.md |
-|                                     |                                                              |
-| **破解工具**                        |                                                              |
-| Beyond Compare 4 破解：文件比较工具 | https://github.com/lionsom/iOS-/blob/master/Tools/Beyond_Compare_4_破解.md |
-| Navicat Premium 12 破解：数据库工具 | https://github.com/lionsom/iOS-/blob/master/Tools/Navicat_Premium_12_破解.md |
-
-
 
 
 

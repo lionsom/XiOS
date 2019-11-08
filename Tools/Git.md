@@ -1,3 +1,5 @@
+[GitHub官网 - 帮助](https://help.github.com/cn/github)
+
 [廖雪峰git教程](https://www.liaoxuefeng.com/wiki/896043488029600)
 
 [菜鸟教程 - Git 教程](https://www.runoob.com/git/git-tutorial.html)
@@ -170,7 +172,43 @@ $ git branch -d hotfix/ViewFilterBug
 
 
 
-## 六、拓展
+## 六、Git远程仓库地址变更，本地如何修改
+
+> 最终目的：修改本地仓库.git配置文件中的[remote "origin"]中的url
+
+#### 方法一：可以直接修改配置文件
+
+进入仓库根目录，再进入 `.git/config` 文件，修改 [remote “origin”]下面的url即可。
+
+```
+[core]
+        repositoryformatversion = 0
+        filemode = true
+        bare = false
+        logallrefupdates = true
+        ignorecase = true
+        precomposeunicode = true
+[remote "origin"]
+        url = https://github.com/lionsom/XiOS.git
+        fetch = +refs/heads/*:refs/remotes/origin/*
+[branch "master"]
+        remote = origin
+        merge = refs/heads/master
+```
+
+#### 方法二：可以通过命令行来修改配置文件
+
+```
+$ git remote set-url origin new_url
+```
+
+
+
+
+
+
+
+## 七、拓展
 
 ### 拓展一：GitHub提交无法添加统计到Contribution图
 
@@ -272,7 +310,6 @@ Thumbs.db
   ```
   $ git rm .DS_Store
   ```
-
 
 **4、坑**
 
