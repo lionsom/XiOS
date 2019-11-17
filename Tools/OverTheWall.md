@@ -1,10 +1,12 @@
-### 前期可先使用蓝灯翻墙
+### 一、前期可先使用蓝灯翻墙
 
 [lantern](https://github.com/getlantern/lantern)
 
 
 
-### 真正官网
+### 二、Shadowsocks
+
+#### 2.1、真正官网
 
 [shadowsocks真正官网](https://shadowsocks.org/en/index.html)
 
@@ -12,9 +14,7 @@
 
 [GitHub - shadowsocks](https://github.com/shadowsocks)
 
-
-
-### 购买使用
+#### 2.2、购买使用
 
 本站（[Shadowsocks.com](https://shadowsocks.com/)）由澳洲公司运营，与 [Shadowsocks](https://github.com/shadowsocks) 开发者并无任何关係，并非 Shadowsocks 官网。
 
@@ -22,25 +22,15 @@
 
 [GitHub - Shadowsocks-Wiki](https://github.com/Shadowsocks-Wiki)
 
-
-
-### 额外阅读
-
-[自用SS/SSR机场体验及吐槽](http://backu9.blogspot.com/2018/09/ssssr_18.html)
-
-https://github.com/xieyushi/blog/wiki/
-
-https://leaderliang.coding.me/1829.html
+[详细教程](https://leaderliang.coding.me/1829.html)
 
 
 
-
-
-### 新推荐 - 喵帕斯（稳定，比较贵）
+### 三、新推荐 - 喵帕斯（稳定，比较贵）
 
 [https://喵帕斯.com](https://xn--i2ru8q2qg.com)
 
-注册：http://zoohotelforever.blogspot.com/2019/03/blog-post_13.html
+[喵帕斯的注册教程](http://zoohotelforever.blogspot.com/2019/03/blog-post_13.html)
 
 
 
@@ -52,19 +42,13 @@ https://leaderliang.coding.me/1829.html
 
 
 
+### 四、推荐阅读
 
+[shadowsocks搭建教程](https://shadowsocks.blogspot.com/)
 
-[推荐手机端SS的APP（iOS、安卓）]([http://www.shuangjiuhengyi.com/blog/2018/07/18/%e6%8e%a8%e8%8d%90%e6%89%8b%e6%9c%ba%e7%ab%afss%e7%9a%84app%ef%bc%88ios%e3%80%81%e5%ae%89%e5%8d%93%ef%bc%89/](http://www.shuangjiuhengyi.com/blog/2018/07/18/推荐手机端ss的app（ios、安卓）/)）
+[自用SS/SSR机场体验及吐槽](http://backu9.blogspot.com/2018/09/ssssr_18.html)
 
-
-
-
-
-
-
-
-
-
+https://github.com/xieyushi/blog/wiki/
 
 
 
