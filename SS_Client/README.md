@@ -49,3 +49,30 @@ Shadowsocks在技术上可以简单总结为：
 一套基于**Socks5**代理方式的网络加密传输数据包的技术
 
 = **用socks5技术加密的技术**
+
+
+
+### 二、NEKit
+
+[**NEKit**](https://github.com/zhuhaow/NEKit)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
