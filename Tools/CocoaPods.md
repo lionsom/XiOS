@@ -347,7 +347,17 @@ pod install --verbose --no-repo-update
 pod update --verbose --no-repo-update
 ```
 
-### 2、关于Podfile文件编辑时，第三方库版本号的各种写法
+
+
+### 2、翻墙下，提速
+
+```
+$ ALL_PROXY=socks5://127.0.0.1:1086 git clone ....
+```
+
+
+
+### 3、关于Podfile文件编辑时，第三方库版本号的各种写法
 
 ```
 #pod 'AFNetworking' //不显式指定依赖库版本，表示每次都获取最新版本
