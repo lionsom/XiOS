@@ -4,9 +4,18 @@
 [GitHub - oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)
 
 
+
+
+
+
+
+
+
 ## 一、Shell介绍
 
 可阅读我的另一篇 [Shell入门](https://github.com/lionsom/iOS-/blob/master/Shell学习/Shell入门.md)
+
+
 
 ## 二、安装Zsh
 
@@ -28,8 +37,7 @@ sh -c "$(wget -O- https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/maste
 
 ![](media_Zsh/001.png)
 
-
-## 3、Shell相关操作
+## 三、Shell相关操作
 
 ### 3.1、查看系统中的shell
 
@@ -90,9 +98,38 @@ GNU bash, version 3.2.57(1)-release (x86_64-apple-darwin18)
 Copyright (C) 2007 Free Software Foundation, Inc.
 ```
 
+
+
 ## 四、Zsh插件、主题、更新、卸载
 
-尽在 [Zsh github](https://github.com/robbyrussell/oh-my-zsh)
+>  尽在 [Zsh github](https://github.com/robbyrussell/oh-my-zsh)
+
+
+
+### 4.1、更换主题
+
+您将需要编辑`~/.zshrc`文件，显示隐藏文件 `⌘⇧.`
+
+> // 默认选择一个主题
+>
+> ZSH_THEME="robbyrussell"
+>
+> 
+>
+> // 系统随机一个主题
+>
+> ZSH_THEME="random"
+>
+> 
+>
+> // 配置中随机一个主题
+>
+> ZSH_THEME_RANDOM_CANDIDATES=(
+>   "robbyrussell"
+>   "agnoster"
+> )
+
+
 
 ## 五、自定义快捷键+插件git
 
@@ -151,5 +188,20 @@ plugins=(git)
 
 
 
+## 拓展
 
+### 1. 隐藏文件
+
+**方法一：**
+
+ `⌘⇧.(Command + Shift + .)` 
+
+**方法二：**
+
+在终端使用:
+
+> //显示隐藏文件
+>  defaults write com.apple.finder AppleShowAllFiles -bool true
+>  //不显示隐藏文件
+>  defaults write com.apple.finder AppleShowAllFiles -bool false
 
