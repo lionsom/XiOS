@@ -4,6 +4,7 @@
 # 1. 首先，我们导入了 Flask 类。这个类的实例将会是我们的 WSGI 应用程序
 from flask import Flask
 from flask import request
+from werkzeug import secure_filename
 
 # 2. 接下来，我们创建一个该类的实例，第一个参数是应用模块或者包的名称。
 # 如果你使用单一的模块（如本例），你应该使用 __name__ ，因为模块的名称将会因其作为单独应用启动还是作为模块导入而有不同（ 也即是 '__main__' 或实际的导入名）。
@@ -68,6 +69,16 @@ def valid_login(name, password):
 # with app.test_request_context('/login', method='POST'):
 #     assert request.path == 'login'
 #     assert request.method == 'POST'
+
+
+@app.route('/upload', methods=['GET', 'POST'])
+def upload_file():
+    if request.method == 'POST':
+        f = request.files['the_file']
+        # f.save('/var/uploads/uploaded_file.txt')
+        f.save('/var/www/uploads/' + secure_filename(f.filename))   # 获取客户端的文件名
+
+
 
 
 def AAA():
