@@ -120,7 +120,7 @@ brew 全称Homebrew，是Mac OSX上的软件包管理工具。
 
 
 
-### 4.3、apt-get
+#### 4.3、apt-get
 
 apt-get是debian(Ubuntu)才有的包管理器。
 
@@ -128,4 +128,4 @@ apt-get是debian(Ubuntu)才有的包管理器。
 
 #### 4.4、yum
 
-yum是fedora有的包管理器。
+yum是CentOS有的包管理器。
