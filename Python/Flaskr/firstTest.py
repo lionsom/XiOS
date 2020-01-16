@@ -4,7 +4,9 @@
 # 1. 首先，我们导入了 Flask 类。这个类的实例将会是我们的 WSGI 应用程序
 from flask import Flask
 from flask import request
-from werkzeug import secure_filename
+from werkzeug.utils import secure_filename
+import os
+import pymysql  # 导入三方数据库
 
 # 2. 接下来，我们创建一个该类的实例，第一个参数是应用模块或者包的名称。
 # 如果你使用单一的模块（如本例），你应该使用 __name__ ，因为模块的名称将会因其作为单独应用启动还是作为模块导入而有不同（ 也即是 '__main__' 或实际的导入名）。
@@ -47,7 +49,6 @@ def loginXX():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    error = None
     if request.method == 'POST':
         if valid_login(request.form['name'],
                        request.form['password']):
@@ -76,13 +77,48 @@ def upload_file():
     if request.method == 'POST':
         f = request.files['the_file']
         # f.save('/var/uploads/uploaded_file.txt')
-        f.save('/var/www/uploads/' + secure_filename(f.filename))   # 获取客户端的文件名
-
-
+        f.save('/var/www/uploads/' + secure_filename(f.filename))  # 获取客户端的文件名
 
 
 def AAA():
     return 'AAAAAA'
+
+
+@app.route('/uploadError', methods=['POST'])
+def uploadError():
+    # 获得响应头信息
+    # print(request.headers)
+    # print(request.headers['Content-Type'])
+    # print(request.headers.get('Content-Length'))
+
+    # 获取form-data数据
+    print(request.form['code'])
+    print(request.form['message'])
+
+    if request.form['code'] and request.form['message']:
+        # 连接数据库
+        try:
+            db = pymysql.connect(host='127.0.0.1', user='root', passwd='your password', db='news', port=3306,
+                                 charset='utf8')
+            # 检验数据库是否连接成功
+            cursor = db.cursor()
+            # 这个是执行sql语句，返回的是影响的条数
+            data = cursor.execute('SELECT * FROM `new`')
+            # 得到一条数据
+            one = cursor.fetchone()
+            print(data)
+            print(one)
+        except pymysql.Error as e:
+            print(e)
+            print('操作数据库失败')
+        finally:
+            # 如果连接成功就要关闭数据库
+            if db:
+                db.close()
+        return '提交成功'
+    else:
+        return '提交成功，内容空'
+
 
 
 # 5. 最后我们用 run() 函数来让应用运行在本地服务器上。
