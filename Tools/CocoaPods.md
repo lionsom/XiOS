@@ -336,6 +336,17 @@ $ pod search AFNetworking
 
 
 
+### 4.3、问题三：pod 命令失效
+
+![](media_CocoaPods/4.2.png)
+
+* 原因：mac 升级10.15 macOS系统导致cocoapods失效
+* 深入原因：似乎是将系统ruby版本更改为2.3。路径已移至`/System/Library/Frameworks/Ruby.framework/Versions/2.3/usr/bin`。
+* Github Issues：[CocoaPods CLI fails in High Sierra due to change of Ruby version](https://github.com/CocoaPods/CocoaPods/issues/6778)
+* 解决：重新安装CocoaPods：`$ sudo gem install cocoapods`
+
+
+
 ## 五、奇淫巧技
 
 ### 1、pod install提速

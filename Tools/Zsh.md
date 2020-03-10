@@ -5,12 +5,6 @@
 
 
 
-
-
-
-
-
-
 ## 一、Shell介绍
 
 可阅读我的另一篇 [Shell入门](https://github.com/lionsom/iOS-/blob/master/Shell学习/Shell入门.md)
