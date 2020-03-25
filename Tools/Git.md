@@ -8,11 +8,16 @@
 
 ## 基本原理图
 
-![](media_git/git.png)
+![](media_git/git01.png)
 
-- **工作区：**就是你在电脑里能看到的目录。
-- **暂存区：**英文叫stage, 或index。一般存放在 ".git目录下" 下的index文件（.git/index）中，所以我们把暂存区有时也叫作索引（index）。
-- **版本库：**工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
+- **工作区Workspace：**就是你在电脑里能看到的目录。
+- **暂存区Index / Stage：**英文叫stage, 或index。一般存放在 ".git目录下" 下的index文件（.git/index）中，所以我们把暂存区有时也叫作索引（index）。
+- **版本库Repository：**工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
+- **远程仓库Remote：**远程仓库
+
+![](media_git/git02.png)
+
+![](media_git/git03.png)
 
 
 

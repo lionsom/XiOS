@@ -110,35 +110,26 @@ $ lipo -info xxx.framework
 
 ## 打包.framework
 
+1、创建Pod，导入三方库AFN、SDW、YYKit
 
 
 
+2、PPNetWork
 
-1. 导入form  lxform
-2. 系统framework
-   1. Libxml2.2.tbd
-3. 分类
-4. 创建Pod，导入三方库AFN、SDW、YYKit
+* AccoutTool
+* EntId
 
 
 
+3、XLForm 
 
-
-更改项目配置
-
-1. Build Active Architecture Only修改为NO，否则生成的静态库就只支持当前选择设备的架构。
-2. 在搜索栏搜索 Mach-O Type ，将 Mach-O Type修改为 Static Library(静态库)类型。
-3. 选中 Target ，选择 Build Phases - Headers ，可以看出有三个选项，分别是 Public 、Private 、Project ，把需要公开给别人的 .h 文件拖到 Public 中，把不想公开的，即为隐藏的 .h 文件拖到 Project 中。
-
-
-
-
-
-打包framework：分为真机和模拟器，最后将两个Framework合并。
-
-
-
-
+* entid
+* libxml  [解决方案](https://www.jianshu.com/p/f0d4bc22784b)
+* qyccolor
+* 头文件 + 常量 + define
+* 百度Map，pod安装不上 ` $ ALL_PROXY=socks5://127.0.0.1:1086 pod install --verbose --no-repo-update`
+* QYCFontImage 字体库
+* 各类Controller：LinkWebViewController
 
 
 
