@@ -15,9 +15,34 @@
 - **版本库Repository：**工作区有一个隐藏目录.git，这个不算工作区，而是Git的版本库。
 - **远程仓库Remote：**远程仓库
 
+![](media_git/工作区&暂存区.png)
+
 ![](media_git/git02.png)
 
 ![](media_git/git03.png)
+
+
+
+```
+* 查看本地分支：$ git branch
+* 查看远程分支：$ git branch -r
+* 查看所有(本地+远程)分支：$ git branch -a
+* 查看远程库信息： $ git remote -v
+* 查看当前分支版本控制记录：$ git log
+* 查看当前分支版本控制记录（精简版）：git log --oneline
+* 查看分支合并图：$ git log --graph
+
+
+* 创建分支：$ git branch <name>
+* 切换分支：$ git checkout <name>
+* 创建+切换分支：$ git checkout -b <name>
+* 合并某分支到当前分支：$ git merge <name>
+* 删除分支：$ git branch -d <name>
+* 强行删除：$ git branch -D <name>
+
+合并分支强制禁用Fast forward模式：
+$ git merge --no-ff -m "merge with no-ff" dev
+```
 
 
 
@@ -121,8 +146,6 @@ $ git push --set-upstream origin feature/justtest
 
 2、可执行`$ git reset --hard` 撤销修改
 
-
-
 * 解决方法二：
 
 1、 `git log`查看提交记录，确认想回退的 commit_id
@@ -145,6 +168,18 @@ $ git reset 06a82b26cd0a3c3131d1e40dba2420dbeb859e6c
 
 $ git reset --hard
 ```
+
+### 4.4、git 撤销某个文件
+
+`$ git checkout -- file`
+
+* 一种是`file`自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
+
+* 一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
+
+总之，就是让这个文件回到最近一次`git commit`或`git add`时的状态。
+
+
 
 
 
@@ -181,7 +216,7 @@ $ git branch -d hotfix/ViewFilterBug
 
 > 最终目的：修改本地仓库.git配置文件中的[remote "origin"]中的url
 
-#### 方法一：可以直接修改配置文件
+### 方法一：可以直接修改配置文件
 
 进入仓库根目录，再进入 `.git/config` 文件，修改 [remote “origin”]下面的url即可。
 
@@ -201,7 +236,7 @@ $ git branch -d hotfix/ViewFilterBug
         merge = refs/heads/master
 ```
 
-#### 方法二：可以通过命令行来修改配置文件
+### 方法二：可以通过命令行来修改配置文件
 
 ```
 $ git remote set-url origin new_url
@@ -209,13 +244,35 @@ $ git remote set-url origin new_url
 
 
 
+## 七、Github打Tag
+
+```
+/// 查看tag
+$ git tag
+
+/// 创建tag
+// 第一步：切换到需要打标签的分支上：
+$ git branch
+* dev
+  master
+$ git checkout master
+Switched to branch 'master'
+
+// 第二步：直接打tag && 带标签的tag
+$ git tag v1.0
+$ git tag -a <tagname> -m "blablabla..."
+
+// 第三步：查看所有tag
+$ git tag
+v1.0
+
+/// 从tag拉取一个新分支，进行修改，原tag是不变的，不能修改。
+$ git checkout -b chuanhua V7.12.0
+```
 
 
 
-
-## 七、拓展
-
-### 拓展一：GitHub提交无法添加统计到Contribution图
+## 八、GitHub提交无法添加统计到Contribution图
 
 **问题**
 
@@ -247,7 +304,7 @@ $ git config –-global user.email "***"
 
 
 
-### 拓展二：`.DS_Store`文件冲突
+## 九、`.DS_Store`文件冲突
 
 > **解决方法：.配置全局的.gitignore**
 >
@@ -329,7 +386,7 @@ Thumbs.db
 
 
 
-### 拓展三、git clone 失败
+## 十、git clone 失败
 
 ```
 error: RPC failed; curl 18 transfer closed with outstanding read data remaining
@@ -338,9 +395,9 @@ fatal: early EOF
 fatal: index-pack failed
 ```
 
-#### 方法一：将http:// 改为 git://
+### 方法一：将http:// 改为 git://
 
-#### 方法二：修改curl的postBuffer的默认值
+### 方法二：修改curl的postBuffer的默认值
 
 查看配置 终端输入：
 
@@ -358,152 +415,29 @@ $ git config --global http.postBuffer 524288000
 
 
 
+## 十一、打开GitHub官网慢
 
+**4.1、修改mac hosts文件**
 
+1.打开[DNS检测|DNS查询 - 站长工具](http://tool.chinaz.com/dns/)
 
+2.在检测输入栏中输入[https://github.com](http://github.com/)官网
 
-## 其他、查看历史
-
-[菜鸟教程 - Git 查看提交历史](https://www.runoob.com/git/git-commit-history.html)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-![](media_git/工作区&暂存区.png)
-
-
-
-
-
-
-### git 查看分支
-
-* 查看本地分支：`$ git branch`
-* 查看远程分支：`$ git branch -r`
-* 查看所有(本地+远程)分支：`$ git branch -a`
-
-### 查看远程库信息，使用 `$ git remote -v`
-
-
-
-
-### git 撤销操作：`$ git checkout -- file`
-
-* 一种是`file`自修改后还没有被放到暂存区，现在，撤销修改就回到和版本库一模一样的状态；
-
-* 一种是readme.txt已经添加到暂存区后，又作了修改，现在，撤销修改就回到添加到暂存区后的状态。
-
-总之，就是让这个文件回到最近一次`git commit`或`git add`时的状态。
-
-
-### git 查看当前分支版本控制记录：`$ git log`
-
-用`$ git log --graph`命令可以看到分支合并图。
-
-![](media_git/git log.png)
-
-
-
-
-
-
-### 分支类
-
-查看分支：git branch
-
-创建分支：git branch <name>
-
-切换分支：git checkout <name>
-
-创建+切换分支：git checkout -b <name>
-
-合并某分支到当前分支：git merge <name>
-
-删除分支：git branch -d <name>
-
-强行删除：git branch -D <name>
-
-合并分支强制禁用Fast forward模式：
-`$ git merge --no-ff -m "merge with no-ff" dev`
-
-
-
-
-### 将某个远程主机的更新，全部取回本地：`$ git fetch`
-
-
-
-
-
-### 标签 tag
-
-* 创建标签
+3.把检测列表里的TTL值最小的IP输入到hosts里，并对应写上github官网域名。
 
 ```
-// 第一步：切换到需要打标签的分支上：
-$ git branch
-* dev
-  master
-$ git checkout master
-Switched to branch 'master'
-
-// 第二步：直接打tag
-$ git tag v1.0
-
-// 第三步：查看所有tag
-$ git tag
-v1.0
+##
+# Host Database
+#
+# localhost is used to configure the loopback interface
+# when the system is booting.  Do not change this entry.
+##
+127.0.0.1	localhost
+255.255.255.255	broadcasthost
+::1             localhost
+13.229.188.59 	https://github.com/
 ```
 
-* 可以指定标签信息：`$ git tag -a <tagname> -m "blablabla..."`
+**4.2、将hosts文件复制一份进行修改，再拖入替换**
 
-
-### 拉取tag分支
-
-拉取远程指定tag：`$ git fetch origin`
-
-
-先 git clone 整个仓库，然后 git checkout tag_name 就可以取得 tag 对应的代码了。 
-但是这时候 git 可能会提示你当前处于一个“detached HEAD” 状态，因为 tag 相当于是一个快照，是不能更改它的代码的，如果要在 tag 代码的基础上做修改，你需要一个分支： 
-git checkout -b branch_name tag_name 
-这样会从 tag 创建一个分支，然后就和普通的 git 操作一样了。
-
-从`V7.12.0`的tag上拉取一个`chuanhua`新分支：
-`$ git checkout -b chuanhua V7.12.0`
-
----------------------
-作者：philos3 
-来源：CSDN 
-原文：https://blog.csdn.net/philos3/article/details/72812120 
-版权声明：本文为博主原创文章，转载请附上博文链接！
-
-
-
-
-
-
-
-
+![](media_git/hosts路径.png)
