@@ -262,7 +262,13 @@ Switched to branch 'master'
 $ git tag v1.0
 $ git tag -a <tagname> -m "blablabla..."
 
-// 第三步：查看所有tag
+// 第三步：push单个tag，命令格式为：
+$ git push origin tag_20170908
+
+// push所有tag，命令格式为：
+$ git push --tags  /  $ git push origin --tags
+
+// 第四步：查看所有tag
 $ git tag
 v1.0
 
