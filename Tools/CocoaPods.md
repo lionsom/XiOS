@@ -416,9 +416,73 @@ end
 
 
 
+## 七、CDN警告 + spec repo源更换
+
+遇到新的报错警告
+
+![](media_CocoaPods/CDN.jpg)
+
+原因：
+
+[CocoaPods 1.7.2 — Master Repo CDN is Finalized!](http://blog.cocoapods.org/CocoaPods-1.7.2/)
+
+[CocoaPods 1.8 Beta is Here!](http://blog.cocoapods.org/CocoaPods-1.8.0-beta/)
+
+**CocoaPods 1.8** switches the CDN as the default spec repo source and comes with a few enhancements!
+
+CDN支持首先在1.7版本中引入，并在1.7.2中完成。 它旨在极大地加快初始设置和依赖关系分析的速度。 在1.8版本中，CocoaPods不再需要克隆现在庞大的主规格存储库即可运行，用户可以几乎立即将其项目与CocoaPods集成在一起。
+
+> 注意：`podfile`文件中一定要指定`master`源，因为现在默认是`trunk`源
 
 
 
+解决：
+
+按照官方文档 podfile文件中添加source源
+
+```
+source 'https://github.com/CocoaPods/Specs.git'
+```
+
+再移除trunk源
+
+```
+$ pod repo remove trunk
+```
+
+
+
+相关命令：
+
+```
+// 查看版本
+$ pod --version 
+// 查看源
+$ pod repo
+$ pod repo list
+// 移除trunk源
+$ pod repo remove trunk
+// 新增源
+$ pod repo add master https://gitcafe.com/akuandev/Specs.git
+// 更新源
+$ pod repo update
+
+
+
+➜ ~ pod repo
+
+master
+- Type: git (master)
+- URL:  https://github.com/CocoaPods/Specs.git
+- Path: /Users/qiyeyun/.cocoapods/repos/master
+
+trunk
+- Type: CDN
+- URL:  https://cdn.cocoapods.org/
+- Path: /Users/qiyeyun/.cocoapods/repos/trunk
+
+2 repos
+```
 
 
 
