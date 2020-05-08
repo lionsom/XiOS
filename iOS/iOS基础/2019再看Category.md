@@ -362,7 +362,7 @@ static struct /*_prop_list_t*/ {
 
 
 
-![](Media/media_Category/001.png)
+![](media_Category/001.png)
 
 ```
 2019-07-29 14:48:38.461856+0800 Category深入[4543:177912] MyClass load
@@ -372,7 +372,7 @@ static struct /*_prop_list_t*/ {
 
 
 
-![](Media/media_Category/002.png)
+![](media_Category/002.png)
 
 ```
 2019-07-29 14:47:46.286189+0800 Category深入[4526:177145] MyClass load
@@ -384,7 +384,7 @@ static struct /*_prop_list_t*/ {
 
 ### 4.2、有继承关系的类中，+load调用顺序
 
-![](Media/media_Category/004.png)
+![](media_Category/004.png)
 
 > 父类：Father
 >
@@ -536,7 +536,7 @@ static struct /*_prop_list_t*/ {
 | 调用时机       | 只要文件被引用就会被调用，所以如果类没有被引进项目,就不会调用 +load | 是在类或者它的子类收到第一条消息（实例方法、类方法）之前被调用的。 |
 | 调用顺序       | 1、+load 会在 main() 函数之前被调用；<br>2、父类 > 子类 > 分类 | 父类 > 子类（或分类，分类覆盖本类方法）                      |
 | 调用次数       | 1次                                                          | 1、如果只有父类，则调用1次或0次；<br>2；有子类则调用多次；（子类也会调用父类的initialize方法） |
-| 子类、类别调用 | 子类：如果子类没有实现 load 方法, 该子类是不会调用该方法的, 就算父类实现了也不会调用父类的load方法；<br><br> 类别：当有多个类别(Category)都实现了load方法,这几个load方法都会执行,但执行顺序不确定，执行顺序与其在Compile Sources中出现的顺序一致; ![](Media/media_Category/009.png) | 如果子类实现 initialize方法时,会覆盖父类initialize方法；<br><br> 如果子类不实现 initialize 方法，会把父类的实现继承过来调用一遍；<br><br>当有多个Category都实现了initialize方法,会覆盖类中的方法,只执行一个(会执行Compile Sources 列表中最后一个Category 的initialize方法) |
+| 子类、类别调用 | 子类：如果子类没有实现 load 方法, 该子类是不会调用该方法的, 就算父类实现了也不会调用父类的load方法；<br><br> 类别：当有多个类别(Category)都实现了load方法,这几个load方法都会执行,但执行顺序不确定，执行顺序与其在Compile Sources中出现的顺序一致; ![](media_Category/009.png) | 如果子类实现 initialize方法时,会覆盖父类initialize方法；<br><br> 如果子类不实现 initialize 方法，会把父类的实现继承过来调用一遍；<br><br>当有多个Category都实现了initialize方法,会覆盖类中的方法,只执行一个(会执行Compile Sources 列表中最后一个Category 的initialize方法) |
 | 线程安全       | load 方法是线程安全的，内部使用了锁，应避免线程阻塞在 load 中。 | 在initialize方法收到调用时，运行环境基本健全。initialize的运行过程中是能保证线程安全的； |
 | 常见场景       | 1、由于调用load方法时的环境很不安全，我们应该尽量减少load方法的逻辑；<br>2、load 中实现 Method Swizzle | 1、常用于初始化全局变量和静态变量；<br>2、者单例模式的实现方案； |
 
@@ -563,7 +563,7 @@ static struct /*_prop_list_t*/ {
 
 **交换下编译顺序**
 
-![](Media/media_Category/003.png)
+![](media_Category/003.png)
 
 ```
 // 输出

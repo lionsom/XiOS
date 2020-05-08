@@ -52,37 +52,37 @@ $ lipo -info xxx.framework
 
 默认打出来的是动态库
 
-![](media/media_Library/自制003.jpg)
+![](media_Library/自制003.jpg)
 
 
 
 ### 1.5、将头文件暴露出去，供外界使用
 
-![](media/media_Library/自制005.jpg)
+![](media_Library/自制005.jpg)
 
 
 
 ### 1.6、在头文件中导入所有公开的头文件
 
-![](media/media_Library/自制007.jpg)
+![](media_Library/自制007.jpg)
 
 
 
 ### 1.7、选择Debug / Release环境
 
-![](media/media_Library/自制004.jpg)
+![](media_Library/自制004.jpg)
 
 
 
 ### 1.8、选择模拟器 / 真机环境
 
-![](media/media_Library/自制006.jpg)
+![](media_Library/自制006.jpg)
 
 
 
 ### 1.9、查看导出的Framework
 
-![](media/media_Library/自制008.jpg)
+![](media_Library/自制008.jpg)
 
 
 
@@ -94,7 +94,7 @@ $ lipo -info xxx.framework
 
 我们导出的Framework分为模拟器与真机，所以导入到项目里面也只能选择对应的机型。
 
-![](media/media_Library/自制009.jpg)
+![](media_Library/自制009.jpg)
 
 
 
