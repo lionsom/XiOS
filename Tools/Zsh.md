@@ -180,6 +180,17 @@ plugins=(git)
 
 
 
+## 六、配置文件
+
+oh-my-zsh的配置文件为`.zshrc`，而默认shell（bash）的配置文件为`.bash_profile` 。
+
+
+
+**若bash_profile不生效？**
+
+1. 打开Oh My Zsh的配置文件`.zshrc`（`vi ~/.zshrc`），在其中添加代码：`source ~/.bash_profile`，
+2. 终端执行`source ~/.zshrc`即可
+
 
 
 ## 拓展
