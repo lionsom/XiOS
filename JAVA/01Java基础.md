@@ -449,6 +449,203 @@ long total2 = money * (long)year;	// 30000000000
 
 
 
+## 获取键盘
+
+```
+// 导入Scanner包
+import java.util.Scanner;
+
+public class scanner {
+		public static void main(String[] args){
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("AAAA = ");
+        String name = scanner.nextLine();
+        System.out.println(name);
+    }
+}
+```
+
+
+
+## 控制语句
+
+> 简单，忽略。
+
+
+
+### 带标签的continue和break
+
+> 类似于goto关键字，可以跳到指定代码。
+
+```
+// 输出 100 - 150 之间所有的质数
+// 这里我们使用标签continue跳转到外部循环。
+
+public class testLabelContinue {
+		public static void main(String[] args) {
+				outer: for(int i = 100; i < 150; i++) {
+						for(int j = 2; j < i/2; j++) {
+								if(i%j == 0) {
+										continue outer;
+								}
+						}
+						system.out.print(i);
+				}
+		}
+}
+```
+
+
+
+## 语句块
+
+> 语句块 { }，一般用来限制局部变量的作用域。
+
+
+
+## 方法
+
+### 简单使用
+
+* 方法声明格式
+
+  ```
+  [修饰词1，修饰词2，...] 返回值类型 方法名(形式参数列表) {
+  		Java语句......
+  }
+  ```
+
+* 简单使用
+
+  ```
+  public class Method {
+      public static void main(String[] args) {
+          // 通过对象调用普通方法
+          Method m = new Method();
+          m.printString();
+          m.add(1,2);
+          int c = m.addArgs(2,3) + 100;
+          System.out.println(c);
+      }
+  
+      void printString() {
+          System.out.println("adf");
+      }
+  
+      void add(int a, int b) {
+          System.out.println(a+b);
+      }
+  
+      int addArgs(int a, int b) {
+          System.out.println(a+b);
+          return a+b;
+      }
+  }
+  ```
+
+### 方法重载
+
+> 方法名相同，形式参数不同，构成方法重载。
+>
+> 他们是完全不同的两个方法。
+
+```
+public class Method {
+    public static void main(String[] args) {
+        // 方法前加上 public static 就可以直接使用了。
+        add(1,2);
+        add(1,2,3);
+    }
+
+    public static void add(int a, int b) {
+        System.out.println(a+b);
+    }
+    
+    public static void add(int a, int b, int c) {
+        System.out.println(a+b+c);
+    }
+}
+```
+
+
+
+### 方法递归
+
+> 优点：程序简单
+>
+> 缺点：递归调用占用大量堆栈，内存消耗大，调用层次越多，耗时越多
+
+```
+public class Recursion {
+    public static void main(String[] args){
+        // 获取1970至今的时间，毫秒
+        long d1 = System.currentTimeMillis();
+        // 递归阶乘，%d %s接参数，%n换行同\n
+        System.out.printf("%d阶乘结果为：%s%n",10,factorial(10));
+        long d2 = System.currentTimeMillis();
+        System.out.printf("阶乘耗时：%d%n",d2 - d1);
+				
+				// 普通循环阶乘
+				factorialLoop(10);
+    }
+
+    // 递归阶乘，1*2*3*4....*n
+    static long factorial(int n) {
+        if (n == 1) {
+            return 1;
+        } else {
+            return n * factorial(n-1);
+        }
+    }
+		
+		// 循环阶乘
+    static long factorialLoop(int n) {
+        long d3 = System.currentTimeMillis();
+        long result = n;
+        while (n > 1) {
+            result *= n-1;
+            n--;
+        }
+        long d4 = System.currentTimeMillis();
+        System.out.printf("%d循环结果为：%s%n",10,result);
+        System.out.printf("循环耗时：%d%n",d4 - d3);
+        return result;
+    }
+}
+
+===============================
+10阶乘结果为：3628800
+阶乘耗时：35
+10循环结果为：3628800
+循环耗时：0
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
