@@ -1,0 +1,11 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<persons>
+    <person>
+        <name>至尊宝</name>
+        <age>9000</age>
+    </person>
+    <person>
+        <name>白金进</name>
+        <age>8000</age>
+    </person>
+</persons>

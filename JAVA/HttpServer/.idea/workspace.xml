@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="05e910ef-5df1-40f2-a768-0a2d5262f110" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaFXApplication" />
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1c2L9UjZ8tv2Eqmx3hteJEIbXxM" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="aspect.path.notification.shown" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/lx/servlet" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_npm_path_reset_for_default_project" value="true" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="fileTemplates" />
+  </component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/lx/servlet" />
+      <recent name="$PROJECT_DIR$/src" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/com/lx/server/basic" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Application.myServer">
+    <configuration name="XMLParse" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lx.servlet.XMLParse" />
+      <module name="HttpServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lx.servlet.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="XMLPerson" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lx.server.basic.XMLPerson" />
+      <module name="HttpServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lx.server.basic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="XMLTest" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="XMLTest" />
+      <module name="HttpServer" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="XMLTest" type="Application" factoryName="Application" temporary="true">
+      <option name="MAIN_CLASS_NAME" value="com.lx.server.basic.XMLTest" />
+      <module name="HttpServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lx.server.basic.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="myServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.lx.myServer.myServer" />
+      <module name="HttpServer" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="com.lx.myServer.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <list>
+      <item itemvalue="Application.XMLTest" />
+      <item itemvalue="Application.XMLPerson" />
+      <item itemvalue="Application.XMLParse" />
+      <item itemvalue="Application.myServer" />
+    </list>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.myServer" />
+        <item itemvalue="Application.XMLParse" />
+        <item itemvalue="Application.XMLPerson" />
+        <item itemvalue="Application.XMLTest" />
+        <item itemvalue="Application.XMLTest" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="05e910ef-5df1-40f2-a768-0a2d5262f110" name="Default Changelist" comment="" />
+      <created>1589721589745</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1589721589745</updated>
+      <workItem from="1589721591121" duration="156000" />
+      <workItem from="1589721750815" duration="16535000" />
+    </task>
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="2" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="104" y="52" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1589721922261">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state x="104" y="52" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1280.735@0.23.1280.735" timestamp="1589721922261" />
+    <state x="435" y="104" key="#com.intellij.ide.util.MemberChooser" timestamp="1589817352644">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state x="435" y="104" key="#com.intellij.ide.util.MemberChooser/0.23.1280.735@0.23.1280.735" timestamp="1589817352644" />
+    <state width="430" height="438" key="DebuggerActiveHint" timestamp="1589821390883">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state width="430" height="438" key="DebuggerActiveHint/0.23.1280.735@0.23.1280.735" timestamp="1589821390883" />
+    <state width="1238" height="287" key="GridCell.Tab.0.bottom" timestamp="1589821480292">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state width="1238" height="287" key="GridCell.Tab.0.bottom/0.23.1280.735@0.23.1280.735" timestamp="1589821480292" />
+    <state width="1238" height="287" key="GridCell.Tab.0.center" timestamp="1589821480291">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state width="1238" height="287" key="GridCell.Tab.0.center/0.23.1280.735@0.23.1280.735" timestamp="1589821480291" />
+    <state width="1238" height="287" key="GridCell.Tab.0.left" timestamp="1589821480291">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state width="1238" height="287" key="GridCell.Tab.0.left/0.23.1280.735@0.23.1280.735" timestamp="1589821480291" />
+    <state width="1238" height="287" key="GridCell.Tab.0.right" timestamp="1589821480292">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state width="1238" height="287" key="GridCell.Tab.0.right/0.23.1280.735@0.23.1280.735" timestamp="1589821480291" />
+    <state width="1238" height="287" key="GridCell.Tab.1.bottom" timestamp="1589821480293">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state width="1238" height="287" key="GridCell.Tab.1.bottom/0.23.1280.735@0.23.1280.735" timestamp="1589821480293" />
+    <state width="1238" height="287" key="GridCell.Tab.1.center" timestamp="1589821480293">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state width="1238" height="287" key="GridCell.Tab.1.center/0.23.1280.735@0.23.1280.735" timestamp="1589821480293" />
+    <state width="1238" height="287" key="GridCell.Tab.1.left" timestamp="1589821480292">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state width="1238" height="287" key="GridCell.Tab.1.left/0.23.1280.735@0.23.1280.735" timestamp="1589821480292" />
+    <state width="1238" height="287" key="GridCell.Tab.1.right" timestamp="1589821480293">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state width="1238" height="287" key="GridCell.Tab.1.right/0.23.1280.735@0.23.1280.735" timestamp="1589821480293" />
+    <state x="283" y="29" key="SettingsEditor" timestamp="1589809320111">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state x="283" y="29" key="SettingsEditor/0.23.1280.735@0.23.1280.735" timestamp="1589809320111" />
+    <state x="406" y="173" key="refactoring.ChangeSignatureDialog" timestamp="1589811235794">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state x="406" y="173" key="refactoring.ChangeSignatureDialog/0.23.1280.735@0.23.1280.735" timestamp="1589811235794" />
+    <state x="366" y="82" width="670" height="676" key="search.everywhere.popup" timestamp="1589811241731">
+      <screen x="0" y="23" width="1280" height="735" />
+    </state>
+    <state x="366" y="82" width="670" height="676" key="search.everywhere.popup/0.23.1280.735@0.23.1280.735" timestamp="1589811241731" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/com/lx/myServer/myServer.java</url>
+          <line>33</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+</project>
