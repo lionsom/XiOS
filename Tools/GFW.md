@@ -36,7 +36,7 @@
 
 订阅地址：
 
-![](media_OverTheWall/喵_订阅.png)
+![](media_GFW/喵_订阅.png)
 
 
 
