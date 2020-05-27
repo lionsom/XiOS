@@ -94,40 +94,7 @@ Copyright (C) 2007 Free Software Foundation, Inc.
 
 
 
-## 四、Zsh插件、主题、更新、卸载
-
->  尽在 [Zsh github](https://github.com/robbyrussell/oh-my-zsh)
-
-
-
-### 4.1、更换主题
-
-您将需要编辑`~/.zshrc`文件，显示隐藏文件 `⌘⇧.`
-
-> // 默认选择一个主题
->
-> ZSH_THEME="robbyrussell"
->
-> 
->
-> // 系统随机一个主题
->
-> ZSH_THEME="random"
->
-> 
->
-> // 配置中随机一个主题
->
-> ZSH_THEME_RANDOM_CANDIDATES=(
->   "robbyrussell"
->   "agnoster"
-> )
-
-
-
-## 五、自定义快捷键+插件git
-
-### 5.1、自定义快捷键（alias）
+## 四、自定义快捷键（alias）
 
 前往安装目录下，打开隐藏文件 `.zshrc`（显示隐藏文件：command+shift+>）： 
 
@@ -153,7 +120,54 @@ alias aaaa="ls"
 
 ![](media_Zsh/002.png)
 
-### 5.2、插件git
+
+
+## 五、Themes
+
+>  尽在 [Zsh github](https://github.com/robbyrussell/oh-my-zsh)
+
+### 5.1、更换主题
+
+您将需要编辑`~/.zshrc`文件，显示隐藏文件 `⌘⇧.`
+
+```
+# Set name of the theme to load --- if set to "random", it will
+# load a random theme each time oh-my-zsh is loaded, in which case,
+# to know which specific one was loaded, run: echo $RANDOM_THEME
+# See https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+ZSH_THEME="robbyrussell"
+
+# Set list of themes to pick from when loading at random
+# Setting this variable when ZSH_THEME=random will cause zsh to load
+# a theme from this variable instead of looking in ~/.oh-my-zsh/themes/
+# If set to an empty array, this variable will have no effect.
+# ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "xiong-chiamiov")
+
+
+/////// ========= 说明 ==========
+// 默认选择一个主题
+ZSH_THEME="robbyrussell"
+
+// 系统随机一个主题
+ZSH_THEME="random"
+
+// 配置中随机一个主题
+ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "xiong-chiamiov")
+```
+
+## 5.2、自定义Themes
+
+同6.3自定义plugins
+
+
+
+## 六、Plugins
+
+### 6.1、目录说明
+
+![](media_zsh/005.png)
+
+### 6.2、自带plugins之git
 
 查看所有插件plugins [github/plugins](https://github.com/robbyrussell/oh-my-zsh/tree/master/plugins)
 
@@ -180,7 +194,35 @@ plugins=(git)
 
 
 
-## 六、配置文件
+### 6.3、自定义安装plugins之zsh-autosuggestions
+
+![](media_Zsh/006.png)
+
+
+
+1. 前往 `.oh-my-zsh`  --> `custom` --> `plugins` 文件夹目录下安装自定义plugins。
+
+2. ```
+   ➜ git clone git://github.com/zsh-users/zsh-autosuggestions
+   ```
+
+3. 在 `.zshrc` 配置中添加
+
+   ```
+   # Which plugins would you like to load?
+   # Standard plugins can be found in ~/.oh-my-zsh/plugins/*
+   # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
+   # Example format: plugins=(rails git textmate ruby lighthouse)
+   # Add wisely, as too many plugins slow down shell startup.
+   plugins=(pod git)
+   plugins=(git zsh-autosuggestions)				// 新增zsh-autosuggestions
+   ```
+
+4. 最后执行`source ~/.zshrc` 即可，重启终端，就出现了自动补全功能。
+
+
+
+## 七、配置文件
 
 oh-my-zsh的配置文件为`.zshrc`，而默认shell（bash）的配置文件为`.bash_profile` 。
 
