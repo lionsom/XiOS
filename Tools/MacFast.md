@@ -143,7 +143,13 @@ output.jpg	输出的图片路径
 
 ## 8、zsh-autosuggestions
 
-> autosuggestions是Zsh的插件，详情请查看《Zsh.md》
+> autosuggestions是Zsh的插件，自动补全，详情请查看《Zsh.md》
+
+
+
+## 9、autojump
+
+xxx
 
 
 
@@ -231,12 +237,12 @@ output.jpg	输出的图片路径
 
 * #### registry.dat所在目录：`Library/Application Support/Beyond Compare`
 
-  ![](media_Tools/001.jpeg)
+  ![](media_MacFast/001.jpeg)
 
 
 * #### 移除 registry.dat：`rm registry.dat`
 
-  ![](media_Tools/002.jpeg)
+  ![](media_MacFast/002.jpeg)
 
 * #### 重启程序即可
 
