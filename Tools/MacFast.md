@@ -1,5 +1,7 @@
 
 
+
+
 # 一、Homebrew
 
 > Homebrew是Mac OS 不可或缺的套件管理器。
@@ -125,7 +127,29 @@ output.jpg	输出的图片路径
 
 > 它是Shell，代替原生bash
 >
-> 详情请看文档：《Zsh》
+> 详情请看文档：《Zsh.md》
+
+
+
+## 7、zsh-git快捷键
+
+> git是Zsh的插件，就是git命令行的快捷键。
+>
+> gl  === git pull
+>
+> gp  ===  git push
+
+
+
+## 8、zsh-autosuggestions
+
+> autosuggestions是Zsh的插件，自动补全，详情请查看《Zsh.md》
+
+
+
+## 9、autojump
+
+xxx
 
 
 
@@ -213,12 +237,12 @@ output.jpg	输出的图片路径
 
 * #### registry.dat所在目录：`Library/Application Support/Beyond Compare`
 
-  ![](media_Tools/001.jpeg)
+  ![](media_MacFast/001.jpeg)
 
 
 * #### 移除 registry.dat：`rm registry.dat`
 
-  ![](media_Tools/002.jpeg)
+  ![](media_MacFast/002.jpeg)
 
 * #### 重启程序即可
 

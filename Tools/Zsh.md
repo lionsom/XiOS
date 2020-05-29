@@ -155,7 +155,7 @@ ZSH_THEME="random"
 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "xiong-chiamiov")
 ```
 
-## 5.2、自定义Themes
+### 5.2、自定义Themes
 
 同6.3自定义plugins
 
@@ -219,19 +219,6 @@ plugins=(git)
    ```
 
 4. 最后执行`source ~/.zshrc` 即可，重启终端，就出现了自动补全功能。
-
-
-
-## 七、配置文件
-
-oh-my-zsh的配置文件为`.zshrc`，而默认shell（bash）的配置文件为`.bash_profile` 。
-
-
-
-**若bash_profile不生效？**
-
-1. 打开Oh My Zsh的配置文件`.zshrc`（`vi ~/.zshrc`），在其中添加代码：`source ~/.bash_profile`，
-2. 终端执行`source ~/.zshrc`即可
 
 
 
