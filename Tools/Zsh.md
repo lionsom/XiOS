@@ -155,7 +155,7 @@ ZSH_THEME="random"
 ZSH_THEME_RANDOM_CANDIDATES=( "robbyrussell" "agnoster" "xiong-chiamiov")
 ```
 
-## 5.2、自定义Themes
+### 5.2、自定义Themes
 
 同6.3自定义plugins
 

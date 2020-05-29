@@ -1,5 +1,7 @@
 
 
+
+
 # 一、Homebrew
 
 > Homebrew是Mac OS 不可或缺的套件管理器。
@@ -125,7 +127,23 @@ output.jpg	输出的图片路径
 
 > 它是Shell，代替原生bash
 >
-> 详情请看文档：《Zsh》
+> 详情请看文档：《Zsh.md》
+
+
+
+## 7、zsh-git快捷键
+
+> git是Zsh的插件，就是git命令行的快捷键。
+>
+> gl  === git pull
+>
+> gp  ===  git push
+
+
+
+## 8、zsh-autosuggestions
+
+> autosuggestions是Zsh的插件，详情请查看《Zsh.md》
 
 
 
