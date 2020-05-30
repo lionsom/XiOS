@@ -6,45 +6,45 @@ function getDir() {
 	for file in $1/* 
 	do
 		echo $file
+        
+        # 目录为空，跳过改循环
+        if [ "`ls $file`" = "" ]; then
+            echo "===================================="
+            echo "$file is empty"
+            echo "===================================="
+            continue
+        fi
+  
+        # 判断是否为文件类型
 		if test -f $file 
 		then
-			if [[ $file == *.png ]]
+			if [[ $file == *.png ]] || [[ $file == *.jpg ]] || [[ $file == *.jpeg ]]
 			then
-				echo "我是PNG图片"
+				echo "我是PNG/JPG/JPEG图片"
 				guetzli --quality $2 --verbose $file $file
-			elif [[ $file == *.jpg ]]
-			then
-				echo "我是JPG图片"
-				guetzli --quality $2 --verbose $file $file
-            elif [[ $file == *.jpeg ]]
-            then
-                echo "我是JPEG图片"
-                guetzli --quality $2 --verbose $file $file
             else 
-				echo "我是不是图片文件"
+				echo "我文件，但不是图片类型"
 			fi
 		else
 			echo "我是目录"
-			getDir $file			
+			getDir $file $2
 		fi
 	done
 }
 
 
 
-# 先判断命令后是否有路径，若没有，则会遍历根目录，不符合我们的需求。
+# 命令行校验
 if [ -z $1 ]; then
     echo "请在命令后面加上文件夹路径"
+elif test -f $1; then
+    echo "请输入目录路径"
 elif [ -z $2 ]; then
-    echo "请在后面加上图片压缩比：【85 ~ 100】"
+    echo "请在后面加上图片压缩比：[84 ~ 100]"
+elif [ $2 -lt 84 ] || [ $2 -gt 100 ]; then
+    echo "请输入图片压缩比范围：[84 ~ 100]"
 else
-    # 判断是否为文件
-    if test -f $file
-    then
-        echo "请输入目录路径"
-    else
-        # 执行遍历方法，参数$1:目录路径，参数$2:图片压缩比例【85 ~ 100】
-        getDir $1 $2
-    fi
+    # 执行遍历方法，参数$1:目录路径，参数$2:图片压缩比例：[84 ~ 100]
+    getDir $1 $2
 fi
 
