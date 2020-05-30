@@ -9,9 +9,9 @@
 for file in $1/*
 do
     if test -f $file
-then
-echo $file
-   arr=(${arr[*]} $file)
+    then
+    echo $file
+    arr=(${arr[*]} $file)
 fi
 done
 
@@ -22,7 +22,21 @@ echo ${arr[@]}
 
 # 第二步：通过命令参数，获取自定义路径
 
+```
+#!/bin/zsh
+echo "Shell 传递参数实例！";
+echo "执行的文件名：$0";
+echo "第一个参数为：$1";
+echo "第二个参数为：$2";
+echo "第三个参数为：$3";
 
+➜ ~ ./test.sh 1 2 3
+Shell 传递参数实例！
+执行的文件名：./test.sh
+第一个参数为：1
+第二个参数为：2
+第三个参数为：3
+```
 
 
 
@@ -31,13 +45,27 @@ echo ${arr[@]}
 ```
 -f "file"  // 判断file是否是文件;
 -d "file"  // 判断file是否是目录（文件夹）。
+
+if [ -d $filename ]; then
+  echo "$filename is a directory "
+elif [ -f $filename ]; then
+  echo "$filename is a file"
+fi
 ```
 
 
 
 # 第四步：判断文件是否为.png、.jpg、.jpeg结尾
 
-
+```
+if [[ $file == *.png ]] || [[ $file == *.jpg ]] || [[ $file == *.jpeg ]]
+then
+		echo "我是PNG/JPG/JPEG图片"
+		guetzli --quality $2 --verbose $file $file
+else 
+    echo "我文件，但不是图片类型"
+fi
+```
 
 
 
@@ -58,8 +86,6 @@ echo ${arr[@]}
 original.jpg	输入的图片路径
 output.jpg	输出的图片路径
 ```
-
-
 
 
 
@@ -98,10 +124,6 @@ fi
 # -ge 	// 大于等于
 # -le 	// 小于等于   
 ```
-
-
-
-
 
 
 
@@ -157,7 +179,63 @@ fi
 
 ## 3、大图片压缩非常耗时
 
+> 在测试过程中发现，压缩过程还是比较漫长的，所以选择的目录中图片不要太多。
 
+
+
+# 【源码】
+
+```
+#!/bin/zsh
+
+# 方法：递归路径下所有的文件
+function getDir() {
+	echo $1
+	for file in $1/* 
+	do
+		echo $file
+        
+        # 目录为空，跳过改循环
+        if [ "`ls $file`" = "" ]; then
+            echo "===================================="
+            echo "$file is empty"
+            echo "===================================="
+            continue
+        fi
+  
+        # 判断是否为文件类型
+		if test -f $file 
+		then
+			if [[ $file == *.png ]] || [[ $file == *.jpg ]] || [[ $file == *.jpeg ]]
+			then
+				echo "我是PNG/JPG/JPEG图片"
+				guetzli --quality $2 --verbose $file $file
+            else 
+				echo "我文件，但不是图片类型"
+			fi
+		else
+			echo "我是目录"
+			getDir $file $2
+		fi
+	done
+}
+
+
+
+# 命令行校验
+if [ -z $1 ]; then
+    echo "请在命令后面加上文件夹路径"
+elif test -f $1; then
+    echo "请输入目录路径"
+elif [ -z $2 ]; then
+    echo "请在后面加上图片压缩比：[84 ~ 100]"
+elif [ $2 -lt 84 ] || [ $2 -gt 100 ]; then
+    echo "请输入图片压缩比范围：[84 ~ 100]"
+else
+    # 执行遍历方法，参数$1:目录路径，参数$2:图片压缩比例：[84 ~ 100]
+    getDir $1 $2
+fi
+```
 
 
 
