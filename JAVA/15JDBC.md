@@ -31,21 +31,50 @@
 
 
 
-## 4、导入MySQL驱动
+## 4、导入MySQL驱动 【重点】
+
+### 1、项目导入
+
+![](media_JDBC/002.jpg)
 
 
 
+### 2、Tomcat导入
 
+![](media_JDBC/003.jpg)
 
 
 
 ## 4、Java程序连接MySQL
 
+> https://www.runoob.com/java/java-mysql-connect.html
+
+```
+// MySQL 8.0 以上版本 - JDBC 驱动名及数据库 URL
+static final String JDBC_DRIVER = "com.mysql.cj.jdbc.Driver";
+static final String DB_URL = "jdbc:mysql://localhost:3306/QYC";
+
+// 数据库的用户名与密码，需要根据自己的设置
+static final String USERNAME = "root";
+static final String PASSWORD = "1111";
+
+public void startJDBC(String arg) {
+    Connection conn = null;
+    Statement stmt = null;
+
+    // 注册 JDBC 驱动
+    Class.forName(JDBC_DRIVER);
+
+    // 打开链接
+    conn = DriverManager.getConnection(DB_URL, USERNAME, PASSWORD);
+}
+```
 
 
 
 
-https://www.runoob.com/java/java-mysql-connect.html
+
+
 
 
 
