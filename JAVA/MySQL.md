@@ -577,8 +577,6 @@ mysql> select * from firstTable;
 Empty set (0.00 sec)
 ```
 
-
-
 ### 6.4、更改数据
 
 > update 表名 set name = "Lucy", age = 24 where personId = 20;
@@ -602,9 +600,289 @@ mysql> select * from firstTable;
 
 
 
-## 七、查看MySQL相关参数
+## 七、数据库用户操作
 
-### 7.1、通过查看datadir系统变量来查看数据目录
+### 1、查看用户列表
+
+查看用户并没有直接的SQL语句，而是进入 **mysql数据库的user表**（这个mysql库和user表都是一开始就有的），直接用 select * from user；
+
+```mysql
+// 查看用户列表中信息
+mysql> SELECT User, Host, plugin FROM mysql.user;
++------------------+-----------+-----------------------+
+| User             | Host      | plugin                |
++------------------+-----------+-----------------------+
+| mysql.infoschema | localhost | caching_sha2_password |
+| mysql.session    | localhost | caching_sha2_password |
+| mysql.sys        | localhost | caching_sha2_password |
+| root             | localhost | mysql_native_password |
++------------------+-----------+-----------------------+
+4 rows in set (0.00 sec)
+```
+
+或，切换到mysql数据库
+
+```mysql
+// 1.切换到mysql数据库
+mysql> use mysql;
+Reading table information for completion of table and column names
+You can turn off this feature to get a quicker startup with -A
+
+Database changed
+
+// 2.查看user表中user字段
+mysql> select user from user;
++------------------+
+| user             |
++------------------+
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
++------------------+
+4 rows in set (0.00 sec)
+```
+
+### 2、创建新用户
+
+> CREATE USER <name> IDENTIFIED BY <password>;
+
+```mysql
+mysql> create user linx identified by '1111';
+ERROR 1819 (HY000): Your password does not satisfy the current policy requirements
+```
+
+若遇到密码校验不通过，则查看 【十、查看密码校验 & 修改密码校验】
+
+```mysql
+// 再次查看mysql数据库中user表
+mysql> select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| linx             |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
++------------------+
+5 rows in set (0.00 sec)
+```
+
+### 3、更改用户名
+
+> RENAME USER <oldname> to <newname>;
+
+```mysql
+mysql> rename user linx to linxiang;
+Query OK, 0 rows affected (0.00 sec)
+
+// 再次查看，修改成功！
+mysql> select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| linxiang         |
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
++------------------+
+5 rows in set (0.00 sec)
+```
+
+### 4、删除用户
+
+> DROP USER <name>;
+
+```mysql
+mysql> drop user linxiang;
+Query OK, 0 rows affected (0.00 sec)
+
+// 再次查看，删除成功！！
+mysql> select user from mysql.user;
++------------------+
+| user             |
++------------------+
+| mysql.infoschema |
+| mysql.session    |
+| mysql.sys        |
+| root             |
++------------------+
+4 rows in set (0.00 sec)
+```
+
+### 5、更改密码
+
+* 方法一【失败】：SET PASSWORD
+
+```mysql
+mysql> set password for linx = password('1234');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'password('1234')' at line 1
+```
+
+* 方法二【成功】：ALTER USER
+
+```mysql
+// Root修改root密码
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED BY '1111';
+Query OK, 0 rows affected (0.01 sec)
+
+// Root修改linx用户密码
+mysql> ALTER USER 'linx'@'%' IDENTIFIED by '1234';
+Query OK, 0 rows affected (0.01 sec)
+```
+
+### 6、查看用户权限
+
+> SHOW GRANTS FOR <name>;
+
+```mysql
+mysql> show grants for linx;
++----------------------------------+
+| Grants for linx@%                |
++----------------------------------+
+| GRANT USAGE ON *.* TO `linx`@`%` |
++----------------------------------+
+1 row in set (0.00 sec)
+```
+
+### 7、设置用户权限
+
+> GRANT <操作: SELECT, INSERT,UPDATE, ALL> ON <database . tablename> TO <name>;
+
+```mysql
+mysql> Grant select on LX_DB.first to linx;
+ERROR 1146 (42S02): Table 'lx_db.first' doesn't exist
+mysql> Grant select on LX_DB.firstTable to linx;
+Query OK, 0 rows affected (0.01 sec)
+
+// 再次查看权限，设置成功！
+mysql> show grants for linx;
++----------------------------------------------------+
+| Grants for linx@%                                  |
++----------------------------------------------------+
+| GRANT USAGE ON *.* TO `linx`@`%`                   |
+| GRANT SELECT ON `lx_db`.`firsttable` TO `linx`@`%` |
++----------------------------------------------------+
+2 rows in set (0.00 sec)
+```
+
+### 8、移除用户权限
+
+> REVOKE <操作: SELECT, INSERT,UPDATE, ALL> ON <database . tablename> FROM <name>;
+
+```mysql
+// 移除数据库所有表权限，失败！因为刚刚只有firstTable表权限，并无全部表权限。
+mysql> revoke select on lx_db.* from linx;
+ERROR 1141 (42000): There is no such grant defined for user 'linx' on host '%'
+// 移除lx_db数据库中firsttable表权限。
+mysql> revoke select on lx_db.firsttable from linx;
+Query OK, 0 rows affected (0.01 sec)
+
+// 再次查看，移除成功
+mysql> show grants for linx;
++----------------------------------+
+| Grants for linx@%                |
++----------------------------------+
+| GRANT USAGE ON *.* TO `linx`@`%` |
++----------------------------------+
+1 row in set (0.00 sec)
+```
+
+
+
+## 八、查看密码策略 & 修改密码策略和Authentication Plugin
+
+```mysql
+// root进入数据库
+➜ mysql -u root -p 	
+```
+
+### 1、查看密码策略
+
+```mysql
+mysql> SHOW VARIABLES LIKE 'validate_password%';
++--------------------------------------+--------+
+| Variable_name                        | Value  |
++--------------------------------------+--------+
+| validate_password.check_user_name    | ON     |
+| validate_password.dictionary_file    |        |
+| validate_password.length             | 8      |
+| validate_password.mixed_case_count   | 1      |
+| validate_password.number_count       | 1      |
+| validate_password.policy             | MEDIUM |
+| validate_password.special_char_count | 1      |
++--------------------------------------+--------+
+7 rows in set (0.01 sec)
+```
+
+### 2、修改密码策略
+
+>  将 `validate_password.policy ` 改为LOW，`validate_password.length` 改为4
+
+```mysql
+mysql> set global validate_password.policy=0;		// 设置密码策略，LOW
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> set global validate_password.length=4;  // 设置密码长度
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;				// 使更新的权限表加载到内存中
+Query OK, 0 rows affected (0.00 sec)
+
+// 查看是否修改成功
+mysql> SHOW VARIABLES LIKE 'validate_password%';
++--------------------------------------+-------+
+| Variable_name                        | Value |
++--------------------------------------+-------+
+| validate_password.check_user_name    | ON    |
+| validate_password.dictionary_file    |       |
+| validate_password.length             | 4     |
+| validate_password.mixed_case_count   | 1     |
+| validate_password.number_count       | 1     |
+| validate_password.policy             | LOW   |
+| validate_password.special_char_count | 1     |
++--------------------------------------+-------+
+7 rows in set (0.00 sec)
+```
+
+### 3、修改密码规则中的Authentication Plugin
+
+> 小于mysql8版本：Authentication Plugin = mysql_native_password
+>
+> 大于mysql8版本：Authentication Plugin = caching_sha2_password
+>
+> 
+>
+> 所以这里修改Authentication Plugin，改为：mysql_native_password （小于mysql8版本）
+
+```mysql
+// 修改密码规则，同时必须修改密码，若不加『BY '123456'』，则默认密码为空。
+mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> FLUSH PRIVILEGES;				// 使更新的权限表加载到内存中
+Query OK, 0 rows affected (0.00 sec)
+
+// 查看用户列表中信息
+mysql> SELECT User, Host,plugin FROM mysql.user;
++------------------+-----------+-----------------------+
+| User             | Host      | plugin                |
++------------------+-----------+-----------------------+
+| mysql.infoschema | localhost | caching_sha2_password |
+| mysql.session    | localhost | caching_sha2_password |
+| mysql.sys        | localhost | caching_sha2_password |
+| root             | localhost | mysql_native_password |
++------------------+-----------+-----------------------+
+4 rows in set (0.00 sec)
+```
+
+
+
+## 九、查看MySQL相关参数
+
+### 1、通过查看datadir系统变量来查看数据目录
 
 > show variables like 'datadir';		// 直接搜索datadir
 >
@@ -652,9 +930,9 @@ mysql> show variables like '%dir%';
 
 
 
-### 7.2、查看MySQL端口号
+### 2、查看MySQL端口号
 
-```
+```mysql
 mysql> show global variables like 'port';
 +---------------+-------+
 | Variable_name | Value |
@@ -666,139 +944,25 @@ mysql> show global variables like 'port';
 
 
 
+## 十、Navicat Premium
 
-
-
-
-## 八、Navicat Premium
-
-### 8.1、Navicat连接MySQL失败
+### 1、【现象】Navicat连接MySQL失败 - 加密类型更改
 
 [stackoverflow - 解决方案](https://stackoverflow.com/questions/50169576/mysql-8-0-11-error-connect-to-caching-sha2-password-the-specified-module-could-n)
 
-![](media_MySQL/001.png)
+![img](file:///Users/lionsom/GitHub/XiOS/JAVA/media_MySQL/001.png?lastModify=1591200827)
 
-【原因】
+### 2、【原因】
 
 发现这个错误出现的原因是在mysql8之前的版本中加密规则为 **mysql_native_password**，而在mysql8以后的加密规则为 **caching_sha2_password**。
 
-【解决】
+### 3、【解决步骤】
 
-1. root进入数据库
+- 查看【八、查看密码策略 & 修改密码策略和Authentication Plugin】
 
-```
-➜ mysql -u root -p 	
-```
+### 4、【成功】
 
-2. validate_password插件查看密码策略
-
-```
-mysql> SHOW VARIABLES LIKE 'validate_password%';
-+--------------------------------------+--------+
-| Variable_name                        | Value  |
-+--------------------------------------+--------+
-| validate_password.check_user_name    | ON     |
-| validate_password.dictionary_file    |        |
-| validate_password.length             | 8      |
-| validate_password.mixed_case_count   | 1      |
-| validate_password.number_count       | 1      |
-| validate_password.policy             | MEDIUM |
-| validate_password.special_char_count | 1      |
-+--------------------------------------+--------+
-7 rows in set (0.01 sec)
-```
-
-3. 修改密码策略，将 `validate_password.policy ` 改为LOW，`validate_password.length` 改为4
-
-```
-mysql> set global validate_password.policy=0;		// 设置密码策略，LOW
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> set global validate_password.length=4;  // 设置密码长度
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> FLUSH PRIVILEGES;				// 使更新的权限表加载到内存中
-Query OK, 0 rows affected (0.00 sec)
-
-// 查看是否修改成功
-mysql> SHOW VARIABLES LIKE 'validate_password%';
-+--------------------------------------+-------+
-| Variable_name                        | Value |
-+--------------------------------------+-------+
-| validate_password.check_user_name    | ON    |
-| validate_password.dictionary_file    |       |
-| validate_password.length             | 4     |
-| validate_password.mixed_case_count   | 1     |
-| validate_password.number_count       | 1     |
-| validate_password.policy             | LOW   |
-| validate_password.special_char_count | 1     |
-+--------------------------------------+-------+
-7 rows in set (0.00 sec)
-```
-
-4. 修改加密规则，改为：mysql_native_password （小于mysql8版本）
-
-```
-mysql> ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '123456';
-Query OK, 0 rows affected (0.00 sec)
-
-mysql> FLUSH PRIVILEGES;				// 使更新的权限表加载到内存中
-Query OK, 0 rows affected (0.00 sec)
-
-// 查看用户列表中信息
-mysql> SELECT User, Host,plugin FROM mysql.user;
-+------------------+-----------+-----------------------+
-| User             | Host      | plugin                |
-+------------------+-----------+-----------------------+
-| mysql.infoschema | localhost | caching_sha2_password |
-| mysql.session    | localhost | caching_sha2_password |
-| mysql.sys        | localhost | caching_sha2_password |
-| root             | localhost | mysql_native_password |
-+------------------+-----------+-----------------------+
-4 rows in set (0.00 sec)
-```
-
-5. 再次前往 Navicate 重新连接，成功！！！
-
-![](media_MySQL/002.png)
-
-
-
-
-
-## 九、数据库用户操作
-
-### 9.1、查看用户列表
-
-查看用户并没有直接的SQL语句，而是进入 **mysql数据库的user表**（这个mysql库和user表都是一开始就有的），直接用 select * from user；
-
-```
-// 查看用户列表中信息
-mysql> SELECT User, Host, plugin FROM mysql.user;
-+------------------+-----------+-----------------------+
-| User             | Host      | plugin                |
-+------------------+-----------+-----------------------+
-| mysql.infoschema | localhost | caching_sha2_password |
-| mysql.session    | localhost | caching_sha2_password |
-| mysql.sys        | localhost | caching_sha2_password |
-| root             | localhost | mysql_native_password |
-+------------------+-----------+-----------------------+
-4 rows in set (0.00 sec)
-```
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+![img](file:///Users/lionsom/GitHub/XiOS/JAVA/media_MySQL/002.png?lastModify=1591200827)
 
 
 
