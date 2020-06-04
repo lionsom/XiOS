@@ -107,6 +107,11 @@ class FirstViewController: UIViewController {
             }
         }
         
+        guard let a = Int32("3214756842555") else {
+            print("")
+            return
+        }
+        print("A = \(a)")
         
 
         
