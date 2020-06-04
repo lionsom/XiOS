@@ -1,6 +1,12 @@
 
 
-# 一、JDBC
+# 一、Servlet
+
+servlet.jar 可以在tomcat lib下导入
+
+
+
+# 二、JDBC
 
 ## 1、介绍
 
