@@ -14,6 +14,12 @@ class ThirdViewController: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.red
+        
+        self.title = "第三页";
+        
+        // 导航栏是否半透明
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
 

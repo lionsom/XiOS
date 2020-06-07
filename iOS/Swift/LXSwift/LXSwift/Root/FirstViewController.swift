@@ -13,10 +13,37 @@ class FirstViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.view.backgroundColor = UIColor.orange
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.orange
+        
+        self.title = "第一页";
+        
+        // 导航栏是否半透明
+        self.navigationController?.navigationBar.isTranslucent = false
+        
+        // 导航栏底色
+        self.navigationController?.navigationBar.barTintColor = UIColor.darkGray
+        
+        // 導覽列右邊 UIView
+        let myUIView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
+        myUIView.backgroundColor = UIColor.purple
+        let rightButton = UIBarButtonItem(customView: myUIView)
+        // 加到導覽列中
+        self.navigationItem.rightBarButtonItem = rightButton
+
+        // 建立一個按鈕
+        let myButton = UIButton(frame: CGRect(x: 100, y: 250, width: 120, height: 40))
+//        myButton.setTitle("回前頁", forState:UIButton.State.normal)
+        myButton.setTitle("哈", for: .normal)
+        myButton.backgroundColor = UIColor.blue
+        myButton.addTarget(self, action: #selector(back), for: .touchUpInside)
+
+        self.view.addSubview(myButton)
     }
     
+    @objc func back() {
+        print("Line = \(#line), Function = \(#function) ")
+    }
 
     /*
     // MARK: - Navigation
