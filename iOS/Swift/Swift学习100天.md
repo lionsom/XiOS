@@ -1,0 +1,98 @@
+# 第一天：创建项目20200607
+
+## 一、纯代码启动
+
+Xcode 11 中新建 iOS 项目工程时，会有很多变化，最大的变化就是工程中多了文件 SceneDelegate.swift。
+
+### 1、项目文件变化
+
+● AppDelegate.swift 从 Xcode 11 开始负责 App 的启动与终止，并负责与 SceneDelegate 交接，不再管理应用程序的生命周期。
+
+● SceneDelegate.swift 文件接管 Xcode 11 之前 AppDelegate.swift 的功能，负责管理应用程序的生命周期。
+
+虽然 Xcode 11 开始新建的工程使用 SceneDelegate 管理应用的生命周期，但我们还是可以通过删除一些 plist 字段来让 AppDelegate 重新管理应用的生命周期。
+
+### 2、纯代码，移除storyboard
+
+把 Info.plist 中的 ```Application Scene Manifest → Scene Configuration → Application Session Role → Storyboard Name``` 和 ```Main storyboard file base name``` 字段删除。
+
+![](media_100day/001_001.jpg)
+
+### 3、是否保留 SceneDelegate 的配置方法
+
+#### 3.1、保留 SceneDelegate
+
+在 Xcode 11 中，AppDelegate 中通过 `application(_:configurationForConnecting:options) `代理回调函数返回一个 `UISceneConfiguration` 实例。当 App 完成启动后，控制权被交接给 `SceneDelegate`，此时函数 `scene(_:willConnectTo:options:)` 会被调用，我们可以通过如下代码设置 window 的根视图控制器：
+
+```
+func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+    
+    if let windowScene = scene as? UIWindowScene {
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = FirstViewController()
+        self.window = window
+        window.makeKeyAndVisible()
+    }
+}
+```
+
+#### 3.2、不保留 SceneDelegate
+
+首先我们要删除 `SceneDelegate.swift`，然后再删除 `info.plist 的 Application Scene Manifest` 字段。
+
+```
+var window: UIWindow?
+
+func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    // Override point for customization after application launch.
+    self.window = UIWindow(frame: UIScreen.main.bounds)
+    self.window?.rootViewController = FirstViewController()
+    self.window?.makeKeyAndVisible()
+    return true
+}
+```
+
+最后再删掉这两个函数：
+
+```
+func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
+}
+
+func application(_ application: UIApplication, didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
+}
+```
+
+
+
+## 二、UITabBarController + UINavigationController
+
+### 2.1、创建TabBarController + UINavigationController
+
+```
+class RootTabbarController: UITabBarController {
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        createSubVC()
+    }
+    
+    func createSubVC() {
+        let firstVC = FirstViewController()        
+        let secondVC = SecondViewController()
+        self.viewControllers = [firstVC, secondVC]
+    }
+}
+```
+
+### 2.2、Window显示Tabbar
+
+```
+//设置window的rootViewController
+self.window?.rootViewController = RootTabbarController()
+```
+
+
+
+
+
