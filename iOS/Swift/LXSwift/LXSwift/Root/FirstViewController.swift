@@ -18,13 +18,20 @@ class FirstViewController: UIViewController {
         
         self.title = "第一页";
         
+        // 导航栏风格
+        self.navigationController!.navigationBar.barStyle = .black
         // 导航栏是否半透明
-        self.navigationController?.navigationBar.isTranslucent = false
-        
+        self.navigationController!.navigationBar.isTranslucent = false
         // 导航栏底色
-        self.navigationController?.navigationBar.barTintColor = UIColor.green
+        self.navigationController!.navigationBar.barTintColor = UIColor.green
+        // iOS7以后已经修改，不再修改导航栏背景色
+        // To tint the bar's background, please use -barTintColor.
+        self.navigationController!.navigationBar.tintColor = UIColor.red  // X
+        // 导航栏titile颜色
+        self.navigationController!.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.orange]
+
         
-        // 導覽列右邊 UIView
+        // 自定义导航栏右侧视图
         let myUIView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         myUIView.backgroundColor = UIColor.purple
         let rightButton = UIBarButtonItem(customView: myUIView)

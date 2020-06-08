@@ -164,7 +164,8 @@ func Log<T>(_ message:T, file:String = #file, function:String = #function, line:
 
 # Customizing Your App’s Navigation Bar
 
-[Customizing Your App’s Navigation Bar](https://developer.apple.com/documentation/uikit/uinavigationcontroller/customizing_your_app_s_navigation_bar)
+* [Customizing Your App’s Navigation Bar](https://developer.apple.com/documentation/uikit/uinavigationcontroller/customizing_your_app_s_navigation_bar)
 
 
 
+* [Changing navigation bar color in Swift](https://stackoverflow.com/questions/24687238/changing-navigation-bar-color-in-swift)
