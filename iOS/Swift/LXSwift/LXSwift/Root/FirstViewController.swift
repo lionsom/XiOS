@@ -42,9 +42,19 @@ class FirstViewController: UIViewController {
     }
     
     
-    // MARK: - 啊水电费
+    // MARK: - ====== Actions ======
     @objc func back() {
-        Log("啊水电费看")
+        Log("点击了")
+        
+        // new VC
+        let vc = Algorithm_003()
+        
+        //跳转隐藏tabbar
+        self.hidesBottomBarWhenPushed = true;
+        // push
+        self.navigationController?.pushViewController(vc , animated: true)
+        //返回后显示tabbar
+        self.hidesBottomBarWhenPushed = false;
     }
     
     // TODO:adf

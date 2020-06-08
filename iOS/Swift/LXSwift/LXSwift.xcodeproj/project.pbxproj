@@ -27,6 +27,9 @@
 		99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */; };
 		99EB46F9248E06CE0033D7CB /* GlobalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */; };
 		99EB46FE248E08A30033D7CB /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46FD248E08A30033D7CB /* LoginVC.swift */; };
+		99EB4702248E14530033D7CB /* Algorithm_001.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB4701248E14530033D7CB /* Algorithm_001.swift */; };
+		99EB4704248E14630033D7CB /* Algorithm_002.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB4703248E14630033D7CB /* Algorithm_002.swift */; };
+		99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB4705248E146F0033D7CB /* Algorithm_003.swift */; };
 		A5C14367C5F9C70FDBF83D96 /* Pods_LXSwift.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73D6892A4398758B3105CFF9 /* Pods_LXSwift.framework */; };
 /* End PBXBuildFile section */
 
@@ -56,6 +59,9 @@
 		99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+LXColor.swift"; sourceTree = "<group>"; };
 		99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstant.swift; sourceTree = "<group>"; };
 		99EB46FD248E08A30033D7CB /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		99EB4701248E14530033D7CB /* Algorithm_001.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_001.swift; sourceTree = "<group>"; };
+		99EB4703248E14630033D7CB /* Algorithm_002.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_002.swift; sourceTree = "<group>"; };
+		99EB4705248E146F0033D7CB /* Algorithm_003.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_003.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -170,6 +176,7 @@
 			isa = PBXGroup;
 			children = (
 				99EB46FD248E08A30033D7CB /* LoginVC.swift */,
+				99EB4700248E14080033D7CB /* Algorithm */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -179,6 +186,16 @@
 			children = (
 			);
 			path = Singleton;
+			sourceTree = "<group>";
+		};
+		99EB4700248E14080033D7CB /* Algorithm */ = {
+			isa = PBXGroup;
+			children = (
+				99EB4701248E14530033D7CB /* Algorithm_001.swift */,
+				99EB4703248E14630033D7CB /* Algorithm_002.swift */,
+				99EB4705248E146F0033D7CB /* Algorithm_003.swift */,
+			);
+			path = Algorithm;
 			sourceTree = "<group>";
 		};
 		AE2ED7DEFE8DB7B6E5E208E9 /* Frameworks */ = {
@@ -316,11 +333,14 @@
 				99EB46F9248E06CE0033D7CB /* GlobalConstant.swift in Sources */,
 				8AC898CC248CEEEF00D954B4 /* SecondViewController.swift in Sources */,
 				8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */,
+				99EB4702248E14530033D7CB /* Algorithm_001.swift in Sources */,
 				99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */,
 				99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */,
 				99EB46FE248E08A30033D7CB /* LoginVC.swift in Sources */,
+				99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */,
 				8AC898CE248CEEF900D954B4 /* ThirdViewController.swift in Sources */,
 				8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */,
+				99EB4704248E14630033D7CB /* Algorithm_002.swift in Sources */,
 				8ACB3BFA248CE2F4003B6410 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

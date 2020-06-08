@@ -154,6 +154,10 @@ func Log<T>(_ message:T, file:String = #file, function:String = #function, line:
 
 
 
+## 8、push
+
+* [『簡易說明Xcode』顯示下一個畫面方法（由程式觸發的方式 — push）]([https://medium.com/%E5%BD%BC%E5%BE%97%E6%BD%98%E7%9A%84-swift-ios-app-%E9%96%8B%E7%99%BC%E6%95%99%E5%AE%A4/%E7%B0%A1%E6%98%93%E8%AA%AA%E6%98%8Excode%E4%B8%AD%E7%9A%84%E9%A1%AF%E7%A4%BA%E4%B8%8B%E4%B8%80%E5%80%8B%E7%95%AB%E9%9D%A2%E6%96%B9%E6%B3%95-%E7%94%B1%E7%A8%8B%E5%BC%8F%E8%A7%B8%E7%99%BC%E7%9A%84%E6%96%B9%E5%BC%8F-push-e0da619641f7](https://medium.com/彼得潘的-swift-ios-app-開發教室/簡易說明xcode中的顯示下一個畫面方法-由程式觸發的方式-push-e0da619641f7))
+
 
 
 
