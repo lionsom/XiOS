@@ -24,7 +24,7 @@ Xcode 11 中新建 iOS 项目工程时，会有很多变化，最大的变化就
 
 在 Xcode 11 中，AppDelegate 中通过 `application(_:configurationForConnecting:options) `代理回调函数返回一个 `UISceneConfiguration` 实例。当 App 完成启动后，控制权被交接给 `SceneDelegate`，此时函数 `scene(_:willConnectTo:options:)` 会被调用，我们可以通过如下代码设置 window 的根视图控制器：
 
-```
+```swift
 func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
     
     if let windowScene = scene as? UIWindowScene {
@@ -40,7 +40,7 @@ func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options conn
 
 首先我们要删除 `SceneDelegate.swift`，然后再删除 `info.plist 的 Application Scene Manifest` 字段。
 
-```
+```swift
 var window: UIWindow?
 
 func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -54,7 +54,7 @@ func application(_ application: UIApplication, didFinishLaunchingWithOptions lau
 
 最后再删掉这两个函数：
 
-```
+```swift
 func application(_ application: UIApplication, configurationForConnecting connectingSceneSession: UISceneSession, options: UIScene.ConnectionOptions) -> UISceneConfiguration {
 }
 
@@ -64,35 +64,103 @@ func application(_ application: UIApplication, didDiscardSceneSessions sceneSess
 
 
 
-## 二、UITabBarController + UINavigationController
+# 第二天： 20200608
 
-### 2.1、创建TabBarController + UINavigationController
+## 1、MARK、TODO、FIXME
+
+* OC
 
 ```
-class RootTabbarController: UITabBarController {
+#pragma mark - 说明
+```
 
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        createSubVC()
-    }
-    
-    func createSubVC() {
-        let firstVC = FirstViewController()        
-        let secondVC = SecondViewController()
-        self.viewControllers = [firstVC, secondVC]
-    }
+* Swift
+
+```swift
+// MARK: - 说明文字,带分割线
+// MARK: 说明文字,不带分割线
+
+// TODO: 需要提醒的文字
+
+// FIXME: 需要修改bug的相关说明
+```
+
+## 2、输出当前函数、当前行
+
+> Swift 支持全局函数
+
+```swift
+func Log<T>(_ message:T, file:String = #file, function:String = #function, line:Int = #line) {
+    #if DEBUG
+    // 获取文件名
+    let fileName = (file as NSString).lastPathComponent
+    // 打印日志内容
+    print("\(fileName) \(line) \(function) \(message)")
+    #endif
 }
 ```
 
-### 2.2、Window显示Tabbar
+## 3、Category VS EXtension
 
+* [How to create swift class for category?](https://stackoverflow.com/questions/24142829/how-to-create-swift-class-for-category)
+
+#### 3.1、UIColor 扩展
+
+* [How to access extension of UIColor in Swift?](https://stackoverflow.com/questions/29648348/how-to-access-extension-of-uicolor-in-swift)
+
+* [How to Create a UIColor in Swift](https://www.codingexplorer.com/create-uicolor-swift/)
+
+
+
+## 4、全局常量 Constants
+
+* [Global constants file in Swift](https://stackoverflow.com/questions/26252233/global-constants-file-in-swift)
+
+
+
+## 5、单例 Singleton
+
+* [Using a dispatch_once singleton model in Swift](https://stackoverflow.com/questions/24024549/using-a-dispatch-once-singleton-model-in-swift)
+
+
+
+## 6、#ifdef in Swift
+
+* [#ifdef replacement in the Swift language](https://stackoverflow.com/questions/24003291/ifdef-replacement-in-the-swift-language)
+
+* OC
+
+```swift
+#ifdef DEBUG
+    // Debug-only code
+#endif
 ```
-//设置window的rootViewController
-self.window?.rootViewController = RootTabbarController()
+
+* Swift
+
+```swift
+#if DEBUG
+
+#elseif AAA
+
+#else
 ```
 
+## 7、convenience
 
+* [Swift: Convenience initializers - Self used before self.init call](https://stackoverflow.com/questions/37095435/swift-convenience-initializers-self-used-before-self-init-call)
+
+* [swift convenience init and generic class](https://stackoverflow.com/questions/44066573/swift-convenience-init-and-generic-class)
+
+
+
+
+
+
+
+# Customizing Your App’s Navigation Bar
+
+[Customizing Your App’s Navigation Bar](https://developer.apple.com/documentation/uikit/uinavigationcontroller/customizing_your_app_s_navigation_bar)
 
 
 

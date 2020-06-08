@@ -22,7 +22,7 @@ class FirstViewController: UIViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         
         // 导航栏底色
-        self.navigationController?.navigationBar.barTintColor = UIColor.darkGray
+        self.navigationController?.navigationBar.barTintColor = UIColor.green
         
         // 導覽列右邊 UIView
         let myUIView = UIView(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
@@ -35,15 +35,21 @@ class FirstViewController: UIViewController {
         let myButton = UIButton(frame: CGRect(x: 100, y: 250, width: 120, height: 40))
 //        myButton.setTitle("回前頁", forState:UIButton.State.normal)
         myButton.setTitle("哈", for: .normal)
-        myButton.backgroundColor = UIColor.blue
+        myButton.backgroundColor = UIColor.randomColor()
         myButton.addTarget(self, action: #selector(back), for: .touchUpInside)
 
         self.view.addSubview(myButton)
     }
     
+    
+    // MARK: - 啊水电费
     @objc func back() {
-        print("Line = \(#line), Function = \(#function) ")
+        Log("啊水电费看")
     }
+    
+    // TODO:adf
+    
+    // FIXME: adsf
 
     /*
     // MARK: - Navigation
