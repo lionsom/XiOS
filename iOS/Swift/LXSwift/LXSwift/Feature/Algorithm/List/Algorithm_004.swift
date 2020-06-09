@@ -17,8 +17,7 @@ class Algorithm_004: UIViewController {
         self.view.backgroundColor = UIColor.randomColor()
         self.title = "罗马数字转阿拉伯数字";
         
-        print("\(RomaNumChangeToAlaboNum(romaNum: "asdfadfs"))")
-        
+        print("\(RomaToInt(romaNum: "MMMDCLLXVI"))")
     }
     
     deinit {
@@ -27,7 +26,7 @@ class Algorithm_004: UIViewController {
     
     /// 将罗马数字转换为阿拉伯数字
     /// - Returns: 返回值 -1 失败
-    func RomaNumChangeToAlaboNum(romaNum:String) -> Int {
+    func RomaToInt(romaNum:String) -> Int {
         /**
          I  1
          V  5
@@ -37,16 +36,31 @@ class Algorithm_004: UIViewController {
          D 500
          M 1000
          */
-
+        var result = 0;
         for item in romaNum {
-            
             //
             print(item)
             
+            switch item {
+            case "M":
+                result += 1000
+            case "D":
+                result += 500
+            case "C":
+                result += 100
+            case "L":
+                result += 50
+            case "X":
+                result += 10
+            case "V":
+                result += 5
+            case "I":
+                result += 1
+            default:
+                break
+            }
         }
-        
-        
-        return -1;
+        return result
     }
     
     

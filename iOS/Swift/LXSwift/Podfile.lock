@@ -4,19 +4,23 @@ PODS:
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
+  - SnapKit (5.0.1)
 
 DEPENDENCIES:
   - Moya (~> 14.0)
+  - SnapKit (~> 5.0.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
     - Moya
+    - SnapKit
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
 
-PODFILE CHECKSUM: faf7acae318e4f823b4e134f994849b8ed02875d
+PODFILE CHECKSUM: 97826e00fd1af10a69b5442af1543d12357b8760
 
 COCOAPODS: 1.8.4

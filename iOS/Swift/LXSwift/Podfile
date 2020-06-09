@@ -9,6 +9,6 @@ target 'LXSwift' do
   # Pods for LXSwift
 
 pod 'Moya', '~> 14.0'
-
+pod 'SnapKit', '~> 5.0.0'
 
 end
