@@ -10,5 +10,7 @@ target 'LXSwift' do
 
 pod 'Moya', '~> 14.0'
 pod 'SnapKit', '~> 5.0.0'
+pod 'SVProgressHUD'
+
 
 end
