@@ -95,6 +95,11 @@ class FirstViewController: UIViewController {
             
             navigationItem.prompt = nil
         }
+        
+        let AlgorithmVC = Algorithm_004()
+        self.hidesBottomBarWhenPushed = true
+        self.navigationController?.pushViewController(AlgorithmVC, animated: true)
+        self.hidesBottomBarWhenPushed = false
     }
     
     @objc func tapClick(tap:UITapGestureRecognizer) {

@@ -24,6 +24,7 @@
 		8ACB3C03248CE2F6003B6410 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ACB3C02248CE2F6003B6410 /* Assets.xcassets */; };
 		8ACB3C06248CE2F6003B6410 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACB3C04248CE2F6003B6410 /* LaunchScreen.storyboard */; };
 		9964A2BA248F1BE000553584 /* AlgorithmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2B9248F1BE000553584 /* AlgorithmTableViewController.swift */; };
+		9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BB248F3D7100553584 /* Algorithm_004.swift */; };
 		99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46EF248DEC660033D7CB /* GlobalFunc.swift */; };
 		99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */; };
 		99EB46F9248E06CE0033D7CB /* GlobalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */; };
@@ -57,6 +58,7 @@
 		8ACB3C05248CE2F6003B6410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8ACB3C07248CE2F6003B6410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9964A2B9248F1BE000553584 /* AlgorithmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTableViewController.swift; sourceTree = "<group>"; };
+		9964A2BB248F3D7100553584 /* Algorithm_004.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_004.swift; sourceTree = "<group>"; };
 		99EB46EF248DEC660033D7CB /* GlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunc.swift; sourceTree = "<group>"; };
 		99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+LXColor.swift"; sourceTree = "<group>"; };
 		99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstant.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				99EB4701248E14530033D7CB /* Algorithm_001.swift */,
 				99EB4703248E14630033D7CB /* Algorithm_002.swift */,
 				99EB4705248E146F0033D7CB /* Algorithm_003.swift */,
+				9964A2BB248F3D7100553584 /* Algorithm_004.swift */,
 			);
 			path = List;
 			sourceTree = "<group>";
@@ -357,6 +360,7 @@
 				99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */,
 				9964A2BA248F1BE000553584 /* AlgorithmTableViewController.swift in Sources */,
 				99EB46FE248E08A30033D7CB /* LoginVC.swift in Sources */,
+				9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */,
 				99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */,
 				8AC898CE248CEEF900D954B4 /* ThirdViewController.swift in Sources */,
 				8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */,
