@@ -17,8 +17,9 @@ class Algorithm_004: UIViewController {
         self.view.backgroundColor = UIColor.randomColor()
         self.title = "罗马数字转阿拉伯数字";
         
-        print("\(RomaNumChangeToAlaboNum(romaNum: "asdfadfs"))")
+//        print("\(RomaNumChangeToAlaboNum(romaNum: "asdfadfs"))")
         
+        print("\(romanToInt("DCXV"))")
     }
     
     deinit {
@@ -37,8 +38,13 @@ class Algorithm_004: UIViewController {
          D 500
          M 1000
          */
-
+        let array = Array(romaNum)
+        
         for item in romaNum {
+            
+            if item == "M" {
+                
+            }
             
             //
             print(item)
@@ -48,7 +54,6 @@ class Algorithm_004: UIViewController {
         
         return -1;
     }
-    
     
     
     /*

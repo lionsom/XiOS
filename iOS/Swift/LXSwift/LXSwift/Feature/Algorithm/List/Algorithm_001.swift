@@ -14,7 +14,23 @@ class Algorithm_001: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        self.view.backgroundColor = UIColor.randomColor()
+        self.title = "两数之和";
+        
+        
+        let numsArr = [1,2,3,4,5,6,7,8,9,10];
+        let target = 10;
+        for (index, value) in numsArr.enumerated() {
+            for (index1, value1) in numsArr.enumerated() {
+                if index < index1 {
+                    if value+value1 == target {
+                        print("index =", index, index1)
+                    }
+                }
+            }
+        }
     }
+    
     
 
     /*
