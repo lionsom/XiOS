@@ -8,6 +8,8 @@
 
 import UIKit
 
+import SVProgressHUD
+
 class FirstViewController: UIViewController {
 
     override func viewDidLoad() {
@@ -113,7 +115,6 @@ class FirstViewController: UIViewController {
     
     @objc func back() {
         Log("点击了")
-        
         // new VC
         let vc = Algorithm_003()
         

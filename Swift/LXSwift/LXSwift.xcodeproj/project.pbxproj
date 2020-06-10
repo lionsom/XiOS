@@ -25,6 +25,8 @@
 		8ACB3C06248CE2F6003B6410 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACB3C04248CE2F6003B6410 /* LaunchScreen.storyboard */; };
 		9964A2BA248F1BE000553584 /* AlgorithmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2B9248F1BE000553584 /* AlgorithmTableViewController.swift */; };
 		9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BB248F3D7100553584 /* Algorithm_004.swift */; };
+		9964A2BE249073D300553584 /* AlgorithmTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BD249073D300553584 /* AlgorithmTVCell.swift */; };
+		9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2C12490764200553584 /* SVProgressHUDVC.swift */; };
 		99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46EF248DEC660033D7CB /* GlobalFunc.swift */; };
 		99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */; };
 		99EB46F9248E06CE0033D7CB /* GlobalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */; };
@@ -59,6 +61,8 @@
 		8ACB3C07248CE2F6003B6410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9964A2B9248F1BE000553584 /* AlgorithmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTableViewController.swift; sourceTree = "<group>"; };
 		9964A2BB248F3D7100553584 /* Algorithm_004.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_004.swift; sourceTree = "<group>"; };
+		9964A2BD249073D300553584 /* AlgorithmTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTVCell.swift; sourceTree = "<group>"; };
+		9964A2C12490764200553584 /* SVProgressHUDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVProgressHUDVC.swift; sourceTree = "<group>"; };
 		99EB46EF248DEC660033D7CB /* GlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunc.swift; sourceTree = "<group>"; };
 		99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+LXColor.swift"; sourceTree = "<group>"; };
 		99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstant.swift; sourceTree = "<group>"; };
@@ -163,6 +167,7 @@
 			isa = PBXGroup;
 			children = (
 				9964A2B9248F1BE000553584 /* AlgorithmTableViewController.swift */,
+				9964A2BD249073D300553584 /* AlgorithmTVCell.swift */,
 			);
 			path = Main;
 			sourceTree = "<group>";
@@ -176,6 +181,14 @@
 				9964A2BB248F3D7100553584 /* Algorithm_004.swift */,
 			);
 			path = List;
+			sourceTree = "<group>";
+		};
+		9964A2C0249075AB00553584 /* Vendor_Usage */ = {
+			isa = PBXGroup;
+			children = (
+				9964A2C12490764200553584 /* SVProgressHUDVC.swift */,
+			);
+			path = Vendor_Usage;
 			sourceTree = "<group>";
 		};
 		99EB46EE248DEBC70033D7CB /* Config */ = {
@@ -200,6 +213,7 @@
 			children = (
 				99EB46FD248E08A30033D7CB /* LoginVC.swift */,
 				99EB4700248E14080033D7CB /* Algorithm */,
+				9964A2C0249075AB00553584 /* Vendor_Usage */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -352,6 +366,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9964A2BE249073D300553584 /* AlgorithmTVCell.swift in Sources */,
 				99EB46F9248E06CE0033D7CB /* GlobalConstant.swift in Sources */,
 				8AC898CC248CEEEF00D954B4 /* SecondViewController.swift in Sources */,
 				8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */,
@@ -359,6 +374,7 @@
 				99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */,
 				99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */,
 				9964A2BA248F1BE000553584 /* AlgorithmTableViewController.swift in Sources */,
+				9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */,
 				99EB46FE248E08A30033D7CB /* LoginVC.swift in Sources */,
 				9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */,
 				99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */,
