@@ -18,7 +18,12 @@ class Algorithm_004: UIViewController {
         self.title = "罗马数字转阿拉伯数字";
         
 
-        print("\(RomaToInt(romaNum: "MMMDCLLXVI"))")
+        print("\(RomaToInt(romaNum: "XLVIII"))")   // 48
+        print("\(RomaToInt(romaNum: "XLIX"))")     // 49
+        print("\(RomaToInt(romaNum: "XCIX"))")     // 99
+        print("\(RomaToInt(romaNum: "CDLXXXIX"))") // 489
+        print("\(RomaToInt(romaNum: "MCMXLIII"))") // 1943
+        print("\(RomaToInt(romaNum: "MCMXLIX"))")  // 1949
     }
     
     deinit {
@@ -26,6 +31,7 @@ class Algorithm_004: UIViewController {
     }
     
     /// 将罗马数字转换为阿拉伯数字
+    /// 罗马数字对照表：https://wywu.pixnet.net/blog/post/23023232
     /// - Returns: 返回值 -1 失败
     func RomaToInt(romaNum:String) -> Int {
         /**
@@ -37,13 +43,36 @@ class Algorithm_004: UIViewController {
          D 500
          M 1000
          */
-        _ = Array(romaNum)
-
+        var Num = romaNum
         var result = 0;
-        for item in romaNum {
-            //
-            print(item)
-            
+        
+        if Num.contains("IV") {
+            result += 4
+            Num = Num.replacingOccurrences(of: "IV", with: "")
+        }
+        if Num.contains("IX") {
+            result += 9
+            Num = Num.replacingOccurrences(of: "IX", with: "")
+        }
+        if Num.contains("XL") {
+            result += 40
+            Num = Num.replacingOccurrences(of: "XL", with: "")
+        }
+        if Num.contains("XC") {
+            result += 90
+            Num = Num.replacingOccurrences(of: "XC", with: "")
+        }
+        if Num.contains("CD") {
+            result += 400
+            Num = Num.replacingOccurrences(of: "CD", with: "")
+        }
+        if Num.contains("CM") {
+            result += 900
+            Num = Num.replacingOccurrences(of: "CM", with: "")
+        }
+        
+        
+        for item in Num {
             switch item {
             case "M":
                 result += 1000
