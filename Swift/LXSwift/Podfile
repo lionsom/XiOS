@@ -11,6 +11,11 @@ target 'LXSwift' do
 pod 'Moya', '~> 14.0'
 pod 'SnapKit', '~> 5.0.0'
 pod 'SVProgressHUD'
-
+pod 'SwiftLint'
+pod 'SwiftyJSON', '~> 4.0'
+pod 'Valet'
+pod 'SwiftyUserDefaults', '~> 5.0'
+pod 'Hero'
+pod 'DZNEmptyDataSet'
 
 end
