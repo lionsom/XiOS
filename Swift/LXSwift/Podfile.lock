@@ -1,11 +1,15 @@
 PODS:
   - Alamofire (5.2.1)
+  - CryptoSwift (1.3.1)
   - DZNEmptyDataSet (1.8.1)
+  - FSCalendar (2.8.1)
+  - GDPerformanceView-Swift (2.0.3)
   - Hero (1.5.0)
   - Moya (14.0.0):
     - Moya/Core (= 14.0.0)
   - Moya/Core (14.0.0):
     - Alamofire (~> 5.0)
+  - Onboard (2.3.3)
   - SnapKit (5.0.1)
   - SVProgressHUD (2.2.5)
   - SwiftLint (0.39.2)
@@ -14,9 +18,13 @@ PODS:
   - Valet (3.2.8)
 
 DEPENDENCIES:
+  - CryptoSwift (~> 1.0)
   - DZNEmptyDataSet
+  - FSCalendar
+  - GDPerformanceView-Swift (~> 2.0.3)
   - Hero
   - Moya (~> 14.0)
+  - Onboard
   - SnapKit (~> 5.0.0)
   - SVProgressHUD
   - SwiftLint
@@ -27,9 +35,13 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - CryptoSwift
     - DZNEmptyDataSet
+    - FSCalendar
+    - GDPerformanceView-Swift
     - Hero
     - Moya
+    - Onboard
     - SnapKit
     - SVProgressHUD
     - SwiftLint
@@ -39,9 +51,13 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e911732990610fe89af59ac0077f923d72dc3dfd
+  CryptoSwift: f12f037f6d0fcd6d48c96db0071b653de64e6c4d
   DZNEmptyDataSet: 9525833b9e68ac21c30253e1d3d7076cc828eaa7
+  FSCalendar: 5245140456fcbcac5824c203b98bd8068bdfee1a
+  GDPerformanceView-Swift: ef3d05deb103e472a5494d3f60aeca5a58b88a7d
   Hero: b7385b75e7259da62f4f85462f59a5082d66b058
   Moya: 5b45dacb75adb009f97fde91c204c1e565d31916
+  Onboard: 4d6e943e20bdd6bc229df967a347dd7514bc2a6f
   SnapKit: 97b92857e3df3a0c71833cce143274bf6ef8e5eb
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   SwiftLint: 22ccbbe3b8008684be5955693bab135e0ed6a447
@@ -49,6 +65,6 @@ SPEC CHECKSUMS:
   SwiftyUserDefaults: 33fcb42bd1feb53a37d873feb62c82967db5f7f6
   Valet: 16d0537d70db79d9ba953b9060b5da4fb8004e51
 
-PODFILE CHECKSUM: 7aad162c4d015711e90e833fd4b6c6d89fed6a71
+PODFILE CHECKSUM: 4a14116d17220f46f0ee4f7b9ca0f0b4df33fbde
 
 COCOAPODS: 1.9.1

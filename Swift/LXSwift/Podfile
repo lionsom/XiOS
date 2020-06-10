@@ -17,5 +17,11 @@ pod 'Valet'
 pod 'SwiftyUserDefaults', '~> 5.0'
 pod 'Hero'
 pod 'DZNEmptyDataSet'
+pod 'Onboard'
+pod 'GDPerformanceView-Swift', '~> 2.0.3'
+pod 'CryptoSwift', '~> 1.0'
+pod 'FSCalendar'
+# pod 'ImageViewer'
+
 
 end

@@ -347,6 +347,29 @@ $ pod search AFNetworking
 
 
 
+###4.4、问题四：pod install 失败
+
+* 操作示例
+
+```
+➜ LXSwift git:(master) ✗ pod install
+Analyzing dependencies
+Downloading dependencies
+Installing Onboard (2.3.3)
+
+[!] Error installing Onboard
+[!] /usr/bin/git clone https://github.com/mamaral/Onboard.git /var/folders/cl/ws9pg99n0tlb3zd6_ddqzh1c0000gn/T/d20200610-45025-nz4ytc --template= --single-branch --depth 1 --branch v2.3.3
+
+Cloning into '/var/folders/cl/ws9pg99n0tlb3zd6_ddqzh1c0000gn/T/d20200610-45025-nz4ytc'...
+error: RPC failed; curl 56 LibreSSL SSL_read: SSL_ERROR_SYSCALL, errno 54
+fatal: the remote end hung up unexpectedly
+fatal: protocol error: bad pack header
+```
+
+* 解决：更新pod，`brew `
+
+
+
 ## 五、奇淫巧技
 
 ### 1、pod install提速
