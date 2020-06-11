@@ -24,6 +24,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = RootTabbarController()
         self.window?.makeKeyAndVisible()
         
+        Int32;
+        Int8
+        UInt;
+        
         return true
     }
 
