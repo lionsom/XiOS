@@ -27,10 +27,10 @@
 		9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BB248F3D7100553584 /* Algorithm_004.swift */; };
 		9964A2BE249073D300553584 /* AlgorithmTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BD249073D300553584 /* AlgorithmTVCell.swift */; };
 		9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2C12490764200553584 /* SVProgressHUDVC.swift */; };
+		9970A03E24938D4A008EF873 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9970A03D24938D4A008EF873 /* LoginVC.swift */; };
 		99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46EF248DEC660033D7CB /* GlobalFunc.swift */; };
 		99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */; };
 		99EB46F9248E06CE0033D7CB /* GlobalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */; };
-		99EB46FE248E08A30033D7CB /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46FD248E08A30033D7CB /* LoginVC.swift */; };
 		99EB4702248E14530033D7CB /* Algorithm_001.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB4701248E14530033D7CB /* Algorithm_001.swift */; };
 		99EB4704248E14630033D7CB /* Algorithm_002.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB4703248E14630033D7CB /* Algorithm_002.swift */; };
 		99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB4705248E146F0033D7CB /* Algorithm_003.swift */; };
@@ -63,10 +63,10 @@
 		9964A2BB248F3D7100553584 /* Algorithm_004.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_004.swift; sourceTree = "<group>"; };
 		9964A2BD249073D300553584 /* AlgorithmTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTVCell.swift; sourceTree = "<group>"; };
 		9964A2C12490764200553584 /* SVProgressHUDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVProgressHUDVC.swift; sourceTree = "<group>"; };
+		9970A03D24938D4A008EF873 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		99EB46EF248DEC660033D7CB /* GlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunc.swift; sourceTree = "<group>"; };
 		99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+LXColor.swift"; sourceTree = "<group>"; };
 		99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstant.swift; sourceTree = "<group>"; };
-		99EB46FD248E08A30033D7CB /* LoginVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		99EB4701248E14530033D7CB /* Algorithm_001.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_001.swift; sourceTree = "<group>"; };
 		99EB4703248E14630033D7CB /* Algorithm_002.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_002.swift; sourceTree = "<group>"; };
 		99EB4705248E146F0033D7CB /* Algorithm_003.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_003.swift; sourceTree = "<group>"; };
@@ -91,6 +91,14 @@
 				6FEFE7B1D199BA1FDD6227A1 /* Pods-LXSwift.release.xcconfig */,
 			);
 			path = Pods;
+			sourceTree = "<group>";
+		};
+		8A6E409024927AA400D97A21 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				9970A03D24938D4A008EF873 /* LoginVC.swift */,
+			);
+			path = Login;
 			sourceTree = "<group>";
 		};
 		8AC898C7248CEE4D00D954B4 /* AppEntry */ = {
@@ -211,7 +219,7 @@
 		99EB46FC248E088C0033D7CB /* Feature */ = {
 			isa = PBXGroup;
 			children = (
-				99EB46FD248E08A30033D7CB /* LoginVC.swift */,
+				8A6E409024927AA400D97A21 /* Login */,
 				99EB4700248E14080033D7CB /* LeetCodeAlgorithm */,
 				9964A2C0249075AB00553584 /* Vendor_Usage */,
 			);
@@ -375,8 +383,8 @@
 				99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */,
 				9964A2BA248F1BE000553584 /* AlgorithmTableViewController.swift in Sources */,
 				9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */,
-				99EB46FE248E08A30033D7CB /* LoginVC.swift in Sources */,
 				9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */,
+				9970A03E24938D4A008EF873 /* LoginVC.swift in Sources */,
 				99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */,
 				8AC898CE248CEEF900D954B4 /* ThirdViewController.swift in Sources */,
 				8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */,
