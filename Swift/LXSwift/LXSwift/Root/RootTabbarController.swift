@@ -8,8 +8,6 @@
 
 import UIKit
 
-//import FirstViewController
-
 class RootTabbarController: UITabBarController {
 
     override func viewDidLoad() {
@@ -26,7 +24,7 @@ class RootTabbarController: UITabBarController {
         tabbar1_normal = tabbar1_normal?.withRenderingMode(UIImage.RenderingMode.automatic)
         let tabbar1_select = UIImage(named:"tabbar_home_select")
         let tabItem1 = UITabBarItem(title: "主页", image: tabbar1_normal, selectedImage: tabbar1_select)
-        tabItem1.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0);  // 偏移
+        tabItem1.imageInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0);  // 偏移
         firstNavi.tabBarItem = tabItem1
         
         let secondVC = SecondViewController()
@@ -41,14 +39,22 @@ class RootTabbarController: UITabBarController {
         thirdNavi.addChild(thirdVC)
         let tabbar3_normal = UIImage(named:"tabbar_shop_normal")
         let tabbar3_select = UIImage(named:"tabbar_shop_select")
-        let tabItem3 = UITabBarItem(title: "记录", image: tabbar3_normal, selectedImage: tabbar3_select)
+        let tabItem3 = UITabBarItem(title: "力扣", image: tabbar3_normal, selectedImage: tabbar3_select)
         thirdNavi.tabBarItem = tabItem3
+        
+        let forthVC = ForthViewController()
+        let forthNavi = UINavigationController(rootViewController: forthVC)
+        let tabbar4_normal = UIImage(named:"tabbar_person_normal")
+        let tabbar4_select = UIImage(named:"tabbar_person_select")
+        let tabItem4 = UITabBarItem(title: "个人", image: tabbar4_normal, selectedImage: tabbar4_select)
+        forthNavi.tabBarItem = tabItem4
         
         // 添加
 //        self.viewControllers = [firstNavi, secondNavi, thirdNavi]
         self.addChild(firstNavi)
         self.addChild(secondNavi)
         self.addChild(thirdNavi)
+        self.viewControllers?.append(forthNavi)
         
         // 默认选择
         self.selectedIndex = 1
@@ -56,9 +62,9 @@ class RootTabbarController: UITabBarController {
         //tabbar背景
         self.tabBar.barTintColor = UIColor.white
         //tabbar选中图片+文字颜色
-        self.tabBar.tintColor = UIColor.green
+        self.tabBar.tintColor = UIColor.red
         //tabbar未选择图片+文字颜色
-        self.tabBar.unselectedItemTintColor = UIColor.yellow
+        self.tabBar.unselectedItemTintColor = UIColor.black
         
 //        self.tabBar.backgroundImage = UIImage();
 //        self.tabBar.shadowImage = UIImage();
@@ -80,14 +86,4 @@ class RootTabbarController: UITabBarController {
         print("Line = \(#line), Function = \(#function) ")
     }
     
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

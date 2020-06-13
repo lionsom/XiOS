@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		8A1DDCD824949656001BA58C /* Learning_String_VC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDCD724949656001BA58C /* Learning_String_VC.swift */; };
+		8A1DDCFE2494B311001BA58C /* Specs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDCFD2494B311001BA58C /* Specs.swift */; };
+		8A1DDD002494CA22001BA58C /* FBMeBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDCFF2494CA22001BA58C /* FBMeBaseViewController.swift */; };
+		8A1DDD022494CAAA001BA58C /* FBMeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD012494CAAA001BA58C /* FBMeViewController.swift */; };
+		8A1DDD072494CB1B001BA58C /* FBMeUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD062494CB1B001BA58C /* FBMeUser.swift */; };
+		8A1DDD092494D341001BA58C /* FBMeBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD082494D341001BA58C /* FBMeBaseCell.swift */; };
+		8A1DDD0F249529A8001BA58C /* ForthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD0E249529A8001BA58C /* ForthViewController.swift */; };
+		8A1DDD1124952D84001BA58C /* ThirdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD1024952D84001BA58C /* ThirdCell.swift */; };
 		8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898C5248CEE4500D954B4 /* RootTabbarController.swift */; };
 		8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */; };
 		8AC898CC248CEEEF00D954B4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898CB248CEEEF00D954B4 /* SecondViewController.swift */; };
@@ -41,6 +49,14 @@
 		69F0201378D177B42A66BA1F /* Pods-LXSwift.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwift.debug.xcconfig"; path = "Target Support Files/Pods-LXSwift/Pods-LXSwift.debug.xcconfig"; sourceTree = "<group>"; };
 		6FEFE7B1D199BA1FDD6227A1 /* Pods-LXSwift.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-LXSwift.release.xcconfig"; path = "Target Support Files/Pods-LXSwift/Pods-LXSwift.release.xcconfig"; sourceTree = "<group>"; };
 		73D6892A4398758B3105CFF9 /* Pods_LXSwift.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_LXSwift.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8A1DDCD724949656001BA58C /* Learning_String_VC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Learning_String_VC.swift; sourceTree = "<group>"; };
+		8A1DDCFD2494B311001BA58C /* Specs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Specs.swift; sourceTree = "<group>"; };
+		8A1DDCFF2494CA22001BA58C /* FBMeBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBMeBaseViewController.swift; sourceTree = "<group>"; };
+		8A1DDD012494CAAA001BA58C /* FBMeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBMeViewController.swift; sourceTree = "<group>"; };
+		8A1DDD062494CB1B001BA58C /* FBMeUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBMeUser.swift; sourceTree = "<group>"; };
+		8A1DDD082494D341001BA58C /* FBMeBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBMeBaseCell.swift; sourceTree = "<group>"; };
+		8A1DDD0E249529A8001BA58C /* ForthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForthViewController.swift; sourceTree = "<group>"; };
+		8A1DDD1024952D84001BA58C /* ThirdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCell.swift; sourceTree = "<group>"; };
 		8AC898C5248CEE4500D954B4 /* RootTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabbarController.swift; sourceTree = "<group>"; };
 		8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		8AC898CB248CEEEF00D954B4 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
@@ -53,7 +69,7 @@
 		8AC898E7248D22D300D954B4 /* tabbar_shop_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_shop_normal@2x.png"; sourceTree = "<group>"; };
 		8AC898E8248D22D300D954B4 /* tabbar_person_normal@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_person_normal@2x.png"; sourceTree = "<group>"; };
 		8AC898E9248D22D300D954B4 /* tabbar_person_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "tabbar_person_select@2x.png"; sourceTree = "<group>"; };
-		8ACB3BF6248CE2F4003B6410 /* LXSwift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LXSwift.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8ACB3BF6248CE2F4003B6410 /* 自学Swift.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "自学Swift.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		8ACB3BF9248CE2F4003B6410 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8ACB3C00248CE2F4003B6410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		8ACB3C02248CE2F6003B6410 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -93,6 +109,91 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		8A1DDCD624948AE8001BA58C /* LearningByVideo */ = {
+			isa = PBXGroup;
+			children = (
+				8A1DDCD724949656001BA58C /* Learning_String_VC.swift */,
+				8A1DDCFB2494B2C5001BA58C /* FaceBookMe */,
+			);
+			path = LearningByVideo;
+			sourceTree = "<group>";
+		};
+		8A1DDCFB2494B2C5001BA58C /* FaceBookMe */ = {
+			isa = PBXGroup;
+			children = (
+				8A1DDD032494CADF001BA58C /* Controller */,
+				8A1DDD042494CAE7001BA58C /* View */,
+				8A1DDD052494CAED001BA58C /* Model */,
+			);
+			path = FaceBookMe;
+			sourceTree = "<group>";
+		};
+		8A1DDCFC2494B2E8001BA58C /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				8A1DDCFD2494B311001BA58C /* Specs.swift */,
+			);
+			path = Helper;
+			sourceTree = "<group>";
+		};
+		8A1DDD032494CADF001BA58C /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				8A1DDCFF2494CA22001BA58C /* FBMeBaseViewController.swift */,
+				8A1DDD012494CAAA001BA58C /* FBMeViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		8A1DDD042494CAE7001BA58C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				8A1DDD082494D341001BA58C /* FBMeBaseCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8A1DDD052494CAED001BA58C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				8A1DDD062494CB1B001BA58C /* FBMeUser.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		8A1DDD0A249517B3001BA58C /* Second */ = {
+			isa = PBXGroup;
+			children = (
+				8AC898CB248CEEEF00D954B4 /* SecondViewController.swift */,
+			);
+			path = Second;
+			sourceTree = "<group>";
+		};
+		8A1DDD0B249517C1001BA58C /* First */ = {
+			isa = PBXGroup;
+			children = (
+				8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */,
+			);
+			path = First;
+			sourceTree = "<group>";
+		};
+		8A1DDD0C249517CA001BA58C /* Third */ = {
+			isa = PBXGroup;
+			children = (
+				8AC898CD248CEEF900D954B4 /* ThirdViewController.swift */,
+				8A1DDD1024952D84001BA58C /* ThirdCell.swift */,
+			);
+			path = Third;
+			sourceTree = "<group>";
+		};
+		8A1DDD0D2495296B001BA58C /* Forth */ = {
+			isa = PBXGroup;
+			children = (
+				8A1DDD0E249529A8001BA58C /* ForthViewController.swift */,
+			);
+			path = Forth;
+			sourceTree = "<group>";
+		};
 		8A6E409024927AA400D97A21 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -113,9 +214,10 @@
 			isa = PBXGroup;
 			children = (
 				8AC898C5248CEE4500D954B4 /* RootTabbarController.swift */,
-				8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */,
-				8AC898CB248CEEEF00D954B4 /* SecondViewController.swift */,
-				8AC898CD248CEEF900D954B4 /* ThirdViewController.swift */,
+				8A1DDD0B249517C1001BA58C /* First */,
+				8A1DDD0A249517B3001BA58C /* Second */,
+				8A1DDD0C249517CA001BA58C /* Third */,
+				8A1DDD0D2495296B001BA58C /* Forth */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -148,7 +250,7 @@
 		8ACB3BF7248CE2F4003B6410 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				8ACB3BF6248CE2F4003B6410 /* LXSwift.app */,
+				8ACB3BF6248CE2F4003B6410 /* 自学Swift.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -159,6 +261,7 @@
 				8AC898C7248CEE4D00D954B4 /* AppEntry */,
 				8AC898C8248CEE5F00D954B4 /* Root */,
 				99EB46FC248E088C0033D7CB /* Feature */,
+				8A1DDCFC2494B2E8001BA58C /* Helper */,
 				99EB46FA248E08740033D7CB /* Extension */,
 				99EB46EE248DEBC70033D7CB /* Config */,
 				99EB46FF248E0B620033D7CB /* Singleton */,
@@ -219,6 +322,7 @@
 		99EB46FC248E088C0033D7CB /* Feature */ = {
 			isa = PBXGroup;
 			children = (
+				8A1DDCD624948AE8001BA58C /* LearningByVideo */,
 				8A6E409024927AA400D97A21 /* Login */,
 				99EB4700248E14080033D7CB /* LeetCodeAlgorithm */,
 				9964A2C0249075AB00553584 /* Vendor_Usage */,
@@ -269,7 +373,7 @@
 			);
 			name = LXSwift;
 			productName = LXSwift;
-			productReference = 8ACB3BF6248CE2F4003B6410 /* LXSwift.app */;
+			productReference = 8ACB3BF6248CE2F4003B6410 /* 自学Swift.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -374,12 +478,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8A1DDD092494D341001BA58C /* FBMeBaseCell.swift in Sources */,
+				8A1DDD072494CB1B001BA58C /* FBMeUser.swift in Sources */,
 				9964A2BE249073D300553584 /* AlgorithmTVCell.swift in Sources */,
 				99EB46F9248E06CE0033D7CB /* GlobalConstant.swift in Sources */,
 				8AC898CC248CEEEF00D954B4 /* SecondViewController.swift in Sources */,
 				8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */,
 				99EB4702248E14530033D7CB /* Algorithm_001.swift in Sources */,
+				8A1DDD0F249529A8001BA58C /* ForthViewController.swift in Sources */,
 				99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */,
+				8A1DDCFE2494B311001BA58C /* Specs.swift in Sources */,
 				99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */,
 				9964A2BA248F1BE000553584 /* AlgorithmTableViewController.swift in Sources */,
 				9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */,
@@ -387,9 +495,13 @@
 				9970A03E24938D4A008EF873 /* LoginVC.swift in Sources */,
 				99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */,
 				8AC898CE248CEEF900D954B4 /* ThirdViewController.swift in Sources */,
+				8A1DDD022494CAAA001BA58C /* FBMeViewController.swift in Sources */,
 				8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */,
 				99EB4704248E14630033D7CB /* Algorithm_002.swift in Sources */,
 				8ACB3BFA248CE2F4003B6410 /* AppDelegate.swift in Sources */,
+				8A1DDD1124952D84001BA58C /* ThirdCell.swift in Sources */,
+				8A1DDCD824949656001BA58C /* Learning_String_VC.swift in Sources */,
+				8A1DDD002494CA22001BA58C /* FBMeBaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -544,7 +656,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.LX.LXSwift;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "自学Swift";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -566,7 +678,7 @@
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.LX.LXSwift;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "自学Swift";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

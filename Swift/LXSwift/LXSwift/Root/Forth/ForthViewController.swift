@@ -1,25 +1,23 @@
 //
-//  SecondViewController.swift
+//  ForthViewController.swift
 //  LXSwift
 //
-//  Created by 林祥 on 2020/6/7.
+//  Created by 林祥 on 2020/6/13.
 //  Copyright © 2020 LX. All rights reserved.
 //
 
 import UIKit
 
-class SecondViewController: UIViewController {
+class ForthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.blue
-        
-        self.title = "第二页";
-        
+        view.backgroundColor = UIColor.red
+        self.navigationItem.title = "个人"
         // 导航栏是否半透明
-        self.navigationController?.navigationBar.isTranslucent = true
+        navigationController?.navigationBar.isTranslucent = false
+        
     }
     
 

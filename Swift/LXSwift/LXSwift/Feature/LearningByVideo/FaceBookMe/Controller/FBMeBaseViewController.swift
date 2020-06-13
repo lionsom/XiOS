@@ -1,25 +1,21 @@
 //
-//  ThirdViewController.swift
+//  FBMeBaseViewController.swift
 //  LXSwift
 //
-//  Created by 林祥 on 2020/6/7.
+//  Created by 林祥 on 2020/6/13.
 //  Copyright © 2020 LX. All rights reserved.
 //
 
 import UIKit
 
-class ThirdViewController: UIViewController {
+class FBMeBaseViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        self.view.backgroundColor = UIColor.red
         
-        self.title = "第三页";
-        
-        // 导航栏是否半透明
-        self.navigationController?.navigationBar.isTranslucent = false
+        view.backgroundColor = UIColor.randomColor()
     }
     
 
