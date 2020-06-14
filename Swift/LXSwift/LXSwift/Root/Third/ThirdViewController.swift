@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ThirdCellDelegate {
 
     private static let identifier = "CellId"
 
@@ -39,7 +39,9 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func setUpTableView() {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.register(ThirdCell.self, forCellReuseIdentifier: ThirdViewController.identifier)
         view.addSubview(tableView)
+        
         
         // Set layout for tableView.
         NSLayoutConstraint.activate([
@@ -59,6 +61,11 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     // MARK: - ========== Delegate ==========
+    // MARK: ===== ThirdCellDelegate
+    func thirdCellDetailBtnClick(fromCell: ThirdCell, didClickBtn: UIButton) {
+        Log(didClickBtn.titleLabel?.text)
+    }
+    
     // MARK: ===== UITableViewDataSource
     /// Section number
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -72,21 +79,23 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     
     /// Cell
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        //declare a tableViewCell as an implicitly unwrapped optional...
-        var cell:UITableViewCell! = tableView.dequeueReusableCell(withIdentifier: ThirdViewController.identifier)
         
-        //you CAN check this against nil, if nil then create a cell (don't redeclare like you were doing...
-        if cell == nil {
-            cell = UITableViewCell(style: UITableViewCell.CellStyle.default ,
-                                   reuseIdentifier:ThirdViewController.identifier)
-        }
+        let cell: ThirdCell = tableView.dequeueReusableCell(withIdentifier: ThirdViewController.identifier, for: indexPath) as! ThirdCell
         
-        cell.textLabel?.text = "\(indexPath.row)"
-        cell.detailTextLabel?.text = "哈哈哈"
+//        cell.textLabel?.text = "\(indexPath.row)"
+//        cell.imageView?.image = UIImage(named: "fb_games")
+        // 附件视图
+        cell.accessoryType = .disclosureIndicator
+        // 点击
+        cell.selectionStyle = .none
         
-        cell.imageView?.image = UIImage(named: "")
+        cell.model = ThirdModel(title: "", avatar: "", detail: "")
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
     }
     
     // MARK: ===== UITableViewDelegate
@@ -102,8 +111,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tv.backgroundColor = UIColor.white
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.tableFooterView = UIView()
+        
+//        tv.sele
         // separator
-        tv.separatorStyle = .singleLine
+        tv.separatorStyle = .none //.singleLine
         tv.separatorColor = UIColor.orange
         // register
         tv.register(UITableViewCell.self, forCellReuseIdentifier: ThirdViewController.identifier)
