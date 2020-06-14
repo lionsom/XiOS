@@ -80,7 +80,9 @@ class ThirdCell: UITableViewCell {
         cellView.addSubview(avatarImageView)
         cellView.addSubview(dayLabel)
         cellView.addSubview(detailBtn)
-        
+        // 按钮点击事件，放在这里生效【Why?】
+        detailBtn.addTarget(self, action: #selector(detailBtnClick(sender:)), for: .touchUpInside)
+
         // layout
         NSLayoutConstraint.activate([
             cellView.topAnchor.constraint(equalTo: self.topAnchor, constant: 10),
@@ -111,10 +113,7 @@ class ThirdCell: UITableViewCell {
     
     // MARK: - ========== Action ==========
     @objc func detailBtnClick(sender: UIButton) {
-        
-        Log("爱的色放上课了")
-        
-//        delegate?.thirdCellDetailBtnClick(fromCell: self, didClickBtn: sender)
+        delegate?.thirdCellDetailBtnClick(fromCell: self, didClickBtn: sender)
     }
     
     // MARK: - ========== Set&Get ==========
@@ -126,8 +125,6 @@ class ThirdCell: UITableViewCell {
         view.layer.borderWidth = 2.0
         view.layer.borderColor = UIColor.orange.cgColor
         view.translatesAutoresizingMaskIntoConstraints = false
-        
-//        view.isUserInteractionEnabled = true
         return view
     }()
     
@@ -155,7 +152,6 @@ class ThirdCell: UITableViewCell {
         let btn = UIButton(type: .custom)
         btn.translatesAutoresizingMaskIntoConstraints = false
         btn.backgroundColor = Specs.color.gray
-        btn.addTarget(self, action: #selector(detailBtnClick(sender:)), for: .touchUpInside)
         btn.setTitle("详情", for: .normal)
         btn.setTitle("进入", for: .selected)
         // 边角

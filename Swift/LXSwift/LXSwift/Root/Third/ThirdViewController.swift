@@ -42,7 +42,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tableView.register(ThirdCell.self, forCellReuseIdentifier: ThirdViewController.identifier)
         view.addSubview(tableView)
         
-        
         // Set layout for tableView.
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: self.view.topAnchor),
@@ -63,7 +62,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: - ========== Delegate ==========
     // MARK: ===== ThirdCellDelegate
     func thirdCellDetailBtnClick(fromCell: ThirdCell, didClickBtn: UIButton) {
-        Log(didClickBtn.titleLabel?.text)
+        Log(fromCell.dayLabel.text)
     }
     
     // MARK: ===== UITableViewDataSource
@@ -82,15 +81,14 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         let cell: ThirdCell = tableView.dequeueReusableCell(withIdentifier: ThirdViewController.identifier, for: indexPath) as! ThirdCell
         
-//        cell.textLabel?.text = "\(indexPath.row)"
-//        cell.imageView?.image = UIImage(named: "fb_games")
         // 附件视图
         cell.accessoryType = .disclosureIndicator
         // 点击
         cell.selectionStyle = .none
-        
+        // set delegate
+        cell.delegate = self
+        // set model
         cell.model = ThirdModel(title: "", avatar: "", detail: "")
-        
         return cell
     }
     
@@ -111,8 +109,6 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         tv.backgroundColor = UIColor.white
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.tableFooterView = UIView()
-        
-//        tv.sele
         // separator
         tv.separatorStyle = .none //.singleLine
         tv.separatorColor = UIColor.orange
