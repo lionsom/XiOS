@@ -16,6 +16,7 @@
 		8A1DDD0F249529A8001BA58C /* ForthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD0E249529A8001BA58C /* ForthViewController.swift */; };
 		8A1DDD1124952D84001BA58C /* ThirdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD1024952D84001BA58C /* ThirdCell.swift */; };
 		8A1DDD1324965FC4001BA58C /* ThirdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD1224965FC4001BA58C /* ThirdModel.swift */; };
+		8A1DDD1524975D5F001BA58C /* ThirdJSON.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDD1424975D5E001BA58C /* ThirdJSON.geojson */; };
 		8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898C5248CEE4500D954B4 /* RootTabbarController.swift */; };
 		8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */; };
 		8AC898CC248CEEEF00D954B4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898CB248CEEEF00D954B4 /* SecondViewController.swift */; };
@@ -59,6 +60,7 @@
 		8A1DDD0E249529A8001BA58C /* ForthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForthViewController.swift; sourceTree = "<group>"; };
 		8A1DDD1024952D84001BA58C /* ThirdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCell.swift; sourceTree = "<group>"; };
 		8A1DDD1224965FC4001BA58C /* ThirdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdModel.swift; sourceTree = "<group>"; };
+		8A1DDD1424975D5E001BA58C /* ThirdJSON.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThirdJSON.geojson; sourceTree = "<group>"; };
 		8AC898C5248CEE4500D954B4 /* RootTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabbarController.swift; sourceTree = "<group>"; };
 		8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		8AC898CB248CEEEF00D954B4 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
@@ -185,6 +187,7 @@
 				8AC898CD248CEEF900D954B4 /* ThirdViewController.swift */,
 				8A1DDD1024952D84001BA58C /* ThirdCell.swift */,
 				8A1DDD1224965FC4001BA58C /* ThirdModel.swift */,
+				8A1DDD1424975D5E001BA58C /* ThirdJSON.geojson */,
 			);
 			path = Third;
 			sourceTree = "<group>";
@@ -423,6 +426,7 @@
 				8ACB3C06248CE2F6003B6410 /* LaunchScreen.storyboard in Resources */,
 				8ACB3C03248CE2F6003B6410 /* Assets.xcassets in Resources */,
 				8AC898F1248D22D300D954B4 /* tabbar_person_select@2x.png in Resources */,
+				8A1DDD1524975D5F001BA58C /* ThirdJSON.geojson in Resources */,
 				8AC898EC248D22D300D954B4 /* tabbar_node_select@2x.png in Resources */,
 				8AC898EA248D22D300D954B4 /* tabbar_home_normal@2x.png in Resources */,
 				8AC898F0248D22D300D954B4 /* tabbar_person_normal@2x.png in Resources */,

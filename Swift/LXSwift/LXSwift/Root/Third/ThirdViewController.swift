@@ -8,6 +8,10 @@
 
 import UIKit
 
+import SwiftyJSON
+
+import JSONDecoder
+
 class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ThirdCellDelegate {
 
     private static let identifier = "CellId"
@@ -115,6 +119,33 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // register
         tv.register(UITableViewCell.self, forCellReuseIdentifier: ThirdViewController.identifier)
         return tv
+    }()
+    
+    
+    var dataSource: NSMutableArray = {
+        var arr = NSMutableArray()
+        let mainBundle = Bundle.main
+        
+        let aa = mainBundle.bundleIdentifier
+        let vv = mainBundle.infoDictionary
+        
+        let b = mainBundle.bundleURL
+        let c = mainBundle.bundlePath
+        let d = mainBundle.resourceURL
+        let e = mainBundle.resourcePath
+       
+        let jsonfile = mainBundle.path(forResource: "ThirdJSON", ofType: "geojson")
+        if jsonfile != nil {
+            let json = try! String(contentsOfFile: jsonfile!, encoding: String.Encoding.utf8)
+            
+            let jsonObj = JSON(parseJSON: json)
+            
+            if jsonObj["result"].boolValue == true && jsonObj["code"].intValue == 200 {
+                Log("成功")
+            }
+        }
+        
+        return arr
     }()
     
 }

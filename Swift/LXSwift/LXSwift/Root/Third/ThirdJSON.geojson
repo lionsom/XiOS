@@ -1,0 +1,11 @@
+{
+    "result":true,
+    "code":200,
+    "message": "请求成功",
+    "result": [
+        { "title": "Brett", "avatar":"McLaughlin", "detail": "aaaa" },
+        { "title": "Brett", "avatar":"McLaughlin", "detail": "aaaa" },
+        { "title": "Brett", "avatar":"McLaughlin", "detail": "aaaa" }
+    ],
+    "config": {"title": "力扣题"}
+}
