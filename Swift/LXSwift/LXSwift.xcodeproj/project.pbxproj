@@ -15,7 +15,6 @@
 		8A1DDD092494D341001BA58C /* FBMeBaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD082494D341001BA58C /* FBMeBaseCell.swift */; };
 		8A1DDD0F249529A8001BA58C /* ForthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD0E249529A8001BA58C /* ForthViewController.swift */; };
 		8A1DDD1124952D84001BA58C /* ThirdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD1024952D84001BA58C /* ThirdCell.swift */; };
-		8A1DDD1324965FC4001BA58C /* ThirdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD1224965FC4001BA58C /* ThirdModel.swift */; };
 		8A1DDD1524975D5F001BA58C /* ThirdJSON.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDD1424975D5E001BA58C /* ThirdJSON.geojson */; };
 		8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898C5248CEE4500D954B4 /* RootTabbarController.swift */; };
 		8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */; };
@@ -33,6 +32,8 @@
 		8ACB3C01248CE2F4003B6410 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACB3BFF248CE2F4003B6410 /* Main.storyboard */; };
 		8ACB3C03248CE2F6003B6410 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8ACB3C02248CE2F6003B6410 /* Assets.xcassets */; };
 		8ACB3C06248CE2F6003B6410 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACB3C04248CE2F6003B6410 /* LaunchScreen.storyboard */; };
+		8AE4FE2F249A638100648D89 /* ThirdResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE4FE2E249A638100648D89 /* ThirdResult.swift */; };
+		8AE4FE31249A79EA00648D89 /* ThirdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE4FE30249A79EA00648D89 /* ThirdModel.swift */; };
 		9964A2BA248F1BE000553584 /* AlgorithmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2B9248F1BE000553584 /* AlgorithmTableViewController.swift */; };
 		9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BB248F3D7100553584 /* Algorithm_004.swift */; };
 		9964A2BE249073D300553584 /* AlgorithmTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BD249073D300553584 /* AlgorithmTVCell.swift */; };
@@ -59,7 +60,6 @@
 		8A1DDD082494D341001BA58C /* FBMeBaseCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FBMeBaseCell.swift; sourceTree = "<group>"; };
 		8A1DDD0E249529A8001BA58C /* ForthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForthViewController.swift; sourceTree = "<group>"; };
 		8A1DDD1024952D84001BA58C /* ThirdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCell.swift; sourceTree = "<group>"; };
-		8A1DDD1224965FC4001BA58C /* ThirdModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdModel.swift; sourceTree = "<group>"; };
 		8A1DDD1424975D5E001BA58C /* ThirdJSON.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThirdJSON.geojson; sourceTree = "<group>"; };
 		8AC898C5248CEE4500D954B4 /* RootTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabbarController.swift; sourceTree = "<group>"; };
 		8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
@@ -79,6 +79,8 @@
 		8ACB3C02248CE2F6003B6410 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8ACB3C05248CE2F6003B6410 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8ACB3C07248CE2F6003B6410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8AE4FE2E249A638100648D89 /* ThirdResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdResult.swift; sourceTree = "<group>"; };
+		8AE4FE30249A79EA00648D89 /* ThirdModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdModel.swift; sourceTree = "<group>"; };
 		9964A2B9248F1BE000553584 /* AlgorithmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTableViewController.swift; sourceTree = "<group>"; };
 		9964A2BB248F3D7100553584 /* Algorithm_004.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_004.swift; sourceTree = "<group>"; };
 		9964A2BD249073D300553584 /* AlgorithmTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTVCell.swift; sourceTree = "<group>"; };
@@ -184,10 +186,11 @@
 		8A1DDD0C249517CA001BA58C /* Third */ = {
 			isa = PBXGroup;
 			children = (
+				8AE4FE30249A79EA00648D89 /* ThirdModel.swift */,
 				8AC898CD248CEEF900D954B4 /* ThirdViewController.swift */,
 				8A1DDD1024952D84001BA58C /* ThirdCell.swift */,
-				8A1DDD1224965FC4001BA58C /* ThirdModel.swift */,
 				8A1DDD1424975D5E001BA58C /* ThirdJSON.geojson */,
+				8AE4FE2E249A638100648D89 /* ThirdResult.swift */,
 			);
 			path = Third;
 			sourceTree = "<group>";
@@ -488,15 +491,16 @@
 				8A1DDD092494D341001BA58C /* FBMeBaseCell.swift in Sources */,
 				8A1DDD072494CB1B001BA58C /* FBMeUser.swift in Sources */,
 				9964A2BE249073D300553584 /* AlgorithmTVCell.swift in Sources */,
+				8AE4FE31249A79EA00648D89 /* ThirdModel.swift in Sources */,
 				99EB46F9248E06CE0033D7CB /* GlobalConstant.swift in Sources */,
 				8AC898CC248CEEEF00D954B4 /* SecondViewController.swift in Sources */,
 				8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */,
+				8AE4FE2F249A638100648D89 /* ThirdResult.swift in Sources */,
 				99EB4702248E14530033D7CB /* Algorithm_001.swift in Sources */,
 				8A1DDD0F249529A8001BA58C /* ForthViewController.swift in Sources */,
 				99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */,
 				8A1DDCFE2494B311001BA58C /* Specs.swift in Sources */,
 				99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */,
-				8A1DDD1324965FC4001BA58C /* ThirdModel.swift in Sources */,
 				9964A2BA248F1BE000553584 /* AlgorithmTableViewController.swift in Sources */,
 				9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */,
 				9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */,

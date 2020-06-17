@@ -1,11 +1,12 @@
 {
+    "id":10011,
     "result":true,
     "code":200,
     "message": "请求成功",
-    "result": [
-        { "title": "Brett", "avatar":"McLaughlin", "detail": "aaaa" },
-        { "title": "Brett", "avatar":"McLaughlin", "detail": "aaaa" },
-        { "title": "Brett", "avatar":"McLaughlin", "detail": "aaaa" }
+    "datas": [
+        { "title": "Brett", "avatar":"McLaughlin", "detail": "aaaa", "index":0 },
+        { "title": "Brett", "avatar":"McLaughlin", "detail": "aaaa", "index":1 },
+        { "title": "Brett", "avatar":"McLaughlin", "detail": "aaaa", "index":2 }
     ],
-    "config": {"title": "力扣题"}
+    "config": {"title": "力扣题", "color": "red"}
 }

@@ -10,8 +10,6 @@ import UIKit
 
 import SwiftyJSON
 
-import JSONDecoder
-
 class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ThirdCellDelegate {
 
     private static let identifier = "CellId"
@@ -72,12 +70,12 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: ===== UITableViewDataSource
     /// Section number
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 1;
+        return 1
     }
     
     /// Row number
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20
+        return self.dataSource.count
     }
     
     /// Cell
@@ -92,7 +90,10 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // set delegate
         cell.delegate = self
         // set model
-        cell.model = ThirdModel(title: "", avatar: "", detail: "")
+        let res = self.dataSource[indexPath.row] as MResult
+        cell.model = ThirdModel(title: res.title, avatar: <#T##String#>, detail: <#T##String#>)
+            
+            
         return cell
     }
     
@@ -122,7 +123,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }()
     
     
-    var dataSource: NSMutableArray = {
+    var dataSource: NSArray = {
         var arr = NSMutableArray()
         let mainBundle = Bundle.main
         
@@ -138,14 +139,25 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         if jsonfile != nil {
             let json = try! String(contentsOfFile: jsonfile!, encoding: String.Encoding.utf8)
             
-            let jsonObj = JSON(parseJSON: json)
-            
-            if jsonObj["result"].boolValue == true && jsonObj["code"].intValue == 200 {
-                Log("成功")
+            guard let urlPath = Bundle.main.path(forResource: "ThirdJSON", ofType: "geojson") else { return [] }
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: jsonfile!))
+                let jsonData: Any = try JSONSerialization.jsonObject(with: data, options: JSONSerialization.ReadingOptions.mutableContainers)
+                let newStr = String(data: data, encoding: String.Encoding.utf8)
+
+                print("present = ", jsonData)
+
+                let decoder = JSONDecoder()
+                let result = try decoder.decode(ThirdResult.self, from: data)
+                
+                return result.datas as NSArray
+
+            } catch let error {
+                print(error)
+                return []
             }
         }
-        
-        return arr
+        return []
     }()
     
 }
