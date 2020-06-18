@@ -252,3 +252,26 @@ xxx
 
 [吾爱破解 - 思维导图 Xmind Zen](https://www.52pojie.cn/thread-1064432-1-1.html)
 
+
+
+
+
+# 四、GitHub工具
+
+[让你纵横 GitHub 的五大神器](https://mp.weixin.qq.com/s/NCNcf2RS0c6Gjp0kMwjo_w)
+
+## 1、Octotree
+
+目录一览
+
+## 2、Sourcegraph
+
+快速查看资源
+
+## 3、Enhanced GitHub
+
+下载指定文件
+
+## 4、GitHub Dark Theme
+
+暗黑
