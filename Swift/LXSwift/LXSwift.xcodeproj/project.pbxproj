@@ -119,8 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				9913FEA2249B82C9006606AA /* String */,
-				9913FEA1249B82A5006606AA /* StopWatch */,
 				8A1DDCFB2494B2C5001BA58C /* FaceBookMe */,
+				9913FEA1249B82A5006606AA /* StopWatch */,
 			);
 			path = LearningByVideo;
 			sourceTree = "<group>";

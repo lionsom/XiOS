@@ -82,11 +82,17 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell = UITableViewCell(style: UITableViewCell.CellStyle.default ,
                                    reuseIdentifier:SecondViewController.identifier)
         }
+        // 附件视图
+        cell.accessoryType = .disclosureIndicator
         
-        cell.textLabel?.text = "\(indexPath.row)"
-        cell.detailTextLabel?.text = "哈哈哈"
+        if indexPath.row == 0 {
+            cell.textLabel?.text = "FB"
+        }
+        else {
+            cell.textLabel?.text = "\(indexPath.row)"
+        }
         
-        cell.imageView?.image = UIImage(named: "")
+        cell.imageView?.image = UIImage(named: "fb_games")
         
         return cell
     }
@@ -95,7 +101,16 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     /// didSelect
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        Log("\(indexPath.row)")
+        
+        if indexPath.row == 0 {
+            let FBVC = FBMeViewController()
+            self.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(FBVC, animated: true)
+            self.hidesBottomBarWhenPushed = false
+        }
+        else {
+            Log("\(indexPath.row)")
+        }
     }
         
     // MARK: - ========== Set&Get ==========
