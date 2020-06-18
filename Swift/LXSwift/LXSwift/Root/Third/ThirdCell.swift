@@ -27,8 +27,8 @@ class ThirdCell: UITableViewCell {
     }()
     lazy var dataMarr = NSMutableSet()
     
-    private var _model: MResult?  ///< 存储属性
-    var model: MResult? {
+    private var _model: ThirdModel?  ///< 存储属性
+    var model: ThirdModel? {
         set {
             // 给存储属性赋值
             self._model = newValue

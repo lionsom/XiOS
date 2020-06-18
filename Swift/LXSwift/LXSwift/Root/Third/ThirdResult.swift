@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ThirdResult: Codable {
+struct ThirdResult: Codable {
     var ID: Int
     var result: Bool
     var code: Int?
@@ -25,14 +25,14 @@ class ThirdResult: Codable {
         case config
     }
     
-    class MResult: Codable {
+    struct MResult: Codable {
         var title: String?
         var avatar: String?
         var detail: String?
         var index: Int?
     }
 
-    class MConfig: Codable {
+    struct MConfig: Codable {
         var title: String?
         var color: MColor?    // 枚举类型
     }

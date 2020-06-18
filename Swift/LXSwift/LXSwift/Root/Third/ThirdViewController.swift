@@ -90,9 +90,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         // set delegate
         cell.delegate = self
         // set model
-        let res = self.dataSource[indexPath.row] as MResult
-        cell.model = ThirdModel(title: res.title, avatar: <#T##String#>, detail: <#T##String#>)
-            
+        cell.model = ThirdModel(title: "", avatar: "", detail: "")
             
         return cell
     }

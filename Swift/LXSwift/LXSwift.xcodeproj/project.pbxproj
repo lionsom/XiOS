@@ -186,8 +186,8 @@
 		8A1DDD0C249517CA001BA58C /* Third */ = {
 			isa = PBXGroup;
 			children = (
-				8AE4FE30249A79EA00648D89 /* ThirdModel.swift */,
 				8AC898CD248CEEF900D954B4 /* ThirdViewController.swift */,
+				8AE4FE30249A79EA00648D89 /* ThirdModel.swift */,
 				8A1DDD1024952D84001BA58C /* ThirdCell.swift */,
 				8A1DDD1424975D5E001BA58C /* ThirdJSON.geojson */,
 				8AE4FE2E249A638100648D89 /* ThirdResult.swift */,
