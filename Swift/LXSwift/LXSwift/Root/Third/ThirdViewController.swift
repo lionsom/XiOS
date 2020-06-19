@@ -9,6 +9,7 @@
 import UIKit
 
 import SwiftyJSON
+import SVProgressHUD
 
 class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, ThirdCellDelegate {
 
@@ -64,7 +65,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     // MARK: - ========== Delegate ==========
     // MARK: ===== ThirdCellDelegate
     func thirdCellDetailBtnClick(fromCell: ThirdCell, didClickBtn: UIButton) {
-        Log(fromCell.dayLabel.text)
+        Log(fromCell.titleLabel.text! + fromCell.descLabel.text!)
     }
     
     // MARK: ===== UITableViewDataSource
@@ -89,8 +90,12 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
         cell.selectionStyle = .none
         // set delegate
         cell.delegate = self
+        
+        // 获取数据源
+        let result = self.dataSource[indexPath.row] as! ThirdResult.MResult
+        
         // set model
-        cell.model = ThirdModel(title: "", avatar: "", detail: "")
+        cell.model = ThirdModel(title: result.title!, avatar: result.avatar!, detail: result.detail!)
             
         return cell
     }
@@ -103,7 +108,18 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     /// didSelect
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        Log("\(indexPath.row)")
+
+        // 根据字符串转Class
+        let result = self.dataSource[indexPath.row] as! ThirdResult.MResult
+        let vcname = result.detail
+        if let vc = vcname?.stringChangeToVC() {
+            self.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(vc, animated: true)
+            self.hidesBottomBarWhenPushed = false
+        }
+        else {
+            SVProgressHUD.showError(withStatus: "暂不支持")
+        }
     }
     
     // MARK: - ========== Set&Get ==========

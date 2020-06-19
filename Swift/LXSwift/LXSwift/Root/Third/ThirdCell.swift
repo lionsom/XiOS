@@ -36,7 +36,13 @@ class ThirdCell: UITableViewCell {
             if title.isEmpty {
                 title = "默认title"
             }
-            dayLabel.text = title
+            titleLabel.text = title
+            
+            var desc: String = self._model?.detail ?? ""
+            if desc.isEmpty {
+                desc = "默认desc"
+            }
+            descLabel.text = desc
             
             var image = UIImage(named: self._model?.avatar ?? "default_avatar")
             if image == nil {
@@ -78,7 +84,8 @@ class ThirdCell: UITableViewCell {
         // addSubview
         addSubview(cellView)
         cellView.addSubview(avatarImageView)
-        cellView.addSubview(dayLabel)
+        cellView.addSubview(titleLabel)
+        cellView.addSubview(descLabel)
         cellView.addSubview(detailBtn)
         // 按钮点击事件，放在这里生效【Why?】
         detailBtn.addTarget(self, action: #selector(detailBtnClick(sender:)), for: .touchUpInside)
@@ -104,10 +111,17 @@ class ThirdCell: UITableViewCell {
         ])
 
         NSLayoutConstraint.activate([
-            dayLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor, constant: 0),
-            dayLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 10),
-            dayLabel.bottomAnchor.constraint(equalTo: self.centerYAnchor, constant: 0),
-            dayLabel.rightAnchor.constraint(equalTo: detailBtn.leftAnchor, constant: -10)
+            titleLabel.topAnchor.constraint(equalTo: avatarImageView.topAnchor, constant: 0),
+            titleLabel.leftAnchor.constraint(equalTo: avatarImageView.rightAnchor, constant: 20),
+            titleLabel.bottomAnchor.constraint(equalTo: cellView.centerYAnchor, constant: 0),
+            titleLabel.rightAnchor.constraint(equalTo: detailBtn.leftAnchor, constant: -10)
+        ])
+        
+        NSLayoutConstraint.activate([
+            descLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 0),
+            descLabel.leftAnchor.constraint(equalTo: titleLabel.leftAnchor, constant: 0),
+            descLabel.bottomAnchor.constraint(equalTo: avatarImageView.bottomAnchor, constant: 0),
+            descLabel.rightAnchor.constraint(equalTo: titleLabel.rightAnchor, constant: 0)
         ])
     }
     
@@ -131,16 +145,27 @@ class ThirdCell: UITableViewCell {
     let avatarImageView: UIImageView = {
         let imageview = UIImageView()
         imageview.translatesAutoresizingMaskIntoConstraints = false
-        imageview.backgroundColor = UIColor.red
+        imageview.backgroundColor = UIColor.clear
         imageview.image = UIImage(named: "default_avatar")
         imageview.contentMode = .scaleAspectFit
         return imageview
     }()
     
-    let dayLabel: UILabel = {
+    let titleLabel: UILabel = {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "day 01"
+        label.text = "标题"
+        label.textAlignment = .left
+        label.lineBreakMode = .byTruncatingTail
+        label.textColor = Specs.color.green
+        label.font = Specs.font.largeBold
+        return label
+    }()
+    
+    let descLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.text = "详情"
         label.textAlignment = .left
         label.lineBreakMode = .byTruncatingTail
         label.textColor = Specs.color.green
