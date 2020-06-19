@@ -36,7 +36,6 @@
 		8AE4FE31249A79EA00648D89 /* ThirdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE4FE30249A79EA00648D89 /* ThirdModel.swift */; };
 		9913FEA4249C4ABA006606AA /* Algorithm_005.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9913FEA3249C4ABA006606AA /* Algorithm_005.swift */; };
 		9913FEA6249C4C75006606AA /* String+ClassFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9913FEA5249C4C75006606AA /* String+ClassFromString.swift */; };
-		9913FEA8249C4E13006606AA /* ErrorVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9913FEA7249C4E13006606AA /* ErrorVC.swift */; };
 		9964A2BA248F1BE000553584 /* AlgorithmTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2B9248F1BE000553584 /* AlgorithmTableViewController.swift */; };
 		9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BB248F3D7100553584 /* Algorithm_004.swift */; };
 		9964A2BE249073D300553584 /* AlgorithmTVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BD249073D300553584 /* AlgorithmTVCell.swift */; };
@@ -86,7 +85,6 @@
 		8AE4FE30249A79EA00648D89 /* ThirdModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdModel.swift; sourceTree = "<group>"; };
 		9913FEA3249C4ABA006606AA /* Algorithm_005.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_005.swift; sourceTree = "<group>"; };
 		9913FEA5249C4C75006606AA /* String+ClassFromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ClassFromString.swift"; sourceTree = "<group>"; };
-		9913FEA7249C4E13006606AA /* ErrorVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorVC.swift; sourceTree = "<group>"; };
 		9964A2B9248F1BE000553584 /* AlgorithmTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTableViewController.swift; sourceTree = "<group>"; };
 		9964A2BB248F3D7100553584 /* Algorithm_004.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_004.swift; sourceTree = "<group>"; };
 		9964A2BD249073D300553584 /* AlgorithmTVCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmTVCell.swift; sourceTree = "<group>"; };
@@ -214,7 +212,6 @@
 			isa = PBXGroup;
 			children = (
 				9970A03D24938D4A008EF873 /* LoginVC.swift */,
-				9913FEA7249C4E13006606AA /* ErrorVC.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -533,7 +530,6 @@
 				9913FEA4249C4ABA006606AA /* Algorithm_005.swift in Sources */,
 				9913FEA6249C4C75006606AA /* String+ClassFromString.swift in Sources */,
 				99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */,
-				9913FEA8249C4E13006606AA /* ErrorVC.swift in Sources */,
 				8AC898CE248CEEF900D954B4 /* ThirdViewController.swift in Sources */,
 				8A1DDD022494CAAA001BA58C /* FBMeViewController.swift in Sources */,
 				8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */,

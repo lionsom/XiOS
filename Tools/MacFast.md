@@ -258,6 +258,8 @@ xxx
 
 # 四、GitHub工具
 
+[谷粒-Chrome插件英雄榜 ChromeAppHeroes](https://github.com/zhaoolee/ChromeAppHeroes)
+
 [让你纵横 GitHub 的五大神器](https://mp.weixin.qq.com/s/NCNcf2RS0c6Gjp0kMwjo_w)
 
 ## 1、Octotree

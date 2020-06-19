@@ -16,6 +16,20 @@ class Learning_String_VC: UIViewController {
         self.view.backgroundColor = UIColor.white
         self.title = "String";
         
+        /*
+         1. String初始化
+         2. String遍历character
+         3. Character数组转String
+         4. Unicode
+         5. 计算Character字符数量
+         6. String索引
+         7. String插入
+         8. String删除
+         9. String比较:字符相等、字符串相等、前缀、后缀
+         */
+        
+        
+        
         // MARK: - ========== 计算字符数量 ==========
         // MARK: ===== 包含Unicode =====
         let unusualMenagerie = "Koala 🐨, Snail 🐌, Penguin 🐧, Dromedary 🐪"
