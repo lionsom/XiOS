@@ -1,5 +1,5 @@
 //
-//  Learning_String_VC.swift
+//  StringVC.swift
 //  LXSwift
 //
 //  Created by 林祥 on 2020/6/13.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Learning_String_VC: UIViewController {
+class StringVC: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()

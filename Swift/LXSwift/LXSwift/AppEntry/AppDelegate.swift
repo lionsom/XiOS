@@ -21,9 +21,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         self.window?.backgroundColor = UIColor.white
         //设置window的rootViewController
-        self.window?.rootViewController = RootTabbarController()
-        self.window?.makeKeyAndVisible()
         
+        let isLogin = UserDefaults.standard.bool(forKey: Key.UserDefaults.k_ISLogin)
+        if isLogin {
+            self.window?.rootViewController = RootTabbarController()
+        }
+        else {
+            self.window?.rootViewController = LoginVC()
+        }
+        self.window?.makeKeyAndVisible()
         return true
     }
 

@@ -8,27 +8,38 @@
 
 import UIKit
 
+import SVProgressHUD
+
 class ForthViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        view.backgroundColor = UIColor.red
+        view.backgroundColor = UIColor.white
         self.navigationItem.title = "个人"
+        
+        
+        setUpNavigation()
+    }
+    
+    func setUpNavigation() {
         // 导航栏是否半透明
         navigationController?.navigationBar.isTranslucent = false
         
+        // 导航栏右侧按钮 - 退出
+        let logoutBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(logoutBarButtonItemClick(sender:)))
+        self.navigationItem.rightBarButtonItems = [logoutBarButtonItem]
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    // MARK: - ====== Actions ======
+    @objc func logoutBarButtonItemClick(sender: UIBarButtonItem) {
+        SVProgressHUD.showSuccess(withStatus: "退出成功")
+        
+        // 设置标识
+        UserDefaults.standard.set(false, forKey: Key.UserDefaults.k_ISLogin)
+        
+        if let window = UIApplication.shared.delegate?.window {
+            window?.rootViewController  = LoginVC()
+        }
     }
-    */
-
 }

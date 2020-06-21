@@ -97,33 +97,15 @@ class FirstViewController: UIViewController {
             
             navigationItem.prompt = nil
         }
-        
-        let AlgorithmVC = Algorithm_004()
-        self.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(AlgorithmVC, animated: true)
-        self.hidesBottomBarWhenPushed = false
     }
     
     @objc func tapClick(tap:UITapGestureRecognizer) {
         Log("tap Click")
-        
-        let AlgorithmVC = AlgorithmTableViewController()
-        self.hidesBottomBarWhenPushed = true
-        self.navigationController?.pushViewController(AlgorithmVC, animated: true)
-        self.hidesBottomBarWhenPushed = false
     }
     
     @objc func back() {
         Log("点击了")
-        // new VC
-        let vc = Algorithm_003()
         
-        //跳转隐藏tabbar
-        self.hidesBottomBarWhenPushed = true;
-        // push
-        self.navigationController?.pushViewController(vc , animated: true)
-        //返回后显示tabbar
-        self.hidesBottomBarWhenPushed = false;
     }
     
     // TODO:adf

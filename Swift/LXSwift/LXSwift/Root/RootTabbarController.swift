@@ -57,7 +57,7 @@ class RootTabbarController: UITabBarController {
         self.viewControllers?.append(forthNavi)
         
         // 默认选择
-        self.selectedIndex = 1
+        self.selectedIndex = 2
 
         //tabbar背景
         self.tabBar.barTintColor = UIColor.white

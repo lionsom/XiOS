@@ -56,7 +56,10 @@ struct Key {
     }
 
     struct UserDefaults {
+        // 是否为第一次登录
         static let k_App_Running_FirstTime = "userRunningAppFirstTime"
+        // 记录登录状态
+        static let k_ISLogin = "isLogin"
     }
 
     struct Headers {
