@@ -34,7 +34,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - ========== UI ==========
     func setUpNavigationBar() {
-        let leftBarButtonItem1 = UIBarButtonItem(title: "Learn", style: .plain, target: self, action: #selector(leftBarButtonClick(sender:)))
+        let leftBarButtonItem1 = UIBarButtonItem(title: "常用代码", style: .plain, target: self, action: #selector(leftBarButtonClick(sender:)))
         self.navigationItem.leftBarButtonItems = [leftBarButtonItem1]
     }
     
@@ -54,7 +54,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - ========== Action ==========
     @objc func leftBarButtonClick(sender: UIBarButtonItem) {
-        let stringVC = FBMeViewController() //Learning_String_VC()
+        let stringVC = UsageVC()
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(stringVC, animated: true)
         self.hidesBottomBarWhenPushed = false

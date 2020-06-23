@@ -35,3 +35,42 @@
 
 
 # 二、How to use
+
+* Swift 3 and above
+
+### Store
+
+```swift
+UserDefaults.standard.set(true, forKey: "Key")      //Bool
+UserDefaults.standard.set(1, forKey: "Key")         //Integer
+UserDefaults.standard.set("TEST", forKey: "Key")    //setObject
+```
+
+### Retrieve
+
+```swift
+ UserDefaults.standard.bool(forKey: "Key")
+ UserDefaults.standard.integer(forKey: "Key")
+ UserDefaults.standard.string(forKey: "Key")
+```
+
+### Remove
+
+```swift
+ UserDefaults.standard.removeObject(forKey: "Key")
+```
+
+### Remove all Keys
+
+```swift
+ if let appDomain = Bundle.main.bundleIdentifier {
+		UserDefaults.standard.removePersistentDomain(forName: appDomain)
+ }
+```
+
+
+
+
+
+
+

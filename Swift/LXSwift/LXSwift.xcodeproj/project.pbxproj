@@ -35,6 +35,7 @@
 		8ACB3C06248CE2F6003B6410 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8ACB3C04248CE2F6003B6410 /* LaunchScreen.storyboard */; };
 		8AE4FE2F249A638100648D89 /* ThirdResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE4FE2E249A638100648D89 /* ThirdResult.swift */; };
 		8AE4FE31249A79EA00648D89 /* ThirdModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AE4FE30249A79EA00648D89 /* ThirdModel.swift */; };
+		990102E424A237E1002F5EC7 /* SVProgressHUD+LX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 990102E324A237E1002F5EC7 /* SVProgressHUD+LX.swift */; };
 		9913FEA4249C4ABA006606AA /* Algorithm_005.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9913FEA3249C4ABA006606AA /* Algorithm_005.swift */; };
 		9913FEA6249C4C75006606AA /* String+ClassFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9913FEA5249C4C75006606AA /* String+ClassFromString.swift */; };
 		994859FC24A039200095302B /* UsageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994859FB24A039200095302B /* UsageVC.swift */; };
@@ -84,6 +85,7 @@
 		8ACB3C07248CE2F6003B6410 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8AE4FE2E249A638100648D89 /* ThirdResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdResult.swift; sourceTree = "<group>"; };
 		8AE4FE30249A79EA00648D89 /* ThirdModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ThirdModel.swift; sourceTree = "<group>"; };
+		990102E324A237E1002F5EC7 /* SVProgressHUD+LX.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "SVProgressHUD+LX.swift"; sourceTree = "<group>"; };
 		9913FEA3249C4ABA006606AA /* Algorithm_005.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_005.swift; sourceTree = "<group>"; };
 		9913FEA5249C4C75006606AA /* String+ClassFromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ClassFromString.swift"; sourceTree = "<group>"; };
 		994859FB24A039200095302B /* UsageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageVC.swift; sourceTree = "<group>"; };
@@ -311,6 +313,7 @@
 		9964A2C0249075AB00553584 /* Vendor_Usage */ = {
 			isa = PBXGroup;
 			children = (
+				990102E324A237E1002F5EC7 /* SVProgressHUD+LX.swift */,
 				9964A2C12490764200553584 /* SVProgressHUDVC.swift */,
 			);
 			path = Vendor_Usage;
@@ -502,6 +505,7 @@
 				8AC898CC248CEEEF00D954B4 /* SecondViewController.swift in Sources */,
 				8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */,
 				8AE4FE2F249A638100648D89 /* ThirdResult.swift in Sources */,
+				990102E424A237E1002F5EC7 /* SVProgressHUD+LX.swift in Sources */,
 				99EB4702248E14530033D7CB /* Algorithm_001.swift in Sources */,
 				8A1DDD0F249529A8001BA58C /* ForthViewController.swift in Sources */,
 				99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */,
