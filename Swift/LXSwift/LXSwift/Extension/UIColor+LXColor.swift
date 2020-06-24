@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-/** Usage
+/* Usage
  // 类方法
  let color = UIColor.randomColor()
  

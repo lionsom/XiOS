@@ -17,16 +17,12 @@ class SVProgressHUDVC: UIViewController {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-    }
-    
-    func easyShow() {
-        // ShowHUD
-        SVProgressHUD.show(withStatus: "啊水电费");
         
-        // 延迟执行
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
-            // DismissHUD
-            SVProgressHUD.dismiss()
-        }
+        
+        SVProgressHUD.showSuccess("自定义Success")
+        
+        SVProgressHUD.showError("自定义Error")
+        
+        SVProgressHUD.showInfo("自定义Info")
     }
 }
