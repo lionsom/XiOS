@@ -39,6 +39,12 @@
 		9913FEA4249C4ABA006606AA /* Algorithm_005.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9913FEA3249C4ABA006606AA /* Algorithm_005.swift */; };
 		9913FEA6249C4C75006606AA /* String+ClassFromString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9913FEA5249C4C75006606AA /* String+ClassFromString.swift */; };
 		994859FC24A039200095302B /* UsageVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 994859FB24A039200095302B /* UsageVC.swift */; };
+		995CFF2A24A3015B0016118C /* Father.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CFF2924A3015B0016118C /* Father.swift */; };
+		995CFF2C24A302730016118C /* Son.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CFF2B24A302730016118C /* Son.swift */; };
+		995CFF2E24A3236F0016118C /* Enum.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CFF2D24A3236F0016118C /* Enum.swift */; };
+		995CFF3024A3273A0016118C /* Algorithm_006.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CFF2F24A3273A0016118C /* Algorithm_006.swift */; };
+		995CFF3224A32E530016118C /* Protocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CFF3124A32E530016118C /* Protocol.swift */; };
+		995CFF3424A332140016118C /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 995CFF3324A332140016118C /* Error.swift */; };
 		9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BB248F3D7100553584 /* Algorithm_004.swift */; };
 		9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2C12490764200553584 /* SVProgressHUDVC.swift */; };
 		9970A03E24938D4A008EF873 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9970A03D24938D4A008EF873 /* LoginVC.swift */; };
@@ -89,6 +95,12 @@
 		9913FEA3249C4ABA006606AA /* Algorithm_005.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_005.swift; sourceTree = "<group>"; };
 		9913FEA5249C4C75006606AA /* String+ClassFromString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+ClassFromString.swift"; sourceTree = "<group>"; };
 		994859FB24A039200095302B /* UsageVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UsageVC.swift; sourceTree = "<group>"; };
+		995CFF2924A3015B0016118C /* Father.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Father.swift; sourceTree = "<group>"; };
+		995CFF2B24A302730016118C /* Son.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Son.swift; sourceTree = "<group>"; };
+		995CFF2D24A3236F0016118C /* Enum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Enum.swift; sourceTree = "<group>"; };
+		995CFF2F24A3273A0016118C /* Algorithm_006.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_006.swift; sourceTree = "<group>"; };
+		995CFF3124A32E530016118C /* Protocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocol.swift; sourceTree = "<group>"; };
+		995CFF3324A332140016118C /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
 		9964A2BB248F3D7100553584 /* Algorithm_004.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_004.swift; sourceTree = "<group>"; };
 		9964A2C12490764200553584 /* SVProgressHUDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVProgressHUDVC.swift; sourceTree = "<group>"; };
 		9970A03D24938D4A008EF873 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
@@ -219,9 +231,14 @@
 		8A74CD2A249F066500B25C87 /* BaseCourse */ = {
 			isa = PBXGroup;
 			children = (
+				994859FB24A039200095302B /* UsageVC.swift */,
 				8A1DDCD724949656001BA58C /* StringVC.swift */,
 				8A74CD2B249F961D00B25C87 /* ControlFlowVC.swift */,
-				994859FB24A039200095302B /* UsageVC.swift */,
+				995CFF2924A3015B0016118C /* Father.swift */,
+				995CFF2B24A302730016118C /* Son.swift */,
+				995CFF2D24A3236F0016118C /* Enum.swift */,
+				995CFF3124A32E530016118C /* Protocol.swift */,
+				995CFF3324A332140016118C /* Error.swift */,
 			);
 			path = BaseCourse;
 			sourceTree = "<group>";
@@ -298,18 +315,6 @@
 			path = LXSwift;
 			sourceTree = "<group>";
 		};
-		9964A2B8248F1BBE00553584 /* List */ = {
-			isa = PBXGroup;
-			children = (
-				99EB4701248E14530033D7CB /* Algorithm_001.swift */,
-				99EB4703248E14630033D7CB /* Algorithm_002.swift */,
-				99EB4705248E146F0033D7CB /* Algorithm_003.swift */,
-				9964A2BB248F3D7100553584 /* Algorithm_004.swift */,
-				9913FEA3249C4ABA006606AA /* Algorithm_005.swift */,
-			);
-			path = List;
-			sourceTree = "<group>";
-		};
 		9964A2C0249075AB00553584 /* Vendor_Usage */ = {
 			isa = PBXGroup;
 			children = (
@@ -359,7 +364,12 @@
 		99EB4700248E14080033D7CB /* LeetCodeAlgorithm */ = {
 			isa = PBXGroup;
 			children = (
-				9964A2B8248F1BBE00553584 /* List */,
+				99EB4701248E14530033D7CB /* Algorithm_001.swift */,
+				99EB4703248E14630033D7CB /* Algorithm_002.swift */,
+				99EB4705248E146F0033D7CB /* Algorithm_003.swift */,
+				9964A2BB248F3D7100553584 /* Algorithm_004.swift */,
+				9913FEA3249C4ABA006606AA /* Algorithm_005.swift */,
+				995CFF2F24A3273A0016118C /* Algorithm_006.swift */,
 			);
 			path = LeetCodeAlgorithm;
 			sourceTree = "<group>";
@@ -497,6 +507,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				995CFF3024A3273A0016118C /* Algorithm_006.swift in Sources */,
 				8A1DDD092494D341001BA58C /* FBMeBaseCell.swift in Sources */,
 				8A1DDD072494CB1B001BA58C /* FBMeUser.swift in Sources */,
 				994859FC24A039200095302B /* UsageVC.swift in Sources */,
@@ -514,6 +525,7 @@
 				9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */,
 				9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */,
 				9970A03E24938D4A008EF873 /* LoginVC.swift in Sources */,
+				995CFF2A24A3015B0016118C /* Father.swift in Sources */,
 				9913FEA4249C4ABA006606AA /* Algorithm_005.swift in Sources */,
 				9913FEA6249C4C75006606AA /* String+ClassFromString.swift in Sources */,
 				99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */,
@@ -521,10 +533,14 @@
 				8A1DDD022494CAAA001BA58C /* FBMeViewController.swift in Sources */,
 				8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */,
 				8A74CD2C249F961D00B25C87 /* ControlFlowVC.swift in Sources */,
+				995CFF2C24A302730016118C /* Son.swift in Sources */,
+				995CFF2E24A3236F0016118C /* Enum.swift in Sources */,
 				99EB4704248E14630033D7CB /* Algorithm_002.swift in Sources */,
 				8ACB3BFA248CE2F4003B6410 /* AppDelegate.swift in Sources */,
 				8A1DDD1124952D84001BA58C /* ThirdCell.swift in Sources */,
+				995CFF3224A32E530016118C /* Protocol.swift in Sources */,
 				8A1DDCD824949656001BA58C /* StringVC.swift in Sources */,
+				995CFF3424A332140016118C /* Error.swift in Sources */,
 				8A1DDD002494CA22001BA58C /* FBMeBaseViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

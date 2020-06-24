@@ -18,7 +18,11 @@ class UsageVC: UIViewController {
         self.title = "常用的方法举例";
         
         
+        enumTest()
         
+        Error()
+        
+        deferFunc()
     }
     
     // MARK: - ========== UserDefaults ==========
@@ -90,5 +94,69 @@ class UsageVC: UIViewController {
         print("just call back")
     }
     
+    // MARK: - ========== FatherAndSon ==========
+    func FatherAndSon() {
+         let s = Son(name: "Lin", school: "JS")
+         s.run()
+         Log("name = \(s.name),age = \(s.age),sex = \(s.sex), school = \(s.school)")
+         
+         s.study = "哇哈哈"
+         Log("study = \(s.study), school = \(s.school)")
+    }
     
+    // MARK: - ========== Enum枚举 ==========
+    func enumTest() {
+        let ace = Rank.ace
+        let aceRawValue = ace.rawValue
+        Log("\(ace) + \(aceRawValue)")
+        
+        // 使用 init?(rawValue:) 初始化构造器来从原始值创建一个枚举实例。
+        if let convertedRank = Rank(rawValue: 3) {
+            let threeSimpleDesc = convertedRank.simpleDescription()
+            Log(threeSimpleDesc)
+        }
+    
+        let hearts = Suit.hearts
+        let heartsDescription = hearts.simpleDescription()
+        Log("\(hearts) + \(heartsDescription)")
+        
+        let threeOfSpades = Card(rank: .three, suit: .spades)
+        let threeOfSpadesDescription = threeOfSpades.simpleDescription()
+        Log("\(threeOfSpades) + \(threeOfSpadesDescription)")
+    }
+    
+    // MARK: - ========== Error ==========
+    func Error() {
+        // 方法一：do-catch
+        do {
+            let printerResponse = try send(job: 100, toPrinter: "AAA")
+            Log(printerResponse)
+        } catch PrinterError.outOfPaper {
+            Log("catch - PrinterError.outOfPaper")
+        } catch PrinterError.noToner {
+            Log("catch - PrinterError.outOfPaper")
+        } catch {
+            Log(error)
+        }
+        
+        // 方法二：try?
+        // 使用 try? 将结果转换为可选的。如果函数抛出错误，该错误会被抛弃并且结果为 nil。否则，结果会是一个包含函数返回值的可选值。
+        let printerSuccess = try? send(job: 1884, toPrinter: "AAA")
+        Log(printerSuccess)
+    }
+    
+    // MARK:- ========== defer ==========
+    /*
+     使用 defer 代码块来表示在函数返回前，函数中最后执行的代码。无论函数是否会抛出错误，这段代码都将执行。
+     使用 defer 可以把函数调用之初就要执行的代码和函数调用结束时的扫尾代码写在一起，虽然这两者的执行时机截然不同。
+     */
+    func deferFunc() {
+        Log("代码前...")
+        defer {
+            Log("代码后...")
+        }
+        Log("代码中...")
+    }
+    
+
 }

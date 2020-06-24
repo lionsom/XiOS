@@ -26,6 +26,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         self.setUpNavigationBar()
         
         setUpTableView();
+        
     }
     
     deinit {

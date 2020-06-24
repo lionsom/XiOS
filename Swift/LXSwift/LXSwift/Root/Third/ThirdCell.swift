@@ -49,8 +49,6 @@ class ThirdCell: UITableViewCell {
                 image = UIImage(named: "default_avatar")
             }
             avatarImageView.image = image
-            
-            
         }
         get {
             // 返回新的存储属性
