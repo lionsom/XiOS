@@ -17,6 +17,7 @@
 		8A1DDD1124952D84001BA58C /* ThirdCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A1DDD1024952D84001BA58C /* ThirdCell.swift */; };
 		8A1DDD1524975D5F001BA58C /* ThirdJSON.geojson in Resources */ = {isa = PBXBuildFile; fileRef = 8A1DDD1424975D5E001BA58C /* ThirdJSON.geojson */; };
 		8A74CD2C249F961D00B25C87 /* ControlFlowVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A74CD2B249F961D00B25C87 /* ControlFlowVC.swift */; };
+		8A74CD2F24A791ED00B25C87 /* StopWatchVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A74CD2E24A791ED00B25C87 /* StopWatchVC.swift */; };
 		8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898C5248CEE4500D954B4 /* RootTabbarController.swift */; };
 		8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */; };
 		8AC898CC248CEEEF00D954B4 /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AC898CB248CEEEF00D954B4 /* SecondViewController.swift */; };
@@ -71,6 +72,7 @@
 		8A1DDD1024952D84001BA58C /* ThirdCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThirdCell.swift; sourceTree = "<group>"; };
 		8A1DDD1424975D5E001BA58C /* ThirdJSON.geojson */ = {isa = PBXFileReference; lastKnownFileType = text; path = ThirdJSON.geojson; sourceTree = "<group>"; };
 		8A74CD2B249F961D00B25C87 /* ControlFlowVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ControlFlowVC.swift; sourceTree = "<group>"; };
+		8A74CD2E24A791ED00B25C87 /* StopWatchVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StopWatchVC.swift; sourceTree = "<group>"; };
 		8AC898C5248CEE4500D954B4 /* RootTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootTabbarController.swift; sourceTree = "<group>"; };
 		8AC898C9248CEEDF00D954B4 /* FirstViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirstViewController.swift; sourceTree = "<group>"; };
 		8AC898CB248CEEEF00D954B4 /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		8A1DDCD624948AE8001BA58C /* LearningPro */ = {
 			isa = PBXGroup;
 			children = (
+				8A74CD2D24A791D400B25C87 /* StopWatch */,
 				8A1DDCFB2494B2C5001BA58C /* FaceBookMe */,
 			);
 			path = LearningPro;
@@ -241,6 +244,14 @@
 				995CFF3324A332140016118C /* Error.swift */,
 			);
 			path = BaseCourse;
+			sourceTree = "<group>";
+		};
+		8A74CD2D24A791D400B25C87 /* StopWatch */ = {
+			isa = PBXGroup;
+			children = (
+				8A74CD2E24A791ED00B25C87 /* StopWatchVC.swift */,
+			);
+			path = StopWatch;
 			sourceTree = "<group>";
 		};
 		8AC898C7248CEE4D00D954B4 /* AppEntry */ = {
@@ -537,6 +548,7 @@
 				995CFF2E24A3236F0016118C /* Enum.swift in Sources */,
 				99EB4704248E14630033D7CB /* Algorithm_002.swift in Sources */,
 				8ACB3BFA248CE2F4003B6410 /* AppDelegate.swift in Sources */,
+				8A74CD2F24A791ED00B25C87 /* StopWatchVC.swift in Sources */,
 				8A1DDD1124952D84001BA58C /* ThirdCell.swift in Sources */,
 				995CFF3224A32E530016118C /* Protocol.swift in Sources */,
 				8A1DDCD824949656001BA58C /* StringVC.swift in Sources */,

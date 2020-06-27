@@ -89,6 +89,9 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if indexPath.row == 0 {
             cell.textLabel?.text = "FB"
         }
+        else if indexPath.row == 1 {
+            cell.textLabel?.text = "计时器"
+        }
         else {
             cell.textLabel?.text = "\(indexPath.row)"
         }
@@ -104,9 +107,15 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.deselectRow(at: indexPath, animated: true)
         
         if indexPath.row == 0 {
-            let FBVC = FBMeViewController()
+            let VC = FBMeViewController()
             self.hidesBottomBarWhenPushed = true
-            self.navigationController?.pushViewController(FBVC, animated: true)
+            self.navigationController?.pushViewController(VC, animated: true)
+            self.hidesBottomBarWhenPushed = false
+        }
+        else if indexPath.row == 1 {
+            let VC = StopWatchVC()
+            self.hidesBottomBarWhenPushed = true
+            self.navigationController?.pushViewController(VC, animated: true)
             self.hidesBottomBarWhenPushed = false
         }
         else {
