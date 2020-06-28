@@ -950,7 +950,7 @@ mysql> show global variables like 'port';
 
 [stackoverflow - 解决方案](https://stackoverflow.com/questions/50169576/mysql-8-0-11-error-connect-to-caching-sha2-password-the-specified-module-could-n)
 
-![img](file:///Users/lionsom/GitHub/XiOS/JAVA/media_MySQL/001.png?lastModify=1591200827)
+![img](media_MySQL/001.png)
 
 ### 2、【原因】
 
@@ -962,7 +962,7 @@ mysql> show global variables like 'port';
 
 ### 4、【成功】
 
-![img](file:///Users/lionsom/GitHub/XiOS/JAVA/media_MySQL/002.png?lastModify=1591200827)
+![img](media_MySQL/002.png)
 
 
 
