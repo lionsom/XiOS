@@ -9,7 +9,7 @@
         { "title": "判断是否为回文数", "avatar":"fb_friends", "detail": "Algorithm_003", "index":2 },
         { "title": "罗马数字转阿拉伯数字", "avatar":"fb_games", "detail": "Algorithm_004", "index":3 },
         { "title": "最长公共前缀", "avatar":"fb_groups", "detail": "Algorithm_005", "index":4 },
-        { "title": "Brett", "avatar":"McLaughlin", "detail": "Algorithm_006", "index":5 },
+        { "title": "有效的括号", "avatar":"fb_home", "detail": "Algorithm_006", "index":5 },
         { "title": "Brett", "avatar":"McLaughlin", "detail": "Algorithm_007", "index":6 },
         { "title": "Brett", "avatar":"McLaughlin", "detail": "Algorithm_008", "index":7 }
     ],
