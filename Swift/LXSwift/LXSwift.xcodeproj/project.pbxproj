@@ -140,8 +140,8 @@
 		8A1DDCD624948AE8001BA58C /* LearningPro */ = {
 			isa = PBXGroup;
 			children = (
-				8A74CD2D24A791D400B25C87 /* StopWatch */,
 				8A1DDCFB2494B2C5001BA58C /* FaceBookMe */,
+				8A74CD2D24A791D400B25C87 /* StopWatch */,
 			);
 			path = LearningPro;
 			sourceTree = "<group>";
