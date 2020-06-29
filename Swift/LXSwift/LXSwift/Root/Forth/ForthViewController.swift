@@ -33,7 +33,7 @@ class ForthViewController: UIViewController {
     
     // MARK: - ====== Actions ======
     @objc func logoutBarButtonItemClick(sender: UIBarButtonItem) {
-        SVProgressHUD.showSuccess(withStatus: "退出成功")
+        SVProgressHUD.lx_showSuccess("退出成功")
         
         // 设置标识
         UserDefaults.standard.set(false, forKey: Key.UserDefaults.k_ISLogin)

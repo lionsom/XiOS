@@ -118,7 +118,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
             self.hidesBottomBarWhenPushed = false
         }
         else {
-            SVProgressHUD.showError(withStatus: "暂不支持")
+            SVProgressHUD.lx_showError("暂不支持")
         }
     }
     

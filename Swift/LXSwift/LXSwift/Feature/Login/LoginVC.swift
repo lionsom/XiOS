@@ -41,9 +41,9 @@ class LoginVC: UIViewController {
         SVProgressHUD.show(withStatus: "正在登录...")
         
         // 延迟执行
-        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
+        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
             SVProgressHUD.dismiss {
-                SVProgressHUD.showSuccess(withStatus: "登录成功")
+                SVProgressHUD.lx_showSuccess("登录成功")
                 
                 // 设置标识
                 UserDefaults.standard.set(true, forKey: Key.UserDefaults.k_ISLogin)

@@ -1,5 +1,7 @@
 package com.lx;
 
+import com.google.gson.Gson;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -46,20 +48,25 @@ public class PackageServlet extends javax.servlet.http.HttpServlet {
         String uri = req.getRequestURI();   // 获取uri
         System.out.println("uri:"+uri);     // uri:/WEB152/request
 
+        // 获取参数
+        String page = req.getParameter("page");
+        String limit = req.getParameter("limit");
+
+        // default
+        String result = "{\"name\":\"暂不支持\",\"type\":\"后续再开发！\"}";
+
         if ( uri.endsWith("/package") ) {
             // JDBC
             JDBCManager manager = new JDBCManager();
-            manager.PackageJDBC_Select(1,1);
+            result = manager.PackageJDBC_Select(Integer.valueOf(page), Integer.valueOf(limit));
         }
-
 
         resp.setCharacterEncoding("UTF-8");
         resp.setContentType("application/json; charset=utf-8");
 //        resp.setHeader("content-type", "text/html;charset=UTF-8");   // 等价于
-        String data = "{\"name\":\"暂不支持\",\"type\":\"后续再开发！\"}";
 
         OutputStream outputStream = resp.getOutputStream(); //获取OutputStream输出流
-        byte[] dataByteArr = data.getBytes("UTF-8"); //将字符转换成字节数组，指定以UTF-8编码进行转换
+        byte[] dataByteArr = result.getBytes("UTF-8"); //将字符转换成字节数组，指定以UTF-8编码进行转换
         outputStream.write(dataByteArr); //使用OutputStream流向客户端输出字节数组
     }
 
@@ -71,29 +78,35 @@ public class PackageServlet extends javax.servlet.http.HttpServlet {
         System.out.println("PackageServlet doPost");
 
         // POST Param
-        String name = req.getParameter("name");
+        String createAt = getCurrentTime();
+        String bundleName = req.getParameter("bundleName");
+        String currentVersion = req.getParameter("currentVersion");
+        String appId = req.getParameter("appId");
+        String appName = req.getParameter("appName");
         String icon = req.getParameter("icon");
         String branch = req.getParameter("branch");
         String env = req.getParameter("env");
         String install = req.getParameter("install");
         String platform = req.getParameter("platform");
-        String create_by = req.getParameter("create_by");
-//        String create_at = req.getParameter("create_at");
-        String create_at = getCurrentTime();
+        String developer = req.getParameter("developer");
         String testUser = req.getParameter("testUser");
-        System.out.println("name" + " : " + name);
+
+        System.out.println("createAt" + " : " + createAt);
+        System.out.println("bundleName" + " : " + bundleName);
+        System.out.println("currentVersion" + " : " + currentVersion);
+        System.out.println("appId" + " : " + appId);
+        System.out.println("appName" + " : " + appName);
         System.out.println("icon" + " : " + icon);
         System.out.println("branch" + " : " + branch);
         System.out.println("env" + " : " + env);
         System.out.println("install" + " : " + install);
         System.out.println("platform" + " : " + platform);
-        System.out.println("create_by" + " : " + create_by);
-        System.out.println("create_at" + " : " + create_at);
+        System.out.println("developer" + " : " + developer);
         System.out.println("testUser" + " : " + testUser);
 
         // JDBC
         JDBCManager manager = new JDBCManager();
-        manager.PackageJDBC_Insert(name, icon, branch, env, install, platform, create_by, create_at, testUser);
+        manager.PackageJDBC_Insert(createAt, bundleName, currentVersion, appId, appName, icon, branch, env, install, platform, developer, testUser);
 
 
         // 返回值 字符集

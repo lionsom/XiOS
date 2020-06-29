@@ -19,10 +19,10 @@ class SVProgressHUDVC: UIViewController {
         // Do any additional setup after loading the view.
         
         
-        SVProgressHUD.showSuccess("自定义Success")
+        SVProgressHUD.lx_showSuccess("自定义Success")
         
-        SVProgressHUD.showError("自定义Error")
+        SVProgressHUD.lx_showError("自定义Error")
         
-        SVProgressHUD.showInfo("自定义Info")
+        SVProgressHUD.lx_showInfo("自定义Info")
     }
 }

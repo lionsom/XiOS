@@ -1,6 +1,10 @@
 package com.lx;
 
+import com.google.gson.Gson;
+
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 //import java.sql.Connection;
 //import java.sql.DriverManager;
 //import java.sql.SQLException;
@@ -65,7 +69,7 @@ public class JDBCManager {
 
 
 
-    public void PackageJDBC_Insert(String name, String icon, String branch, String env, String install, String platform, String create_by, String create_at, String testUser) {
+    public void PackageJDBC_Insert(String createAt, String bundleName, String currentVersion, String appId, String appName, String icon, String branch, String env, String install, String platform, String developer, String testUser) {
         Connection conn = null;
         Statement stmt = null;
 
@@ -81,8 +85,8 @@ public class JDBCManager {
             stmt = conn.createStatement();
             String sql;
             sql = "INSERT INTO QYC_Package" +
-                    "(name, icon, branch, env, install, platform, create_by, create_at, testUser)" +
-                    "VALUES (" + "'" + name + "','" + icon + "','" + branch + "','" + env + "','" + install + "','" + platform + "','" + create_by + "','" + create_at + "','" + testUser + "'" + ")";
+                    "(createAt, bundleName, currentVersion, appId, appName, icon, branch, env, install, platform, developer, testUser)" +
+                    "VALUES (" + "'" + createAt + "','" + bundleName + "','" + currentVersion + "','" + appId + "','" + appName + "','" + icon + "','" + branch + "','" + env + "','" + install + "','" + platform + "','" + developer + "','"  + testUser + "'" + ")";
 
             stmt.executeUpdate(sql);
 
@@ -114,6 +118,9 @@ public class JDBCManager {
         Connection conn = null;
         Statement stmt = null;
 
+        // 数据数组
+        List<PackageInfo> infoList = new ArrayList<PackageInfo>();
+
         try {
             // 注册 JDBC 驱动
             Class.forName(JDBC_DRIVER);
@@ -125,25 +132,35 @@ public class JDBCManager {
             System.out.println(" 实例化Statement对象...");
             stmt = conn.createStatement();
             String sql;
-            sql = "SELECT * FROM QYC_Package ORDER BY create_at DESC LIMIT " + String.valueOf(page * limit) + "," + String.valueOf(limit);
+            sql = "SELECT * FROM QYC_Package ORDER BY createAt DESC LIMIT " + String.valueOf(page * limit) + "," + String.valueOf(limit);
+
+            System.out.print("SQL语句 ：" + sql);
 
             ResultSet rs = stmt.executeQuery(sql);
 
             //STEP 5: Extract data from result set
             while(rs.next()){
+
                 //Retrieve by column name
-                String name  = rs.getString("name");
+                String createAt  = rs.getString("createAt");
+                String bundleName = rs.getString("bundleName");
+                String currentVersion = rs.getString("currentVersion");
+                String appId = rs.getString("appId");
+                String appName = rs.getString("appName");
                 String icon = rs.getString("icon");
                 String branch = rs.getString("branch");
                 String env = rs.getString("env");
                 String install = rs.getString("install");
                 String platform = rs.getString("platform");
-                String create_by = rs.getString("create_by");
-                String create_at = rs.getString("create_at");
+                String developer = rs.getString("developer");
                 String testUser = rs.getString("testUser");
 
+                // Bean
+                PackageInfo info = new PackageInfo(createAt,bundleName,currentVersion,appId,appName,icon,branch,env,install,platform,developer,testUser);
+                infoList.add(info);
+
                 //Display values
-                System.out.print( "\n" + name+" " + icon+" " + branch+" " + env+" " + install+" " + platform+" " + create_by+" " + create_at+" " + testUser);
+                System.out.print( "\n" + createAt+" " + bundleName+" " + currentVersion+" " + appId+" " + appName+" " + icon+" " + branch +" " + env +" " + install +" " + platform+" " + developer+" " + testUser);
             }
             rs.close();
 
@@ -169,7 +186,11 @@ public class JDBCManager {
             }
         }
 
-        return "hahaha";
+        // 解析对象
+        Gson gson = new Gson();
+        String resultJson = gson.toJson(infoList);
+
+        return resultJson;
     }
 
 }

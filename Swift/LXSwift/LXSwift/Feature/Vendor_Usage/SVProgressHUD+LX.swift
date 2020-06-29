@@ -11,7 +11,7 @@ import Foundation
 import SVProgressHUD.SVProgressHUD
 
 // 扩展不能包括属性
-fileprivate let kDurationTime: TimeInterval = 2.0
+fileprivate let kDurationTime: TimeInterval = 1.0
 
 
 extension SVProgressHUD {
@@ -40,7 +40,7 @@ extension SVProgressHUD {
 
     // MARK: - ========== Success ==========
     // 类方法
-    class func showSuccess(_ message: String) {
+    class func lx_showSuccess(_ message: String) {
         // 初始化
         SVProgressHUD.customInit()
         // 主线程
@@ -52,7 +52,7 @@ extension SVProgressHUD {
     
     // MARK: - ========== Error ==========
     // 类方法
-    class func showError(_ message: String) {
+    class func lx_showError(_ message: String) {
         // 初始化
         SVProgressHUD.customInit()
         // 主线程
@@ -64,7 +64,7 @@ extension SVProgressHUD {
     
     // MARK: - ========== Info ==========
     // 类方法
-    class func showInfo(_ message: String) {
+    class func lx_showInfo(_ message: String) {
         // 初始化
         SVProgressHUD.customInit()
         // 主线程

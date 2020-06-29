@@ -1,26 +1,31 @@
 package com.lx;
 
 public class PackageInfo {
-    String name = "";
+    String createAt = "";
+    String bundleName = "";
+    String currentVersion = "";
+    String appId = "";
+    String appName = "";
     String icon = "";
     String branch = "";
     String env = "";
     String install = "";
     String platform = "";
-    String create_by = "";
-    String create_at = "";
+    String developer = "";
     String testUser = "";
 
-
-    public PackageInfo(String name, String icon, String branch, String env, String install, String platform, String create_by, String create_at, String testUser) {
-        this.name = name;
+    public PackageInfo(String createAt, String bundleName, String currentVersion, String appId, String appName, String icon, String branch, String env, String install, String platform, String developer, String testUser) {
+        this.createAt = createAt;
+        this.bundleName = bundleName;
+        this.currentVersion = currentVersion;
+        this.appId = appId;
+        this.appName = appName;
         this.icon = icon;
         this.branch = branch;
         this.env = env;
         this.install = install;
         this.platform = platform;
-        this.create_by = create_by;
-        this.create_at = create_at;
+        this.developer = developer;
         this.testUser = testUser;
     }
 }
