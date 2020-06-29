@@ -55,7 +55,7 @@ class SecondViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     // MARK: - ========== Action ==========
     @objc func leftBarButtonClick(sender: UIBarButtonItem) {
-        let stringVC = UsageVC()
+        let stringVC = StringVC()
         self.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(stringVC, animated: true)
         self.hidesBottomBarWhenPushed = false

@@ -137,7 +137,7 @@ class ThirdViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }()
     
     
-    var dataSource: NSArray = {
+    lazy var dataSource: NSArray = {
         var arr = NSMutableArray()
         let mainBundle = Bundle.main
         
