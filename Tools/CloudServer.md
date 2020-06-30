@@ -126,9 +126,77 @@ OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
 
 
 
+## JAVA
+
+```
+// 查看jdk安装路径
+~ which java  
+~ ls -lrt /usr/bin/java  
+~ ls -lrt /etc/alternatives/java
+```
 
 
 
 
 
+## 端口
+
+```
+// 查看当前所有tcp端口
+~ netstat -ntlp
+
+// 查看所有8080端口使用情况
+~ netstat -lnp | grep 8080
+
+
+
+// 查看端口占用
+~ lsof -i tcp:8080
+
+// root执行
+~ lsof -i
+```
+
+
+
+## 防火墙
+
+```
+// 查看防火墙状态
+~ systemctl status firewalld
+
+// 开启/关闭 防火墙服务
+~ systemctl start firewalld.service
+~ systemctl start firewalld.service
+
+// 设置防火墙开机自启动
+~ systemctl enable firewalld.service
+
+// 查看开启的所有端口
+~ firewall-cmd --permanent --zone=public --list-ports
+
+// 验证是否开启8080端口
+~ firewall-cmd --query-port=8080/tcp
+
+// 开启8080端口
+~ firewall-cmd --zone=public --add-port=8080/tcp --permanent
+
+// 重启防火墙
+~ firewall-cmd --reload
+
+// 关闭端口
+~ firewall-cmd --zone=public --remove-port=8080/tcp --permanent
+
+```
+
+
+
+## Tomcat
+
+>  **访问是HTTP**
+
+```
+// 查看tomcat是否启动成功
+~ ps -ef|grep tomcat 
+```
 
