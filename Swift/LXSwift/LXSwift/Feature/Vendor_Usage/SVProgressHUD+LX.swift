@@ -24,8 +24,8 @@ extension SVProgressHUD {
         SVProgressHUD.setDefaultMaskType(.clear)
         // 菊花样式
         SVProgressHUD.setDefaultAnimationType(.native)
-        // 设置最小时长
-        SVProgressHUD.setMinimumDismissTimeInterval(kDurationTime)
+        // 设置最小时长，dismiss手动设置
+        // SVProgressHUD.setMinimumDismissTimeInterval(kDurationTime)
         // 圆角
         SVProgressHUD.setCornerRadius(10)
         SVProgressHUD.setBorderWidth(2)
@@ -41,11 +41,16 @@ extension SVProgressHUD {
     // MARK: - ========== Success ==========
     // 类方法
     class func lx_showSuccess(_ message: String) {
+        SVProgressHUD.lx_showSuccess(message, completioned: nil)
+    }
+    
+    class func lx_showSuccess(_ message: String, completioned: Optional<()->()>) {
         // 初始化
         SVProgressHUD.customInit()
         // 主线程
         DispatchQueue.main.async {
             SVProgressHUD.showSuccess(withStatus: message)
+            SVProgressHUD.dismiss(withDelay: kDurationTime, completion: completioned)
         }
     }
     
@@ -53,23 +58,32 @@ extension SVProgressHUD {
     // MARK: - ========== Error ==========
     // 类方法
     class func lx_showError(_ message: String) {
+        SVProgressHUD.lx_showError(message, completioned: nil)
+    }
+    
+    class func lx_showError(_ message: String, completioned: Optional<()->()>) {
         // 初始化
         SVProgressHUD.customInit()
         // 主线程
         DispatchQueue.main.async {
             SVProgressHUD.showError(withStatus: message)
+            SVProgressHUD.dismiss(withDelay: kDurationTime, completion: completioned)
         }
     }
-    
     
     // MARK: - ========== Info ==========
     // 类方法
     class func lx_showInfo(_ message: String) {
+        SVProgressHUD.lx_showInfo(message, completioned: nil)
+    }
+    
+    class func lx_showInfo(_ message: String, completioned: Optional<()->()>) {
         // 初始化
         SVProgressHUD.customInit()
         // 主线程
         DispatchQueue.main.async {
             SVProgressHUD.showInfo(withStatus: message)
+            SVProgressHUD.dismiss(withDelay: kDurationTime, completion: completioned)
         }
     }
     

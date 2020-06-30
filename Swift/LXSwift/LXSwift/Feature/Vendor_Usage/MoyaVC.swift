@@ -26,14 +26,14 @@ class MoyaVC: UIViewController {
     func method_easy() {
         let ApiProvider = MoyaProvider<LXApi>()
         
-        ApiProvider.request(LXApi.login("ll", "1234")) { result in
-            switch result {
-            case .success(Response):
-                print("Scc")
-            case .failure(Error):
-                print("err")
-            }
-        }
+//        ApiProvider.request(LXApi.login("ll", "1234")) { result in
+//            switch result {
+//            case .success(Response):
+//                print("Scc")
+//            case .failure(Error):
+//                print("err")
+//            }
+//        }
 //
 //        ApiProvider.request(LXApi.logout(parameters: ["name": "lx"])) { (Result<Response, MoyaError>) in
 //            switch Result

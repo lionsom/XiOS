@@ -1,7 +1,3 @@
-
-
-
-
 # mac登录云服务器
 
 ```
@@ -30,11 +26,9 @@ Created symlink /etc/systemd/system/sockets.target.wants/cockpit.socket → /usr
 
 
 
-# 退出：control + d
+### 退出：control + d
 
-
-
-# 重新登录
+### 重新登录
 
 ```
 ➜ ~ ssh root@47.114.81.248
@@ -59,11 +53,7 @@ Last login: Mon Jun 29 17:02:59 2020 from 221.226.186.58
 关闭：systemctl stop firewalld.service || systemctl disable firewalld.service
 ```
 
-
-
-
-
-## cockpit 跳过防火墙
+### cockpit 跳过防火墙
 
 ```
 [root@iZbp1hyj00tfq6s5ka3klmZ ~]# systemctl start firewalld.service
@@ -76,6 +66,65 @@ success
 success
 [root@iZbp1hyj00tfq6s5ka3klmZ ~]#
 ```
+
+
+
+
+
+## SFTP上传本地文件到远程服务器
+
+登录
+
+```
+~ sftp root@47.114.81.248
+```
+
+上传
+
+```
+~ put /Users/qiyeyun/JAVA/apache-tomcat-9.0.35.zip /root/Java
+```
+
+
+
+
+
+
+
+### OpenJDK
+
+4.1 检查 yum 中有没有 java1.8 包
+
+```
+yum list java-1.8*
+```
+
+4.2 开始安装
+
+```
+yum install java-1.8.0-openjdk* -y
+```
+
+
+
+```
+[root@iZbp1hyj00tfq6s5ka3klmZ ~]# java -version
+openjdk version "1.8.0_252"
+OpenJDK Runtime Environment (build 1.8.0_252-b09)
+OpenJDK 64-Bit Server VM (build 25.252-b09, mixed mode)
+```
+
+
+
+
+
+### 移除文件夹，不提示用户
+
+```rm -rf /home/test
+~ rm -rf /home/test
+```
+
+
 
 
 
