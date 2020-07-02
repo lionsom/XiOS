@@ -202,7 +202,22 @@ export PATH=$JAVA_HOME/bin:$PATH:
 
 root     28804     1  0 15:06 ?        00:00:17 /usr/bin/java -Djava.util.logging.config.file=/opt/tomcat/apache-tomcat-9.0.36/conf/logging.properties -Djava.util.logging.manager=org.apache.juli.ClassLoaderLogManager -Djdk.tls.ephemeralDHKeySize=2048 -Djava.protocol.handler.pkgs=org.apache.catalina.webresources -Dorg.apache.catalina.security.SecurityListener.UMASK=0027 -Dignore.endorsed.dirs= -classpath /opt/tomcat/apache-tomcat-9.0.36/bin/bootstrap.jar:/opt/tomcat/apache-tomcat-9.0.36/bin/tomcat-juli.jar -Dcatalina.base=/opt/tomcat/apache-tomcat-9.0.36 -Dcatalina.home=/opt/tomcat/apache-tomcat-9.0.36 -Djava.io.tmpdir=/opt/tomcat/apache-tomcat-9.0.36/temp org.apache.catalina.startup.Bootstrap start
 root     29297 29052  0 18:52 pts/0    00:00:00 grep --color=auto tomcat
+
+
+
 ```
+
+
+## JAVA
+
+```
+// 查看jdk安装路径
+~ which java  
+~ ls -lrt /usr/bin/java  
+~ ls -lrt /etc/alternatives/java
+```
+
+
 
 
 
@@ -223,13 +238,77 @@ success
 
 
 
+## 端口
+
+```
+// 查看当前所有tcp端口
+~ netstat -ntlp
+
+// 查看所有8080端口使用情况
+~ netstat -lnp | grep 8080
+
+
+
+// 查看端口占用
+~ lsof -i tcp:8080
+
+// root执行
+~ lsof -i
+```
+
 
 
 ### 前往阿里云控制台-添加安全组规则
 
-
-
 ![](media_Cloud/ECS_安全组规则1.jpg)
 
 ![](media_Cloud/ECS_安全组规则2.jpg)
+
+
+
+
+
+## 防火墙
+
+```
+// 查看防火墙状态
+~ systemctl status firewalld
+
+// 开启/关闭 防火墙服务
+~ systemctl start firewalld.service
+~ systemctl start firewalld.service
+
+// 设置防火墙开机自启动
+~ systemctl enable firewalld.service
+
+// 查看开启的所有端口
+~ firewall-cmd --permanent --zone=public --list-ports
+
+// 验证是否开启8080端口
+~ firewall-cmd --query-port=8080/tcp
+
+// 开启8080端口
+~ firewall-cmd --zone=public --add-port=8080/tcp --permanent
+
+// 重启防火墙
+~ firewall-cmd --reload
+
+// 关闭端口
+~ firewall-cmd --zone=public --remove-port=8080/tcp --permanent
+```
+
+
+
+
+
+## Tomcat
+
+>  **访问是HTTP**
+
+```
+// 查看tomcat是否启动成功
+~ ps -ef|grep tomcat 
+```
+
+
 

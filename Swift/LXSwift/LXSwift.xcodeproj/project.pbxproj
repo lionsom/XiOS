@@ -50,6 +50,9 @@
 		9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2BB248F3D7100553584 /* Algorithm_004.swift */; };
 		9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9964A2C12490764200553584 /* SVProgressHUDVC.swift */; };
 		996EC3E224AAED3F003DB6AD /* BlockVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996EC3E124AAED3F003DB6AD /* BlockVC.swift */; };
+		996ED16724AC7772003DB6AD /* PSCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996ED16624AC7772003DB6AD /* PSCollectionViewController.swift */; };
+		996ED16924AC77B8003DB6AD /* PS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 996ED16824AC77B8003DB6AD /* PS.xcassets */; };
+		996ED16D24AC7A2F003DB6AD /* PSPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996ED16C24AC7A2F003DB6AD /* PSPhotoCell.swift */; };
 		9970A03E24938D4A008EF873 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9970A03D24938D4A008EF873 /* LoginVC.swift */; };
 		99AA240724A9C35B00FEC09F /* MoyaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA240624A9C35B00FEC09F /* MoyaVC.swift */; };
 		99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46EF248DEC660033D7CB /* GlobalFunc.swift */; };
@@ -110,6 +113,9 @@
 		9964A2BB248F3D7100553584 /* Algorithm_004.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_004.swift; sourceTree = "<group>"; };
 		9964A2C12490764200553584 /* SVProgressHUDVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SVProgressHUDVC.swift; sourceTree = "<group>"; };
 		996EC3E124AAED3F003DB6AD /* BlockVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockVC.swift; sourceTree = "<group>"; };
+		996ED16624AC7772003DB6AD /* PSCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCollectionViewController.swift; sourceTree = "<group>"; };
+		996ED16824AC77B8003DB6AD /* PS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PS.xcassets; sourceTree = "<group>"; };
+		996ED16C24AC7A2F003DB6AD /* PSPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSPhotoCell.swift; sourceTree = "<group>"; };
 		9970A03D24938D4A008EF873 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		99AA240624A9C35B00FEC09F /* MoyaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaVC.swift; sourceTree = "<group>"; };
 		99EB46EF248DEC660033D7CB /* GlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunc.swift; sourceTree = "<group>"; };
@@ -144,20 +150,21 @@
 		8A1DDCD624948AE8001BA58C /* LearningPro */ = {
 			isa = PBXGroup;
 			children = (
-				8A1DDCFB2494B2C5001BA58C /* FaceBookMe */,
-				8A74CD2D24A791D400B25C87 /* StopWatch */,
+				8A74CD2D24A791D400B25C87 /* 02StopWatch */,
+				8A1DDCFB2494B2C5001BA58C /* 03 */,
+				996ED16524AC7454003DB6AD /* 09PhotoScroll */,
 			);
 			path = LearningPro;
 			sourceTree = "<group>";
 		};
-		8A1DDCFB2494B2C5001BA58C /* FaceBookMe */ = {
+		8A1DDCFB2494B2C5001BA58C /* 03 */ = {
 			isa = PBXGroup;
 			children = (
 				8A1DDD032494CADF001BA58C /* Controller */,
 				8A1DDD042494CAE7001BA58C /* View */,
 				8A1DDD052494CAED001BA58C /* Model */,
 			);
-			path = FaceBookMe;
+			path = 03;
 			sourceTree = "<group>";
 		};
 		8A1DDCFC2494B2E8001BA58C /* Helper */ = {
@@ -253,13 +260,13 @@
 			path = BaseCourse;
 			sourceTree = "<group>";
 		};
-		8A74CD2D24A791D400B25C87 /* StopWatch */ = {
+		8A74CD2D24A791D400B25C87 /* 02StopWatch */ = {
 			isa = PBXGroup;
 			children = (
 				8A74CD2E24A791ED00B25C87 /* StopWatchVC.swift */,
 				995CFF3624A876040016118C /* StopWatch.swift */,
 			);
-			path = StopWatch;
+			path = 02StopWatch;
 			sourceTree = "<group>";
 		};
 		8AC898C7248CEE4D00D954B4 /* AppEntry */ = {
@@ -342,6 +349,16 @@
 				99AA240624A9C35B00FEC09F /* MoyaVC.swift */,
 			);
 			path = Vendor_Usage;
+			sourceTree = "<group>";
+		};
+		996ED16524AC7454003DB6AD /* 09PhotoScroll */ = {
+			isa = PBXGroup;
+			children = (
+				996ED16824AC77B8003DB6AD /* PS.xcassets */,
+				996ED16624AC7772003DB6AD /* PSCollectionViewController.swift */,
+				996ED16C24AC7A2F003DB6AD /* PSPhotoCell.swift */,
+			);
+			path = 09PhotoScroll;
 			sourceTree = "<group>";
 		};
 		99EB46EE248DEBC70033D7CB /* Config */ = {
@@ -474,6 +491,7 @@
 				8AC898F0248D22D300D954B4 /* tabbar_person_normal@2x.png in Resources */,
 				8ACB3C01248CE2F4003B6410 /* Main.storyboard in Resources */,
 				8AC898EF248D22D300D954B4 /* tabbar_shop_normal@2x.png in Resources */,
+				996ED16924AC77B8003DB6AD /* PS.xcassets in Resources */,
 				8AC898EB248D22D300D954B4 /* tabbar_node_normal@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -529,6 +547,7 @@
 			files = (
 				995CFF3024A3273A0016118C /* Algorithm_006.swift in Sources */,
 				8A1DDD092494D341001BA58C /* FBMeBaseCell.swift in Sources */,
+				996ED16D24AC7A2F003DB6AD /* PSPhotoCell.swift in Sources */,
 				8A1DDD072494CB1B001BA58C /* FBMeUser.swift in Sources */,
 				994859FC24A039200095302B /* UsageVC.swift in Sources */,
 				8AE4FE31249A79EA00648D89 /* ThirdModel.swift in Sources */,
@@ -537,6 +556,7 @@
 				8AC898CA248CEEDF00D954B4 /* FirstViewController.swift in Sources */,
 				8AE4FE2F249A638100648D89 /* ThirdResult.swift in Sources */,
 				990102E424A237E1002F5EC7 /* SVProgressHUD+LX.swift in Sources */,
+				996ED16724AC7772003DB6AD /* PSCollectionViewController.swift in Sources */,
 				99EB4702248E14530033D7CB /* Algorithm_001.swift in Sources */,
 				8A1DDD0F249529A8001BA58C /* ForthViewController.swift in Sources */,
 				99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */,
