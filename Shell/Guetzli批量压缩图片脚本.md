@@ -2,6 +2,28 @@
 
 
 
+# 前提：Guetzli
+
+[GitHub - guetzli](https://github.com/google/guetzli)
+
+```
+➜ ~ brew install guetzli		// 安装，自动安装依赖Installing guetzli dependency: libpng
+
+// 使用
+➜ ~ guetzli [--quality Q] [--verbose] original.png output.jpg
+➜ ~ guetzli [--quality Q] [--verbose] original.jpg output.jpg
+// 实战
+➜ ~ guetzli --quality 85 --verbose 005.png 010.png
+
+// 说明
+--quality	指的是质量，取值100~85，默认为95。
+--verbose	加此参数后 在执行压缩时会在控制台输出过程。
+original.jpg	输入的图片路径
+output.jpg	输出的图片路径
+```
+
+
+
 # 第一步：遍历路径下所有文件
 
 ```
