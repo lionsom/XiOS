@@ -76,7 +76,11 @@ UUID: 5CE2092C-516B-3E17-86BC-24411A759BB3 (arm64) /Users/qiyeyun/Library/Develo
 
 ### 1.8. 如何找回已发布到App Store的App对应的dSYM文件？
 
+* #### 通过Xcode找回
 
+* #### 通过iTunes Connect找回
+
+* #### 通过mdfind工具找回
 
 
 
