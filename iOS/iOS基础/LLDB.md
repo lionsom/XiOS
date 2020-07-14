@@ -8,7 +8,7 @@
 
 ### 1.1、普通断点
 
-<img src="Media/media_debug/001.jpg" style="zoom: 50%;" />
+<img src="media_debug/001.jpg" style="zoom: 50%;" />
 
 
 
@@ -18,7 +18,7 @@
 
 ### 1.3、条件断点
 
-<img src="Media/media_debug/002.jpg"  />
+<img src="media_debug/002.jpg"  />
 
 ### 1.4、全局条件断点
 
