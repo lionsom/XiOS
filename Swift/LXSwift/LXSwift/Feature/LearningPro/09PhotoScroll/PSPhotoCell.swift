@@ -10,11 +10,6 @@ import UIKit
 
 class PSPhotoCell: UICollectionViewCell {
     
-    init(<#parameters#>) {
-        <#statements#>
-    }
-    
-    
     let imageView: UIImageView = {
         let imv = UIImageView()
         imv.backgroundColor = UIColor.orange

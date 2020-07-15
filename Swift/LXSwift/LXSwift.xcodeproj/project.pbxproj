@@ -55,6 +55,7 @@
 		996ED16D24AC7A2F003DB6AD /* PSPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996ED16C24AC7A2F003DB6AD /* PSPhotoCell.swift */; };
 		9970A03E24938D4A008EF873 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9970A03D24938D4A008EF873 /* LoginVC.swift */; };
 		99AA240724A9C35B00FEC09F /* MoyaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA240624A9C35B00FEC09F /* MoyaVC.swift */; };
+		99E32DC224BE8DE000C58954 /* Algorithm_007.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E32DC124BE8DE000C58954 /* Algorithm_007.swift */; };
 		99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46EF248DEC660033D7CB /* GlobalFunc.swift */; };
 		99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */; };
 		99EB46F9248E06CE0033D7CB /* GlobalConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */; };
@@ -118,6 +119,7 @@
 		996ED16C24AC7A2F003DB6AD /* PSPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSPhotoCell.swift; sourceTree = "<group>"; };
 		9970A03D24938D4A008EF873 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		99AA240624A9C35B00FEC09F /* MoyaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaVC.swift; sourceTree = "<group>"; };
+		99E32DC124BE8DE000C58954 /* Algorithm_007.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_007.swift; sourceTree = "<group>"; };
 		99EB46EF248DEC660033D7CB /* GlobalFunc.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalFunc.swift; sourceTree = "<group>"; };
 		99EB46F6248E05D50033D7CB /* UIColor+LXColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+LXColor.swift"; sourceTree = "<group>"; };
 		99EB46F8248E06CE0033D7CB /* GlobalConstant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GlobalConstant.swift; sourceTree = "<group>"; };
@@ -407,6 +409,7 @@
 				9964A2BB248F3D7100553584 /* Algorithm_004.swift */,
 				9913FEA3249C4ABA006606AA /* Algorithm_005.swift */,
 				995CFF2F24A3273A0016118C /* Algorithm_006.swift */,
+				99E32DC124BE8DE000C58954 /* Algorithm_007.swift */,
 			);
 			path = LeetCodeAlgorithm;
 			sourceTree = "<group>";
@@ -570,6 +573,7 @@
 				9913FEA4249C4ABA006606AA /* Algorithm_005.swift in Sources */,
 				9913FEA6249C4C75006606AA /* String+ClassFromString.swift in Sources */,
 				99EB4706248E146F0033D7CB /* Algorithm_003.swift in Sources */,
+				99E32DC224BE8DE000C58954 /* Algorithm_007.swift in Sources */,
 				8AC898CE248CEEF900D954B4 /* ThirdViewController.swift in Sources */,
 				8A1DDD022494CAAA001BA58C /* FBMeViewController.swift in Sources */,
 				8AC898C6248CEE4500D954B4 /* RootTabbarController.swift in Sources */,
