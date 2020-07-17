@@ -76,11 +76,29 @@ UUID: 5CE2092C-516B-3E17-86BC-24411A759BB3 (arm64) /Users/qiyeyun/Library/Develo
 
 ### 1.8. 如何找回已发布到App Store的App对应的dSYM文件？
 
-* #### 通过Xcode找回
+#### 1. 通过Xcode找回
 
-* #### 通过iTunes Connect找回
+```
+Xcode顶部菜单栏 -> Window -> Organizer -> Archives -> 选择打好的包 -> Show in Finder -> 显示包内容 -> dSYM
+```
 
-* #### 通过mdfind工具找回
+#### 2. 通过 [iTunes Connect](https://itunesconnect.apple.com/) 找回
+
+```
+登录iTunes Connect -> 我的App -> 所有构建版本
+```
+
+#### 3. 通过mdfind工具找回
+
+> 注意，使用mdfind时，UUID需要格式转换（增加“-”）： 12345678-1234-1234-1234-xxxxxxxxxxxx
+
+```
+➜ ~ mdfind "com_apple_xcode_dsym_uuids == AE934E25-F5EE-3CFD-B692-D97506ABF525"
+/Users/qiyeyun/Library/Developer/Xcode/Archives/2020-07-10/Qiyeyun 2020-7-10, 6.24 PM.xcarchive
+/Users/qiyeyun/Library/Developer/Xcode/Archives/2020-07-10/Qiyeyun 2020-7-10, 5.47 PM.xcarchive
+/Users/qiyeyun/Library/Developer/Xcode/Archives/2020-07-10/Qiyeyun 2020-7-10, 5.26 PM.xcarchive
+/Users/qiyeyun/Library/Developer/Xcode/Archives/2020-07-10/Qiyeyun 2020-7-10, 4.45 PM.xcarchive
+```
 
 
 

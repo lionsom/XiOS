@@ -209,11 +209,13 @@ xxx
 
 
 
-## 7、LICEcap
+## 7、LICEcap || GIPHY Capture
 
-> LICEcap是一款Mac gif录屏软件。
+> LICEcap || GIPHY Capture 是一款Mac gif录屏软件。
 
 * [LICEcap](https://www.cockos.com/licecap/)
+
+* [GIPHY Capture](https://giphy.com/apps/giphycapture) install in AppStore
 
 
 
