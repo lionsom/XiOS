@@ -59,7 +59,7 @@ XCode -> Build Settings -> Build Option -> Debug Information Format -> DWARF wit
 
 ### 1.7. 如何查看dSYM文件UUID？
 
-* #### 通过命令查看UUID
+#### 1.通过命令查看UUID
 
 ```
 ~ xcrun dwarfdump --uuid <dSYM文件>
@@ -70,7 +70,7 @@ UUID: AE934E25-F5EE-3CFD-B692-D97506ABF525 (armv7) /Users/qiyeyun/Library/Develo
 UUID: 5CE2092C-516B-3E17-86BC-24411A759BB3 (arm64) /Users/qiyeyun/Library/Developer/Xcode/Archives/2020-07-10/Qiyeyun 2020-7-10, 6.24 PM.xcarchive/dSYMs/Qiyeyun.app.dSYM/Contents/Resources/DWARF/Qiyeyun
 ```
 
-* #### 通过符号表文件查看UUID
+#### 2.通过符号表文件查看UUID
 
 
 
@@ -169,7 +169,7 @@ BUNDLE_IDENTIFIER="xxxx"
 
 * #### 原因：
 
-Xcode
+xcode 11 后改成 ` $(MARKETING_VERSION) $(CURRENT_PROJECT_VERSION)`
 
 * #### 解决方案：
 
@@ -182,7 +182,19 @@ BUNDLE_SHORT_VERSION="$CURRENT_PROJECT_VERSION"
 
 
 
-### 4.3. 查看Bugly符号表管理【成功】
+### 4.3. 查看编译日志
+
+#### 1. 开始运行脚本
+
+![](media_Bugly/7.jpg)
+
+#### 2. dSYM上传成功
+
+![](media_Bugly/8.jpg)
+
+
+
+### 4.4. 查看Bugly符号表管理【成功】
 
 ![](media_Bugly/4.jpg)
 
