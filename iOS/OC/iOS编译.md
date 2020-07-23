@@ -294,9 +294,7 @@ LLVM 将 LLVM IR 生成当前平台的汇编代码，期间 LLVM 根据编译设
 
 
 
-# 五、获取耗时报告
-
-## 5.1. 显示Xcode编译耗时
+## 4.4. 显示Xcode编译耗时
 
 关闭Xcode，执行以下命令显示编译时间，然后重启Xcode即可
 
@@ -308,20 +306,70 @@ $ defaults write com.apple.dt.Xcode ShowBuildOperationDuration YES
 
 
 
-### 5.2、下载LLVM
+# 五、获取耗时报告
+
+国外大神 Aras Pranckevičius 已经在 LLVM 项目提交了 rL357340 修改：clang 增加 -ftime-trace 选项，编译时生成 Chrome（chrome://tracing） JSON 格式的耗时报告，列出所有阶段的耗时。 Clang 9.0 以后已经集成。
+
+### 5.1. 下载LLVM
 
 使用brew安装
 
 ```
 ➜ brew install llvm
 .....
+==> llvm
+To use the bundled libc++ please add the following LDFLAGS:
+  LDFLAGS="-L/usr/local/opt/llvm/lib -Wl,-rpath,/usr/local/opt/llvm/lib"
 
+llvm is keg-only, which means it was not symlinked into /usr/local,
+because macOS already provides this software and installing another version in
+parallel can cause all kinds of trouble.
 
+If you need to have llvm first in your PATH run:
+  echo 'export PATH="/usr/local/opt/llvm/bin:$PATH"' >> ~/.zshrc
+
+For compilers to find llvm you may need to set:
+  export LDFLAGS="-L/usr/local/opt/llvm/lib"
+  export CPPFLAGS="-I/usr/local/opt/llvm/include"
+  
+  
+  
 // llvm安装路径
 /usr/local/opt/llvm
+
+// 查看clang版本
+➜ ~ /usr/local/opt/llvm/bin/clang --version
+clang version 10.0.0
+Target: x86_64-apple-darwin19.5.0
+Thread model: posix
+InstalledDir: /usr/local/opt/llvm/bin
 ```
 
+### 5.2. 使用Clang -ftime-trace扩展获取编译耗时报告
 
+[XCode 分析編譯耗時之我見]([https://medium.com/@SunXiaoShan/llvm-%E7%B7%A8%E8%AD%AF%E8%80%97%E6%99%82%E4%B9%8B%E6%88%91%E8%A6%8B-eabb3fb3817e](https://medium.com/@SunXiaoShan/llvm-編譯耗時之我見-eabb3fb3817e))
+
+> 打开Xcode，配置使用自己下载的Clang，扩展-ftime-trace，然后进行编译，获取耗时报告（JOSN文件），拖动到 **chrome://tracing** 显示。
+
+![](media_Compile/025.jpg)
+
+![](media_Compile/026.jpg)
+
+![](media_Compile/027.jpg)
+
+
+
+![](media_Compile/028.jpg)
+
+![](media_Compile/029.jpg)
+
+![](media_Compile/030.jpg)
+
+
+
+### 5.3. chrome://tracing 显示耗时报告
+
+![](media_Compile/031.jpg)
 
 
 
