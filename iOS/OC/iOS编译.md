@@ -1,10 +1,4 @@
-[深入浅出iOS编译](https://juejin.im/post/5c22eaf1f265da611b5863b2)
-
-[深入iOS系统底层之静态库](https://juejin.im/post/5c63906ff265da2ddd4a3fc0)
-
-
-
-# 一、『编译型』和『解释型』语言
+# n一、『编译型』和『解释型』语言
 
 * 计算机高级语言主要有『编译型』和『解释型』；
 
@@ -323,12 +317,9 @@ $ defaults write com.apple.dt.Xcode ShowBuildOperationDuration YES
 .....
 
 
-
-```
-
-
-
+// llvm安装路径
 /usr/local/opt/llvm
+```
 
 
 
@@ -392,7 +383,126 @@ $ defaults write com.apple.dt.Xcode ShowBuildOperationDuration YES
 
 [ObjC中国 -  **调试：案例学习**](https://objccn.io/issue-19-1/)
 
-### 1. 检查视图层次结构
+[ObjC中国 -  **与调试器共舞 - LLDB 的华尔兹**](https://objccn.io/issue-19-2/)
+
+![](media_Compile/021.jpg)
+
+### 1. help / h
+
+```
+// 列举出所有的命令
+(lldb) help
+
+// 了解更多print命令细节
+(lldb) help print
+```
+
+### 2. print / p
+
+你可能还注意到了，结果中有个 `$0`。实际上你可以使用它来指向这个结果。试试 `print $0 + 7`，你会看到 `106`。任何以美元符开头的东西都是存在于 LLDB 的命名空间的，它们是为了帮助你进行调试而存在的。
+
+![](media_Compile/022.jpg)
+
+### 3. expression / e
+
+如果想改变一个值怎么办？你或许会猜 *modify*。其实这时候我们要用到的是 `expression` 这个方便的命令。
+
+这不仅会改变调试器中的值，实际上它改变了程序中的值。这时候继续执行程序，将会打印 `AA = 50`。神奇吧。
+
+![](media_Compile/023.jpg)
+
+### 4. print 与 expression 关系
+
+```
+(lldb) help print
+......
+'print' is an abbreviation for 'expression --'
+```
+
+### 5. print object / po 打印对象 
+
+先`print`打印对象，发现打印数组时，我们想查看数组元素？？
+
+```
+(lldb) print B
+(__NSCFConstantString *) $0 = 0x0000000100001030 @"haha WAWA"
+
+(lldb) p @[ @"foo", @"bar" ]
+(__NSArrayI *) $1 = 0x00000001005074c0 @"2 elements"
+```
+
+实际上，我们想看的是对象的 `description` 方法的结果。我么需要使用 `-O` (字母 O，而不是数字 0) 标志告诉 `expression` 命令以 `对象` (Object) 的方式来打印结果。
+
+```
+(lldb) p @[ @"foo", @"bar" ]
+(__NSArrayI *) $1 = 0x00000001005074c0 @"2 elements"
+(lldb) e -o -- $1
+<__NSArrayI 0x1005074c0>(
+foo,
+bar
+)
+```
+
+幸运的是，`e -o --` 有也有个别名，那就是 `po` (**p**rint **o**bject 的缩写)，我们可以使用它来进行简化：
+
+```
+(lldb) po $1
+<__NSArrayI 0x1005074c0>(
+foo,
+bar
+)
+```
+
+### 6. po 与 expression 关系
+
+```
+(lldb) help po
+......
+'po' is an abbreviation for 'expression -O  --'
+```
+
+### 7. 声明变量
+
+```
+// 变量必须以 **美元符** 开头。
+(lldb) e int $a = 2
+(lldb) print $a
+(int) $a = 2
+```
+
+### 8. 打印变量
+
+[完整清单](https://sourceware.org/gdb/onlinedocs/gdb/Output-Formats.html)
+
+```
+// 默认十进制
+(lldb) p 16
+(int) $2 = 16
+
+// 十六进制
+(lldb) p/x 16
+(int) $3 = 0x00000010
+
+// 二进制 (t 代表 two)
+(lldb) p/t 16
+(int) $4 = 0b00000000000000000000000000010000
+```
+
+### 9. 断点流程控制
+
+![](media_Compile/024.jpg)
+
+从左到右，四个按钮分别是：continue，step over，step into，step out。
+
+第一个，continue 按钮，会取消程序的暂停，允许程序正常执行 (要么一直执行下去，要么到达下一个断点)。在 LLDB 中，你可以使用 `process continue` 命令来达到同样的效果，它的别名为 `continue`，或者也可以缩写为 `c`。
+
+第二个，step over 按钮，会以黑盒的方式执行一行代码。如果所在这行代码是一个函数调用，那么就**不会**跳进这个函数，而是会执行这个函数，然后继续。LLDB 则可以使用 `thread step-over`，`next`，或者 `n` 命令。
+
+如果你确实想跳进一个函数调用来调试或者检查程序的执行情况，那就用第三个按钮，step in，或者在LLDB中使用 `thread step in`，`step`，或者 `s` 命令。注意，当前行不是函数调用时，`next` 和 `step` 效果是一样的。
+
+大多数人知道 `c`，`n` 和 `s`，但是其实还有第四个按钮，step out。如果你曾经不小心跳进一个函数，但实际上你想跳过它，常见的反应是重复的运行 `n` 直到函数返回。其实这种情况，step out 按钮是你的救世主。它会继续执行到下一个返回语句 (直到一个堆栈帧结束) 然后再次停止。
+
+### 10 . 检查视图层次结构
 
 * `po [[UIWindow keyWindow] recursiveDescription];`
 
@@ -448,15 +558,37 @@ LLDB 非常强大并且可以脚本化。 Facebook 发布了一组名为 [Chisel
 
 
 
+### 11. 更新UI
+
+// 未操作出来
+
+### 12. Push 一个 View Controller
+
+// 未操作出来
+
+### 13. 查找按钮的 target
+
+// 未操作出来
+
 
 
 ## 6.3、[facebook - Chisel](https://github.com/facebook/chisel) -- LLDB命令插件
+
+[Chisel-LLDB命令插件，让调试更Easy](https://blog.cnbluebox.com/blog/2015/03/05/chisel/)
 
 ### 6.3.1. Installation
 
 ```
 brew update
 brew install chisel
+```
+
+brew安装完成会提示
+
+```
+==> Caveats
+Add the following line to ~/.lldbinit to load chisel when Xcode launches:
+  command script import /usr/local/opt/chisel/libexec/fblldb.py
 ```
 
 if `.lldbinit` file doesn't exist you can create it & open it by tapping on the terminal
@@ -466,23 +598,20 @@ touch .lldbinit
 open .lldbinit 
 ```
 
-Then add the following line to your `~/.lldbinit` file.
-
-```
-# ~/.lldbinit
-...
-command script import /usr/local/opt/chisel/libexec/fbchisellldb.py
-```
-
-Alternatively, download chisel and add the following line to your *~/.lldbinit* file.
-
-```
-# ~/.lldbinit
-...
-command script import /path/to/fbchisellldb.py
-```
-
 The commands will be available the next time `Xcode` starts.
+
+### 6.3.2. 重启Xcode，尝试成功
+
+```
+(lldb) pvc
+<LoginViewController 0x7fa472e1c850>, state: appeared, view: <UIView 0x7fa4749074d0>
+```
+
+
+
+
+
+
 
 
 
