@@ -53,6 +53,7 @@
 		996ED16724AC7772003DB6AD /* PSCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996ED16624AC7772003DB6AD /* PSCollectionViewController.swift */; };
 		996ED16924AC77B8003DB6AD /* PS.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 996ED16824AC77B8003DB6AD /* PS.xcassets */; };
 		996ED16D24AC7A2F003DB6AD /* PSPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996ED16C24AC7A2F003DB6AD /* PSPhotoCell.swift */; };
+		996F416F24CEE5F90010DAEA /* Algorithm_008.swift in Sources */ = {isa = PBXBuildFile; fileRef = 996F416E24CEE5F90010DAEA /* Algorithm_008.swift */; };
 		9970A03E24938D4A008EF873 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9970A03D24938D4A008EF873 /* LoginVC.swift */; };
 		99AA240724A9C35B00FEC09F /* MoyaVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99AA240624A9C35B00FEC09F /* MoyaVC.swift */; };
 		99E32DC224BE8DE000C58954 /* Algorithm_007.swift in Sources */ = {isa = PBXBuildFile; fileRef = 99E32DC124BE8DE000C58954 /* Algorithm_007.swift */; };
@@ -117,6 +118,7 @@
 		996ED16624AC7772003DB6AD /* PSCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSCollectionViewController.swift; sourceTree = "<group>"; };
 		996ED16824AC77B8003DB6AD /* PS.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = PS.xcassets; sourceTree = "<group>"; };
 		996ED16C24AC7A2F003DB6AD /* PSPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PSPhotoCell.swift; sourceTree = "<group>"; };
+		996F416E24CEE5F90010DAEA /* Algorithm_008.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_008.swift; sourceTree = "<group>"; };
 		9970A03D24938D4A008EF873 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
 		99AA240624A9C35B00FEC09F /* MoyaVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaVC.swift; sourceTree = "<group>"; };
 		99E32DC124BE8DE000C58954 /* Algorithm_007.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Algorithm_007.swift; sourceTree = "<group>"; };
@@ -410,6 +412,7 @@
 				9913FEA3249C4ABA006606AA /* Algorithm_005.swift */,
 				995CFF2F24A3273A0016118C /* Algorithm_006.swift */,
 				99E32DC124BE8DE000C58954 /* Algorithm_007.swift */,
+				996F416E24CEE5F90010DAEA /* Algorithm_008.swift */,
 			);
 			path = LeetCodeAlgorithm;
 			sourceTree = "<group>";
@@ -565,6 +568,7 @@
 				99EB46F7248E05D50033D7CB /* UIColor+LXColor.swift in Sources */,
 				995CFF3724A876040016118C /* StopWatch.swift in Sources */,
 				8A1DDCFE2494B311001BA58C /* Specs.swift in Sources */,
+				996F416F24CEE5F90010DAEA /* Algorithm_008.swift in Sources */,
 				99EB46F0248DEC660033D7CB /* GlobalFunc.swift in Sources */,
 				9964A2C22490764200553584 /* SVProgressHUDVC.swift in Sources */,
 				9964A2BC248F3D7100553584 /* Algorithm_004.swift in Sources */,

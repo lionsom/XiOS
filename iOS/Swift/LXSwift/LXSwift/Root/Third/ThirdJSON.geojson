@@ -11,7 +11,7 @@
         { "title": "最长公共前缀", "avatar":"fb_groups", "detail": "Algorithm_005", "index":4 },
         { "title": "有效的括号", "avatar":"fb_home", "detail": "Algorithm_006", "index":5 },
         { "title": "删除排序数组中的重复项", "avatar":"fb_groups", "detail": "Algorithm_007", "index":6 },
-        { "title": "Brett", "avatar":"McLaughlin", "detail": "Algorithm_008", "index":7 }
+        { "title": "第一个错误的版本", "avatar":"fb_home", "detail": "Algorithm_008", "index":7 }
     ],
     "config": {"title": "力扣题", "color": "red"}
 }
