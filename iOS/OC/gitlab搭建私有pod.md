@@ -1,0 +1,426 @@
+## 1.搭建私有库之前必须要先创建索引库
+
+首先检查当前电脑的索引库
+
+```text
+➜  pod repo
+
+master
+- Type: git (master)
+- URL:  https://github.com/CocoaPods/Specs.git
+- Path: /Users/lionsom/.cocoapods/repos/master
+
+trunk
+- Type: CDN
+- URL:  https://cdn.cocoapods.org/
+- Path: /Users/lionsom/.cocoapods/repos/trunk
+```
+
+
+
+在gitlab上创建一个新的库，这个库用来保存私有库的podspec文件，所以我们一般起名字最好是 xxxSpec用以区分这个库的作用。
+
+
+
+创建本地索引库，然后将其于刚才创建的远程索引库相关联，**注意！！！**此时的远程索引库是***空的！空的！空的！\***但是必须得有master分支，所以你可以添加一个readme文件。
+
+```text
+// 1.显示repo
+➜  pod repo / pod repo list
+// 2.创建repo
+➜  pod repo add XXXSpec 刚才创建的远程索引库的gitlab的地址
+// 2.移除repo
+➜  pod repo remove XXXSpec
+
+============ 【操作】==============
+
+➜  pod repo add mySpec http://git.qpaas.com/linxiang/TestSpec.git
+Cloning spec repo `mySpec` from `http://git.qpaas.com/linxiang/TestSpec.git`
+
+➜  pod repo
+
+master
+- Type: git (master)
+- URL:  https://github.com/CocoaPods/Specs.git
+- Path: /Users/lionsom/.cocoapods/repos/master
+
+mySpec
+- Type: git (unknown)
+- URL:  http://git.qpaas.com/linxiang/TestSpec.git
+- Path: /Users/lionsom/.cocoapods/repos/mySpec
+
+trunk
+- Type: CDN
+- URL:  https://cdn.cocoapods.org/
+- Path: /Users/lionsom/.cocoapods/repos/trunk
+
+3 repos
+```
+
+
+
+## 2.开始创建本地私有库
+
+1）创建本地私有库（***注意！这个库是存代码的，不要和刚才的索引库混淆了！！！\***）
+
+```text
+// pod lib create 私有库名称
+
+➜  pod lib create QYCQRCode
+Cloning `https://github.com/CocoaPods/pod-template.git` into `QYCQRCode`.
+Configuring QYCQRCode template.
+
+------------------------------
+
+To get you started we need to ask a few questions, this should only take a minute.
+
+2020-08-04 22:15:55.957 defaults[1957:26031]
+The domain/default pair of (org.cocoapods.pod-template, HasRunBefore) does not exist
+If this is your first time we recommend running through with the guide:
+ - https://guides.cocoapods.org/making/using-pod-lib-create.html
+ ( hold cmd and click links to open in a browser. )
+
+ Press return to continue.
+
+
+What platform do you want to use?? [ iOS / macOS ]
+ > iOS
+
+What language do you want to use?? [ Swift / ObjC ]
+ > ObjC
+
+Would you like to include a demo application with your library? [ Yes / No ]
+ > Yes
+
+Which testing frameworks will you use? [ Specta / Kiwi / None ]
+ > None
+
+Would you like to do view based testing? [ Yes / No ]
+ > Yes
+
+What is your class prefix?
+ > AAA
+
+Running pod install on your new library.
+
+Analyzing dependencies
+Downloading dependencies
+Installing FBSnapshotTestCase (2.1.4)
+Installing QYCQRCode (0.1.0)
+Generating Pods project
+Integrating client project
+
+[!] Please close any current Xcode sessions and use `QYCQRCode.xcworkspace` for this project from now on.
+Pod installation complete! There are 2 dependencies from the Podfile and 2 total pods installed.
+
+ Ace! you're ready to go!
+ We will start you off by opening your project in Xcode
+  open 'QYCQRCode/Example/QYCQRCode.xcworkspace'
+
+To learn more about the template see `https://github.com/CocoaPods/pod-template.git`.
+To learn more about creating a new pod, see `https://guides.cocoapods.org/making/making-a-cocoapod`.
+```
+
+
+
+
+
+## 3.将私有库push到远程仓库
+
+1）在gitlab上创建远程私有库。***注意！！！这个库是存远程私有库代码的，不要跟远程索引库混淆啦！！！\***
+
+2）将本地私有库推送到远程私有库
+
+```text
+git status -- 查看当前git存了什么文件
+git add . -- 将所有文件缓存到待提交文件区域
+git commit -m "上传工程" -- 提交文件，写上备注
+git remote add origin 远程仓库地址 -- 添加要推送的远程仓库地址
+git push -u origin master -- 将代码推送到远程仓库的master分支
+
+// 若已绑定远程仓库
+git remote 查看所有远程仓库
+git remote rm origin 移除仓库
+git remote add origin http://git.qpaas.com/linxiang/QYCQRCode.git 再关联新的仓库
+```
+
+
+
+
+
+
+
+
+
+```
+➜  pod lib lint --allow-warnings
+
+
+ -> QYCQRCode (1.0.0)
+    - WARN  | summary: The summary is not meaningful.
+    - WARN  | url: The URL (https://github.com/lionsom/QYCQRCode) is not reachable.
+    - ERROR | [iOS] unknown: Encountered an unknown error (/usr/bin/xcrun simctl list -j devices
+
+xcrun: error: unable to find utility "simctl", not a developer tool or in PATH
+) during validation.
+
+[!] QYCQRCode did not pass validation, due to 1 error.
+You can use the `--no-clean` option to inspect any issue.
+```
+
+
+
+> 本地验证不通过原因：
+>
+> 替换了classes中的代码，没有在Example项目中重新 pod install，导致Example项目编译不过。
+
+
+
+
+
+```
+➜  QYCQRCode git:(master) ✗ pod lib lint --allow-warnings
+
+
+ -> QYCQRCode (1.0.0)
+    - WARN  | summary: The summary is not meaningful.
+    - WARN  | url: The URL (https://github.com/lionsom/QYCQRCode) is not reachable.
+    - NOTE  | xcodebuild:  note: Using new build system
+    - NOTE  | xcodebuild:  note: Building targets in parallel
+    - NOTE  | [iOS] xcodebuild:  note: Planning build
+    - NOTE  | [iOS] xcodebuild:  note: Constructing build description
+    - NOTE  | [iOS] xcodebuild:  warning: Skipping code signing because the target does not have an Info.plist file and one is not being generated automatically. (in target 'App' from project 'App')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'QYCQRCode' from project 'Pods')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'Pods-App' from project 'Pods')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'App' from project 'App')
+
+QYCQRCode passed validation.
+```
+
+
+
+# 验证通过后，打tag
+
+```
+➜  QYCQRCode git:(master) ✗ git tag 1.0.0
+➜  QYCQRCode git:(master) ✗ git push --tag
+Total 0 (delta 0), reused 0 (delta 0)
+To http://git.qpaas.com/linxiang/QYCQRCode.git
+ * [new tag]         1.0.0 -> 1.0.0
+```
+
+
+
+# 验证远程仓库
+
+```
+➜  QYCQRCode git:(master) pod spec lint
+
+ -> QYCQRCode (1.0.0)
+    - WARN  | summary: The summary is not meaningful.
+    - WARN  | url: The URL (https://github.com/lionsom/QYCQRCode) is not reachable.
+    - ERROR | [iOS] unknown: Encountered an unknown error ([!] /usr/bin/git clone https://github.com/lionsom/QYCQRCode.git /var/folders/45/t26gth1x3rq_z1r0b3z00h8r0000gp/T/d20200804-4640-1jjgnx3 --template= --single-branch --depth 1 --branch 1.0.0
+
+Cloning into '/var/folders/45/t26gth1x3rq_z1r0b3z00h8r0000gp/T/d20200804-4640-1jjgnx3'...
+remote: Repository not found.
+fatal: repository 'https://github.com/lionsom/QYCQRCode.git/' not found
+) during validation.
+
+Analyzed 1 podspec.
+
+[!] The spec did not pass validation, due to 1 error and 2 warnings.
+```
+
+
+
+> 错误原因：使用 `https://github.com/lionsom/QYCQRCode.git` 没有权限，
+>
+> 后改为：`git@git.qpaas.com:linxiang/QYCQRCode.git` ，配置了SSH公钥和私钥
+
+```
+➜  pod spec lint --allow-warnings
+
+ -> QYCQRCode (1.0.0)
+    - WARN  | source: Git SSH URLs will NOT work for people behind firewalls configured to only allow HTTP, therefore HTTPS is preferred.
+    - WARN  | summary: The summary is not meaningful.
+    - WARN  | url: There was a problem validating the URL git@git.qpaas.com:linxiang/QYCQRCode.git.
+    - NOTE  | xcodebuild:  note: Using new build system
+    - NOTE  | xcodebuild:  note: Building targets in parallel
+    - NOTE  | [iOS] xcodebuild:  note: Planning build
+    - NOTE  | [iOS] xcodebuild:  note: Constructing build description
+    - NOTE  | [iOS] xcodebuild:  warning: Skipping code signing because the target does not have an Info.plist file and one is not being generated automatically. (in target 'App' from project 'App')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'QYCQRCode' from project 'Pods')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'Pods-App' from project 'Pods')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'App' from project 'App')
+
+Analyzed 1 podspec.
+
+QYCQRCode.podspec passed validation.
+```
+
+
+
+
+
+## 7.将spec文件推送到最开始创建的索引库
+
+1）所有验证通过之后，要将spec文件推送到最开始创建的远程索引库当中
+
+```text
+pod repo push xxxSpec（本地索引库的名称）xxx.podspec
+
+例如我的：
+（如果你的私有库依赖了其他的私有库，需要添加--use-libraries）
+pod repo push JAKSpec JASmartKit_iOS.podspec --allow-warnings --use-libraries --verbose
+```
+
+
+
+```
+➜  pod repo push mySpec QYCQRCode.podspec --allow-warnings
+
+Validating spec
+ -> QYCQRCode (1.0.0)
+    - WARN  | source: Git SSH URLs will NOT work for people behind firewalls configured to only allow HTTP, therefore HTTPS is preferred.
+    - WARN  | summary: The summary is not meaningful.
+    - WARN  | url: There was a problem validating the URL git@git.qpaas.com:linxiang/QYCQRCode.git.
+    - NOTE  | xcodebuild:  note: Using new build system
+    - NOTE  | xcodebuild:  note: Building targets in parallel
+    - NOTE  | [iOS] xcodebuild:  note: Planning build
+    - NOTE  | [iOS] xcodebuild:  note: Constructing build description
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'QYCQRCode' from project 'Pods')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'Pods-App' from project 'Pods')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'App' from project 'App')
+    - NOTE  | [iOS] xcodebuild:  warning: Skipping code signing because the target does not have an Info.plist file and one is not being generated automatically. (in target 'App' from project 'App')
+
+Updating the `mySpec' repo
+
+[!] /usr/bin/git -C /Users/lionsom/.cocoapods/repos/mySpec pull
+
+Your configuration specifies to merge with the ref 'refs/heads/master'
+from the remote, but no such ref was fetched.
+```
+
+
+
+> 原因：索引库还是空的，为提交过任何东西，
+>
+> ```
+> ➜  mySpec git:(master) gl
+> Your configuration specifies to merge with the ref 'refs/heads/master'
+> from the remote, but no such ref was fetched.
+> ```
+>
+> 解决：本地添加个readme，在push即可。
+
+
+
+## 成功
+
+```
+➜  QYCQRCode git:(master) pod repo push mySpec QYCQRCode.podspec --allow-warnings
+
+Validating spec
+ -> QYCQRCode (1.0.0)
+    - WARN  | source: Git SSH URLs will NOT work for people behind firewalls configured to only allow HTTP, therefore HTTPS is preferred.
+    - WARN  | summary: The summary is not meaningful.
+    - WARN  | url: There was a problem validating the URL git@git.qpaas.com:linxiang/QYCQRCode.git.
+    - NOTE  | xcodebuild:  note: Using new build system
+    - NOTE  | xcodebuild:  note: Building targets in parallel
+    - NOTE  | [iOS] xcodebuild:  note: Planning build
+    - NOTE  | [iOS] xcodebuild:  note: Constructing build description
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'QYCQRCode' from project 'Pods')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'Pods-App' from project 'Pods')
+    - NOTE  | [iOS] xcodebuild:  note: Execution policy exception registration failed and was skipped: Error Domain=NSPOSIXErrorDomain Code=1 "Operation not permitted" (in target 'App' from project 'App')
+    - NOTE  | [iOS] xcodebuild:  warning: Skipping code signing because the target does not have an Info.plist file and one is not being generated automatically. (in target 'App' from project 'App')
+
+Updating the `mySpec' repo
+
+
+Adding the spec to the `mySpec' repo
+
+ - [Add] QYCQRCode (1.0.0)
+
+Pushing the `mySpec' repo
+```
+
+
+
+2）最后推送上去之后，在本地的索引库中的样子如下图
+
+![](media_gitlab/001.png)
+
+
+
+
+
+#  pod 更新 指定的索引库 mySpec
+
+
+
+```
+➜  QYCQRCode git:(master)  pod repo update mySpec
+Updating spec repo `mySpec`
+  $ /usr/bin/git -C /Users/lionsom/.cocoapods/repos/mySpec fetch origin --progress
+  $ /usr/bin/git -C /Users/lionsom/.cocoapods/repos/mySpec rev-parse --abbrev-ref HEAD
+  master
+  $ /usr/bin/git -C /Users/lionsom/.cocoapods/repos/mySpec reset --hard origin/master
+  HEAD is now at ca984e6 [Add] QYCQRCode (1.0.0)
+```
+
+
+
+### pod search
+
+
+
+```
+➜  QYCQRCode git:(master) pod search QYCQRCode
+Creating search index for spec repo 'mySpec'.. Done!
+
+-> QYCQRCode (1.0.0)
+   A short description of QYCQRCode.
+   pod 'QYCQRCode', '~> 1.0.0'
+   - Homepage: git@git.qpaas.com:linxiang/QYCQRCode.git
+   - Source:   git@git.qpaas.com:linxiang/QYCQRCode.git
+   - Versions: 1.0.0 [mySpec repo]
+```
+
+
+
+
+
+
+
+# 创建新项目测试  安装QYCQRCode
+
+
+
+```
+
+source 'git@git.qpaas.com:linxiang/TestSpec.git'
+
+target 'testpod' do
+  # Comment the next line if you don't want to use dynamic frameworks
+  use_frameworks!
+
+  # Pods for testpod
+	pod 'QYCQRCode', '~> 1.0.0'
+
+
+  target 'testpodTests' do
+    inherit! :search_paths
+    # Pods for testing
+  end
+
+  target 'testpodUITests' do
+    # Pods for testing
+  end
+
+end
+```
+
+
+
+
+
