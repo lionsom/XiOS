@@ -473,3 +473,20 @@ $ ssh-keygen -o
 现在，进行了上述操作的用户需要将各自的公钥发送给任意一个 Git 服务器管理员。
 
 ![](media_git/ssh03.jpg)
+
+
+
+本地若无效，则重新添加私钥
+
+```
+➜  AY ssh-add ~/.ssh/AAA
+Enter passphrase for /Users/lionsom/.ssh/AAA:
+Identity added: /Users/lionsom/.ssh/AAA (lionsom@LionsomMBP.local)
+```
+
+
+
+
+
+
+
