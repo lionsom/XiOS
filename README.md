@@ -1,7 +1,3 @@
-[梯子推荐：稳定、便宜(￥5/mon)、速度快、节点多 ](https://fnf.xyz/auth/register?code=nGSC)
-
-
-
 # awesome-ios
 
 * [matteocrippa](https://github.com/matteocrippa)
@@ -59,5 +55,4 @@
 [PATH日常 - PATH.md](https://github.com/lionsom/XiOS/blob/master/Tools/PATH.md)
 
 [Ubuntu系统安装](./Tools/Ubuntu.md)
-
 
