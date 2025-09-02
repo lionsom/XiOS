@@ -1,0 +1,6 @@
+
+##########激活码长期更新##########
+
+最新激活码下载地址：http://jets.idejihuo.com
+
+说明：请按使用说明操作，先执行工具安装脚本，然后复制对应的IDE激活码【激活码一定要结合工具使用】，如果提示“Key is invalid”，请查看：http://blog.idejihuo.com/faq/ja-netfilter-error-key-is-invalid.html

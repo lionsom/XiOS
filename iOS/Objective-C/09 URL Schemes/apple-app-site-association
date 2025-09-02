@@ -1,0 +1,37 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "paths": [
+          "*"
+        ],
+        "appID": "6JHY626E93.cn.com.ay.Qiyeyun"
+      },
+      {
+        "paths": [
+          "*"
+        ],
+        "appID": "T2A427WHT5.cn.com.ay.Qiyeyun"
+      },
+      {
+        "paths": [
+          "*"
+        ],
+        "appID": "75A6Q7Q53X.com.tools.51safety"
+      },
+      {
+        "paths": [
+          "*"
+        ],
+        "appID": "9ECP7PKPTE.com.tools.51safety"
+      },
+      {
+        "paths": [
+          "*"
+        ],
+        "appID": "4W4E8TZ8L2.com.njxingong.qycloud"
+      }
+    ],
+    "apps": []
+  }
+}

@@ -1,0 +1,92 @@
+//
+//  RxScrollViewDelegateProxy.swift
+//  RxCocoa
+//
+//  Created by Krunoslav Zaher on 6/19/15.
+//  Copyright © 2015 Krunoslav Zaher. All rights reserved.
+//
+
+#if os(iOS) || os(tvOS)
+
+    import RxSwift
+    import UIKit
+
+    extension UIScrollView: HasDelegate {
+        public typealias Delegate = UIScrollViewDelegate
+    }
+
+    /// For more information take a look at `DelegateProxyType`.
+    open class RxScrollViewDelegateProxy:
+        DelegateProxy<UIScrollView, UIScrollViewDelegate>,
+        DelegateProxyType,
+        UIScrollViewDelegate
+    {
+        /// Typed parent object.
+        public private(set) weak var scrollView: UIScrollView?
+
+        /// - parameter scrollView: Parent object for delegate proxy.
+        public init(scrollView: ParentObject) {
+            self.scrollView = scrollView
+            super.init(parentObject: scrollView, delegateProxy: RxScrollViewDelegateProxy.self)
+        }
+
+        // Register known implementations
+        public static func registerKnownImplementations() {
+            register { RxScrollViewDelegateProxy(scrollView: $0) }
+            register { RxTableViewDelegateProxy(tableView: $0) }
+            register { RxCollectionViewDelegateProxy(collectionView: $0) }
+            register { RxTextViewDelegateProxy(textView: $0) }
+        }
+
+        fileprivate var _contentOffsetBehaviorSubject: BehaviorSubject<CGPoint>?
+        fileprivate var _contentOffsetPublishSubject: PublishSubject<Void>?
+
+        /// Optimized version used for observing content offset changes.
+        internal var contentOffsetBehaviorSubject: BehaviorSubject<CGPoint> {
+            if let subject = _contentOffsetBehaviorSubject {
+                return subject
+            }
+
+            let subject = BehaviorSubject<CGPoint>(value: scrollView?.contentOffset ?? CGPoint.zero)
+            _contentOffsetBehaviorSubject = subject
+
+            return subject
+        }
+
+        /// Optimized version used for observing content offset changes.
+        internal var contentOffsetPublishSubject: PublishSubject<Void> {
+            if let subject = _contentOffsetPublishSubject {
+                return subject
+            }
+
+            let subject = PublishSubject<Void>()
+            _contentOffsetPublishSubject = subject
+
+            return subject
+        }
+
+        // MARK: delegate methods
+
+        /// For more information take a look at `DelegateProxyType`.
+        public func scrollViewDidScroll(_ scrollView: UIScrollView) {
+            if let subject = _contentOffsetBehaviorSubject {
+                subject.on(.next(scrollView.contentOffset))
+            }
+            if let subject = _contentOffsetPublishSubject {
+                subject.on(.next(()))
+            }
+            _forwardToDelegate?.scrollViewDidScroll?(scrollView)
+        }
+
+        deinit {
+            if let subject = _contentOffsetBehaviorSubject {
+                subject.on(.completed)
+            }
+
+            if let subject = _contentOffsetPublishSubject {
+                subject.on(.completed)
+            }
+        }
+    }
+
+#endif

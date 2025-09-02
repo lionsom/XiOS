@@ -1,0 +1,277 @@
+@supports (-webkit-backdrop-filter: blur(20px)) or (backdrop-filter: blur(20px)) {
+	/* Blur Navigation Bar */
+	#ac-localnav.ac-localnav-scrim .ac-ln-background {
+		background-color: rgba(255, 255, 255, 0.65);
+		-webkit-backdrop-filter: saturate(180%) blur(20px);
+		backdrop-filter: saturate(180%) blur(20px)
+	}
+}
+
+.bg-blue {
+	background-color: #eff5f9;
+}
+
+.bg-alt {
+	background-color: #333;
+}
+
+.button-pill {
+	margin-top: 2em;
+	border-radius: 1em;
+}
+
+.margin-bottom-alt {
+	margin-bottom: 16em;
+}
+
+.main {
+	overflow: initial;
+}
+
+.title {
+	font-weight: 500;
+}
+
+.caption {
+	margin-top: -1em;
+	margin-bottom: 3em;
+}
+
+.row-header {
+	margin-bottom: 2em;
+}
+
+.row-flex {
+	display: flex;
+}
+.column-flex-center {
+	align-self: center;
+}
+
+
+@media only screen and (max-width: 1068px) {
+	pre {
+		padding: 15px 0 15px 15px;
+	}
+	pre code {
+		font-size: 12px;
+	}
+}
+
+@media only screen and (max-width: 735px) {
+	.margin-bottom-alt {
+		margin-bottom: 0;
+	}
+	.row-flex {
+		display: block;
+	}
+}
+
+
+/* Images */
+.hero-swift-icon {
+	margin-bottom: 1em;
+	width: 64px;
+	height: 64px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url("/assets/elements/icons/swift/swift-64x64.png");
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx), (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+	.hero-swift-icon {
+		background-image: url("/assets/elements/icons/swift/swift-64x64_2x.png")
+	}
+}
+
+.hero-swift-main {
+	background-image: url('/swift/images/screen-swift-hero-large.png');
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx), (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+	.hero-swift-main {
+		background-image: url('/swift/images/screen-swift-hero-large_2x.png');
+	}
+}
+
+.xcode-logo {
+	margin-top: 0.25em;
+	margin-left: 10px;
+	width: 190px;
+	height: 190px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url("/assets/elements/icons/xcode-12/xcode-12-256x256.png");
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx), only screen and (min-resolution: 144dpi) {
+	.xcode-logo {
+		background-image: url("/assets/elements/icons/xcode-12/xcode-12-256x256_2x.png");
+	}
+}
+
+.image-swift-edu {
+	margin: 2em 0;
+	width: 735px;
+	height: 478px;
+	background-size: 100% 100%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-image: url('/swift/images/swift-edu-large.jpg');
+}
+@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx), (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+	.image-swift-edu {
+		background-image: url('/swift/images/swift-edu-large_2x.jpg');
+	}
+}
+
+@media only screen and (max-width: 1068px) {
+	.hero-swift-main {
+		background-image: url('/swift/images/screen-swift-hero-medium.png');
+	}
+	@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx), (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+		.hero-swift-main {
+			background-image: url('/swift/images/screen-swift-hero-medium_2x.png');
+		}
+	}
+	.image-swift-edu {
+		width: 519px;
+		height: 337px;
+		background-image: url('/swift/images/swift-edu-medium.jpg');
+	}
+	@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx), (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+		.image-swift-edu {
+			background-image: url('/swift/images/swift-edu-medium_2x.jpg');
+		}
+	}
+}
+
+@media only screen and (max-width: 735px) {
+	.hero-swift-main {
+		background-image: url('/swift/images/screen-swift-hero-small.png');
+	}
+	@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx), (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+		.hero-swift-main {
+			background-image: url('/swift/images/screen-swift-hero-small_2x.png');
+		}
+	}
+	.row-header {
+		margin-bottom: 0;
+	}
+}
+
+@media only screen and (max-width: 569px) {
+	.image-swift-edu {
+		margin: 1em 0;
+		width: 320px;
+		height: 208px;
+		background-image: url('/swift/images/swift-edu-small.jpg');
+	}
+	@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 1.5dppx), (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
+		.image-swift-edu {
+			background-image: url('/swift/images/swift-edu-small_2x.jpg');
+		}
+	}
+}
+
+@media only screen and (max-width: 320px) {
+	.image-swift-edu {
+		width: 280px;
+		height: 182px;
+	}
+}
+
+/* Swift subnav */
+.subnav {
+	border-bottom: none;
+}
+
+.subnav .sub-title h2 a {
+	color: #fff;
+}
+
+.subnav ul li a {
+	color: #fff;
+}
+
+.subnav ul li a.active {
+	color: #fff;
+	font-weight: 700;
+}
+
+.rss {
+	position: relative;
+	top: 2.5em;
+}
+
+h1 a:not(:hover) {
+	color: inherit;
+}
+
+h1 a:hover {
+	text-decoration: none;
+	border-bottom: 2px solid #08c;
+}
+
+pre code .console {
+	color: #808080;
+}
+
+.pad-top-2-col {
+	padding-top: 1.5em;
+}
+
+@media all and (max-width: 735px) {
+	.pad-top-2-col {
+		padding-top: 0;
+	}
+}
+
+#prerelease li {
+	margin-bottom: 0.5em;
+}
+
+
+/* ========== Grid ========== */
+#playgrounds-repl {
+	margin-top: 0.8em; 
+}
+
+#main section.section {
+	padding-top: 4em;
+	padding-bottom: 4em;
+}
+
+#main section .section-content .row {
+	margin-left: 0;
+	margin-right: 0;
+}
+#main section .section-content .row > .column {
+	padding: 0;
+}
+
+@media only screen and (max-width: 1068px) {
+	#main section .section-content .row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	#main section .section-content .row > .column {
+		padding: 0;
+	}
+}
+
+@media only screen and (max-width: 735px) {
+	#main section.section {
+		padding-top: 2em;
+		padding-bottom: 2em;
+	}
+	#main section.section.section-overview {
+		padding-bottom: 2em;
+	}
+	#main section .section-content .row {
+		margin-left: 0;
+		margin-right: 0;
+	}
+	#main section .section-content .row > .column {
+		padding: 1em 0;
+	}
+}

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<playground version='6.0' target-platform='ios' buildActiveScheme='true' importAppTypes='true'>
+    <pages>
+        <page name='002.原始值'/>
+        <page name='001.枚举定义'/>
+        <page name='003.枚举类型'/>
+        <page name='004.关联值'/>
+        <page name='004.嵌套枚举'/>
+        <page name='005.包含枚举'/>
+    </pages>
+</playground>

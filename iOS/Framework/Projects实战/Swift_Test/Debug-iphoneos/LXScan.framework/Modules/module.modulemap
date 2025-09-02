@@ -1,0 +1,11 @@
+framework module LXScan {
+  umbrella header "LXScan.h"
+
+  export *
+  module * { export * }
+}
+
+module LXScan.Swift {
+    header "LXScan-Swift.h"
+    requires objc
+}

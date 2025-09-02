@@ -1,0 +1,121 @@
+@font-face {
+	font-family:'Apple Icons';
+	font-style:normal;
+	font-weight:100;
+	src:local('☺'), url("/wss/fonts/Apple-Icons/v1/appleicons_ultralight.woff") format("woff"), url("/wss/fonts/Apple-Icons/v1/appleicons_ultralight.ttf") format("truetype");
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons 100';
+	src:url('/wss/fonts/Apple-Icons/v1/appleicons_ultralight.eot');
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons';
+	font-style:normal;
+	font-weight:200;
+	src:local('☺'), url("/wss/fonts/Apple-Icons/v1/appleicons_thin.woff") format("woff"), url("/wss/fonts/Apple-Icons/v1/appleicons_thin.ttf") format("truetype");
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons 200';
+	src:url('/wss/fonts/Apple-Icons/v1/appleicons_thin.eot');
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons';
+	font-style:normal;
+	font-weight:300;
+	src:local('☺'), url("/wss/fonts/Apple-Icons/v1/appleicons_thin.woff") format("woff"), url("/wss/fonts/Apple-Icons/v1/appleicons_thin.ttf") format("truetype");
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons 300';
+	src:url('/wss/fonts/Apple-Icons/v1/appleicons_thin.eot');
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons';
+	font-style:normal;
+	font-weight:500;
+	src:local('☺'), url("/wss/fonts/Apple-Icons/v1/appleicons_text.woff") format("woff"), url("/wss/fonts/Apple-Icons/v1/appleicons_text.ttf") format("truetype");
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons 500';
+	src:url('/wss/fonts/Apple-Icons/v1/appleicons_text.eot');
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons';
+	font-style:normal;
+	font-weight:600;
+	src:local('☺'), url("/wss/fonts/Apple-Icons/v1/appleicons_text.woff") format("woff"), url("/wss/fonts/Apple-Icons/v1/appleicons_text.ttf") format("truetype");
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons 600';
+	src:url('/wss/fonts/Apple-Icons/v1/appleicons_text.eot');
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons';
+	font-style:normal;
+	font-weight:700;
+	src:local('☺'), url("/wss/fonts/Apple-Icons/v1/appleicons_text.woff") format("woff"), url("/wss/fonts/Apple-Icons/v1/appleicons_text.ttf") format("truetype");
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons 700';
+	src:url('/wss/fonts/Apple-Icons/v1/appleicons_text.eot');
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons';
+	font-style:normal;
+	font-weight:800;
+	src:local('☺'), url("/wss/fonts/Apple-Icons/v1/appleicons_text.woff") format("woff"), url("/wss/fonts/Apple-Icons/v1/appleicons_text.ttf") format("truetype");
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons 800';
+	src:url('/wss/fonts/Apple-Icons/v1/appleicons_text.eot');
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons';
+	font-style:normal;
+	font-weight:900;
+	src:local('☺'), url("/wss/fonts/Apple-Icons/v1/appleicons_text.woff") format("woff"), url("/wss/fonts/Apple-Icons/v1/appleicons_text.ttf") format("truetype");
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons 900';
+	src:url('/wss/fonts/Apple-Icons/v1/appleicons_text.eot');
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+
+@font-face {
+	font-family:'Apple Icons';
+	font-style:normal;
+	font-weight:400;
+	src:url('/wss/fonts/Apple-Icons/v1/appleicons_text.eot');
+	src:local('☺'), url("/wss/fonts/Apple-Icons/v1/appleicons_text.woff") format("woff"), url("/wss/fonts/Apple-Icons/v1/appleicons_text.ttf") format("truetype");
+	/* © Copyright 2015 Apple Inc. All rights reserved.  */
+}
+

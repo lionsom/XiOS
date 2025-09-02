@@ -1,0 +1,598 @@
+<!DOCTYPE html>
+<!-- saved from url=(0045)https://developer.apple.com/swift/blog/?id=27 -->
+<html xmlns="https://www.w3.org/1999/xhtml" xml:lang="en" lang="en" data-lt-installed="true" class=""><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	
+<meta name="Author" content="Apple Inc.">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<link rel="shortcut icon" href="https://developer.apple.com/favicon.ico">
+<link rel="icon" href="https://developer.apple.com/favicon.ico">
+<link rel="mask-icon" href="https://developer.apple.com/apple-logo.svg" color="#333333">
+
+<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/global.dist.css" type="text/css">
+
+<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/localization.css" type="text/css">
+
+<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/jquery-3.6.0.min.js"></script>
+<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/settings.js"></script>
+<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/language-locales.js"></script>
+<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/DeveloperBreadcrumbs.js"></script>
+
+<script async="" src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/jquery.retinate.js"></script>
+<script async="" src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/global.js"></script>
+<script async="" src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/global-logout.js"></script>
+
+
+
+	<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/fonts" type="text/css">
+<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/fonts(1)" type="text/css">
+<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/fonts(2)" type="text/css">
+<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/fonts(3)" type="text/css">
+
+	<title>Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer</title>
+	<meta name="omni_page" content="Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer">
+	<meta name="Description" content="Get the latest news and helpful tips on the Swift programming language from the engineers who created it.">
+	<link rel="alternate" type="application/rss+xml" title="RSS" href="feed://developer.apple.com/swift/blog/news.rss">
+	<link rel="shortcut icon" href="https://developer.apple.com/swift/favicon.ico">
+	<link rel="icon" href="https://developer.apple.com/swift/favicon.ico">
+	<link rel="mask-icon" href="https://developer.apple.com/swift/swift-logo.svg" color="#fd6e33">
+	<link rel="apple-touch-icon" href="https://developer.apple.com/swift/images/swift-touch-icon.png">
+
+	<meta property="og:image" content="https://developer.apple.com/swift/images/swift-og.png">
+	<meta property="og:description" content="Get the latest news and helpful tips on the Swift programming language from the engineers who created it.">
+
+		<meta property="og:title" content="Increasing Performance by Reducing Dynamic Dispatch - Swift Blog">
+	<meta property="og:url" content="https://developer.apple.com/swift/blog/?id=27">
+	
+	<meta name="twitter:card" content="summary">
+	<meta name="twitter:image" content="https://developer.apple.com/swift/images/swift-og.png">
+	<meta name="twitter:site" content="@SwiftLang">
+	<meta name="twitter:creator" content="@SwiftLang">
+	<meta name="twitter:description" content="Get the latest news and helpful tips on the Swift programming language from the engineers who created it.">
+		<meta name="twitter:title" content="Increasing Performance by Reducing Dynamic Dispatch - Swift Blog">
+	<meta name="twitter:url" content="https://developer.apple.com/swift/blog/?id=27">
+	
+
+
+	<link href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/swift.css" rel="stylesheet" type="text/css">
+	<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/swift.js"></script>
+<script charset="utf-8" src="chrome-extension://jgphnjokjhjlcnnajmfjlacjnjkhleah/js/btype.js"></script><script type="text/javascript" charset="utf-8" src="chrome-extension://jgphnjokjhjlcnnajmfjlacjnjkhleah/js/chrome.js"></script><style type="text/css">#_copy{align-items:center;background:#4494d5;border-radius:3px;color:#fff;cursor:pointer;display:flex;font-size:13px;height:30px;justify-content:center;position:absolute;width:60px;z-index:1000}#select-tooltip,#sfModal,.modal-backdrop,div[id^=reader-helper]{display:none!important}.modal-open{overflow:auto!important}._sf_adjust_body{padding-right:0!important}.super_copy_btns_div{position:fixed;width:154px;left:10px;top:45%;background:#e7f1ff;border:2px solid #4595d5;font-weight:600;border-radius:2px;font-family:-apple-system,BlinkMacSystemFont,Segoe UI,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;z-index:5000}.super_copy_btns_logo{width:100%;background:#4595d5;text-align:center;font-size:12px;color:#e7f1ff;line-height:30px;height:30px}.super_copy_btns_btn{display:block;width:128px;height:28px;background:#7f5711;border-radius:4px;color:#fff;font-size:12px;border:0;outline:0;margin:8px auto;font-weight:700;cursor:pointer;opacity:.9}.super_copy_btns_btn:hover{opacity:.8}.super_copy_btns_btn:active{opacity:1}</style><input type="hidden" id="_w_simile" data-inspect-config="3"><script type="text/javascript" src="chrome-extension://dbjbempljhcmhlfpfacalomonjpalpko/scripts/inspector.js"></script><link type="text/css" rel="stylesheet" charset="UTF-8" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/translateelement.css"></head>
+<body id="" data-color-scheme="light" class="vsc-initialized">
+	<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/globalnav.css" type="text/css">
+
+<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/suggest-lang.css" type="text/css">
+<div id="suggest-lang" class="ribbon hide">
+	<div class="ribbon-content-wrapper">
+		<div class="ribbon-content row">
+			<div class="column large-12 large-centered">
+				<a id="suggest-closer" class="icon icon-after icon-reset"></a>
+				<p><a href="https://developer.apple.com/swift/blog/?id=27#" id="suggest-link" class="ribbon-link more">View in English</a></p>
+			</div>
+		</div>
+	</div>
+</div>
+<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/suggest-lang.js"></script>
+<aside id="ac-gn-segmentbar" class="ac-gn-segmentbar" lang="en-US" dir="ltr">
+</aside>
+<input type="checkbox" id="ac-gn-menustate" class="ac-gn-menustate">
+<nav id="ac-globalnav" class="js no-touch no-windows" role="navigation" aria-label="Global" data-hires="false" data-analytics-region="global nav" lang="en-US" dir="ltr" data-www-domain="www.apple.com" data-store-locale="us" data-store-root-path="/us" data-store-api="/[storefront]/shop/bag/status" data-search-locale="en_US" data-search-suggestions-api="/search-services/suggestions/" data-search-defaultlinks-api="/search-services/suggestions/defaultlinks/" data-search-suggestions-enabled="false">
+	<div class="ac-gn-content">
+		<ul class="ac-gn-header">
+			<li class="ac-gn-item ac-gn-menuicon">
+				<label class="ac-gn-menuicon-label" for="ac-gn-menustate" aria-hidden="true">
+					<span class="ac-gn-menuicon-bread ac-gn-menuicon-bread-top">
+						<span class="ac-gn-menuicon-bread-crust ac-gn-menuicon-bread-crust-top"></span>
+					</span>
+					<span class="ac-gn-menuicon-bread ac-gn-menuicon-bread-bottom">
+						<span class="ac-gn-menuicon-bread-crust ac-gn-menuicon-bread-crust-bottom"></span>
+					</span>
+				</label>
+				<a href="https://developer.apple.com/swift/blog/?id=27#ac-gn-menustate" role="button" class="ac-gn-menuanchor ac-gn-menuanchor-open" id="ac-gn-menuanchor-open">
+					<span class="ac-gn-menuanchor-label">Global Nav Open Menu</span>
+				</a>
+				<a href="https://developer.apple.com/swift/blog/?id=27#" role="button" class="ac-gn-menuanchor ac-gn-menuanchor-close" id="ac-gn-menuanchor-close">
+					<span class="ac-gn-menuanchor-label">Global Nav Close Menu</span>
+				</a>
+			</li>
+			<li class="ac-gn-item ac-gn-apple">
+				<a class="ac-gn-link ac-gn-link-apple-developer" href="https://developer.apple.com/" data-analytics-title="appledeveloper home" id="ac-gn-firstfocus-small">
+					<span class="ac-gn-link-text">Apple Developer</span>
+				</a>
+			</li>
+		</ul>
+		<div class="ac-gn-search-placeholder-container" role="search">
+			<div class="ac-gn-search ac-gn-search-small">
+				<a id="ac-gn-link-search-small" class="ac-gn-link" href="https://developer.apple.com/search/" data-analytics-title="search" data-analytics-click="search" data-analytics-intrapage-link="" aria-label="Search" role="button" aria-haspopup="true">
+					<div class="ac-gn-search-placeholder-bar">
+						<div class="ac-gn-search-placeholder-input">
+							<div class="ac-gn-search-placeholder-input-text" aria-hidden="true">
+								<div class="ac-gn-link-search ac-gn-search-placeholder-input-icon"></div>
+								<span class="ac-gn-search-placeholder">Search</span>
+							</div>
+						</div>
+						<div class="ac-gn-searchview-close ac-gn-searchview-close-small ac-gn-search-placeholder-searchview-close">
+							<span class="ac-gn-searchview-close-cancel" aria-hidden="true">Cancel</span>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+		<ul class="ac-gn-list">
+			<li class="ac-gn-item ac-gn-apple">
+				<a class="ac-gn-link ac-gn-link-apple-developer" href="https://developer.apple.com/" data-analytics-title="appledeveloper home" id="ac-gn-firstfocus">
+					<span class="ac-gn-link-text">Apple Developer</span>
+					</a>
+			</li>
+			<li class="ac-gn-item ac-gn-item-menu ac-gn-news">
+				<a class="ac-gn-link ac-gn-link-news" href="https://developer.apple.com/news/" data-analytics-title="news">
+					<span class="ac-gn-link-text">News</span>
+					</a>
+			</li>
+			<li class="ac-gn-item ac-gn-item-menu ac-gn-discover">
+				<a class="ac-gn-link ac-gn-link-discover" href="https://developer.apple.com/discover/" data-analytics-title="discover">
+					<span class="ac-gn-link-text">Discover</span>
+					</a>
+			</li>
+			<li class="ac-gn-item ac-gn-item-menu ac-gn-design">
+				<a class="ac-gn-link ac-gn-link-design" href="https://developer.apple.com/design/" data-analytics-title="design">
+					<span class="ac-gn-link-text">Design</span>
+					</a>
+			</li>
+			<li class="ac-gn-item ac-gn-item-menu ac-gn-develop">
+				<a class="ac-gn-link ac-gn-link-develop" href="https://developer.apple.com/develop/" data-analytics-title="develop">
+					<span class="ac-gn-link-text">Develop</span>
+					</a>
+			</li>
+			<li class="ac-gn-item ac-gn-item-menu ac-gn-distribute">
+				<a class="ac-gn-link ac-gn-link-distribute" href="https://developer.apple.com/distribute/" data-analytics-title="distribute">
+					<span class="ac-gn-link-text">Distribute</span>
+					</a>
+			</li>
+			<li class="ac-gn-item ac-gn-item-menu ac-gn-dsupport">
+				<a class="ac-gn-link ac-gn-link-dsupport" href="https://developer.apple.com/support/" data-analytics-title="dsupport">
+					<span class="ac-gn-link-text">Support</span>
+					</a>
+			</li>
+			<li class="ac-gn-item ac-gn-item-menu ac-gn-account">
+				<a class="ac-gn-link ac-gn-link-account" href="https://developer.apple.com/account/" data-analytics-title="account">
+					<span class="ac-gn-link-text">Account</span>
+					</a>
+			</li>
+			<li class="ac-gn-item ac-gn-item-menu ac-gn-search" role="search">
+				<a id="ac-gn-link-search" class="ac-gn-link ac-gn-link-search" href="https://developer.apple.com/search/" data-analytics-title="search" data-analytics-click="search" data-analytics-intrapage-link="" aria-label="Search" role="button" aria-haspopup="true"></a>
+			</li>
+		</ul>
+		<aside id="ac-gn-searchview" class="ac-gn-searchview" role="search" data-analytics-region="search">
+			<div class="ac-gn-searchview-content">
+				<div class="ac-gn-searchview-bar">
+					<div class="ac-gn-searchview-bar-wrapper">
+						<form id="ac-gn-searchform" class="ac-gn-searchform" action="https://developer.apple.com/search/" method="get">
+							<div class="ac-gn-searchform-wrapper">
+								<input id="ac-gn-searchform-input" class="ac-gn-searchform-input" type="text" name="q" aria-label="Search" placeholder="Search" autocorrect="off" autocapitalize="off" autocomplete="off" spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="true" aria-owns="quicklinks suggestions">
+								<button id="ac-gn-searchform-submit" class="ac-gn-searchform-submit" type="submit" disabled="" aria-label="Submit Search"></button>
+								<button id="ac-gn-searchform-reset" class="ac-gn-searchform-reset" type="reset" disabled="" aria-label="Clear Search">
+										<span class="ac-gn-searchform-reset-background"></span>
+									</button>
+							</div>
+						</form>
+						<button id="ac-gn-searchview-close-small" class="ac-gn-searchview-close ac-gn-searchview-close-small" aria-label="Cancel Search">
+								<span class="ac-gn-searchview-close-cancel" aria-hidden="true">
+									Cancel
+								</span>
+							</button>
+					</div>
+				</div>
+				<aside id="ac-gn-searchresults" class="ac-gn-searchresults" data-string-quicklinks="Quick Links" data-string-suggestions="Suggested Searches" data-string-noresults="">
+                    <section class="ac-gn-searchresults-section ac-gn-searchresults-section-defaultlinks">
+                        <div class="ac-gn-searchresults-section-wrapper">
+							<div class="search-group-checkbox hidden"><input id="group-input" type="checkbox" name="group-filter" checked="">Only search within “<span id="group-search-label"></span>”</div>
+                            <h3 class="ac-gn-searchresults-header ac-gn-searchresults-animated">Quick Links</h3>
+                            <ul class="ac-gn-searchresults-list" id="defaultlinks" role="listbox">
+                            <li class="ac-gn-searchresults-item ac-gn-searchresults-animated"><a href="https://developer.apple.com/ios/" id="search-group-link-0" class="ac-gn-searchresults-link ac-gn-searchresults-link-defaultlinks">iOS 16</a></li><li class="ac-gn-searchresults-item ac-gn-searchresults-animated"><a href="https://developer.apple.com/xcode/" id="search-group-link-1" class="ac-gn-searchresults-link ac-gn-searchresults-link-defaultlinks">Xcode 14 Overview</a></li><li class="ac-gn-searchresults-item ac-gn-searchresults-animated"><a href="https://developer.apple.com/news/" id="search-group-link-2" class="ac-gn-searchresults-link ac-gn-searchresults-link-defaultlinks">Latest News</a></li><li class="ac-gn-searchresults-item ac-gn-searchresults-animated"><a href="https://developer.apple.com/documentation/appstoreconnectapi/certificates/" id="search-group-link-3" class="ac-gn-searchresults-link ac-gn-searchresults-link-defaultlinks">Certificates</a></li><li class="ac-gn-searchresults-item ac-gn-searchresults-animated"><a href="https://developer.apple.com/documentation/storekit/appstore/environment/3963900-xcode/" id="search-group-link-4" class="ac-gn-searchresults-link ac-gn-searchresults-link-defaultlinks">xcode</a></li></ul>
+                            <span role="status" class="ac-gn-searchresults-count" aria-live="polite">5 Quick Links</span>
+                        </div>
+                    </section>
+                </aside>
+			</div>
+			<button id="ac-gn-searchview-close" class="ac-gn-searchview-close" aria-label="Cancel Search">
+					<span class="ac-gn-searchview-close-wrapper">
+						<span class="ac-gn-searchview-close-left"></span>
+						<span class="ac-gn-searchview-close-right"></span>
+					</span>
+				</button>
+		</aside>
+			</div>
+</nav>
+<div class="ac-gn-blur"></div>
+<div id="ac-gn-curtain" class="ac-gn-curtain"></div>
+<div id="ac-gn-placeholder" class="ac-nav-placeholder"></div>
+<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/ac-globalnav.built.js"></script><div id="ac-gn-viewport-emitter">&nbsp;</div>
+<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/search.css">
+<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/search.js"></script>
+
+	<!-- metrics -->
+<script>
+    /* RSID: */
+    var s_account="awdappledeveloper"
+</script>	
+<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/analytics.js"></script>
+<script>
+    s.pageName= AC && AC.Tracking && AC.Tracking.pageName();
+    s.channel="www.en.developer"
+    s.channel="www.en.developer";
+
+    
+    /************* DO NOT ALTER ANYTHING BELOW THIS LINE ! **************/
+    var s_code=s.t();if(s_code)document.write(s_code)
+</script>
+<!-- /metrics -->
+	<link rel="stylesheet" property="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/localnav.css" type="text/css">
+<input type="checkbox" id="localnav-menustate" class="localnav-menustate">
+<div id="localnav-sticky-placeholder" class="css-sticky"></div><nav id="localnav" class="localnav localnav-scrim css-sticky" data-sticky="" role="navigation">
+	<div class="localnav-wrapper">
+		<div class="localnav-background"></div>
+		<div class="localnav-content">
+
+			<h2 class="localnav-title">
+				<a href="https://developer.apple.com/swift/">Swift</a>
+			</h2>
+
+			<div class="localnav-menu">
+				<a href="https://developer.apple.com/swift/blog/?id=27#localnav-menustate" class="localnav-menucta-anchor localnav-menucta-anchor-open" id="localnav-menustate-open">
+					<span class="localnav-menucta-anchor-label">Open Menu</span>
+				</a>
+				<a href="https://developer.apple.com/swift/blog/?id=27#" class="localnav-menucta-anchor localnav-menucta-anchor-close" id="localnav-menustate-close">
+					<span class="localnav-menucta-anchor-label">Close Menu</span>
+				</a>
+				<div class="localnav-menu-tray">
+					<ul class="localnav-menu-items">
+						<li class="localnav-menu-item">
+							<a href="https://developer.apple.com/swift/" class="localnav-menu-link">Overview</a>
+						</li>
+						<li class="localnav-menu-item">
+							<a href="https://developer.apple.com/swift/resources/" class="localnav-menu-link">Resources</a>
+						</li>
+					</ul>
+				</div>
+				<div class="localnav-actions localnav-actions">
+					<div class="localnav-action localnav-action-menucta" aria-hidden="true">
+						<label for="localnav-menustate" class="localnav-menucta">
+							<span class="localnav-menucta-chevron"></span>
+						</label>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+	</div>
+</nav>
+<label id="localnav-curtain" for="localnav-menustate"></label>
+<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/ac-localnav.built.js"></script><div id="localnav-viewport-emitter" data-viewport-emitter-dispatch="" data-viewport-emitter-state="{&quot;viewport&quot;:&quot;large&quot;,&quot;orientation&quot;:&quot;landscape&quot;,&quot;retina&quot;:false}"></div>
+<script type="text/javascript" src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/localnav.js"></script>
+
+
+	<main id="main" class="main" role="main">
+
+		<section class="grid">
+		<section class="row">
+		<section class="column large-11 small-12 gutter padding-top-small large-centered blog-articles no-padding-bottom padding-bottom">
+			<section class="article-list">
+													<article id="article-27" class="article padding-top padding-bottom ">
+						<p class="article-date lighter">Apr  9, 2015</p>
+						<h1>
+														Increasing Performance by Reducing Dynamic Dispatch
+													</h1>
+
+						<p>Like many other languages, Swift allows a class to override methods and properties declared in its superclasses. This means that the program has to determine at runtime which method or property is being referred to and then perform an indirect call or indirect access. This technique, called <em>dynamic dispatch</em>, increases language expressivity at the cost of a constant amount of runtime overhead for each indirect usage. In performance sensitive code such overhead is often undesirable. This blog post showcases three ways to improve performance by eliminating such dynamism: <span class="keyword">final</span>, <span class="keyword">private</span>, and Whole Module Optimization.</p><p>Consider the following example:</p><pre><code><span class="key">class</span> ParticleModel {
+	<span class="key">var</span> point = ( <span class="number">0.0</span>, <span class="number">0.0</span> )
+	<span class="key">var</span> velocity = <span class="number">100.0</span>
+
+	<span class="key">func</span> updatePoint(newPoint: (<span class="title">Double</span>, <span class="title">Double</span>), newVelocity: <span class="title">Double</span>) {
+		<span class="pointer">point</span> = newPoint
+		<span class="pointer">velocity</span> = newVelocity
+	<span></span>}
+
+	<span class="key">func</span> update(newP: (<span class="title">Double</span>, <span class="title">Double</span>), newV: <span class="title">Double</span>) {
+		<span class="pointer">updatePoint</span>(newP, newVelocity: newV)
+	<span></span>}
+}
+
+<span class="key">var</span> p = <span class="pointer">ParticleModel</span>()
+<span class="key">for</span> i <span class="key">in</span> <span class="method">stride</span>(from: <span class="number">0.0</span>, through: <span class="number">360</span>, by: <span class="number">1.0</span>) {
+	<span class="pointer">p</span>.<span class="pointer">update</span>((i * sin(i), i), newV:i*<span class="number">1000</span>)
+}</code></pre><p>As written, the compiler will emit a dynamically dispatched call to:</p><ol><li>Call <span class="keyword">update</span> on <span class="keyword">p</span>.</li><li>Call <span class="keyword">updatePoint</span> on <span class="keyword">p</span>.</li><li>Get the property <span class="keyword">point</span> tuple of p.</li><li>Get the property <span class="keyword">velocity</span> of p.</li></ol><p>This might not be what you would expect when looking at this code. The dynamic calls are necessary because a subclass of <span class="keyword">ParticleModel</span> might override <span class="keyword">point</span> or <span class="keyword">velocity</span> with a computed property or override <span class="keyword">updatePoint()</span> or <span class="keyword">update()</span> with new implementations.</p><p>In Swift, dynamic dispatch calls are implemented by looking up a function from a method table and then performing an indirect call. This is slower than performing a direct call. Additionally, indirect calls also prevent many compiler optimizations, making the indirect call even more expensive. In performance critical code there are techniques you can use to restrict this dynamic behavior when it isn’t needed to improve performance.</p><h3>Use <span class="menlo">final</span> when you know that a declaration does not need to be overridden.</h3><p>The <span class="keyword">final</span> keyword is a restriction on a class, method, or property that indicates that the declaration cannot be overridden. This allows the compiler to safely elide dynamic dispatch indirection. For instance, in the following <span class="keyword">point</span> and <span class="keyword">velocity</span> will be accessed directly through a load from the object’s stored property and <span class="keyword">updatePoint()</span> will be called via a direct function call. On the other hand, <span class="keyword">update()</span> will still be called via dynamic dispatch, allowing for subclasses to override <span class="keyword">update()</span> with customized functionality.</p><pre><code><span class="key">class</span> ParticleModel {
+	<span></span>final <span class="key">var</span> point = ( x: <span class="number">0.0</span>, y: <span class="number">0.0</span> )
+	<span></span>final <span class="key">var</span> velocity = <span class="number">100.0</span>
+
+	<span></span>final <span class="key">func</span> updatePoint(newPoint: (<span class="title">Double</span>, <span class="title">Double</span>), newVelocity: <span class="title">Double</span>) {
+		<span class="pointer">point</span> = newPoint
+		<span class="pointer">velocity</span> = newVelocity
+	<span></span>}
+
+	<span class="key">func</span> update(newP: (<span class="title">Double</span>, <span class="title">Double</span>), newV: <span class="title">Double</span>) {
+		<span></span>updatePoint(newP, newVelocity: newV)
+	<span></span>}
+}</code></pre><p>It is possible to mark an entire class as <span class="keyword">final</span> by attaching the attribute to the class itself. This forbids subclassing the class, implying that all functions and properties of the class are <span class="keyword">final</span> as well.</p><pre><code>final <span class="key">class</span> ParticleModel {
+	<span class="key">var</span> point = ( x: <span class="number">0.0</span>, y: <span class="number">0.0</span> )
+	<span class="key">var</span> velocity = <span class="number">100.0</span>
+	<span class="comment">// ...</span>
+}</code></pre><h3>Infer <span class="menlo">final</span> on declarations referenced in one file by applying the <span class="menlo">private</span> keyword.</h3><p>Applying the <span class="keyword">private</span> keyword to a declaration restricts the visibility of the declaration to the current file. This allows the compiler to find all potentially overriding declarations. The absence of any such overriding declarations enables the compiler to infer the <span class="keyword">final</span> keyword automatically and remove indirect calls for methods and property accesses.</p><p>Assuming there is no class overriding <span class="keyword">ParticleModel</span> in the current file, the compiler can replace all dynamically dispatched calls to private declarations with direct calls.</p><pre><code><span class="key">class</span> ParticleModel {
+	<span></span>private <span class="key">var</span> point = ( x: <span class="number">0.0</span>, y: <span class="number">0.0</span> )
+	<span></span>private <span class="key">var</span> velocity = <span class="number">100.0</span>
+
+	<span></span>private <span class="key">func</span> updatePoint(newPoint: (<span class="title">Double</span>, <span class="title">Double</span>), newVelocity: <span class="title">Double</span>) {
+		<span class="pointer">point</span> = newPoint
+		<span class="pointer">velocity</span> = newVelocity
+	<span></span>}
+
+	<span class="key">func</span> update(newP: (<span class="title">Double</span>, <span class="title">Double</span>), newV: <span class="title">Double</span>) {
+		<span></span>updatePoint(newP, newVelocity: newV)
+	<span></span>}
+}</code></pre><p>As in the previous example, <span class="keyword">point</span> and <span class="keyword">velocity</span> are accessed directly and <span class="keyword">updatePoint()</span> is called directly. Again, <span class="keyword">update()</span> will be invoked indirectly due to <span class="keyword">update()</span> not being <span class="keyword">private</span>.</p><p>Just like with <span class="keyword">final</span>, it is possible to apply the <span class="keyword">private</span> attribute to the class declaration itself causing the class to be <span class="keyword">private</span> and thus all of the properties and methods of the class as well.</p><pre><code>private <span class="key">class</span> ParticleModel {
+	<span class="key">var</span> point = ( x: <span class="number">0.0</span>, y: <span class="number">0.0</span> )
+	<span class="key">var</span> velocity = <span class="number">100.0</span>
+	<span class="comment">// ...</span>
+}</code></pre><h3>Use Whole Module Optimization to infer <span class="menlo">final</span> on <span class="menlo">internal</span> declarations.</h3><p>Declarations with <span class="keyword">internal</span> access (the default if nothing is declared) are only visible within the module where they are declared. Because Swift normally compiles the files that make up a module separately, the compiler cannot ascertain whether or not an <span class="keyword">internal</span> declaration is overridden in a different file. However, if Whole Module Optimization is enabled, all of the module is compiled together at the same time. This allows the compiler to make inferences about the entire module together and infer <span class="keyword">final</span> on declarations with <span class="keyword">internal</span> if there are no visible overrides.</p><p>Let’s go back to the original code snippet, this time adding some extra <span class="keyword">public</span> keywords to <span class="keyword">ParticleModel</span>.</p><pre><code>public <span class="key">class</span> ParticleModel {
+	<span class="key">var</span> point = ( x: <span class="number">0.0</span>, y: <span class="number">0.0</span> )
+	<span class="key">var</span> velocity = <span class="number">100.0</span>
+
+	<span class="key">func</span> updatePoint(newPoint: (<span class="title">Double</span>, <span class="title">Double</span>), newVelocity: <span class="title">Double</span>) {
+		<span class="pointer">point</span> = newPoint
+		<span class="pointer">velocity</span> = newVelocity
+	<span></span>}
+
+	<span></span>public <span class="key">func</span> update(newP: (<span class="title">Double</span>, <span class="title">Double</span>), newV: <span class="title">Double</span>) {
+		<span class="pointer">updatePoint</span>(newP, newVelocity: newV)
+	<span></span>}
+}
+
+<span class="key">var</span> p = <span class="pointer">ParticleModel</span>()
+<span class="key">for</span> i <span class="key">in</span> <span class="method">stride</span>(from: <span class="number">0.0</span>, through: times, by: <span class="number">1.0</span>) {
+	<span class="pointer">p</span>.update((i * sin(i), i), newV:i*<span class="number">1000</span>)
+}</code></pre><p>When compiling this snippet with Whole Module Optimization the compiler can infer <span class="keyword">final</span> on the properties <span class="keyword">point</span>, <span class="keyword">velocity</span>, and the method call <span class="keyword">updatePoint()</span>. In contrast, it can not be inferred that <span class="keyword">update()</span> is <span class="keyword">final</span> since <span class="keyword">update()</span> has public access.</p>
+
+						
+						
+
+												<p class="margin-top-small"><a class="icon icon-before icon-chevronleft" href="https://developer.apple.com/swift/blog/">All Blog Posts</a></p>
+											</article>
+											</section>
+	</section>
+
+
+</section>
+
+</section></main>
+
+	<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/footer.dist.css">
+<footer id="footer" class="footer" role="contentinfo" aria-labelledby="footer-label">
+    <div class="footer-content">
+        <h2 class="footer-label" id="footer-label">Developer Footer</h2>
+		
+		<developer-breadcrumbs style="display: block;">
+			
+								
+				
+							
+		<nav class="footer-breadcrumbs" aria-label="Breadcrumbs"><a href="https://www.apple.com/" class="home footer-breadcrumbs-home"><span class="footer-breadcrumbs-home-icon" aria-hidden="true" data-hires-status="pending"></span><span class="footer-breadcrumbs-home-label">Apple</span></a><div class="footer-breadcrumbs-path"><ol class="footer-breadcrumbs-list"><li class="footer-breadcrumbs-item"><a href="https://developer.apple.com/">Developer</a></li><li class="footer-breadcrumbs-item"><a href="https://developer.apple.com/swift/">Swift</a></li><li class="footer-breadcrumbs-item"><a href="https://developer.apple.com/swift/blog/">Blog</a></li><li class="footer-breadcrumbs-item">Increasing Performance by Reducing Dynamic Dispatch</li></ol></div></nav></developer-breadcrumbs>
+		        <nav class="footer-directory" aria-label="Apple Developer Directory" role="navigation">
+	<!--googleoff: all-->
+	<div class="footer-directory-column">
+		<input class="footer-directory-column-section-state" type="checkbox" id="footer-directory-column-section-state-platform">
+		<div class="footer-directory-column-section">
+			<label class="footer-directory-column-section-label" for="footer-directory-column-section-state-platform">
+				<h3 class="footer-directory-column-section-title">Platforms</h3>
+			</label>
+			<a href="https://developer.apple.com/swift/blog/?id=27#footer-directory-column-section-state-platform" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-open"> <span class="footer-directory-column-section-anchor-label">Open Menu</span> </a>
+			<a href="https://developer.apple.com/swift/blog/?id=27#" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-close"> <span class="footer-directory-column-section-anchor-label">Close Menu</span> </a>
+			<ul class="footer-directory-column-section-list">
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/ios/">iOS</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/ipados/">iPadOS</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/macos/">macOS</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/tvos/">tvOS</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/watchos/">watchOS</a></li>
+			</ul>
+		</div>
+
+		<input class="footer-directory-column-section-state" type="checkbox" id="footer-directory-column-section-state-tools">
+		<div class="footer-directory-column-section">
+			<label class="footer-directory-column-section-label" for="footer-directory-column-section-state-tools">
+				<h3 class="footer-directory-column-section-title">Tools</h3>
+			</label>
+			<a href="https://developer.apple.com/swift/blog/?id=27#footer-directory-column-section-state-tools" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-open"> <span class="footer-directory-column-section-anchor-label">Open Menu</span> </a>
+			<a href="https://developer.apple.com/swift/blog/?id=27#" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-close"> <span class="footer-directory-column-section-anchor-label">Close Menu</span> </a>
+			<ul class="footer-directory-column-section-list">
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/swift/">Swift</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/swiftui/">SwiftUI</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/swift-playgrounds/">Swift Playgrounds</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/testflight/">TestFlight</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/xcode/">Xcode</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/xcode-cloud/">Xcode Cloud</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/sf-symbols/">SF Symbols</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer-directory-column">
+		<input class="footer-directory-column-section-state" type="checkbox" id="footer-directory-column-section-state-topics">
+		<div class="footer-directory-column-section">
+			<label class="footer-directory-column-section-label" for="footer-directory-column-section-state-topics">
+				<h3 class="footer-directory-column-section-title">Topics &amp; Technologies</h3>
+			</label>
+			<a href="https://developer.apple.com/swift/blog/?id=27#footer-directory-column-section-state-topics" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-open"> <span class="footer-directory-column-section-anchor-label">Open Menu</span> </a>
+			<a href="https://developer.apple.com/swift/blog/?id=27#" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-close"> <span class="footer-directory-column-section-anchor-label">Close Menu</span> </a>
+			<ul class="footer-directory-column-section-list">
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/accessibility/">Accessibility</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/accessories/">Accessories</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/app-extensions/">App Extensions</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/app-store/">App Store</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/audio/">Audio &amp; Video</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/augmented-reality/">Augmented Reality</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/business/">Business</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/design/">Design</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/distribute/">Distribution</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/education/">Education</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/fonts/">Fonts</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/games/">Games</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/health-fitness/">Health &amp; Fitness</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/in-app-purchase/">In-App Purchase</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/localization/">Localization</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/maps/">Maps &amp; Location</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/machine-learning/">Machine Learning</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/security/">Security</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/safari/">Safari &amp; Web</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="footer-directory-column">
+		<input class="footer-directory-column-section-state" type="checkbox" id="footer-directory-column-section-state-resources">
+		<div class="footer-directory-column-section">
+			<label class="footer-directory-column-section-label" for="footer-directory-column-section-state-resources">
+				<h3 class="footer-directory-column-section-title">Resources</h3>
+			</label>
+			<a href="https://developer.apple.com/swift/blog/?id=27#footer-directory-column-section-state-resources" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-open"> <span class="footer-directory-column-section-anchor-label">Open Menu</span> </a>
+			<a href="https://developer.apple.com/swift/blog/?id=27#" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-close"> <span class="footer-directory-column-section-anchor-label">Close Menu</span> </a>
+			<ul class="footer-directory-column-section-list">
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/documentation/">Documentation</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/learn/curriculum/">Curriculum</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/download/">Downloads</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/forums/">Forums</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/videos/">Videos</a></li>
+			</ul>
+		</div>
+
+		<input class="footer-directory-column-section-state" type="checkbox" id="footer-directory-column-section-state-support">
+		<div class="footer-directory-column-section">
+			<label class="footer-directory-column-section-label" for="footer-directory-column-section-state-support">
+				<h3 class="footer-directory-column-section-title">Support</h3>
+			</label>
+			<a href="https://developer.apple.com/swift/blog/?id=27#footer-directory-column-section-state-support" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-open"> <span class="footer-directory-column-section-anchor-label">Open Menu</span> </a>
+			<a href="https://developer.apple.com/swift/blog/?id=27#" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-close"> <span class="footer-directory-column-section-anchor-label">Close Menu</span> </a>
+			<ul class="footer-directory-column-section-list">
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/support/articles/">Support Articles</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/contact/">Contact Us</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/bug-reporting/">Bug Reporting</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/system-status/">System Status</a></li>
+			</ul>
+		</div>
+
+		<input class="footer-directory-column-section-state" type="checkbox" id="footer-directory-column-section-state-account">
+		<div class="footer-directory-column-section">
+			<label class="footer-directory-column-section-label" for="footer-directory-column-section-state-account">
+				<h3 class="footer-directory-column-section-title">Account</h3>
+			</label>
+			<a href="https://developer.apple.com/swift/blog/?id=27#footer-directory-column-section-state-account" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-open"> <span class="footer-directory-column-section-anchor-label">Open Menu</span> </a>
+			<a href="https://developer.apple.com/swift/blog/?id=27#" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-close"> <span class="footer-directory-column-section-anchor-label">Close Menu</span> </a>
+			<ul class="footer-directory-column-section-list">
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/account/">Apple Developer</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://appstoreconnect.apple.com/">App Store Connect</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/account/ios/certificate/">Certificates, IDs, &amp; Profiles</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://feedbackassistant.apple.com/">Feedback Assistant</a></li>
+			</ul>
+		</div>
+	</div>
+	
+	<div class="footer-directory-column">
+		<input class="footer-directory-column-section-state" type="checkbox" id="footer-directory-column-section-state-programs">
+		<div class="footer-directory-column-section">
+			<label class="footer-directory-column-section-label" for="footer-directory-column-section-state-programs">
+				<h3 class="footer-directory-column-section-title">Programs</h3>
+			</label>
+			<a href="https://developer.apple.com/swift/blog/?id=27#footer-directory-column-section-state-programs" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-open"> <span class="footer-directory-column-section-anchor-label">Open Menu</span> </a>
+			<a href="https://developer.apple.com/swift/blog/?id=27#" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-close"> <span class="footer-directory-column-section-anchor-label">Close Menu</span> </a>
+			<ul class="footer-directory-column-section-list">
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/programs/">Apple Developer Program</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/programs/enterprise/">Apple Developer Enterprise Program</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/app-store/small-business-program/">App Store Small Business Program</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://mfi.apple.com/">MFi Program</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/programs/news-partner/">News Partner Program</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/programs/video-partner/">Video Partner Program</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/security-bounty/">Security Bounty Program</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/programs/security-research-device/">Security Research Device Program</a></li>
+			</ul>
+		</div>
+
+		<input class="footer-directory-column-section-state" type="checkbox" id="footer-directory-column-section-state-events">
+		<div class="footer-directory-column-section">
+			<label class="footer-directory-column-section-label" for="footer-directory-column-section-state-events">
+				<h3 class="footer-directory-column-section-title">Events</h3>
+			</label>
+			<a href="https://developer.apple.com/swift/blog/?id=27#footer-directory-column-section-state-events" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-open"> <span class="footer-directory-column-section-anchor-label">Open Menu</span> </a>
+			<a href="https://developer.apple.com/swift/blog/?id=27#" class="footer-directory-column-section-anchor footer-directory-column-section-anchor-close"> <span class="footer-directory-column-section-anchor-label">Close Menu</span> </a>
+			<ul class="footer-directory-column-section-list">
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/events/">Events Overview</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/accelerator/">App Accelerators</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/app-store/app-store-awards/">App Store Awards</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/design/awards/">Apple Design Awards</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/learn/experts/#academies">Apple Developer Academies</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/entrepreneur-camp/">Entrepreneur Camp</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/events/ask-apple/">Ask Apple</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/tech-talks/">Tech Talks</a></li>
+				<li class="footer-directory-column-section-item"><a class="footer-directory-column-section-link" href="https://developer.apple.com/wwdc/">WWDC</a></li>
+			</ul>
+		</div>
+	</div>
+	<!--googleon: all-->
+</nav>
+        <section class="footer-mini" vocab="http://schema.org/" typeof="Organization">
+	<div class="footer-mini-news">
+		<div class="copy">
+			To view the latest developer news, visit <a href="https://developer.apple.com/news/">News and Updates</a>.
+		</div>
+		<div class="content">
+			<div class="color-scheme-toggle" role="radiogroup" tabindex="0" aria-label="Select a color scheme preference">
+
+				<label data-color-scheme-option="light">
+
+					<input type="radio" value="light" autocomplete="off" onchange="window.setPreferredColorScheme(event.target.value)">
+
+					<div class="text">Light</div>
+
+				</label>
+
+				<label data-color-scheme-option="dark">
+
+					<input type="radio" value="dark" autocomplete="off" onchange="window.setPreferredColorScheme(event.target.value)">
+
+					<div class="text">Dark</div>
+
+				</label>
+
+				<label data-color-scheme-option="auto">
+
+					<input type="radio" value="auto" autocomplete="off" onchange="window.setPreferredColorScheme(event.target.value)">
+
+					<div class="text">Auto</div>
+
+				</label>
+
+			</div>
+			<script async="" src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/color-scheme-toggle.js"></script>
+		</div>
+	</div>
+	<link rel="stylesheet" href="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/language-dropdown.css">
+	<div class="language-dropdown dropdown-container legacy-form hidden">
+		<select class="dropdown" aria-label="Language Dropdown"></select>
+		<span class="dropdown-icon icon icon-chevrondown" aria-hidden="true"></span>
+	</div>
+	<script src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/language-dropdown.js"></script>
+	<div class="footer-mini-legal">
+		<div class="footer-mini-legal-copyright">Copyright ©  2023 <a href="https://www.apple.com/">Apple Inc.</a> All rights reserved.</div>
+		<div class="footer-mini-legal-links">
+			<a class="footer-mini-legal-link" href="https://www.apple.com/legal/internet-services/terms/site.html">Terms of Use</a>
+			<a class="footer-mini-legal-link" href="https://www.apple.com/legal/privacy/en-ww/">Privacy Policy</a>
+			<a class="footer-mini-legal-link" href="https://developer.apple.com/support/terms/">Agreements and Guidelines</a>
+		</div>
+	</div>
+</section>
+    </div>
+</footer><div id="goog-gt-tt" class="skiptranslate" dir="ltr"><div style="padding: 8px;"><div><div class="logo"><img src="./Increasing Performance by Reducing Dynamic Dispatch - Swift Blog - Apple Developer_files/translate_24dp.png" width="20" height="20" alt="Google 翻译"></div></div></div><div class="top" style="padding: 8px; float: left; width: 100%;"><h1 class="title gray">原文</h1></div><div class="middle" style="padding: 8px;"><div class="original-text"></div></div><div class="bottom" style="padding: 8px;"><div class="activity-links"><span class="activity-link">提供更好的翻译建议</span></div><div class="started-activity-container"><hr style="color: #CCC; background-color: #CCC; height: 1px; border: none;"><div class="activity-root"></div></div></div><div class="status-message" style="display: none;"></div></div>
+
+
+
+<div class="goog-te-spinner-pos"><div class="goog-te-spinner-animation"><svg xmlns="http://www.w3.org/2000/svg" class="goog-te-spinner" width="96px" height="96px" viewBox="0 0 66 66"><circle class="goog-te-spinner-path" fill="none" stroke-width="6" stroke-linecap="round" cx="33" cy="33" r="30"></circle></svg></div></div></body><style>
+    #relingo-translate-card { 
+      width: 262px;
+      border-radius: 8px;
+      overflow:hidden;
+    }</style><relingo-app id="relingo-stats"></relingo-app></html>
